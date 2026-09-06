@@ -8,6 +8,7 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { createRenderKit, createCharacter, animateCharacter, type Surface } from './render-kit';
 import { createMapCameraControls } from './camera-controls';
+import { buildWall, buildBarrier, buildVehicle } from './world-props';
 const COLORS={orange:0xf3bb78};
 export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:any;onHover:(v:any)=>void;zoom:number;onZoomChange:(zoom:number)=>void;viewReset:number}){
  const host=useRef<HTMLDivElement>(null),sceneRef=useRef<ReturnType<typeof createMapCameraControls>|null>(null),hoverRef=useRef(onHover),zoomRef=useRef(onZoomChange);hoverRef.current=onHover;zoomRef.current=onZoomChange;
@@ -61,28 +62,11 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
    else if(!['exit','note'].includes(e.type))kit.contact(g,0,0,1.25,1.1);
    if(e.type==='prop'){
     if(e.style==='wall'){
-     const height=game.level===1?1.38:e.y<2?2.5:1.65;
-     box(g,(w-1)/2,0,(h-1)/2,w-.025,height,h-.025,0x87978f);
-     box(g,(w-1)/2,height,(h-1)/2,w+.08,.13,h+.08,0x9aa798);
-     for(let i=0;i<w;i+=2){box(g,i,.12,-.513,.05,height-.2,.032,0x586d62);box(g,i,.12,h-.487,.05,height-.2,.032,0x586d62);}
-     if(game.level!==1)for(let i=0;i<w;i++){if(hash(e.x+i,e.y)>.4){box(g,i,height+.13,0,.09,.17+hash(i,e.x)*.22,.08,0x605b47);const rod=cylinder(g,i+.15,height+.12,0,.024,.43,0x746b4c);rod.rotation.z=.2;}}
-     if(game.level===1){
-       // Tile cladding follows both faces of the bunker partitions.
-       for(const z of [-.503,h-.497])kit.box(g,(w-1)/2,.08,z,w-.03,1.03,.012,0xc3c9af,'tiles');
-       for(const x of [-.503,w-.497])kit.box(g,x,.08,(h-1)/2,.012,1.03,h-.03,0xc3c9af,'tiles');
-       for(const z of [-.516,h-.484])kit.box(g,(w-1)/2,1.11,z,w-.025,.055,.03,0x70897e,'brushedSteel');
-     }
-
+     buildWall(kit,g,e,game.level);
     }else if(e.style==='barrier'){
-     for(let i=0;i<w;i++)for(let j=0;j<h;j++){box(g,i,0,j,.96,.35,.9,0x6a7162);box(g,i,.35,j,.65,.55,.7,0x7f8270);const stripe=box(g,i,.42,j+.365,.19,.4,.014,(i+j)%2?0x333c34:0xbd954e);stripe.rotation.z=-.3;}
+     buildBarrier(kit,g,e);
     }else if(e.style==='car'){
-     const paint=e.id==='car1'?0xa0b5b0:0xc1b08b;
-     box(g,.5,.28,1,1.65,.5,2.75,paint);box(g,.5,.78,1.1,1.4,.55,1.4,paint);
-     kit.box(g,.5,.86,.37,1.22,.37,.045,0x99bfc0,'glass');kit.box(g,.5,.86,1.82,1.22,.35,.04,0x83a5a2,'glass');
-     for(const x of [-.211,1.211]){kit.box(g,x,.86,1.1,.025,.35,1.14,0x9ab5ac,'glass');kit.box(g,x,1.22,1.1,.035,.055,1.35,0xaab2a1,'brushedSteel');kit.box(g,x,.67,1.32,.035,.055,.21,0xaab2a1,'brushedSteel');}
-     kit.box(g,.5,.28,-.4,1.7,.18,.1,0x9ea99f,'brushedSteel');
-     for(const x of [-.32,1.32])for(const y of [.25,1.95]){const wheel=kit.cylinder(g,x,.08,y,.33,.22,0x929a91,.33,'rubber');wheel.rotation.z=Math.PI/2;wheel.position.y=.32;const hub=kit.cylinder(g,x+(x<0?-.12:.12),.08,y,.145,.024,0x8d998b,.145,'brushedSteel');hub.rotation.z=Math.PI/2;hub.position.y=.32;}
-     kit.box(g,.05,.65,-.31,.26,.1,.02,0xb9b483,'glass');kit.box(g,.95,.65,-.31,.26,.1,.02,0xb9b483,'glass');
+     buildVehicle(kit,g,e);
     }else if(e.style==='vent'){
      kit.box(g,(w-1)/2,0,(h-1)/2,w-.1,1.05,h-.1,game.level===1?0x879d9a:0xb19875,game.level===1?'brushedSteel':'corrugated');box(g,(w-1)/2,1.05,(h-1)/2,w+.02,.12,h+.02,0xb6b9a8);for(let i=0;i<7;i++)kit.box(g,(w-1)/2,.26+i*.095,-.505,w-.4,.04,.04,0x283b39);cylinder(g,(w-1)/2,1.18,(h-1)/2,.48,.13,0x334440);
     }else if(e.style==='tank'){
@@ -100,8 +84,14 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     const shell:Surface=e.id==='wreck'?'carPaint':['locker','medical','roof-aid'].includes(e.id)?'brushedSteel':'wood';
     const color=e.id==='medical'||e.id==='roof-aid'?0xcbd3c5:0x9ca28d;
     kit.box(g,0,0,0,.86,.65,.8,color,shell);const lid=new THREE.Group();lid.position.set(0,.65,-.4);g.add(lid);kit.box(lid,0,0,.4,.92,.12,.87,color,shell);g.userData.lid=lid;
-    for(const x of [-.29,.29]){kit.box(g,x,0,0,.07,.65,.82,0x626c58,'brushedSteel');kit.box(lid,x,.12,.4,.07,.015,.88,0x9b9b76,'brushedSteel')}
-    kit.box(g,0,.3,.415,.24,.18,.02,0xc7b577,'brushedSteel');
+    if(e.id==='wreck'){
+      kit.box(g,0,.08,.415,.94,.12,.11,0xa1aa97,'brushedSteel');
+      for(const x of [-.3,.3]){kit.box(g,x,.4,.415,.21,.13,.03,0x9f503b);kit.box(g,x,.41,.435,.09,.09,.012,0xd49d59);}
+      kit.box(g,0,.23,.417,.29,.09,.023,0xb9c0a7);kit.box(lid,0,.125,.72,.25,.02,.035,0x879581,'brushedSteel');
+    }else{
+      for(const x of [-.29,.29]){kit.box(g,x,0,0,.07,.65,.82,0x626c58,'brushedSteel');kit.box(lid,x,.12,.4,.07,.015,.88,0x9b9b76,'brushedSteel')}
+      kit.box(g,0,.3,.415,.24,.18,.02,0xc7b577,'brushedSteel');
+    }
     if(e.id==='roof-store')kit.box(lid,0,.136,.4,.48,.035,.76,0x63745d,'canvas');
     if(e.id==='medical'||e.id==='roof-aid'){kit.box(lid,0,.137,.4,.06,.014,.25,0x984c37);kit.box(lid,0,.137,.4,.25,.014,.06,0x984c37);}
    }else if(e.type==='generator'){

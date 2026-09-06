@@ -30,4 +30,20 @@ campaign();campaign(true);
  const g=new Game();g.inventory.push('keycard','sample');g.loadLevel(2);g.start();g.signal=3;g.pause();progress(g,8,false);check(g.signal===3,'Pause freezes wave timer');g.start();g.signal=0;g.drop('sample');go(g,'evac');check(g.mode==='playing','Cannot evacuate without sample');
  for(const p of [[2,16],[18,16],[2,4]])check(!g.isBlocked(...p),'Wave spawn is clear');
 }
-console.log(`${assertions} assertions passed. Campaign navigation, puzzle gates, combat, carrying, health, distraction, waves, pause and restart verified.`);
+{
+ const g=new Game();g.start();g.move(4,15);g.health=40;g.openInventory();
+ check(g.inventoryOpen&&g.mode==='paused','Inventory pauses active play');
+ const frozen=JSON.stringify({player:g.player,zombies:g.zombies,time:g.time,health:g.health});progress(g,4,false);
+ check(frozen===JSON.stringify({player:g.player,zombies:g.zombies,time:g.time,health:g.health}),'Inventory freezes movement, zombies and time');
+ g.start();g.pause();check(g.mode==='paused','Start and pause shortcuts cannot resume an open inventory');
+ g.openInventory();g.use('medkit');check(g.health===80&&!g.has('medkit')&&g.inventoryOpen,'Inventory healing consumes exactly one item without resuming');
+ g.drop('crowbar');const dropped=g.entities.find(e=>e.item==='crowbar');check(!g.has('crowbar')&&dropped&&!g.isBlocked(dropped.x,dropped.y),'Inventory drop produces recoverable loot on a free tile');
+ g.closeInventory();g.closeInventory();check(g.mode==='playing'&&!g.inventoryOpen,'Close is idempotent and restores active play');go(g,dropped.id);check(g.has('crowbar'),'Inventory-dropped equipment can be collected again');
+ g.pause();g.openInventory();g.use('bottle');check(g.mode==='paused'&&!g.inventoryOpen&&g.throwing,'Throw preparation from pause preserves pause');g.start();g.throwBottle(4,15);check(!g.throwing&&!g.has('bottle'),'Prepared bottle throws after resume');
+ g.inventory.push('bottle');g.use('bottle');g.openInventory();check(!g.throwing,'Opening inventory cancels an earlier pending throw');g.drop('bottle');g.closeInventory();g.move(4,15);check(!g.throwing,'Dropping last bottle cannot trap map input in throw mode');
+ g.inventory.push('bottle');g.openInventory();g.use('bottle');check(g.mode==='playing'&&g.throwing&&!g.inventoryOpen,'Throw preparation from play closes inventory and resumes');
+ g.throwing=true;g.consume('bottle');g.throwBottle(4,15);check(!g.throwing,'Missing bottle exits stale throw mode');
+ g.openInventory();g.restart();check(!g.inventoryOpen&&g.inventoryReturnMode===null&&g.mode==='briefing','Restart clears inventory state');
+ for(const mode of ['briefing','dead','complete','won']){g.mode=mode;g.openInventory();const items=[...g.inventory];g.drop('medkit');g.use('medkit');check(!g.canManageInventory&&g.inventory.join()===items.join(),'Inactive inventory is read-only');g.closeInventory();check(g.mode===mode,'Read-only inventory restores original phase');}
+}
+console.log(`${assertions} assertions passed. Campaign navigation, puzzle gates, combat, carrying, health, distraction, waves, inventory management, pause and restart verified.`);
