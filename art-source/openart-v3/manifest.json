@@ -1,0 +1,347 @@
+{
+  "generationCount": 3,
+  "retries": 0,
+  "provider": "OpenArt CLI",
+  "model": "gpt-image-2",
+  "config": {
+    "aspectRatio": "4:3",
+    "imageCount": 1,
+    "quality": "medium",
+    "resolutionTier": "2k"
+  },
+  "quotedCreditsPerJob": 40,
+  "expectedTotalCredits": 120,
+  "actualDebit": "Not present in generation response",
+  "promptsFile": "prompts.json",
+  "allSourceDimensions": {
+    "width": 1792,
+    "height": 1344,
+    "mode": "RGB"
+  },
+  "materials": {
+    "source": "materials.png",
+    "historyId": "8EHzDztBo9hu3u8iaSz3",
+    "tiles": {
+      "concrete": [
+        0,
+        0,
+        896,
+        672
+      ],
+      "asphalt": [
+        896,
+        0,
+        896,
+        672
+      ],
+      "steel": [
+        0,
+        672,
+        896,
+        672
+      ],
+      "slate": [
+        896,
+        672,
+        896,
+        672
+      ]
+    },
+    "notes": "Visually clean aligned orthographic atlas. Natural material texture; perfect seamlessness not verified."
+  },
+  "inventory": {
+    "source": "inventory.png",
+    "historyId": "WmN0YwzyoQNFxnBYAtkX",
+    "icons": {
+      "crowbar": {
+        "row": 0,
+        "col": 0,
+        "baseCrop": [
+          0,
+          0,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          0,
+          0,
+          448,
+          336
+        ]
+      },
+      "bandage": {
+        "row": 0,
+        "col": 1,
+        "baseCrop": [
+          448,
+          0,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          448,
+          0,
+          448,
+          336
+        ]
+      },
+      "bottle": {
+        "row": 0,
+        "col": 2,
+        "baseCrop": [
+          896,
+          0,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          896,
+          0,
+          448,
+          336
+        ]
+      },
+      "fuse": {
+        "row": 0,
+        "col": 3,
+        "baseCrop": [
+          1344,
+          0,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          1344,
+          0,
+          448,
+          336
+        ]
+      },
+      "jerrycan": {
+        "row": 1,
+        "col": 0,
+        "baseCrop": [
+          0,
+          336,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          0,
+          336,
+          448,
+          336
+        ]
+      },
+      "keycard": {
+        "row": 1,
+        "col": 1,
+        "baseCrop": [
+          448,
+          336,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          448,
+          336,
+          448,
+          336
+        ]
+      },
+      "specimen": {
+        "row": 1,
+        "col": 2,
+        "baseCrop": [
+          896,
+          336,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          896,
+          336,
+          448,
+          336
+        ]
+      },
+      "battery": {
+        "row": 1,
+        "col": 3,
+        "baseCrop": [
+          1344,
+          336,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          1344,
+          336,
+          448,
+          336
+        ]
+      },
+      "scrap": {
+        "row": 2,
+        "col": 0,
+        "baseCrop": [
+          0,
+          672,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          0,
+          672,
+          448,
+          336
+        ]
+      },
+      "chair": {
+        "row": 2,
+        "col": 1,
+        "baseCrop": [
+          448,
+          672,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          448,
+          672,
+          448,
+          336
+        ]
+      },
+      "tire": {
+        "row": 2,
+        "col": 2,
+        "baseCrop": [
+          896,
+          672,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          896,
+          672,
+          448,
+          336
+        ]
+      },
+      "toolbox": {
+        "row": 2,
+        "col": 3,
+        "baseCrop": [
+          1344,
+          672,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          1344,
+          672,
+          448,
+          336
+        ]
+      },
+      "ration": {
+        "row": 3,
+        "col": 0,
+        "baseCrop": [
+          0,
+          1008,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          0,
+          1008,
+          448,
+          336
+        ]
+      },
+      "mara": {
+        "row": 3,
+        "col": 1,
+        "baseCrop": [
+          448,
+          1008,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          448,
+          984,
+          448,
+          360
+        ]
+      },
+      "zombie": {
+        "row": 3,
+        "col": 2,
+        "baseCrop": [
+          896,
+          1008,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          896,
+          984,
+          448,
+          360
+        ]
+      },
+      "radio": {
+        "row": 3,
+        "col": 3,
+        "baseCrop": [
+          1344,
+          1008,
+          448,
+          336
+        ],
+        "recommendedCrop": [
+          1344,
+          1008,
+          448,
+          336
+        ]
+      }
+    },
+    "notes": [
+      "All 16 icons appear in correct order.",
+      "Mara and zombie extend slightly above nominal final-row boundary y=1008; use recommended portrait crop y=984 height=360.",
+      "Chair is open rather than folded.",
+      "Background is a near-uniform very dark green with subtle pixel variation, not exactly #17231b. Sample corner RGB is [17,26,19]. No transparency."
+    ]
+  },
+  "sectors": {
+    "source": "sectors.png",
+    "historyId": "ioMsFID8QYyhPQA1Ffk0",
+    "panoramas": {
+      "checkpoint": [
+        0,
+        0,
+        1792,
+        448
+      ],
+      "laboratory": [
+        0,
+        448,
+        1792,
+        448
+      ],
+      "rooftop": [
+        0,
+        896,
+        1792,
+        448
+      ]
+    },
+    "notes": "Visually clean exact 3-strip panorama atlas."
+  },
+  "coordinateConvention": "All crop arrays are [x,y,width,height] in source pixels, zero based.",
+  "modifications": "No source images edited, cropped, resized or integrated."
+}

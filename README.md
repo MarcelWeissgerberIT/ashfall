@@ -18,3 +18,9 @@ Die Kampagne führt durch den Kontrollpunkt, Station Null und das Evakuierungsda
 Node.js >= 22.13.0. `npm install`, dann `npm run dev`. `npm run build` erzeugt die Sites-Ausgabe.
 
 `node scripts/check-game.mjs` prüft zwei vollständige Kampagnendurchläufe über dieselben Lauf- und Interaktionsfunktionen wie im Spiel sowie Traglast, Ablenkung, Heilung, Türbedingungen, Pause, Neustart und Wellen. `npx tsc --noEmit` prüft die TypeScript-Integration.
+
+## OpenArt-Grafiken
+
+Die Grafikfassung ergänzt OpenArt-Oberflächen für Beton, Asphalt, rostigen Stahl und Steinpflaster, Gegenstandsbilder, Porträts und drei Sektorpanoramen. Die drei ursprünglichen Bildatlanten sowie ihre Prompts und Modellparameter liegen unter `art-source/openart-v3`. `scripts/prepare-art.cjs` extrahiert die Bilder reproduzierbar mit Sharp. Die fertigen WebP-Dateien sind bereits in `public/images/openart` enthalten.
+
+3D-Figuren verwenden nun gerundete Körperformen, Gelenkbewegungen und Ausrüstungsdetails. Die Welt hat Materialstrukturen, Pfützen, Kontaktschatten, sanftes Leuchten und Licht pro Sektor. Rechte oder mittlere Maustaste ziehen verschiebt die Kamera auch bei vergrößerter Ansicht.
