@@ -53,7 +53,7 @@ export default function Scene({game,onHover,zoom}:{game:any;onHover:(v:any)=>voi
     const p=new THREE.Mesh(kit.geometry('unit-plane',()=>new THREE.PlaneGeometry(1,1)),m);p.scale.set(w,h,1);p.rotation.x=-Math.PI/2;p.position.set(x,.017,z);p.userData.noPick=true;g.add(p);
   };
   function makeObject(e:any){const g=new THREE.Group();g.position.set(e.x,0,e.y);g.userData.entity=e;const w=e.w||1,h=e.h||1;
-   currentSurface=e.type==='prop'?(['wall','barrier','rubble'].includes(e.style)?'concrete':['car','vent','tank','desk'].includes(e.style)?'steel':undefined):['container','generator','door','radio','exit'].includes(e.type)?'steel':undefined;
+   currentSurface=e.type==='prop'?(['wall','barrier','rubble'].includes(e.style)?'concrete':e.style==='car'?'carPaint':e.style==='tree'?'bark':['vent','tank','desk','bed'].includes(e.style)?'brushedSteel':undefined):['generator','door','radio','exit'].includes(e.type)?'brushedSteel':undefined;
    if(e.type==='prop'&&e.style!=='tree')kit.contact(g,(w-1)/2,(h-1)/2,w+.65,h+.6);
    else if(!['exit','note'].includes(e.type))kit.contact(g,0,0,1.25,1.1);
    if(e.type==='prop'){
@@ -63,52 +63,71 @@ export default function Scene({game,onHover,zoom}:{game:any;onHover:(v:any)=>voi
      box(g,(w-1)/2,height,(h-1)/2,w+.08,.13,h+.08,0x9aa798);
      for(let i=0;i<w;i+=2){box(g,i,.12,-.513,.05,height-.2,.032,0x586d62);box(g,i,.12,h-.487,.05,height-.2,.032,0x586d62);}
      if(game.level!==1)for(let i=0;i<w;i++){if(hash(e.x+i,e.y)>.4){box(g,i,height+.13,0,.09,.17+hash(i,e.x)*.22,.08,0x605b47);const rod=cylinder(g,i+.15,height+.12,0,.024,.43,0x746b4c);rod.rotation.z=.2;}}
-     if(game.level===1)for(let i=0;i<w;i+=3){box(g,i,.5,h-.477,1.7,.045,.018,0x687d6f);}
+     if(game.level===1){
+       // Tile cladding follows both faces of the bunker partitions.
+       for(const z of [-.503,h-.497])kit.box(g,(w-1)/2,.08,z,w-.03,1.03,.012,0xc3c9af,'tiles');
+       for(const x of [-.503,w-.497])kit.box(g,x,.08,(h-1)/2,.012,1.03,h-.03,0xc3c9af,'tiles');
+       for(const z of [-.516,h-.484])kit.box(g,(w-1)/2,1.11,z,w-.025,.055,.03,0x70897e,'brushedSteel');
+     }
 
     }else if(e.style==='barrier'){
      for(let i=0;i<w;i++)for(let j=0;j<h;j++){box(g,i,0,j,.96,.35,.9,0x6a7162);box(g,i,.35,j,.65,.55,.7,0x7f8270);const stripe=box(g,i,.42,j+.365,.19,.4,.014,(i+j)%2?0x333c34:0xbd954e);stripe.rotation.z=-.3;}
     }else if(e.style==='car'){
-     box(g,.5,.28,1,1.65,.5,2.75,0x535e4c);box(g,.5,.78,1.1,1.4,.55,1.4,0x645f49);box(g,.5,.86,.37,1.22,.37,.045,0x263f3d);box(g,.5,.86,1.82,1.22,.35,.04,0x233432);box(g,.5,.28,-.4,1.7,.18,.1,0x383d33);for(const x of [-.32,1.32])for(const y of [.25,1.95]){const wheel=cylinder(g,x,.08,y,.33,.22,0x1c2625);wheel.rotation.z=Math.PI/2;wheel.position.y=.32}box(g,.05,.65,-.31,.26,.1,.02,0xb9b483);box(g,.95,.65,-.31,.26,.1,.02,0xb9b483);
+     const paint=e.id==='car1'?0xa0b5b0:0xc1b08b;
+     box(g,.5,.28,1,1.65,.5,2.75,paint);box(g,.5,.78,1.1,1.4,.55,1.4,paint);
+     kit.box(g,.5,.86,.37,1.22,.37,.045,0x99bfc0,'glass');kit.box(g,.5,.86,1.82,1.22,.35,.04,0x83a5a2,'glass');
+     for(const x of [-.211,1.211]){kit.box(g,x,.86,1.1,.025,.35,1.14,0x9ab5ac,'glass');kit.box(g,x,1.22,1.1,.035,.055,1.35,0xaab2a1,'brushedSteel');kit.box(g,x,.67,1.32,.035,.055,.21,0xaab2a1,'brushedSteel');}
+     kit.box(g,.5,.28,-.4,1.7,.18,.1,0x9ea99f,'brushedSteel');
+     for(const x of [-.32,1.32])for(const y of [.25,1.95]){const wheel=kit.cylinder(g,x,.08,y,.33,.22,0x929a91,.33,'rubber');wheel.rotation.z=Math.PI/2;wheel.position.y=.32;const hub=kit.cylinder(g,x+(x<0?-.12:.12),.08,y,.145,.024,0x8d998b,.145,'brushedSteel');hub.rotation.z=Math.PI/2;hub.position.y=.32;}
+     kit.box(g,.05,.65,-.31,.26,.1,.02,0xb9b483,'glass');kit.box(g,.95,.65,-.31,.26,.1,.02,0xb9b483,'glass');
     }else if(e.style==='vent'){
-     box(g,(w-1)/2,0,(h-1)/2,w-.1,1.05,h-.1,0x596862);box(g,(w-1)/2,1.05,(h-1)/2,w+.02,.12,h+.02,0x78837a);for(let i=0;i<7;i++)box(g,(w-1)/2,.26+i*.095,-.505,w-.4,.04,.04,0x283b39);cylinder(g,(w-1)/2,1.18,(h-1)/2,.48,.13,0x334440);
+     kit.box(g,(w-1)/2,0,(h-1)/2,w-.1,1.05,h-.1,game.level===1?0x879d9a:0xb19875,game.level===1?'brushedSteel':'corrugated');box(g,(w-1)/2,1.05,(h-1)/2,w+.02,.12,h+.02,0xb6b9a8);for(let i=0;i<7;i++)kit.box(g,(w-1)/2,.26+i*.095,-.505,w-.4,.04,.04,0x283b39);cylinder(g,(w-1)/2,1.18,(h-1)/2,.48,.13,0x334440);
     }else if(e.style==='tank'){
      cylinder(g,.5,.6,.5,.92,2.1,0x708076);cylinder(g,.5,2.7,.5,.95,.16,0x8b9687,.65);for(const x of [0,1])for(const z of [0,1])box(g,x,0,z,.12,.65,.12,0x354942);
     }else if(e.style==='bed'){
-     box(g,0,.4,1,.87,.15,2.7,0x62746d);box(g,0,.55,1,.78,.23,2.5,0x969c86);box(g,0,.78,.15,.65,.13,.42,0xc0c4ad);for(const z of [0,2])box(g,0,0,z,.75,.45,.1,0x34463f);
+     box(g,0,.4,1,.87,.15,2.7,0x879d94);kit.box(g,0,.55,1,.78,.23,2.5,0xb8b9a4,'vinyl',0,true);kit.box(g,0,.78,.15,.65,.13,.42,0xe0dfc7,'vinyl',0,true);kit.box(g,0,.786,1.6,.79,.025,1.1,0x8d9d85,'canvas');for(const z of [0,2])box(g,0,0,z,.75,.45,.1,0x6f8075);
     }else if(e.style==='desk'){
-     box(g,(w-1)/2,.7,0,w-.1,.16,.92,0x88918a);box(g,0,0,0,.15,.7,.75,0x4b5f58);box(g,w-1,0,0,.15,.7,.75,0x4b5f58);box(g,.6,.86,0,.6,.5,.2,0x34463e);box(g,.6,.93,.115,.48,.32,.01,0x8cac8c,0x304c33);
+     box(g,(w-1)/2,.7,0,w-.1,.16,.92,0xb7c1b6);box(g,0,0,0,.15,.7,.75,0x7f9388);box(g,w-1,0,0,.15,.7,.75,0x7f9388);kit.box(g,.6,.86,0,.6,.5,.2,0x44564d,'carPaint');kit.box(g,.6,.93,.115,.48,.32,.01,0x8cac8c,undefined,0x304c33);kit.box(g,.65,.869,.3,.58,.014,.2,0x707d6c,'rubber');
     }else if(e.style==='tree'){
      cylinder(g,0,0,0,.15,3,0x454c3b,.055);const branch=cylinder(g,0,1.7,0,.09,1.2,0x454c3b,.025);branch.rotation.z=.85;branch.position.x=.35;
     }else {
      for(let i=0;i<8;i++){const geo=kit.geometry(`rubble:${i}:${e.x}`,()=>new THREE.DodecahedronGeometry(.24+hash(i,e.x)*.5,0));const m=new THREE.Mesh(geo,mat(i%2?0x657066:0x48554b));m.position.set(hash(i,e.y)*(w-.3),.2+hash(i,33)*.25,hash(i,e.x)*(h-.3));m.rotation.set(i,.4,i*.7);m.castShadow=true;g.add(m)}
     }
    }else if(e.type==='container'){
-    box(g,0,0,0,.86,.65,.8,0x686a4a);const lid=new THREE.Group();lid.position.set(0,.65,-.4);g.add(lid);box(lid,0,0,.4,.92,.12,.87,0x8b8b62);g.userData.lid=lid;for(const x of [-.29,.29]){box(g,x,0,0,.07,.67,.82,0x35463b);box(g,x,.77,0,.07,.015,.88,0xb1a776)}box(g,0,.3,.415,.24,.18,.02,0xc7b577);
+    const shell:Surface=e.id==='wreck'?'carPaint':['locker','medical','roof-aid'].includes(e.id)?'brushedSteel':'wood';
+    const color=e.id==='medical'||e.id==='roof-aid'?0xcbd3c5:0x9ca28d;
+    kit.box(g,0,0,0,.86,.65,.8,color,shell);const lid=new THREE.Group();lid.position.set(0,.65,-.4);g.add(lid);kit.box(lid,0,0,.4,.92,.12,.87,color,shell);g.userData.lid=lid;
+    for(const x of [-.29,.29]){kit.box(g,x,0,0,.07,.65,.82,0x626c58,'brushedSteel');kit.box(lid,x,.12,.4,.07,.015,.88,0x9b9b76,'brushedSteel')}
+    kit.box(g,0,.3,.415,.24,.18,.02,0xc7b577,'brushedSteel');
+    if(e.id==='roof-store')kit.box(lid,0,.136,.4,.48,.035,.76,0x63745d,'canvas');
+    if(e.id==='medical'||e.id==='roof-aid'){kit.box(lid,0,.137,.4,.06,.014,.25,0x984c37);kit.box(lid,0,.137,.4,.25,.014,.06,0x984c37);}
    }else if(e.type==='generator'){
-    box(g,0,0,0,1,.18,1.1,0x273b35);box(g,0,.18,0,.86,.72,.86,0x8a8451);box(g,0,.4,.44,.55,.26,.025,0x263832);box(g,.18,.72,.46,.09,.07,.02,0xe3984c,0x74431b);cylinder(g,-.35,.9,-.2,.06,.75,0x31423c);
+    box(g,0,0,0,1,.18,1.1,0x6b7f6d);kit.box(g,0,.18,0,.86,.72,.86,0xc3b276,'carPaint');kit.box(g,0,.4,.44,.55,.26,.025,0x616d5e,'rubber');kit.box(g,.18,.72,.46,.09,.07,.02,0xe3984c,undefined,0x74431b);cylinder(g,-.35,.9,-.2,.06,.75,0x829489);
    }else if(e.type==='door'||e.type==='exit'&&game.level<2){
     box(g,-.66,0,0,.23,2.4,.48,0x7d8270);box(g,.66,0,0,.23,2.4,.48,0x7d8270);box(g,0,2.4,0,1.57,.2,.5,0x8c917b);
-    const door=box(g,0,0,0,1.1,2.35,.2,0x465b52);door.userData.door=true;g.userData.door=door;
+    const door=new THREE.Group();g.add(door);door.userData.door=true;g.userData.door=door;
+    kit.box(door,0,0,0,1.1,2.35,.2,0xafb3a0,e.type==='door'?'brushedSteel':'corrugated');
+    for(const z of [-.112,.112]){kit.box(door,0,.14,z,.97,.06,.025,0x7f9488,'brushedSteel');kit.box(door,0,2.13,z,.97,.06,.025,0x7f9488,'brushedSteel');kit.box(door,.33,.97,z,.07,.35,.07,0xb4baa4,'brushedSteel');if(e.type==='door')kit.box(door,0,1.55,z,.58,.36,.025,0xabc5bc,'glass');}
     for(let i=0;i<5;i++)box(g,-.48+i*.23,2.42,.26,.1,.22,.015,i%2?0xc7974c:0x202f28);
     box(g,.8,1.15,.27,.22,.3,.13,0x253a32);box(g,.8,1.27,.345,.1,.08,.015,0xf5af63,0xb16a25);
     label(g,e.type==='door'?'LAB / 02':game.level===0?'BUNKER / 04':'DACH / 07',0,2.96,0,.38,'#c8d3bd',true);
    }else if(e.type==='radio'){
-    box(g,0,0,0,.86,.6,.65,0x667158);box(g,0,.6,0,.92,.1,.73,0xa6a07c);box(g,0,.15,.34,.64,.28,.025,0x233c32);box(g,.16,.26,.36,.11,.1,.01,0x89c394,0x34854d);cylinder(g,-.27,.7,-.2,.035,2.9,0x97a695);box(g,-.27,2.5,-.2,1.4,.045,.045,0x97a695);box(g,-.27,2,-.2,.8,.045,.045,0x97a695);
+    kit.box(g,0,0,0,.86,.6,.65,0x9da880,'carPaint');box(g,0,.6,0,.92,.1,.73,0xc3bea0);kit.box(g,0,.15,.34,.64,.28,.025,0x819481,'rubber');kit.box(g,.16,.26,.36,.11,.1,.01,0x89c394,undefined,0x34854d);cylinder(g,-.27,.7,-.2,.035,2.9,0x97a695);box(g,-.27,2.5,-.2,1.4,.045,.045,0x97a695);box(g,-.27,2,-.2,.8,.045,.045,0x97a695);
    }else if(e.type==='exit'){
     dot(g,0,.04,0,1.5,0x98bd93);groundText(g,'H',0,0,2,1.6,'#d3d6b7');
    }else if(e.type==='note'){
     box(g,0,.02,0,.5,.02,.4,0xc0b891);
    }else if(e.type==='item'){
     const type=e.item;
-    if(type==='chair'){box(g,0,.45,0,.65,.1,.65,0x6b8166);box(g,0,.6,-.29,.65,.6,.08,0x60745d);for(const x of [-.27,.27])for(const z of [-.27,.27])box(g,x,0,z,.06,.45,.06,0x9ba18b)}
-    else if(type==='tire'){const geo=kit.geometry('tire',()=>new THREE.TorusGeometry(.33,.14,8,16));const m=new THREE.Mesh(geo,mat(0x23302d));m.rotation.x=Math.PI/2;m.position.y=.16;g.add(m)}
-    else if(type==='bottle'){cylinder(g,0,.02,0,.115,.34,0x76977b);cylinder(g,0,.36,0,.055,.16,0x96b093);}
-    else if(type==='medkit'){box(g,0,.04,0,.45,.2,.4,0xc4c7a8);box(g,0,.245,0,.09,.015,.27,0xa6533a);box(g,0,.245,0,.27,.015,.09,0xa6533a)}
+    if(type==='chair'){kit.box(g,0,.45,0,.65,.1,.65,0x9bac91,'canvas');kit.box(g,0,.6,-.29,.65,.6,.08,0x849b7e,'canvas');for(const x of [-.27,.27])for(const z of [-.27,.27])kit.box(g,x,0,z,.06,.45,.06,0x9ba18b,'brushedSteel')}
+    else if(type==='tire'){const geo=kit.geometry('tire',()=>new THREE.TorusGeometry(.33,.14,8,16));const m=new THREE.Mesh(geo,kit.material(0x889487,'rubber'));m.rotation.x=Math.PI/2;m.position.y=.16;g.add(m)}
+    else if(type==='bottle'){kit.cylinder(g,0,.02,0,.115,.34,0xb0c9b4,.115,'glass');kit.cylinder(g,0,.36,0,.055,.16,0x96b093,.055,'glass');}
+    else if(type==='medkit'){kit.box(g,0,.04,0,.45,.2,.4,0xd8dcc6,'vinyl');box(g,0,.245,0,.09,.015,.27,0xa6533a);box(g,0,.245,0,.27,.015,.09,0xa6533a)}
     else if(type==='sample'){cylinder(g,0,0,0,.2,.55,0x8bcbb3);cylinder(g,0,.55,0,.23,.1,0xc2d3bb);box(g,0,.1,.17,.2,.25,.05,0x7ae4b0,0x228451)}
-    else if(type==='toolbox'){box(g,0,.02,0,.6,.4,.45,0x917c52);box(g,0,.42,0,.28,.09,.05,0x333f36)}
-    else if(type==='scrap'){for(let i=0;i<4;i++){const b=box(g,(i-2)*.09,.02+i*.06,0,.2,.08,.6,0x90977d);b.rotation.y=i*.8}}
-    else if(type==='ration'){cylinder(g,0,.02,0,.2,.33,0x8e9868)}
-    else {box(g,0,.03,0,.35,.3,.32,type==='fuel'?0xa49455:0xa8b19a)}
+    else if(type==='toolbox'){kit.box(g,0,.02,0,.6,.4,.45,0xb59968,'carPaint');kit.box(g,0,.42,0,.28,.09,.05,0x8c9889,'rubber')}
+    else if(type==='scrap'){for(let i=0;i<4;i++){const b=kit.box(g,(i-2)*.09,.02+i*.06,0,.2,.08,.6,0x90977d,i%2?'corrugated':'brushedSteel');b.rotation.y=i*.8}}
+    else if(type==='ration'){kit.cylinder(g,0,.02,0,.2,.33,0x9eab86,.2,'brushedSteel')}
+    else {kit.box(g,0,.03,0,.35,.3,.32,type==='fuel'?0xcdbd80:0xa8b19a,type==='fuel'?'carPaint':'brushedSteel')}
    }
    if(e.type!=='prop'){const r=dot(g,0,.03,0,.53,['generator','exit','radio','door'].includes(e.type)?0xdbab60:0x9dba98);g.userData.ring=r;}
    if(e.type!=='prop'){
@@ -145,7 +164,7 @@ export default function Scene({game,onHover,zoom}:{game:any;onHover:(v:any)=>voi
     }
     if(level===1){
       for(let i=0;i<3;i++){const pipe=kit.cylinder(deco,3+i*5.8,1.6,.6,.065,4.3,0x647971,.065,'steel');pipe.rotation.z=Math.PI/2;}
-      for(let x=1;x<20;x+=2)for(let z=2;z<18;z+=2){if(!game.isBlocked(x,z)){kit.box(deco,x,.004,z,1.92,.004,.012,0x485d55);kit.box(deco,x,.004,z,.012,.004,1.92,0x485d55);}}
+      for(const [x,z] of [[3,6.5],[14,8.5],[18,11.5]])kit.box(deco,x,.004,z,1.4,.006,.85,0x8c9d8d,'rubber');
       for(const [x,z] of [[12,1.1],[17,1.1],[1.1,12]]){kit.box(deco,x,.2,z,.28,.13,.08,0xe48764,undefined,0xd5562d);const light=new THREE.PointLight(0xf57c52,3.5,3.5,2);light.position.set(x,1,z);deco.add(light);}
       puddle(13,11,.9,.45,20);puddle(5,7,.55,.35,21);
     }
@@ -175,7 +194,7 @@ export default function Scene({game,onHover,zoom}:{game:any;onHover:(v:any)=>voi
     renderer.toneMappingExposure=level===1?1.13:1.08;
     kit.box(terrain,(w-1)/2,-1,(h-1)/2,w+.4,.89,h+.4,0x6d7e74,'concrete');
     kit.box(terrain,(w-1)/2,-1.12,(h-1)/2,w+.15,.13,h+.15,0x293e37);
-    kit.box(terrain,(w-1)/2,-.11,(h-1)/2,w,.11,h,level===0?0xa1ada0:0xb0b8aa,level===0?'paving':'concrete');
+    kit.box(terrain,(w-1)/2,-.11,(h-1)/2,w,.11,h,level===0?0xa1ada0:0xb0b8aa,level===0?'paving':level===1?'tiles':'concrete');
     if(level===0)kit.box(terrain,10.55,.001,(h-1)/2,6.85,.007,h,0x89988c,'asphalt');
     // Invisible collision plane is deliberately separate from decoration and textures.
     const planeMaterial=new THREE.MeshBasicMaterial({visible:false});kit.extras.add(planeMaterial);

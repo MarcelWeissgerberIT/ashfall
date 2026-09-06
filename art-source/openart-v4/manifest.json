@@ -1,0 +1,125 @@
+{
+  "provider": "OpenArt CLI",
+  "cli": "openart 0.1.1",
+  "model": "gpt-image-2",
+  "generationCount": 3,
+  "retries": 0,
+  "variants": 0,
+  "commandPattern": "openart generate image PROMPT --model gpt-image-2 -o OUT --timeout 8m --json --yes",
+  "promptsFile": "prompts.json",
+  "creditObservation": {
+    "before": 97795,
+    "after": 97675,
+    "difference": 120,
+    "unit": "credits",
+    "attribution": "Account balance observations only. These responses contain no per-job debit."
+  },
+  "sourceDimensions": {
+    "width": 1792,
+    "height": 1344,
+    "mode": "RGB",
+    "format": "PNG"
+  },
+  "coordinateConvention": "Crop arrays are [x,y,width,height] in source pixels, zero based.",
+  "atlases": {
+    "industrial": {
+      "source": "industrial.png",
+      "historyId": "WIBEQcRpvmTSHtYDMcSn",
+      "resourceId": "H0SzWLQmoFHnyZmQPdhz",
+      "status": "completed",
+      "tiles": {
+        "woodCrate": [
+          0,
+          0,
+          896,
+          672
+        ],
+        "vehiclePaint": [
+          896,
+          0,
+          896,
+          672
+        ],
+        "rubber": [
+          0,
+          672,
+          896,
+          672
+        ],
+        "brushedSteel": [
+          896,
+          672,
+          896,
+          672
+        ]
+      }
+    },
+    "bunker": {
+      "source": "bunker.png",
+      "historyId": "ispXO4ohT2hRUnWgbrKj",
+      "resourceId": "wemxgiQEpdHoAbZklr1i",
+      "status": "completed",
+      "tiles": {
+        "ceramicTile": [
+          0,
+          0,
+          896,
+          672
+        ],
+        "mattressVinyl": [
+          896,
+          0,
+          896,
+          672
+        ],
+        "corrugatedMetal": [
+          0,
+          672,
+          896,
+          672
+        ],
+        "windowGlass": [
+          896,
+          672,
+          896,
+          672
+        ]
+      }
+    },
+    "survival": {
+      "source": "survival.png",
+      "historyId": "Lh0wy9Wk7U70uCWHFn0w",
+      "resourceId": "4sHebGec5QfPz3EWb0ZA",
+      "status": "completed",
+      "tiles": {
+        "backpackCanvas": [
+          0,
+          0,
+          896,
+          672
+        ],
+        "jacketCanvas": [
+          896,
+          0,
+          896,
+          672
+        ],
+        "denim": [
+          0,
+          672,
+          896,
+          672
+        ],
+        "bark": [
+          896,
+          672,
+          896,
+          672
+        ]
+      }
+    }
+  },
+  "visualReview": "All three sources inspected with view_image. Clean orthographic 2x2 quadrant layout, all 12 materials in requested order, no text, borders or perspective. Fine rubber/wood/bark surface relief is visible; exact seamlessness across opposite edges is not verified.",
+  "modifications": "Original PNGs unchanged. prepare-surfaces.cjs extracts each cell with a 2 px inset, creates 640x480 WebP albedo and grayscale bump maps. Materials use mirrored repeat wrapping.",
+  "outputDirectory": "public/images/openart/v4"
+}
