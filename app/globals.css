@@ -24,3 +24,21 @@
 @media(max-width:1200px){.briefing-card{width:347px;padding:0 20px 20px;bottom:185px}.briefing-scene{margin:0 -20px 15px;height:100px}.briefing-scene>span{left:20px}.briefing-kicker{font-size:12px}.briefing-card h2{font-size:24px}.quickslot{width:80px;height:102px}.quickslot>span{font-size:12px}.quickslot .item-art{width:57px;height:45px}.quickbar{gap:9px;padding-right:11px}.entity-card{max-width:335px}.minimap{bottom:199px;width:83px}.minimap svg{width:83px;height:77px}.minimap small{display:none}.inventory-tile .item-art{width:63px;height:50px}.inventory-tile>span{font-size:12px}.survivor h2{font-size:16px}.instruction-strip .pan-help{margin-left:0}}
 @media(max-width:850px){.playfield{height:785px}.briefing-card{width:370px;bottom:199px}.briefing-scene{height:114px}.quickslot{width:92px;height:107px}.quickbar{bottom:54px}.minimap{bottom:192px;width:100px}.minimap svg{width:100px;height:94px}.inventory-tile{aspect-ratio:.85}.inventory-tile .item-art{width:90px;height:70px;max-width:100%}.mission-art{height:170px}.briefing-kicker{font-size:12px}.entity-card{bottom:195px;max-width:375px}.scene-coordinates{font-size:12px}}
 @media(max-width:540px){.playfield{height:780px}.briefing-card{left:17px;width:calc(100% - 34px);bottom:187px;padding:0 18px 18px}.briefing-scene{margin:0 -18px 14px;height:93px}.briefing-scene>span{left:18px}.briefing-card h2{font-size:24px}.briefing-card>p{font-size:14px;line-height:1.65}.briefing-tip{font-size:13px;padding:10px 0 14px;margin-top:10px}.briefing-kicker{font-size:12px}.briefing-card .primary-btn{font-size:12px}.quickbar{width:calc(100% - 28px);gap:7px;padding:7px;bottom:54px}.quickslot{width:75px;height:105px}.quickslot .item-art{width:58px;height:45px}.quickslot>span{font-size:12px}.quickslot>small{font-size:12px;letter-spacing:-.9px}.entity-card{width:calc(100% - 34px);max-width:none;bottom:180px}.inventory-tile .item-art{width:80px;height:59px}.mission-art{height:145px}.survivor-avatar{height:67px;width:60px}.survivor h2{font-size:19px}.scene-coordinates{font-size:12px}.instruction-strip .pan-help{display:none}.field-feedback p{font-size:12px}.quickbar .stealth-btn>span{font-size:12px}.throw-prompt{bottom:190px}.topbar .brand small{font-size:12px;letter-spacing:1.1px}}
+
+/* The map controls remain reachable independently of the current camera crop. */
+.zoom-tools{gap:3px;padding:3px 5px;background:#142923ed;border-color:#84978077;box-shadow:0 5px 24px #07120f70;backdrop-filter:blur(12px)}
+.zoom-tools>small{padding:0 7px;font-family:var(--font-geist-mono),monospace;font-size:12px;letter-spacing:1px;color:#94ab98}
+.zoom-tools .icon-btn{width:42px;height:42px;color:#cdd9bc;flex-shrink:0}
+.zoom-tools .icon-btn:hover:not(:disabled){background:#41503b;color:#ffe0ab}
+.zoom-tools output{width:55px;text-align:center;font-size:14px;font-family:var(--font-geist-mono),monospace;font-variant-numeric:tabular-nums;color:#efd3a8}
+.zoom-tools .zoom-reset{width:80px;flex-direction:column;gap:2px;border-left:1px solid #63745b66;border-radius:0;margin-left:3px}.zoom-reset>span{font-size:12px;line-height:14px}
+.map-south{bottom:13px;z-index:2}
+.quickbar{bottom:78px}
+.briefing-card{bottom:217px}
+.entity-card{bottom:214px}
+.throw-prompt{bottom:224px}
+.scene-canvas canvas:focus-visible{outline:2px solid #b5b991;outline-offset:-3px}
+@media(max-width:1200px){.instruction-strip .pan-help{display:none}}
+@media(max-width:540px){.map-south{justify-content:center;left:8px;right:8px}.scene-coordinates{display:none}.zoom-tools>small{display:none}.zoom-tools .icon-btn{width:44px;height:44px}.zoom-tools output{width:52px}.briefing-card{bottom:211px}.entity-card{bottom:212px}}
+
+@media(max-width:540px){.zoom-tools .zoom-reset{width:80px}}

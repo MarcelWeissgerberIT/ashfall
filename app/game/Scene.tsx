@@ -7,10 +7,12 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { createRenderKit, createCharacter, animateCharacter, type Surface } from './render-kit';
+import { createMapCameraControls } from './camera-controls';
 const COLORS={orange:0xf3bb78};
-export default function Scene({game,onHover,zoom}:{game:any;onHover:(v:any)=>void;zoom:number}){
- const host=useRef<HTMLDivElement>(null),sceneRef=useRef<any>(null),hoverRef=useRef(onHover);hoverRef.current=onHover;
- useEffect(()=>{if(sceneRef.current){sceneRef.current.camera.zoom=zoom;sceneRef.current.camera.updateProjectionMatrix()}},[zoom]);
+export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:any;onHover:(v:any)=>void;zoom:number;onZoomChange:(zoom:number)=>void;viewReset:number}){
+ const host=useRef<HTMLDivElement>(null),sceneRef=useRef<ReturnType<typeof createMapCameraControls>|null>(null),hoverRef=useRef(onHover),zoomRef=useRef(onZoomChange);hoverRef.current=onHover;zoomRef.current=onZoomChange;
+ useEffect(()=>{sceneRef.current?.setZoom(zoom)},[zoom]);
+ useEffect(()=>{sceneRef.current?.reset()},[viewReset]);
  useEffect(()=>{
   if(!host.current)return;
   let disposed=false,frame=0,last=0,lastHover='',lastPath='',currentSurface:Surface|undefined;
@@ -18,11 +20,12 @@ export default function Scene({game,onHover,zoom}:{game:any;onHover:(v:any)=>voi
   const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.6));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;
-  renderer.domElement.setAttribute('aria-label','Isometrische Spielkarte. Klicken zum Bewegen oder Interagieren; rechte Maustaste ziehen zum Verschieben der Ansicht.');
+  renderer.domElement.tabIndex=0;
+  renderer.domElement.setAttribute('aria-label','Isometrische Spielkarte. Klicken zum Bewegen oder Interagieren. Mausrad oder zwei Finger zum Zoomen. Ziehen mit rechter Maustaste oder einem Finger verschiebt die Karte. Plus und Minus zoomen, 0 zeigt die ganze Karte.');
   hostNode.appendChild(renderer.domElement);
   const scene=new THREE.Scene();scene.background=new THREE.Color(0x172c30);scene.fog=new THREE.FogExp2(0x172c30,.021);
   const camera=new THREE.OrthographicCamera(-18,18,14,-14,.1,160);const cameraOffset=new THREE.Vector3(28,33,28);const cameraTarget=new THREE.Vector3(0,0,0);
-  camera.position.copy(cameraOffset);camera.lookAt(cameraTarget);camera.zoom=zoom;sceneRef.current={camera};
+  camera.position.copy(cameraOffset);camera.lookAt(cameraTarget);camera.zoom=zoom;
   const kit=createRenderKit(renderer);
   const ambient=new THREE.HemisphereLight(0xb4d9df,0x31433a,1.4);scene.add(ambient);
   const sun=new THREE.DirectionalLight(0xffdcb3,3.0);sun.position.set(-11,22,3);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-24,right:24,top:24,bottom:-24,near:.5,far:75});sun.shadow.bias=-.0002;sun.shadow.normalBias=.035;sun.shadow.radius=3;scene.add(sun);
@@ -224,7 +227,7 @@ export default function Scene({game,onHover,zoom}:{game:any;onHover:(v:any)=>voi
   pathDots=new THREE.InstancedMesh(kit.geometry('path-circle',()=>new THREE.CircleGeometry(.055,8)),pathMaterial,500);pathDots.count=0;pathDots.frustumCulled=false;world.add(pathDots);
   const rainCount=300,rainArray=new Float32Array(rainCount*6);for(let i=0;i<rainCount;i++){const x=hash(i,3)*42-21,y=hash(i,12)*18,z=hash(i,8)*42-21;rainArray.set([x,y,z,x-.075,y-.45,z+.04],i*6)}
   const rainGeo=new THREE.BufferGeometry();rainGeo.setAttribute('position',new THREE.BufferAttribute(rainArray,3));const rainMat=new THREE.LineBasicMaterial({color:0xa9c9c7,transparent:true,opacity:.16});const rain=new THREE.LineSegments(rainGeo,rainMat);scene.add(rain);
-  const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();let dragging=false,dragX=0,dragY=0;
+  const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
   const pick=(ev:PointerEvent)=>{
     const rect=renderer.domElement.getBoundingClientRect();pointer.set((ev.clientX-rect.left)/rect.width*2-1,-(ev.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
     const hits=raycaster.intersectObjects(pickables,false).filter(hit=>{
@@ -233,31 +236,26 @@ export default function Scene({game,onHover,zoom}:{game:any;onHover:(v:any)=>voi
     });
     const floor=raycaster.intersectObject(tilePlane);hoverEntity=hits[0]?.object.userData.entity??null;hoverPoint=floor[0]?world.worldToLocal(floor[0].point.clone()):null;return {entity:hoverEntity,point:hoverPoint};
   };
-  const pan=(dx:number,dy:number)=>{const scale=(camera.top-camera.bottom)/camera.zoom/hostNode.clientHeight;
-    const right=new THREE.Vector3(1,0,-1).normalize(),down=new THREE.Vector3(1,0,1).normalize();
-    cameraTarget.addScaledVector(right,-dx*scale).addScaledVector(down,-dy*scale*1.4);cameraTarget.x=THREE.MathUtils.clamp(cameraTarget.x,-9,9);cameraTarget.z=THREE.MathUtils.clamp(cameraTarget.z,-9,9);camera.position.copy(cameraOffset).add(cameraTarget);camera.lookAt(cameraTarget);
-  };
   const move=(ev:PointerEvent)=>{
-    if(dragging){pan(ev.clientX-dragX,ev.clientY-dragY);dragX=ev.clientX;dragY=ev.clientY;return}
-    pick(ev);const id=hoverEntity?.id||'';if(id!==lastHover){lastHover=id;hoverRef.current(hoverEntity)}hostNode.style.cursor=game.throwing?'crosshair':hoverEntity?'pointer':'crosshair';
+    pick(ev);const id=hoverEntity?.id||'';if(id!==lastHover){lastHover=id;hoverRef.current(hoverEntity)}renderer.domElement.style.cursor=game.throwing?'crosshair':hoverEntity?'pointer':'crosshair';
     if(hoverPoint&&marker){marker.position.set(Math.round(hoverPoint.x),.037,Math.round(hoverPoint.z));marker.visible=!game.isBlocked(Math.round(hoverPoint.x),Math.round(hoverPoint.z))}else if(marker)marker.visible=false;
   };
   const click=(ev:PointerEvent)=>{
-    if(ev.button===2||ev.button===1){dragging=true;dragX=ev.clientX;dragY=ev.clientY;renderer.domElement.setPointerCapture(ev.pointerId);hostNode.style.cursor='grabbing';return}
-    if(ev.button!==0)return;const {entity,point}=pick(ev);if(game.throwing&&point)game.throwBottle(Math.round(point.x),Math.round(point.z));else if(entity)game.select(entity.id);else if(point)game.move(Math.round(point.x),Math.round(point.z));
+    const {entity,point}=pick(ev);if(game.throwing&&point)game.throwBottle(Math.round(point.x),Math.round(point.z));else if(entity)game.select(entity.id);else if(point)game.move(Math.round(point.x),Math.round(point.z));
   };
-  const stopDrag=(ev:PointerEvent)=>{dragging=false;if(renderer.domElement.hasPointerCapture(ev.pointerId))renderer.domElement.releasePointerCapture(ev.pointerId);hostNode.style.cursor='crosshair'};
   const leave=()=>{if(marker)marker.visible=false;hoverEntity=null;hoverRef.current(null);lastHover=''};
-  const noMenu=(e:MouseEvent)=>e.preventDefault();
   const resize=()=>{const width=hostNode.clientWidth,height=hostNode.clientHeight;if(!width||!height)return;renderer.setSize(width,height);composer.setSize(width,height);
     const aspect=width/height,half=Math.max(13.7,15.65/aspect);camera.left=-half*aspect;camera.right=half*aspect;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();
   };
-  renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerdown',click);renderer.domElement.addEventListener('pointerup',stopDrag);renderer.domElement.addEventListener('pointercancel',stopDrag);renderer.domElement.addEventListener('pointerleave',leave);renderer.domElement.addEventListener('contextmenu',noMenu);
+  const controls=createMapCameraControls(renderer.domElement,camera,cameraTarget,cameraOffset,{
+    onZoom:value=>zoomRef.current(value),onTap:click,onHover:move,onClearHover:leave,
+    bounds:()=>({x:(game.data.size[0]-1)/2,z:(game.data.size[1]-1)/2}),
+  });sceneRef.current=controls;
   const observer=new ResizeObserver(resize);observer.observe(hostNode);resize();let levelEntities=game.entities;
   const matrix=new THREE.Matrix4(),rotation=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0),-Math.PI/2);
   const loop=(now:number)=>{
     if(disposed)return;const dt=last?Math.min((now-last)/1000,.06):0;last=now;game.tick(dt);
-    if(levelEntities!==game.entities){levelEntities=game.entities;build();lastLabel='';}
+    if(levelEntities!==game.entities){levelEntities=game.entities;build();controls.reset();lastLabel='';}
     const playing=game.mode==='playing';animateCharacter(player,game.player,dt,playing,game.time);
     for(const e of game.entities){let g=meshes.get(e.id);if(!g)g=makeObject(e);g.visible=!e.removed;
       if(g.userData.door)g.userData.door.scale.x=(e.open||e.type==='exit'&&game.generatorOn)?.09:1;
@@ -279,7 +277,7 @@ export default function Scene({game,onHover,zoom}:{game:any;onHover:(v:any)=>voi
     composer.render();frame=requestAnimationFrame(loop);
   };
   frame=requestAnimationFrame(loop);
-  return()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();renderer.domElement.removeEventListener('pointermove',move);renderer.domElement.removeEventListener('pointerdown',click);renderer.domElement.removeEventListener('pointerup',stopDrag);renderer.domElement.removeEventListener('pointercancel',stopDrag);renderer.domElement.removeEventListener('pointerleave',leave);renderer.domElement.removeEventListener('contextmenu',noMenu);
+  return()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();controls.dispose();
     for(const g of [terrain,objectGroup,actors,deco,skyline,effectRoot])kit.disposeLocal(g);targetLabel.material.map?.dispose();targetLabel.material.dispose();kit.dispose();pathDots?.dispose();sun.shadow.dispose();rainGeo.dispose();rainMat.dispose();bloom.dispose();output.dispose();composer.dispose();environment.dispose();renderer.dispose();renderer.domElement.remove();sceneRef.current=null;
   };
  },[game]);
