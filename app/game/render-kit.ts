@@ -545,13 +545,14 @@ export function animateCharacter(group:THREE.Group,actor:any,dt:number,playing:b
     // Finish this cosmetic fall even if game-over has stopped actor simulation.
     else d.death=Math.min(1,d.death+THREE.MathUtils.clamp(dt,0,.06)/.85);
     const fall=charSmooth(d.death);
-    d.body.rotation.set(.09*fall,0,(d.variant%2?-1:1)*Math.PI/2*fall);
-    d.body.position.set(0,.48*fall,-.09*fall);
-    d.chest.rotation.x=.2+.3*fall;
+    d.body.rotation.set(Math.PI/2*fall,0,(d.variant%2?-.12:.12)*fall);
+    d.body.position.set(0,.25*fall,-.3*fall);
+    for(const [i,leg] of d.legs.entries()){leg.hip.rotation.set((i?.09:-.12)*fall,0,(i?.09:-.08)*fall);leg.knee.rotation.set(.15*fall,0,0);leg.foot.rotation.set(0,0,0);}
+    d.chest.rotation.x=.08*fall;
     d.arms[0].upper.rotation.x=charMix(-.8,.23,fall);d.arms[1].upper.rotation.x=charMix(-1.2,-.18,fall);
     d.arms[0].elbow.rotation.x=-.45;d.arms[1].elbow.rotation.x=-.8;
     d.head.rotation.z=.15*fall;d.halo.visible=false;d.dead=true;
-    d.contact.scale.set(1.4+fall*.4,1.12+fall*.55,1);
+    d.contact.scale.set(1.4,1.12+fall*1.4,1);
     return;
   }
   if(d.dead){d.dead=false;d.death=0;d.halo.visible=true;d.contact.scale.set(1.4,1.12,1);for(const leg of d.legs)leg.planted=false;}

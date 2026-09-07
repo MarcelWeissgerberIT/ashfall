@@ -436,5 +436,9 @@
   "Saving failed. Your browser may have blocked storage.": "Speichern fehlgeschlagen. Dein Browser blockiert möglicherweise den Speicher.",
   "The saved game could not be read.": "Der Spielstand konnte nicht gelesen werden.",
   "The saved game could not be loaded. Your current game is unchanged.": "Laden fehlgeschlagen. Dein laufendes Spiel bleibt unverändert.",
-  "Includes all three sectors, inventory, equipment, Koda and your message history.": "Enthält den Fortschritt der drei Sektoren, Inventar, Ausrüstung, Koda und deinen Nachrichtenverlauf."
+  "Includes all three sectors, inventory, equipment, Koda and your message history.": "Enthält den Fortschritt der drei Sektoren, Inventar, Ausrüstung, Koda und deinen Nachrichtenverlauf.",
+  "Save / Load": "Speichern / Laden",
+  "ROTATE CAMERA": "KAMERA DREHEN",
+  "Left": "Links",
+  "Right": "Rechts"
 }
