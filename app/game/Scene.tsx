@@ -209,7 +209,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
       const light=new THREE.PointLight(lightColor,level===1?14:21,7,2);light.position.set(x+.7,2.7,y);deco.add(light);
     }
     for(const e of game.entities)makeObject(e);
-    player=createCharacter(kit);actors.add(player);puppy=createPuppy(kit);actors.add(puppy);label(puppy,'KODA',0,.97,0,.17,'#e1cb95');
+    player=createCharacter(kit);actors.add(player);puppy=createPuppy(kit);actors.add(puppy);puppy.traverse(o=>{if(o instanceof THREE.Mesh&&!o.userData.noPick){o.userData.entity=game.companion;pickables.push(o)}});label(puppy,'KODA',0,.97,0,.17,'#e1cb95');
     for(const [i,z] of game.zombies.entries())addZombie(z,i);
     label(deco,level===0?'SECTOR 04':level===1?'STATION ZERO':'ROOF 07',w/2,-.73,h+.08,.42,'#98b4a6');
   }
@@ -240,7 +240,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     if(hoverPoint&&marker){marker.position.set(Math.round(hoverPoint.x),.037,Math.round(hoverPoint.z));marker.visible=!game.isBlocked(Math.round(hoverPoint.x),Math.round(hoverPoint.z))}else if(marker)marker.visible=false;
   };
   const click=(ev:PointerEvent)=>{
-    const {entity,point}=pick(ev);if(game.throwing&&point)game.throwBottle(Math.round(point.x),Math.round(point.z));else if(entity)game.select(entity.id);else if(point)game.move(Math.round(point.x),Math.round(point.z));
+    const {entity,point}=pick(ev);if(game.throwing&&point)game.throwBottle(Math.round(point.x),Math.round(point.z));else if(entity?.type==='companion')game.openCompanion();else if(entity)game.select(entity.id);else if(point)game.move(Math.round(point.x),Math.round(point.z));
   };
   const leave=()=>{if(marker)marker.visible=false;hoverEntity=null;hoverRef.current(null);lastHover=''};
   const resize=()=>{const width=hostNode.clientWidth,height=hostNode.clientHeight;if(!width||!height)return;renderer.setSize(width,height);composer.setSize(width,height);
@@ -284,7 +284,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
           items.forEach((id:string,i:number)=>{const model=buildPickup(kit,cargo,id,{scale:scale*(items.length>1?.65:1),detail:'compact',decorative:true,yaw:i*.65});model.position.x=columns===1?0:(i%2-.5)*scale*.6;model.position.z=(Math.floor(i/columns)-(Math.ceil(items.length/columns)-1)/2)*scale*.6;});
         }
       }
-      if(g.userData.ring){const active=e.type==='exit'&&(level===0?game.generatorOn:level===1?game.has('sample'):game.signal===0),hover=hoverEntity?.id===e.id||game.selected?.id===e.id;
+      if(g.userData.ring){const active=e.type==='exit'&&(level===0?game.generatorOn:level===1?game.has('sample'):game.signal===0),hover=hoverEntity?.id===e.id||game.selected?.id===e.id||game.companion.foundId===e.id;
         const m=g.userData.ring.material as THREE.MeshBasicMaterial;m.color.setHex(active?0x9ee2c0:hover?0xf7c991:0xa5b49b);m.opacity=hover||active?.9:e.type==='item'?.35:e.type==='container'&&e.open?.12:.25;
         g.userData.ring.scale.setScalar(g.userData.ring.userData.baseRadius*(active?1+Math.sin(game.time*3)*.08:1));
       }

@@ -1,4 +1,4 @@
-import { createCompanion, updateCompanion } from './companion.mjs';
+import { createCompanion, updateCompanion, commandCompanion } from './companion.mjs';
 import { RADIO } from './radio.mjs';
 import { createTutorial, updateTutorial } from './tutorial.mjs';
 export const CAPACITY = 14;
@@ -90,18 +90,22 @@ export class Game {
  loadLevel(index,restart=false){
   if(restart){const e=this.entries[index];this.equipment={...e.equipment};this.inventory=[...e.inventory];this.health=e.health;this.kills=e.kills;this.totalTime=e.totalTime;}
   this.level=index;this.unlocked=Math.max(this.unlocked,index);this.data=LEVELS[index];this.entities=clone(this.data.entities);this.zombies=clone(this.data.zombies);this.player={...this.data.start,facing:0,attack:0,hurt:0,action:null};this.path=[];this.target=null;this.selected=null;this.time=0;this.signal=-1;this.spawned=0;this.generatorOn=false;this.effects=[];this.mode='briefing';this.throwing=false;this.sneak=false;this.noise=0;this.flash=0;this.health=Math.max(85,this.health);this.pulse=0;
-  this.companion=createCompanion(this.player);const dogStart=[[-1,0],[0,1],[1,0],[0,-1]].map(([dx,dy])=>({x:this.player.x+dx,y:this.player.y+dy})).find(p=>!this.isBlocked(p.x,p.y));if(dogStart)Object.assign(this.companion,dogStart);this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
+  this.companionOpen=false;this.companion=createCompanion(this.player);const dogStart=[[-1,0],[0,1],[1,0],[0,-1]].map(([dx,dy])=>({x:this.player.x+dx,y:this.player.y+dy})).find(p=>!this.isBlocked(p.x,p.y));if(dogStart)Object.assign(this.companion,dogStart);this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
   if(!restart)this.entries[index]={equipment:{...this.equipment},inventory:[...this.inventory],health:this.health,kills:this.kills,totalTime:this.totalTime};
   this.history=[];this.log(this.data.intro,'story',['checkpoint','bunker','rooftop'][index]);this.emit();
  }
- start(guided=this.tutorialEnabled){if(this.inventoryOpen||this.lootOpen)return;if(this.mode==='briefing'&&this.level===0){this.tutorialEnabled=guided;this.tutorial=createTutorial(guided)}if(this.mode==='briefing'||this.mode==='paused')this.mode='playing';this.emit()}
+ start(guided=this.tutorialEnabled){if(this.companionOpen)return;if(this.inventoryOpen||this.lootOpen)return;if(this.mode==='briefing'&&this.level===0){this.tutorialEnabled=guided;this.tutorial=createTutorial(guided)}if(this.mode==='briefing'||this.mode==='paused')this.mode='playing';this.emit()}
+ commandCompanion(command){return commandCompanion(this,command)}
+ openCompanion(){if(!this.canAct||this.inventoryOpen||this.lootOpen)return;this.companionOpen=true;this.mode='paused';this.throwing=false;this.emit()}
+ closeCompanion(){if(!this.companionOpen)return;this.companionOpen=false;this.mode='playing';this.emit()}
+ careCompanion(kind){if(!this.companionOpen||!['feed','play'].includes(kind))return false;if(kind==='feed'&&!this.consume('ration'))return false;this.companion.care={kind,at:Date.now()};this.companion.bond=Math.min(100,this.companion.bond+(kind==='feed'?10:5));this.emit();return true}
  get canAct(){return this.mode==='playing'&&!this.tutorial.reading}
  acknowledgeTutorial(){if(!this.tutorial.active||this.mode!=='playing'||this.inventoryOpen)return;this.tutorial.reading=false;this.tutorialFocus++;this.emit()}
  skipTutorial(){this.tutorial.active=false;this.tutorial.reading=false;this.tutorialEnabled=false;this.log('Tutorial skipped. Complete the checkpoint objectives at your own pace.')}
  focusTutorial(){this.tutorialFocus++;this.emit()}
  toggleSneak(){if(!this.canAct)return;this.sneak=!this.sneak;this.emit()}
- pause(){if(this.inventoryOpen||this.lootOpen)return;if(this.mode==='playing')this.mode='paused';else if(this.mode==='paused')this.mode='playing';this.emit()}
- openInventory(){if(this.inventoryOpen||this.lootOpen)return;if(['playing','paused'].includes(this.mode)&&this.tutorial.active)this.tutorial.facts.inventoryViewed=true;this.inventoryReturnMode=this.mode;this.inventoryOpen=true;this.mode='paused';this.throwing=false;this.emit()}
+ pause(){if(this.companionOpen)return;if(this.inventoryOpen||this.lootOpen)return;if(this.mode==='playing')this.mode='paused';else if(this.mode==='paused')this.mode='playing';this.emit()}
+ openInventory(){if(this.companionOpen)return;if(this.inventoryOpen||this.lootOpen)return;if(['playing','paused'].includes(this.mode)&&this.tutorial.active)this.tutorial.facts.inventoryViewed=true;this.inventoryReturnMode=this.mode;this.inventoryOpen=true;this.mode='paused';this.throwing=false;this.emit()}
  closeInventory(){if(!this.inventoryOpen&&!this.lootOpen)return;this.mode=this.inventoryReturnMode||'paused';this.inventoryReturnMode=null;this.inventoryOpen=false;this.lootOpen=false;this.lootContainerId=null;this.emit()}
  get canManageInventory(){return this.canAct||this.mode==='paused'&&(this.inventoryOpen||this.lootOpen)&&['playing','paused'].includes(this.inventoryReturnMode)}
  get lootContainer(){return this.lootOpen?this.entities.find(e=>e.id===this.lootContainerId&&!e.removed):null}

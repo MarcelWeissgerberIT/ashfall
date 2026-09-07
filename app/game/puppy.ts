@@ -25,7 +25,7 @@ export function animatePuppy(root:THREE.Group,dog:any,dt:number,playing:boolean,
  d.body.position.y=moving?Math.abs(stride)*.025:Math.sin(time*2.5)*.004;
  d.body.rotation.x=-bite*.14;
  d.legs.forEach((leg:THREE.Group,i:number)=>{leg.rotation.x=moving?Math.sin(d.phase+(i===0||i===3?0:Math.PI))*.53:0;});
- d.head.rotation.x=(moving?Math.sin(d.phase)*.045:Math.sin(time*1.7)*.055)-bite*.2;
+ d.head.rotation.x=(dog.mode==='sniff'||dog.mode==='found'?.45:0)+(moving?Math.sin(d.phase)*.045:Math.sin(time*1.7)*.055)-bite*.2;
  d.head.rotation.y=moving?0:Math.sin(time*.8)*.16;
  d.jaw.rotation.x=dog.mode==='defend'?.12+bite*.35:.045+Math.max(0,Math.sin(time*2))*.06;
  d.tail.rotation.y=Math.sin(time*(dog.mode==='defend'?11:7))*(moving?.35:.55);d.tail.rotation.x=-.25+(moving?.1:0);d.tailMid.rotation.y=Math.sin(time*7-.5)*.2;
