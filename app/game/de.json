@@ -548,5 +548,13 @@
   "Haven has clean water and power again. Imani is studying the sample. Tonight, Mara and Koda sleep behind safe walls.": "Haven hat wieder sauberes Wasser und Strom. Imani untersucht die Probe. Heute Nacht schlafen Mara und Koda hinter sicheren Mauern.",
   "SAFE ZONE": "SICHERHEITSZONE",
   "FIELD MISSION": "AUSSENEINSATZ",
-  "Escape the city, reach Haven and help the colony survive. Use the radio panel for voiced mission calls, transcripts, and music or voice levels.": "Entkomme der Stadt, erreiche Haven und hilf der Kolonie zu überleben. Im Nachrichtenfenster findest du Funksprüche, Texte sowie Musik- und Spracheinstellungen."
+  "Escape the city, reach Haven and help the colony survive. Use the radio panel for voiced mission calls, transcripts, and music or voice levels.": "Entkomme der Stadt, erreiche Haven und hilf der Kolonie zu überleben. Im Nachrichtenfenster findest du Funksprüche, Texte sowie Musik- und Spracheinstellungen.",
+  "Record": "Aufnahme",
+  "Record video": "Video aufnehmen",
+  "Stop recording": "Aufnahme stoppen",
+  "Download video": "Video herunterladen",
+  "Record the game view with sound · Up to 2 minutes": "Spielansicht mit Ton aufnehmen · Bis zu 2 Minuten",
+  "Recording is unavailable in this browser.": "Dieser Browser unterstützt die Aufnahme nicht.",
+  "Enable audio before recording.": "Aktiviere vor der Aufnahme den Ton.",
+  "Recording failed. Please try again.": "Aufnahme fehlgeschlagen. Bitte erneut versuchen."
 }

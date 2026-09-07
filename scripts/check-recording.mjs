@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {recordGame,recordingType} from '../app/game/recording.mjs';
+assert.equal(recordingType(t=>t==='video/webm'),'video/webm');assert.equal(recordingType(()=>false),'');
+const original={stopped:false,clone(){return {stopped:false,stop(){this.stopped=true}}}};
+let latest,video,tracks;
+globalThis.MediaRecorder=class {static isTypeSupported(t){return t==='video/webm'}constructor(stream){this.stream=stream;this.state='inactive';this.mimeType='video/webm';latest=this}start(){this.state='recording'}stop(){this.state='inactive';this.ondataavailable?.({data:new Blob(['clip'])});this.onstop?.()}};
+const canvas={captureStream(fps){assert.equal(fps,30);video={stopped:false,stop(){this.stopped=true}};tracks=[video];return {addTrack(t){tracks.push(t)},getTracks(){return tracks}}}};
+let result;const session=recordGame(canvas,{getAudioTracks:()=>[original]},blob=>result=blob,()=>assert.fail('unexpected recording error'));
+assert.equal(tracks.length,2);session.stop();assert.equal(result.type,'video/webm');assert.equal(result.size,4);assert.ok(tracks.every(t=>t.stopped));assert.equal(original.stopped,false);
+let done=false,failed=false;recordGame(canvas,{getAudioTracks:()=>[original]},()=>done=true,()=>failed=true);latest.onerror();assert.equal(done,false);assert.equal(failed,true);assert.ok(tracks.every(t=>t.stopped));
+const disposable=recordGame(canvas,{getAudioTracks:()=>[original]},()=>assert.fail('Unmount must not deliver video'),()=>{});disposable.dispose();assert.ok(tracks.every(t=>t.stopped));
+console.log('Recording track mixing, stop/download blob, errors and cleanup verified with MediaRecorder test double.');

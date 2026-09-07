@@ -1,5 +1,6 @@
 'use client';
 import React,{createContext,useContext,useEffect,useState} from 'react';
+import {detectLanguage} from './language.mjs';
 import dictionary from './de.json';
 export function translate(text:string,language='en'):string {
  if(language!=='de')return text;const key=text.trim(),dict=dictionary as Record<string,string>;
@@ -22,7 +23,7 @@ export function translate(text:string,language='en'):string {
 const Locale=createContext({language:'en',setLanguage:(_value:string)=>{}});
 export function LanguageProvider({children}:{children:React.ReactNode}){
  const [language,set]=useState('en');
- useEffect(()=>{let saved='de';try{saved=localStorage.getItem('ashfall-language')||'de'}catch{}set(saved==='de'?'de':'en')},[]);
+ useEffect(()=>{let saved=null;try{saved=localStorage.getItem('ashfall-language')}catch{}set(detectLanguage(saved,navigator.languages?.length?[...navigator.languages]:[navigator.language]))},[]);
  useEffect(()=>{document.documentElement.lang=language},[language]);
  const setLanguage=(v:string)=>{set(v);try{localStorage.setItem('ashfall-language',v)}catch{}};
  return <Locale.Provider value={{language,setLanguage}}>{children}</Locale.Provider>;

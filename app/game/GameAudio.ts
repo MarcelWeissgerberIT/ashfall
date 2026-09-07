@@ -6,6 +6,8 @@ export type AudioStatus={cue:RadioCue|null;playing:boolean;loading:boolean;error
 export class GameAudio {
   private context:AudioContext|null=null;
   private master!:GainNode;
+  private recordingDestination:MediaStreamAudioDestinationNode|null=null;
+  recordingStream(){if(!this.context)return null;if(!this.recordingDestination){this.recordingDestination=this.context.createMediaStreamDestination();this.master.connect(this.recordingDestination);}return this.recordingDestination.stream;}
   private music!:GainNode;
   private voiceGain!:GainNode;
   private voice:HTMLAudioElement|null=null;
@@ -110,11 +112,11 @@ export class GameAudio {
     const oldGain=this.bedGain;
     if(oldGain){oldGain.gain.setTargetAtTime(0,now,.4);const old=this.pads;for(const source of old){source.stop(now+2);source.onended=()=>source.disconnect()}setTimeout(()=>oldGain.disconnect(),2500);}
     this.pads=[];const bed=this.bedGain=ctx.createGain();bed.gain.value=0;bed.gain.setTargetAtTime(1,now,1.8);bed.connect(this.music);
-    const filter=ctx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=[660,440,1000][this.sector];filter.Q.value=.5;filter.connect(bed);
+    const filter=ctx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=[660,440,1000][Math.max(0,this.sector)%3];filter.Q.value=.5;filter.connect(bed);
     const reverb=ctx.createConvolver(),impulse=ctx.createBuffer(2,Math.floor(ctx.sampleRate*3.4),ctx.sampleRate);
     for(let c=0;c<2;c++){const samples=impulse.getChannelData(c);for(let i=0;i<samples.length;i++)samples[i]=(Math.random()*2-1)*Math.pow(1-i/samples.length,3)*.23}
     reverb.buffer=impulse;const wet=ctx.createGain();wet.gain.value=.5;filter.connect(reverb).connect(wet).connect(bed);
-    const chords=[[73.416,110,146.832,174.614,220],[65.406,97.999,130.813,155.563,196],[73.416,110,164.814,220,261.626]][this.sector];
+    const chords=[[73.416,110,146.832,174.614,220],[65.406,97.999,130.813,155.563,196],[73.416,110,164.814,220,261.626]][Math.max(0,this.sector)%3];
     chords.forEach((freq,i)=>{
       const tone=ctx.createOscillator(),amp=ctx.createGain(),pan=ctx.createStereoPanner();tone.type=i<2?'sine':'triangle';tone.frequency.value=freq;tone.detune.value=i%2?-5:4;amp.gain.value=i<2?.052:.019;pan.pan.value=(i-2)*.32;
       tone.connect(amp).connect(pan).connect(filter);tone.start();this.pads.push(tone);
@@ -122,12 +124,12 @@ export class GameAudio {
     });
     const wind=ctx.createBufferSource(),noise=ctx.createBuffer(1,ctx.sampleRate*6,ctx.sampleRate),samples=noise.getChannelData(0);let last=0;
     for(let i=0;i<samples.length;i++){last=(last+.025*(Math.random()*2-1))/1.025;samples[i]=last*3.5}
-    wind.buffer=noise;wind.loop=true;const windFilter=ctx.createBiquadFilter();windFilter.type='bandpass';windFilter.frequency.value=[450,180,750][this.sector];windFilter.Q.value=.4;const windGain=ctx.createGain();windGain.gain.value=.19;wind.connect(windFilter).connect(windGain).connect(bed);wind.start();this.pads.push(wind);
+    wind.buffer=noise;wind.loop=true;const windFilter=ctx.createBiquadFilter();windFilter.type='bandpass';windFilter.frequency.value=[450,180,750][Math.max(0,this.sector)%3];windFilter.Q.value=.4;const windGain=ctx.createGain();windGain.gain.value=.19;wind.connect(windFilter).connect(windGain).connect(bed);wind.start();this.pads.push(wind);
     this.nextBeat=now+2;this.beat=0;
   }
   private schedule(){
     const ctx=this.context;if(!ctx||!this.enabled||this.paused||ctx.state!=='running')return;
-    const now=ctx.currentTime;if(now<this.nextBeat)return;this.nextBeat=now+[3.6,2.8,3.2][Math.max(0,this.sector)];
+    const now=ctx.currentTime;if(now<this.nextBeat)return;this.nextBeat=now+[3.6,2.8,3.2][Math.max(0,this.sector)%3];
     const oscillator=ctx.createOscillator(),gain=ctx.createGain();oscillator.type='sine';oscillator.frequency.setValueAtTime(this.beat%4===0?73.416:55,now);oscillator.frequency.exponentialRampToValueAtTime(36,now+.9);
     gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(.095,now+.04);gain.gain.exponentialRampToValueAtTime(.0001,now+1.5);oscillator.connect(gain).connect(this.music);oscillator.start();oscillator.stop(now+1.6);oscillator.onended=()=>{oscillator.disconnect();gain.disconnect()};this.beat++;
   }
