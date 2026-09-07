@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {Game} from '../app/game/engine.mjs';
+const run=(g,n)=>{for(let i=0;i<n;i++)g.tick(1/60)};
+const g=new Game();g.start(false);g.zombies=[];g.move(6,16);run(g,300);assert(Math.hypot(g.companion.x-g.player.x,g.companion.y-g.player.y)<2,'Puppy catches up');assert(!g.isBlocked(Math.round(g.companion.x),Math.round(g.companion.y)));
+g.openInventory();const snap=JSON.stringify(g.companion);run(g,120);assert.equal(JSON.stringify(g.companion),snap,'Inventory freezes puppy');g.closeInventory();g.pause();run(g,60);assert.equal(JSON.stringify(g.companion),snap,'Pause freezes puppy');g.start();
+g.player.x=3;g.player.y=15;g.player.attack=99;Object.assign(g.companion,{x:3,y:14,cooldown:0,path:[]});g.zombies=[{id:'threat',x:3,y:14.8,hp:100,maxHp:100,alert:true,attack:0,path:[],home:{x:3,y:14.8},repath:99}];run(g,1);assert.equal(g.zombies[0].hp,91,'Puppy damages attacker');assert(g.zombies[0].attack>.5,'Bite interrupts attack');assert.equal(g.health,100,'Interrupt protects Mara');const hp=g.zombies[0].hp;run(g,30);assert.equal(g.zombies[0].hp,hp,'Bites respect cooldown');assert(g.companion.action>=0);
+g.loadLevel(1);g.start(false);g.zombies=[];Object.assign(g.player,{x:15,y:5});Object.assign(g.companion,{x:8,y:6,path:[],repath:0});run(g,600);assert(g.companion.x<9,'Puppy cannot cross sealed lab wall');g.inventory.push('keycard');const door=g.entities.find(e=>e.id==='lab-door');door.open=true;run(g,900);assert(Math.hypot(g.companion.x-g.player.x,g.companion.y-g.player.y)<2,'Puppy follows through opened door');
+g.restart();assert.equal(g.companion.name,'Koda');assert.equal(g.companion.target,null);assert(!g.isBlocked(g.companion.x,g.companion.y),'Safe checkpoint spawn');
+const tutorial=new Game({tutorial:true});tutorial.start();const paused=JSON.stringify(tutorial.companion);run(tutorial,120);assert.equal(JSON.stringify(tutorial.companion),paused,'Tutorial reading pauses puppy');
+console.log('Companion checks passed: follow, collision, closed/open doors, defending damage, interruption, cooldown, inventory, tutorial and restart.');

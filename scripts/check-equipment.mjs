@@ -10,7 +10,7 @@ function check(name, fn) {
   try { fn(); passed++; console.log(`PASS ${name}`); }
   catch (error) { failures.push(name); console.error(`FAIL ${name}\n${error.stack}`); }
 }
-function playing() { const game = new Game(); game.start(false); return game; }
+function playing() { const game = new Game(); game.start(false); game.companion=null; return game; } // Isolate Mara's weapon/armor; companion combat is tested separately.
 function add(game, ...ids) {
   for (const id of ids) assert.equal(game.addItem(id), true, `Fixture item ${id} must fit`);
 }

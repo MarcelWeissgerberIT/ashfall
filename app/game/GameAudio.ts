@@ -22,6 +22,7 @@ export class GameAudio {
   private manual=false;
   private blocked=false;
   private heard='';
+  private language='en';
   private disposed=false;
   private enableRequest=0;
   private status:AudioStatus={cue:null,playing:false,loading:false,error:null};
@@ -65,7 +66,9 @@ export class GameAudio {
     this.music.gain.setTargetAtTime(this.musicLevel*(this.paused?.22:1)*(this.status.playing?.32:1),now,.5);
     this.voiceGain.gain.setTargetAtTime(this.voiceLevel,now,.08);
   }
+  setLanguage(language:string){const next=language==='de'?'de':'en';if(next===this.language)return;this.language=next;this.heard='';this.stopRadio();}
   sync(game:any){
+    this.setLanguage(game.language||'en');
     if(!this.context||!this.enabled)return;
     if(this.sector!==game.level){this.sector=game.level;this.makeBed();}
     const paused=!game.canAct;
@@ -85,7 +88,7 @@ export class GameAudio {
   async playRadio(cue:RadioCue,manual=true,messageId?:string){
     if(!this.enabled||!this.voice)return;
     if(messageId)this.heard=messageId;
-    this.manual=manual;if(manual)this.blocked=false;this.voice.pause();this.voice.src=`/audio/radio/${cue}.mp3`;
+    this.manual=manual;if(manual)this.blocked=false;this.voice.pause();this.voice.src=`/audio/radio/${this.language==='de'?'de/':''}${cue}.mp3`;
     this.report({cue,playing:false,loading:true,error:null});this.staticBurst(.2);
     try{await this.voice.play()}catch(error){if((error as Error).name!=='AbortError')this.report({loading:false,error:'Press Play radio call to enable voice playback.'});else this.report({loading:false})}
   }

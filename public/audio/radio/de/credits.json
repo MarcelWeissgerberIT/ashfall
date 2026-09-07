@@ -1,0 +1,50 @@
+{
+  "voice": "de-DE-ConradNeural",
+  "provider": "Microsoft Edge neural speech via edge-tts",
+  "language": "de-DE",
+  "rate": "-7%",
+  "calls": {
+    "checkpoint": {
+      "title": "Ein Weg unter die Stadt",
+      "text": "Mara, hier Leitstelle. Station Zero liegt unter dem Kontrollpunkt. Finde eine Sicherung in der Wachkiste und Treibstoff im Kofferraum. Starte den Generator und betrete den Bunker. Bleib unauffällig.",
+      "file": "checkpoint.mp3",
+      "sha256": "b53b68c1e0cd07887b22805a444ae98e3579d6fe1ffe014d75a1b58e86d83960"
+    },
+    "generator": {
+      "title": "Bunkertor entriegelt",
+      "text": "Leitstelle an Mara. Der Generator läuft. Das Bunkertor ist entriegelt. Geh hinein und bleib wachsam.",
+      "file": "generator.mp3",
+      "sha256": "f60e4fa52153cace4d665763922165a147c102e7259581918f63a72976c28db8"
+    },
+    "bunker": {
+      "title": "Probe N-04 bergen",
+      "text": "Leitstelle an Mara. Willkommen in Station Zero. Finde die Schlüsselkarte im westlichen Wartungsschrank. Öffne das Labor, berge Probe N-04 und bring sie zum Dachaufzug. Lass die Probe nicht zurück.",
+      "file": "bunker.mp3",
+      "sha256": "f0585dfec8b0d910046410288c34c46396204d0bfda6629e8c9b5a11a3d0f346"
+    },
+    "rooftop": {
+      "title": "Die letzte Frequenz",
+      "text": "Mara, wir haben deine Position. Finde die Batterie im Dachlager und versorge den Langwellensender mit Strom. Sende dein Signal und halte 35 Sekunden durch. Behalte Probe N-04 bei dir.",
+      "file": "rooftop.mp3",
+      "sha256": "ab8018a728ca2869254f33be11a6cb854f0c385b3d784d919e42ed7e7e0dc51e"
+    },
+    "signal": {
+      "title": "Auf Evakuierung warten",
+      "text": "Signal empfangen, Mara. Evakuierung in 35 Sekunden. Der Lärm wird sie anlocken. Bleib in Bewegung. Wir kommen.",
+      "file": "signal.mp3",
+      "sha256": "1887e001c3060c53eb270d505eb9dc32044ae72d6d54a14dbcba63e53f7f9b3a"
+    },
+    "evac-ready": {
+      "title": "Zur Landezone",
+      "text": "Mara, die Evakuierung ist bereit. Erreiche die markierte Landezone mit Probe N-04. Jetzt! Das ist dein Ausweg.",
+      "file": "evac-ready.mp3",
+      "sha256": "f0d47a028d379b84f024355b2be164fad821e056515f4b70b2dcd132b011e184"
+    },
+    "rescue": {
+      "title": "Leitstelle, Ende",
+      "text": "Mara, ihr seid in Sicherheit. Probe N-04 ist gesichert. Wir lassen die Stadt hinter uns. Du hast es geschafft. Leitstelle, Ende.",
+      "file": "rescue.mp3",
+      "sha256": "7d2cb38c16725d4b9c0b3387b5a3aea6b8ab56ab751fb5ed652eae41e771a5d5"
+    }
+  }
+}

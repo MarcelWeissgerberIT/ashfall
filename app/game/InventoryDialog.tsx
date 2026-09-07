@@ -1,4 +1,5 @@
 'use client';
+import { LanguageSwitch, Localized } from './i18n';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Backpack, ArrowDownToLine, ArrowUpRight, ShieldCheck, X, GripVertical, PackageOpen, ArrowRight, Check, Shirt } from 'lucide-react';
@@ -23,9 +24,9 @@ export default function InventoryDialog({game,portalContainer}:{game:any;portalC
    <button className="item-drag-handle" title="Drag item" aria-label={`Drag ${def.name}`} onPointerDown={e=>begin(e,id,from,true)}><GripVertical size={17}/></button>
    {from==='loot'&&<button className="loot-take" disabled={!game.canManageInventory||game.weight+def.weight>CAPACITY+.00001} onClick={()=>game.takeLoot(id)}>Take <ArrowRight size={12}/></button>}
   </div>};
- return <Dialog open={open} onOpenChange={v=>{if(!v)game.closeInventory()}}>
+ return <Localized><Dialog open={open} onOpenChange={v=>{if(!v)game.closeInventory()}}>
   <DialogContent className="inventory-dialog workbench-dialog" showCloseButton={false} portalContainer={portalContainer}>
-   <header className="workbench-header"><div><span className="pack-eyebrow">FIELD EQUIPMENT · WORLD PAUSED</span><DialogTitle>{container?<PackageOpen size={25}/>:<Backpack size={25}/>} {container?container.name:'Mara’s equipment'}</DialogTitle><DialogDescription>{!game.canManageInventory?'Preview only. Enter the sector to change equipment.':container?'Choose what to take. Drag with the corner grip; leftovers stay here.':'Drag gear by its corner grip onto a slot, or select an item and choose Equip.'}</DialogDescription></div><button className="pack-close" aria-label="Close inventory and return to game" onClick={()=>game.closeInventory()}><X size={21}/></button></header>
+   <header className="workbench-header"><div><span className="pack-eyebrow">FIELD EQUIPMENT · WORLD PAUSED <LanguageSwitch/></span><DialogTitle>{container?<PackageOpen size={25}/>:<Backpack size={25}/>} {container?container.name:'Mara’s equipment'}</DialogTitle><DialogDescription>{!game.canManageInventory?'Preview only. Enter the sector to change equipment.':container?'Choose what to take. Drag with the corner grip; leftovers stay here.':'Drag gear by its corner grip onto a slot, or select an item and choose Equip.'}</DialogDescription></div><button className="pack-close" aria-label="Close inventory and return to game" onClick={()=>game.closeInventory()}><X size={21}/></button></header>
    <div className="workbench-capacity"><span>{game.weight.toFixed(1)} / {CAPACITY} kg</span><Progress locale="en-US" value={game.weight/CAPACITY*100} aria-label="Backpack carry weight"/><strong>{(CAPACITY-game.weight).toFixed(1)} kg free</strong></div>
    <div className="workbench-body">
     <section className="equipment-bay" aria-label="Character and equipment slots">
@@ -53,5 +54,5 @@ export default function InventoryDialog({game,portalContainer}:{game:any;portalC
    <div className="workbench-footer"><span><kbd>I</kbd> / <kbd>Esc</kbd> to close</span><button onClick={()=>game.closeInventory()}>BACK TO GAME <ArrowRight size={14}/></button></div>
    {drag&&createPortal(<div className={`drag-ghost ${drag.valid?'valid':''}`} aria-hidden="true" style={{left:drag.x+12,top:drag.y+12}}><ItemIcon id={drag.id} size={27}/><span>{(ITEMS as any)[drag.id].name}</span></div>,portalContainer||document.body)}
   </DialogContent>
- </Dialog>;
+ </Dialog></Localized>;
 }

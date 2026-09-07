@@ -1,0 +1,30 @@
+{
+  "checkpoint": {
+    "title": "Ein Weg unter die Stadt",
+    "text": "Mara, hier Leitstelle. Station Zero liegt unter dem Kontrollpunkt. Finde eine Sicherung in der Wachkiste und Treibstoff im Kofferraum. Starte den Generator und betrete den Bunker. Bleib unauffällig."
+  },
+  "generator": {
+    "title": "Bunkertor entriegelt",
+    "text": "Leitstelle an Mara. Der Generator läuft. Das Bunkertor ist entriegelt. Geh hinein und bleib wachsam."
+  },
+  "bunker": {
+    "title": "Probe N-04 bergen",
+    "text": "Leitstelle an Mara. Willkommen in Station Zero. Finde die Schlüsselkarte im westlichen Wartungsschrank. Öffne das Labor, berge Probe N-04 und bring sie zum Dachaufzug. Lass die Probe nicht zurück."
+  },
+  "rooftop": {
+    "title": "Die letzte Frequenz",
+    "text": "Mara, wir haben deine Position. Finde die Batterie im Dachlager und versorge den Langwellensender mit Strom. Sende dein Signal und halte 35 Sekunden durch. Behalte Probe N-04 bei dir."
+  },
+  "signal": {
+    "title": "Auf Evakuierung warten",
+    "text": "Signal empfangen, Mara. Evakuierung in 35 Sekunden. Der Lärm wird sie anlocken. Bleib in Bewegung. Wir kommen."
+  },
+  "evac-ready": {
+    "title": "Zur Landezone",
+    "text": "Mara, die Evakuierung ist bereit. Erreiche die markierte Landezone mit Probe N-04. Jetzt! Das ist dein Ausweg."
+  },
+  "rescue": {
+    "title": "Leitstelle, Ende",
+    "text": "Mara, ihr seid in Sicherheit. Probe N-04 ist gesichert. Wir lassen die Stadt hinter uns. Du hast es geschafft. Leitstelle, Ende."
+  }
+}

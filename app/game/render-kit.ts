@@ -82,7 +82,7 @@ export function createRenderKit(renderer: THREE.WebGLRenderer) {
   function ellipsoid(parent:THREE.Object3D,x:number,y:number,z:number,sx:number,sy:number,sz:number,color:number,surface?:Surface){
     const metres=surface?SURFACES[surface].metres:0;
     const mesh=new THREE.Mesh(geometry(metres?`ellipsoid:${sx}:${sy}:${sz}:${metres}`:'sphere',()=>{
-      const g=new THREE.SphereGeometry(1,12,10);
+      const g=new THREE.SphereGeometry(1,24,18);
       if(metres){
         const uv=g.attributes.uv,p=g.attributes.position;
         const circumference=2*Math.PI*Math.sqrt((sx*sx+sz*sz)/2);
@@ -96,7 +96,7 @@ export function createRenderKit(renderer: THREE.WebGLRenderer) {
     const joint=new THREE.Group();joint.position.set(x,y,z);parent.add(joint);
     const metres=surface?SURFACES[surface].metres:0;
     const shape=new THREE.Mesh(geometry(`capsule:${radius}:${length}:${metres}`,()=>{
-      const g=new THREE.CapsuleGeometry(radius,Math.max(.01,length-radius*2),4,8);
+      const g=new THREE.CapsuleGeometry(radius,Math.max(.01,length-radius*2),6,12);
       if(metres){const uv=g.attributes.uv,p=g.attributes.position;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)*2*Math.PI*radius/metres,p.getY(i)/(metres*.75));}
       return g;
     }),material(color,surface));
@@ -200,32 +200,31 @@ function charMaraDetail(kit:RenderKit,d:any){
   const {box,ellipsoid,cylinder}=kit;
   const {head,chest,hips,arms,legs,wear,backpack}=d;
   const skin=0xcba489,hair=0x493327,stitch=0x939784,cloth=0x536e70,leather=0x3d473b;
-  // Adult facial planes: narrow jaw, cheekbones, brow, nose bridge and lids.
-  charProfile(kit,head,'Mara-face',[[ -.06,.025,.035,.045],[-.027,.081,.094,.025],[.033,.118,.119,.026],[.105,.139,.131,.011],[.185,.141,.132,0],[.26,.125,.12,-.014],[.316,.081,.076,-.017],[.337,0,0,-.021]],skin,undefined,28);
-  ellipsoid(head,0,.062,.126,.076,.045,.03,0xc69a7f);
-  ellipsoid(head,0,.122,.146,.029,.063,.034,skin);
-  ellipsoid(head,0,.085,.17,.034,.024,.027,skin);
+  // One continuous sculpted surface instead of stacked nose, cheek and chin primitives.
+  const faceGeometry=kit.geometry('Mara:continuous-face:v1',()=>{
+    const geo=new THREE.SphereGeometry(1,64,48),p=geo.attributes.position;
+    const bump=(x:number,y:number,cx:number,cy:number,sx:number,sy:number)=>Math.exp(-(((x-cx)/sx)**2+((y-cy)/sy)**2));
+    for(let i=0;i<p.count;i++){
+      const unitY=p.getY(i),front=Math.max(0,p.getZ(i)),y=.14+unitY*.205;
+      let x=p.getX(i)*(.139*(unitY<-.25?1+(unitY+.25)*.27:1)),z=p.getZ(i)*.122-.005;
+      if(front>0){z+=front*(.035*bump(x,y,0,.097,.025,.030)+.021*bump(x,y,0,.143,.018,.050)+.008*bump(x,y,0,.027,.043,.016)+.008*bump(x,y,0,-.014,.047,.035)-.012*bump(x,y,-.057,.151,.029,.018)-.012*bump(x,y,.057,.151,.029,.018));}
+      p.setXYZ(i,x,y,z);
+    }geo.computeVertexNormals();return geo;
+  });
+  const face=new THREE.Mesh(faceGeometry,kit.material(skin));face.castShadow=true;head.add(face);
   d.eyes=[];
   for(const side of [-1,1]){
-    ellipsoid(head,side*.142,.116,-.002,.027,.052,.025,skin);
-    ellipsoid(head,side*.155,.114,.012,.008,.028,.011,0x987b64);
-    ellipsoid(head,side*.06,.145,.13,.045,.023,.018,0x8a7864);
-    const eye=charJoint(head,'Mara-eye',side*.06,.148,.148);d.eyes.push(eye);
-    ellipsoid(eye,0,0,0,.031,.011,.012,0xd7cfb7);
-    ellipsoid(eye,-side*.002,0,.01,.010,.010,.004,0x647f70);
-    ellipsoid(eye,-side*.002,0,.014,.0045,.007,.002,0x202c2a);
-    ellipsoid(eye,-side*.003,.004,.016,.002,.002,.001,0xf5e5c9);
-    charRod(kit,head,[side*.086,.161,.146],[side*.033,.162,.151],.004,0x70564a);
-    for(let i=0;i<4;i++)ellipsoid(head,side*(.065+i*.012),.106-(i%2)*.009,.139,.0024,.002,.0015,0xa07860);
-    const brow=box(head,side*.058,.173,.143,.065,.014,.014,hair);brow.rotation.z=side*.07;
-    charStrap(kit,head,[side*.105,.067,.132],[side*.071,.04,.144],.008,0xb48c74);
+    ellipsoid(head,side*.136,.115,-.008,.016,.037,.017,skin);
+    const eye=charJoint(head,'Mara-eye',side*.055,.15,.111);d.eyes.push(eye);
+    ellipsoid(eye,0,0,0,.024,.0075,.005,0xd1c5ac);
+    ellipsoid(eye,0,0,.004,.007,.007,.002,0x587266);
+    ellipsoid(eye,0,0,.006,.003,.0045,.001,0x26302d);
+    ellipsoid(eye,-.002,.002,.007,.0014,.0014,.001,0xf4e5cf);
+    charRod(kit,head,[side*.079,.171,.109],[side*.034,.175,.115],.0035,hair);
+    charRod(kit,head,[side*.077,.158,.112],[side*.034,.159,.116],.002,0x796051);
   }
-  box(head,0,.017,.149,.063,.008,.006,0x946f60);
-  ellipsoid(head,0,-.009,.12,.047,.023,.024,skin);
-  // A healed brow scar and subtle lip planes remain legible in the close-up.
-  charStrap(kit,head,[-.098,.192,.13],[-.083,.161,.15],.004,0xdcb59a);
-  ellipsoid(head,0,.023,.15,.033,.006,.005,0x9c7062);
-  ellipsoid(head,0,.011,.15,.028,.006,.006,0xba8976);
+  charRod(kit,head,[-.025,.028,.108],[.025,.028,.108],.0025,0xa47768);
+  charRod(kit,head,[-.086,.187,.102],[-.078,.174,.11],.002,0xd8ac92);
   // Pulled-back dark hair and a short practical braid; the helmet leaves it visible.
   charProfile(kit,head,'swept-hair',[[.198,.144,.132,-.02],[.269,.133,.125,-.023],[.322,.101,.089,-.025],[.35,.03,.031,-.034],[.352,0,0,-.034]],hair);
   for(const side of [-1,1]){
@@ -234,7 +233,7 @@ function charMaraDetail(kit:RenderKit,d:any){
   }
   // Curved locks follow the skull, with a loose strand beside the left cheek.
   const hairPaths=[[[.02,.343,.01],[.105,.308,.07],[.143,.24,.035],[.105,.20,-.135]], [[-.025,.34,.035],[-.11,.30,.083],[-.141,.228,.03],[-.10,.20,-.135]], [[-.12,.275,.061],[-.149,.23,.089],[-.137,.155,.102],[-.13,.09,.084]]];
-  hairPaths.forEach((points,i)=>{const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p as [number,number,number])));const geo=kit.geometry('Mara:hair-lock:'+i,()=>new THREE.TubeGeometry(curve,18,i===2?.009:.011,5,false));const m=new THREE.Mesh(geo,kit.material(i===2?hair:0x725039));m.castShadow=true;head.add(m)});
+  hairPaths.forEach((points,i)=>{const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p as [number,number,number])));const geo=kit.geometry('Mara:hair-lock:'+i,()=>new THREE.TubeGeometry(curve,18,i===2?.0035:.004,5,false));const m=new THREE.Mesh(geo,kit.material(i===2?hair:0x725039));m.castShadow=true;head.add(m)});
   const pony=charJoint(head,'braid',0,.206,-.163);d.ponytail=pony;
   ellipsoid(pony,0,-.029,-.025,.043,.073,.044,hair);
   for(let i=0;i<4;i++)ellipsoid(pony,Math.sin(i*2)*.012,-.09-i*.041,-.017,.028-i*.003,.032,.027-i*.003,i%2?hair:0x514333);
@@ -378,6 +377,14 @@ function charMaraDetail(kit:RenderKit,d:any){
 }
 
 export function createCharacter(kit:RenderKit,zombie=false,variant=0){
+  const source=kit;
+  const recolor=<T extends THREE.Mesh>(mesh:T,color:number):T=>{mesh.material=source.material(color);return mesh};
+  kit={...source,material:(color:number)=>source.material(color),
+    box:(...a:Parameters<RenderKit['box']>)=>recolor(source.box(...a),a[7]),
+    ellipsoid:(...a:Parameters<RenderKit['ellipsoid']>)=>recolor(source.ellipsoid(...a),a[7]),
+    cylinder:(...a:Parameters<RenderKit['cylinder']>)=>recolor(source.cylinder(...a),a[6]),
+    limb:(...a:Parameters<RenderKit['limb']>)=>{const g=source.limb(...a);g.traverse(o=>{if(o instanceof THREE.Mesh)recolor(o,a[6])});return g;}
+  };
   const {box,ellipsoid,limb}=kit;
   const v=((variant%3)+3)%3,skin=zombie?0xa2ad8b:0xcba489;
   const shirt=zombie?[0x637263,0x877661,0x9b9b8d][v]:0x536e70;
@@ -415,17 +422,25 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
   const head=charJoint(chest,'head',0,.49,0);
   kit.cylinder(head,0,-.09,0,.075,.14,skin);
   if(zombie){
-  ellipsoid(head,0,.13,.006,.164,.215,.155,skin);
-  ellipsoid(head,0,.08,.15,.046,.065,.047,skin);
-  for(const x of [-.16,.16])ellipsoid(head,x,.11,0,.034,.064,.033,skin);
-  ellipsoid(head,0,.274,-.041,.17,.107,.147,zombie?0x455043:0x333f32);
-  for(const x of [-.068,.068]){
-    box(head,x,.14,.151,.058,.037,.02,zombie?0x46503b:0x655b45);
-    box(head,x,.148,.166,.025,.016,.009,zombie?0xe4b27a:0x283e34,undefined,zombie?0x4f301b:0);
+  charProfile(kit,head,'infected-face-'+v,[[-.055,.046,.057,.025],[-.015,.085,.086,.015],[.045,.108,.108],[.115,.144,.118],[.2,.138,.12],[.28,.10,.09],[.32,0,0]],skin,undefined,32);
+  ellipsoid(head,0,.11,.112,.021,.04,.025,skin);
+  for(const side of [-1,1]){
+    ellipsoid(head,side*.06,.157,.107,.035,.020,.010,0x525b49);
+    ellipsoid(head,side*.058,.157,.116,.010,.007,.003,0xb8b59b);
+    ellipsoid(head,side*.135,.115,-.01,.024,.042,.025,skin);
+    charRod(kit,head,[side*.095,.095,.10],[side*.07,.065,.115],.005,0x778269);
   }
-  box(head,.012,.018,.146,.084,.019,.015,zombie?0x645342:0x8e6e52);
+  box(head,0,.025,.106,.066,.022,.008,0x534c40);
+  for(const x of [-.025,-.01,.01,.025])box(head,x,.04,.112,.01,.009,.006,0xb5b59d);
+  ellipsoid(head,-.023,.259,-.032,.127,.088,.105,0x45483b);
+  for(let i=0;i<5;i++)ellipsoid(head,-.095+i*.038,.23,-.055,.025,.075,.04,0x45483b);
   }
-  if(zombie){box(chest,-.15,.02,.18,.095,.18,.013,0x644a37);head.rotation.z=.055*(v-1);}
+  if(zombie){
+    box(chest,-.15,.02,.18,.095,.18,.013,0x644a37);head.rotation.z=.055*(v-1);
+    for(const side of [-1,1])charStrap(kit,chest,[side*.08,.35,.07],[side*.16,.23,.17],.055,0x454e43);
+    for(let i=0;i<5;i++)box(chest,-.18+i*.09,-.17,.143,.06,.055+(i%2)*.05,.022,shirt,undefined,0,true);
+    for(const arm of arms){for(let i=0;i<4;i++)ellipsoid(arm.hand,-.044+i*.028,-.092,.06,.015,.052,.022,skin);box(arm.upper,0,-.29,.06,.15,.03,.034,0x465244);}
+  }
   const wear={jacket:[] as THREE.Group[],vest:[] as THREE.Group[],helmet:[] as THREE.Group[]};
   const hands:Record<string,THREE.Group>={};
   let backpack:THREE.Group|undefined,bandage:THREE.Group|undefined;

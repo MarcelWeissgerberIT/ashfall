@@ -56,6 +56,11 @@ for(const zombie of [false,true])for(let variant=0;variant<3;variant++){
   actor.x+=50;check(group,actor);assert(group.userData.legs.every(l=>l.plant.distanceTo(new THREE.Vector3(actor.x,.102,actor.y))<.6));
   actor.hp=0;for(let i=0;i<70;i++)check(group,actor);assert.equal(group.userData.death,1);assert.equal(group.userData.halo.visible,false);
 }
+const puppyURL=url(fs.readFileSync(root+'/app/game/puppy.ts','utf8').replace("from 'three'","from '"+threeURL+"'"));
+const {createPuppy,animatePuppy}=await import(puppyURL);const puppy=createPuppy(kit);roots.push(puppy);
+const dog={x:0,y:0,facing:0,mode:'idle',action:0};
+for(let i=0;i<720;i++){dog.mode=i<240?'idle':i<480?'follow':'defend';if(i>=240&&i<480)dog.y+=.04;dog.action=i>=480?.5-(i%30)/60:0;const before=JSON.stringify(dog);animatePuppy(puppy,dog,1/60,true,i/60);assert.equal(JSON.stringify(dog),before);puppy.updateMatrixWorld(true);puppy.traverse(o=>assert(o.matrixWorld.elements.every(Number.isFinite),'Puppy finite joint transform'));}const phase=puppy.userData.phase;animatePuppy(puppy,dog,1/60,false,12);assert.equal(puppy.userData.phase,phase,'Paused puppy animation freezes');
+console.log('720 puppy animation frames verified: idle, trot, defence, pause and actor immutability.');
 const geos=new Set(),mats=new Set();for(const g of roots)g.traverse(o=>{if(o.isMesh){geos.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])mats.add(m)}});
 let geoDisposals=0,materialDisposals=0;for(const g of geos)g.addEventListener('dispose',()=>geoDisposals++);for(const m of mats)m.addEventListener('dispose',()=>materialDisposals++);
 const perLevelMaterials=kit.extras.size;for(const g of roots)kit.disposeLocal(g);assert.equal(kit.extras.size,0);assert.equal(geoDisposals,0);assert.equal(materialDisposals,perLevelMaterials);

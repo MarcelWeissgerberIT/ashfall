@@ -1,4 +1,5 @@
 'use client';
+import { Localized } from './i18n';
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { RotateCcw, RotateCw, ScanFace, PersonStanding } from 'lucide-react';
@@ -22,5 +23,5 @@ export default function CharacterPreview({game}:{game:any}) {
       renderer.render(scene,camera);frame=requestAnimationFrame(loop)};frame=requestAnimationFrame(loop);
     return()=>{cancelAnimationFrame(frame);observer.disconnect();kit.disposeLocal(character);kit.dispose();renderer.dispose();renderer.domElement.remove()};
   },[game]);
-  return <div className="character-display"><div className="character-preview" ref={host} role="img" aria-label="Live 3D preview of Mara wearing your selected equipment"/><div className="character-turn"><button aria-label="Rotate character left" onClick={()=>angle.current-=Math.PI/4}><RotateCcw size={14}/></button><button className="character-focus" aria-label={closeUp?"Show full outfit":"Inspect Mara’s face"} title={closeUp?"Full outfit":"Face close-up"} onClick={()=>setCloseUp(v=>!v)}>{closeUp?<PersonStanding size={15}/>:<ScanFace size={15}/>}<span>{closeUp?"OUTFIT":"DETAIL"}</span></button><button aria-label="Rotate character right" onClick={()=>angle.current+=Math.PI/4}><RotateCw size={14}/></button></div></div>;
+  return <Localized><div className="character-display"><div className="character-preview" ref={host} role="img" aria-label="Live 3D preview of Mara wearing your selected equipment"/><div className="character-turn"><button aria-label="Rotate character left" onClick={()=>angle.current-=Math.PI/4}><RotateCcw size={14}/></button><button className="character-focus" aria-label={closeUp?"Show full outfit":"Inspect Mara’s face"} title={closeUp?"Full outfit":"Face close-up"} onClick={()=>setCloseUp(v=>!v)}>{closeUp?<PersonStanding size={15}/>:<ScanFace size={15}/>}<span>{closeUp?"OUTFIT":"DETAIL"}</span></button><button aria-label="Rotate character right" onClick={()=>angle.current+=Math.PI/4}><RotateCw size={14}/></button></div></div></Localized>;
 }

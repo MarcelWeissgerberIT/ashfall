@@ -47,6 +47,9 @@ const results=[];
 const run=async(name,fn)=>{try{await fn();results.push({name,status:'PASS'})}catch(error){results.push({name,status:'FAIL',detail:error.message})}};
 const director=async()=>{const statuses=[];const a=new GameAudio(s=>statuses.push({...s}));await a.setEnabled(true);return{a,media:Media.all.at(-1),statuses}};
 
+await run('Language switch loads the matching German and English recording',async()=>{
+ const {a,media}=await director();try{const g=game();g.language='de';a.sync(g);assert.equal(media.src,'/audio/radio/de/checkpoint.mp3');g.language='en';a.sync(g);assert.equal(media.src,'/audio/radio/checkpoint.mp3');}finally{a.dispose();await flush()}
+});
 await run('Automatic cue is not duplicated by repeated sync',async()=>{
  const {a,media}=await director();try{const g=game();a.sync(g);a.sync(g);assert.equal(media.playCalls,1)}finally{a.dispose();await flush()}
 });

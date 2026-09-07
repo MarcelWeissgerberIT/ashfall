@@ -11,6 +11,8 @@ import { tutorialTarget } from './tutorial.mjs';
 import { createMapCameraControls } from './camera-controls';
 import { buildWall, buildBarrier, buildVehicle } from './world-props';
 import { buildPickup } from './loot-assets';
+import { translate } from './i18n';
+import { createPuppy, animatePuppy } from './puppy';
 import { buildSectorDetails } from './sector-details';
 const COLORS={orange:0xf3bb78};
 export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:any;onHover:(v:any)=>void;zoom:number;onZoomChange:(zoom:number)=>void;viewReset:number}){
@@ -39,9 +41,9 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
   const composer=new EffectComposer(renderer,renderTarget);composer.addPass(new RenderPass(scene,camera));
   const bloom=new UnrealBloomPass(new THREE.Vector2(1,1),.27,.5,1.35);composer.addPass(bloom);const output=new OutputPass();composer.addPass(output);
   const world=new THREE.Group();scene.add(world);
-  let level=-1,terrain=new THREE.Group(),objectGroup=new THREE.Group(),actors=new THREE.Group(),deco=new THREE.Group(),skyline=new THREE.Group();
+  let renderedLanguage='',level=-1,terrain=new THREE.Group(),objectGroup=new THREE.Group(),actors=new THREE.Group(),deco=new THREE.Group(),skyline=new THREE.Group();
   const meshes=new Map<string,THREE.Group>(),pickables:THREE.Object3D[]=[];
-  let player:THREE.Group,tilePlane:THREE.Mesh,marker:THREE.Mesh|undefined,hoverEntity:any=null,hoverPoint:THREE.Vector3|null=null;
+  let puppy:THREE.Group,player:THREE.Group,tilePlane:THREE.Mesh,marker:THREE.Mesh|undefined,hoverEntity:any=null,hoverPoint:THREE.Vector3|null=null;
   let pathDots:THREE.InstancedMesh|undefined;const effects=new Map<any,THREE.Mesh>();const effectRoot=new THREE.Group();world.add(effectRoot);
   const hash=(x:number,y:number)=>{const n=Math.sin(x*127.1+y*311.7)*43758.5453;return n-Math.floor(n)};
   const mat=(color:number,glow=0)=>kit.material(color,currentSurface,glow);
@@ -50,12 +52,12 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
   const dot=(g:THREE.Object3D,x:number,y:number,z:number,r:number,c:number)=>{const m=kit.ring(g,x,z,r,c);m.position.y=y;return m};
   const label=(g:THREE.Object3D,text:string,x:number,y:number,z:number,size=1.3,color='#e6dec2',bg=false)=>{
     const canvas=document.createElement('canvas');canvas.width=512;canvas.height=96;
-    const ctx=canvas.getContext('2d')!;if(bg){ctx.fillStyle='rgba(12,24,22,.9)';ctx.fillRect(0,0,512,96)}ctx.fillStyle=color;ctx.font='500 40px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,256,48,490);
+    const ctx=canvas.getContext('2d')!;if(bg){ctx.fillStyle='rgba(12,24,22,.9)';ctx.fillRect(0,0,512,96)}ctx.fillStyle=color;ctx.font='500 40px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(translate(text,game.language),256,48,490);
     const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
     const material=new THREE.SpriteMaterial({map:texture,transparent:true,depthWrite:false});const s=new THREE.Sprite(material);s.position.set(x,y,z);s.scale.set(size*4,size*.75,1);g.add(s);return s;
   };
   const groundText=(g:THREE.Object3D,text:string,x:number,z:number,w:number,h:number,color='#c0b58c')=>{
-    const c=document.createElement('canvas');c.width=1024;c.height=256;const ctx=c.getContext('2d')!;ctx.fillStyle=color;ctx.font='900 135px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,512,128,990);
+    const c=document.createElement('canvas');c.width=1024;c.height=256;const ctx=c.getContext('2d')!;ctx.fillStyle=color;ctx.font='900 135px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(translate(text,game.language),512,128,990);
     const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;const m=new THREE.MeshBasicMaterial({map:texture,transparent:true,opacity:.5,depthWrite:false});kit.extras.add(m);
     const p=new THREE.Mesh(kit.geometry('unit-plane',()=>new THREE.PlaneGeometry(1,1)),m);p.scale.set(w,h,1);p.rotation.x=-Math.PI/2;p.position.set(x,.017,z);p.userData.noPick=true;g.add(p);
   };
@@ -136,7 +138,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
   }
   function puddle(x:number,y:number,rx:number,ry:number,index:number){
     const geom=kit.geometry('puddle:'+index,()=>{const shape=new THREE.Shape();for(let i=0;i<25;i++){const a=i/24*Math.PI*2,r=.78+hash(index,i)*.22;const px=Math.cos(a)*r,py=Math.sin(a)*r;i?shape.lineTo(px,py):shape.moveTo(px,py)}return new THREE.ShapeGeometry(shape)});
-    const material=new THREE.MeshPhysicalMaterial({color:0x77979a,roughness:.14,metalness:.62,clearcoat:1,clearcoatRoughness:.05,transparent:true,opacity:.45,depthWrite:false});kit.extras.add(material);
+    const material=new THREE.MeshPhysicalMaterial({color:0x77979a,roughness:.14,metalness:.62,clearcoat:1,clearcoatRoughness:.05,transparent:true,opacity:.25,depthWrite:false});kit.extras.add(material);
     const mesh=new THREE.Mesh(geom,material);mesh.rotation.x=-Math.PI/2;mesh.position.set(x,.013,y);mesh.scale.set(rx,ry,1);deco.add(mesh);
   }
   function environmentDetails(){
@@ -182,9 +184,9 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     kit.disposeLocal(effectRoot);effects.clear();meshes.clear();pickables.length=0;
     if(pathDots)pathDots.count=0;if(marker)marker.visible=false;lastPath='';lastHover='';hoverEntity=null;hoverPoint=null;hoverRef.current(null);
     terrain=new THREE.Group();objectGroup=new THREE.Group();actors=new THREE.Group();deco=new THREE.Group();skyline=new THREE.Group();world.add(terrain,objectGroup,actors,deco,skyline);
-    level=game.level;const [w,h]=game.data.size;world.position.set(-(w-1)/2,0,-(h-1)/2);cameraTarget.set(0,0,0);camera.position.copy(cameraOffset);camera.lookAt(cameraTarget);
-    const fogColor=level===0?0x213c40:level===1?0x11282b:0x3e4440;scene.background=new THREE.Color(fogColor);scene.fog=new THREE.FogExp2(fogColor,level===1?.026:.018);
-    ambient.color.setHex(level===2?0xb1c9cc:0xb0dce0);ambient.groundColor.setHex(level===1?0x2f413c:0x465040);ambient.intensity=level===1?1.5:1.35;
+    renderedLanguage=game.language;level=game.level;const [w,h]=game.data.size;world.position.set(-(w-1)/2,0,-(h-1)/2);cameraTarget.set(0,0,0);camera.position.copy(cameraOffset);camera.lookAt(cameraTarget);
+    const fogColor=level===0?0x213c40:level===1?0x11282b:0x3e4440;scene.background=new THREE.Color(fogColor);scene.fog=new THREE.FogExp2(fogColor,level===1?.020:.012);
+    ambient.color.setHex(level===2?0xb1c9cc:0xb0dce0);ambient.groundColor.setHex(level===1?0x2f413c:0x465040);ambient.intensity=level===1?1.3:1.12;
     sun.color.setHex(level===2?0xffb96a:level===1?0xadd6d0:0xeee3c0);sun.intensity=level===2?4:level===1?2.1:3;
     sun.position.set(level===2?-18:-11,level===2?13:22,3);fill.color.setHex(level===2?0x87b7c0:0x75b8c7);fill.intensity=level===1?1.1:1.3;
     renderer.toneMappingExposure=level===1?1.13:1.08;
@@ -207,7 +209,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
       const light=new THREE.PointLight(lightColor,level===1?14:21,7,2);light.position.set(x+.7,2.7,y);deco.add(light);
     }
     for(const e of game.entities)makeObject(e);
-    player=createCharacter(kit);actors.add(player);
+    player=createCharacter(kit);actors.add(player);puppy=createPuppy(kit);actors.add(puppy);label(puppy,'KODA',0,.97,0,.17,'#e1cb95');
     for(const [i,z] of game.zombies.entries())addZombie(z,i);
     label(deco,level===0?'SECTOR 04':level===1?'STATION ZERO':'ROOF 07',w/2,-.73,h+.08,.42,'#98b4a6');
   }
@@ -252,7 +254,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
   const matrix=new THREE.Matrix4(),rotation=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0),-Math.PI/2);
   const loop=(now:number)=>{
     if(disposed)return;const dt=last?Math.min((now-last)/1000,.06):0;last=now;game.tick(dt);
-    if(levelEntities!==game.entities){levelEntities=game.entities;build();controls.reset();lastLabel='';}
+    if(levelEntities!==game.entities||renderedLanguage!==game.language){levelEntities=game.entities;build();controls.reset();lastLabel='';}
     const guide=tutorialTarget(game);guideRing.visible=guideArrow.visible=!!guide&&game.mode==='playing';
     if(guide){guideRing.position.set(guide.x,.065,guide.y);guideRing.scale.setScalar(.75*(1+Math.sin(now*.003)*.08));guideArrow.position.set(guide.x,2.1+Math.sin(now*.003)*.13,guide.y);}
     if(lastGuideFocus!==game.tutorialFocus){
@@ -268,7 +270,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
       }
     }
     game.player.equipment=game.equipment;game.player.sneak=game.sneak;game.player.hp=game.health;
-    const playing=game.canAct;animateCharacter(player,game.player,dt,playing,game.time);
+    const playing=game.canAct;animateCharacter(player,game.player,dt,playing,game.time);animatePuppy(puppy,game.companion,dt,playing,game.time);
     for(const e of game.entities){let g=meshes.get(e.id);if(!g)g=makeObject(e);g.visible=!e.removed;
       if(g.userData.door)g.userData.door.scale.x=(e.open||e.type==='exit'&&game.generatorOn)?.09:1;
       if(g.userData.lid)g.userData.lid.rotation.x=THREE.MathUtils.damp(g.userData.lid.rotation.x,e.open?-1.1:0,9,dt);
@@ -292,7 +294,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     const liveEffects=new Set(game.effects);for(const [e,m] of effects){if(!liveEffects.has(e)){effectRoot.remove(m);kit.extras.delete(m.material as THREE.Material);(m.material as THREE.Material).dispose();effects.delete(e)}}
     for(const e of game.effects){let m=effects.get(e);if(!m){m=kit.ring(effectRoot,e.x,e.y,e.type==='bottle'?.7:e.type==='hit'?.55:.8,e.type==='heal'?0x9ce3be:e.type==='hit'?0xeeb477:0xeac28c);effects.set(e,m)}(m.material as THREE.MeshBasicMaterial).opacity=Math.min(.8,e.life);m.scale.setScalar(e.type==='bottle'?.85+Math.sin(game.time*5)*.15:e.type==='hit'?.5+(.3-e.life):.8+(1-e.life)*.4);}
     if(hoverEntity&&!hoverEntity.removed&&hoverEntity.hp!==0){targetLabel.position.copy(world.localToWorld(new THREE.Vector3(hoverEntity.x,hoverEntity.type==='prop'?3:2.25,hoverEntity.y)));targetLabel.visible=true;
-      const text=hoverEntity.name;if(text!==lastLabel){lastLabel=text;const material=targetLabel.material as THREE.SpriteMaterial,canvas=material.map!.image as HTMLCanvasElement,ctx=canvas.getContext('2d')!;ctx.clearRect(0,0,512,96);ctx.fillStyle='rgba(11,23,22,.94)';ctx.fillRect(0,0,512,96);ctx.fillStyle=hoverEntity.type==='zombie'?'#edb291':'#f1e4c6';ctx.font='500 40px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,256,48,488);material.map!.needsUpdate=true;}
+      const text=translate(hoverEntity.name,game.language);if(text!==lastLabel){lastLabel=text;const material=targetLabel.material as THREE.SpriteMaterial,canvas=material.map!.image as HTMLCanvasElement,ctx=canvas.getContext('2d')!;ctx.clearRect(0,0,512,96);ctx.fillStyle='rgba(11,23,22,.94)';ctx.fillRect(0,0,512,96);ctx.fillStyle=hoverEntity.type==='zombie'?'#edb291':'#f1e4c6';ctx.font='500 40px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,256,48,488);material.map!.needsUpdate=true;}
     }else targetLabel.visible=false;
     rain.visible=level===0;rainMat.opacity=level===0?.14:.06;
     if(playing&&rain.visible){for(let i=0;i<rainCount;i++){rainArray[i*6+1]-=dt*11;rainArray[i*6+4]-=dt*11;if(rainArray[i*6+1]<-.5){rainArray[i*6+1]=18;rainArray[i*6+4]=17.55}}rainGeo.attributes.position.needsUpdate=true;}

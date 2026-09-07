@@ -1,3 +1,4 @@
+import { createCompanion, updateCompanion } from './companion.mjs';
 import { RADIO } from './radio.mjs';
 import { createTutorial, updateTutorial } from './tutorial.mjs';
 export const CAPACITY = 14;
@@ -89,7 +90,7 @@ export class Game {
  loadLevel(index,restart=false){
   if(restart){const e=this.entries[index];this.equipment={...e.equipment};this.inventory=[...e.inventory];this.health=e.health;this.kills=e.kills;this.totalTime=e.totalTime;}
   this.level=index;this.unlocked=Math.max(this.unlocked,index);this.data=LEVELS[index];this.entities=clone(this.data.entities);this.zombies=clone(this.data.zombies);this.player={...this.data.start,facing:0,attack:0,hurt:0,action:null};this.path=[];this.target=null;this.selected=null;this.time=0;this.signal=-1;this.spawned=0;this.generatorOn=false;this.effects=[];this.mode='briefing';this.throwing=false;this.sneak=false;this.noise=0;this.flash=0;this.health=Math.max(85,this.health);this.pulse=0;
-  this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
+  this.companion=createCompanion(this.player);const dogStart=[[-1,0],[0,1],[1,0],[0,-1]].map(([dx,dy])=>({x:this.player.x+dx,y:this.player.y+dy})).find(p=>!this.isBlocked(p.x,p.y));if(dogStart)Object.assign(this.companion,dogStart);this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
   if(!restart)this.entries[index]={equipment:{...this.equipment},inventory:[...this.inventory],health:this.health,kills:this.kills,totalTime:this.totalTime};
   this.history=[];this.log(this.data.intro,'story',['checkpoint','bunker','rooftop'][index]);this.emit();
  }
@@ -176,6 +177,7 @@ export class Game {
   // A held melee weapon automatically defends at close range; click to actively pursue.
   if(this.player.attack<=0){const close=this.zombies.find(z=>z.hp>0&&distance(this.player,z)<1.12);if(close)this.hit(close)}
   if(!this.canAct)return;
+  updateCompanion(this,dt);
   for(const z of this.zombies){if(z.hp<=0||this.tutorial.active&&this.tutorial.index<3)continue;z.attack=Math.max(0,z.attack-dt);z.repath-=dt;const d=distance(z,this.player);const lured=z.lure&&z.lure.until>this.time;
    if(d<(this.sneak?2.5:4.5)||this.noise>.5&&d<8)z.alert=true;
    let dest=lured?z.lure:z.alert?this.player:{x:z.home.x+Math.sin(this.time*.2+z.home.x)*1.5,y:z.home.y+Math.cos(this.time*.2+z.home.y)*1.5};

@@ -4,6 +4,11 @@ An isometric survival game with three connected, playable sectors: the Checkpoin
 
 ## Play
 
+Switch between **Deutsch / English** in the header, briefing, or inventory. The preference is saved on this device, and switching keeps the current mission. Both languages include prerecorded radio calls.
+
+**Koda**, a German shepherd puppy, accompanies Mara through all three sectors. He follows reachable paths and interrupts nearby attackers with a short defensive bite. He pauses with the world and returns at each sector checkpoint. He is a supporting companion, not a target for enemy damage.
+
+
 Start **Guided tutorial** in sector one to learn through eight practical exercises. Instructions pause the world; the first three exercises also keep enemies still. Real actions advance the guide, including actions completed out of order. Skip the tutorial at any time, or choose **Play without tutorial**. Later sectors play normally.
 
 - Click or tap open ground to move. Click items, containers, devices, doors, or enemies to approach and interact.
@@ -36,8 +41,8 @@ Repository-wide `npm run lint` is not clean: it reports strict typing, React mut
 
 ## Visuals and audio
 
-OpenArt surface atlases, inventory art, portraits, and sector illustrations ship in `public/images/openart`. Sources and prompts are in `art-source`. The new 17-item inventory atlas is in `public/images/loot/items-v2.png`, with its generation prompt in `art-source/items-v2/prompt.txt`. The detailed Mara rig, 17 pickup models, visible container contents, equipment, lighting, weather, and animated poses are code-native. Mara has a weathered red scarf with secondary motion, curved hair strands, blinking eyes, facial detail, and personal equipment. The equipment preview switches between the full outfit and a face close-up. Each sector adds batched architectural dressing: checkpoint drainage and fencing, bunker service pipes and bed rails, and rooftop cable trays and gutters.
+OpenArt surface atlases, inventory art, portraits, and sector illustrations ship in `public/images/openart`. Sources and prompts are in `art-source`. The new 17-item inventory atlas is in `public/images/loot/items-v2.png`, with its generation prompt in `art-source/items-v2/prompt.txt`. The detailed Mara rig, 17 pickup models, visible container contents, equipment, lighting, weather, and animated poses are code-native. Characters use dedicated solid cloth colors instead of coarse world textures. Mara has a continuous sculpted face, and Infected have reshaped heads and torn clothing. Mara has a weathered red scarf with secondary motion, curved hair strands, blinking eyes, facial detail, and personal equipment. The equipment preview switches between the full outfit and a face close-up. Each sector adds batched architectural dressing: checkpoint drainage and fencing, bunker service pipes and bed rails, and rooftop cable trays and gutters.
 
 The ambient score is composed procedurally with Web Audio: slow minor chords, filtered wind, distant pulses, reverb, and a distinct palette for each sector. Music lowers during radio speech and pauses.
 
-Seven prerecorded English neural radio calls ship in `public/audio/radio`. Credits and full scripts are in `credits.json`; `app/game/radio.mjs` supplies captions. The voice is en-GB-RyanNeural, synthesized through the edge-tts project. Playback requires no speech service, account, or API key. Runtime filtering supplies the radio timbre and static. Transcripts remain available with sound muted.
+Seven prerecorded English neural radio calls ship in `public/audio/radio`. Credits and full scripts are in `credits.json`; `app/game/radio.mjs` supplies captions. The voices are en-GB-RyanNeural (English) and de-DE-ConradNeural (German), synthesized through the edge-tts project. German recordings and credits are in public/audio/radio/de. Playback requires no speech service, account, or API key. Runtime filtering supplies the radio timbre and static. Transcripts remain available with sound muted.
