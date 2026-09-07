@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict';
+import {Game} from '../app/game/engine.mjs';
+import {createSave,SAVE_KEY,readSave} from '../app/game/savegame.mjs';
+import {listSaves,writeSave,LIBRARY_KEY} from '../app/game/save-library.mjs';
+const map=new Map(),storage={getItem:k=>map.get(k)||null,setItem:(k,v)=>map.set(k,v)},g=new Game();storage.setItem(SAVE_KEY,createSave(g));assert.equal(listSaves(storage)[0].id,'legacy');let slots=writeSave(storage,g,'Before lab');assert.equal(slots.length,2);g.health=50;slots=writeSave(storage,g,'Second try');assert.equal(slots.length,3);assert.equal(readSave(slots[1].raw).state.health,100);slots=writeSave(storage,g,'Before lab',slots[1].id);assert.equal(slots.length,3);assert.equal(readSave(slots[1].raw).state.health,50);assert(map.has(SAVE_KEY),'Legacy backup preserved');assert.throws(()=>writeSave(storage,g,' '));for(let i=slots.length;i<20;i++)writeSave(storage,g,'Slot '+i);assert.throws(()=>writeSave(storage,g,'Full'));assert.equal(listSaves(storage).length,20);console.log('Named saves, legacy preservation, isolated slots, explicit overwrite and capacity verified.');

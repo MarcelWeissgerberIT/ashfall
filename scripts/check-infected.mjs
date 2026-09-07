@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict';
+import {Game} from '../app/game/engine.mjs';
+import {configureInfected,INFECTED} from '../app/game/infected.mjs';
+for(const [i,r] of INFECTED.entries()){const g=new Game();g.start(false);g.companion=null;g.entities=[];g.player={x:3,y:3,attack:99,facing:0,hurt:0};const z=configureInfected({id:'z',x:6,y:3,alert:true,attack:0,repath:0,path:[],home:{x:6,y:3},lure:{x:9,y:3,until:1}},i);g.zombies=[z];g.tick(.05);assert.equal(z.maxHp,r.hp);if(r.kind==='stalker')assert(z.x<6,'Stalker ignores an old lure');else assert(z.x>6,'Less intelligent infected follow lure');}
+const g=new Game();g.start(false);g.companion=null;g.player={x:3.45,y:3,attack:99,facing:0};g.entities=[{id:'wall',x:4,y:2,w:1,h:3,solid:true}];g.zombies=[configureInfected({id:'z',x:4.5,y:3,alert:true,attack:0,repath:0,path:[],home:{x:4.5,y:3}},0)];const hp=g.health;g.tick(.05);assert.equal(g.health,hp,'Wall blocks melee');console.log('Infected archetypes, lure intelligence and wall-safe attacks verified.');

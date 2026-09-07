@@ -220,7 +220,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     for(const [i,z] of game.zombies.entries())addZombie(z,i);
     label(deco,level===0?'SECTOR 04':level===1?'STATION ZERO':'ROOF 07',w/2,-.73,h+.08,.42,'#98b4a6');
   }
-  function addZombie(z:any,variant=0){const g=createCharacter(kit,true,variant);g.userData.entity=z;
+  function addZombie(z:any,variant=0){const g=createCharacter(kit,true,z.kind==='runner'?1:z.kind==='stalker'?2:z.kind==='shambler'?0:variant%3);g.userData.entity=z;
     g.traverse(o=>{if(o instanceof THREE.Mesh&&!o.userData.noPick){o.userData.entity=z;pickables.push(o)}});meshes.set(z.id,g);actors.add(g);return g;
   }
   build();

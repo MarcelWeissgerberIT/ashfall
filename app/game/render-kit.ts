@@ -389,7 +389,7 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     limb:(...a:Parameters<RenderKit['limb']>)=>{const g=source.limb(...a);g.traverse(o=>{if(o instanceof THREE.Mesh)recolor(o,a[6])});return g;}
   };
   const {box,ellipsoid,limb}=kit;
-  const v=((variant%3)+3)%3,skin=zombie?0xa2ad8b:0xcba489;
+  const v=((variant%3)+3)%3,skin=zombie?[0x87927b,0xaaa18e,0x899c98][v]:0xcba489;
   const shirt=zombie?[0x637263,0x877661,0x9b9b8d][v]:0x536e70;
   const group=new THREE.Group();group.name=zombie?'infected':'Mara';
   const body=charJoint(group,'body');
@@ -428,18 +428,24 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
   charProfile(kit,head,'infected-face-'+v,[[-.055,.046,.057,.025],[-.015,.085,.086,.015],[.045,.108,.108],[.115,.144,.118],[.2,.138,.12],[.28,.10,.09],[.32,0,0]],skin,undefined,32);
   ellipsoid(head,0,.11,.112,.021,.04,.025,skin);
   for(const side of [-1,1]){
-    ellipsoid(head,side*.06,.157,.107,.035,.020,.010,0x525b49);
-    ellipsoid(head,side*.058,.157,.116,.010,.007,.003,0xb8b59b);
+    ellipsoid(head,side*.06,.157,.107,.035,.020,.010,0x302d2b);
+    ellipsoid(head,side*.058,.157,.116,.010,.007,.003,0xc7ba8b);
     ellipsoid(head,side*.135,.115,-.01,.024,.042,.025,skin);
     charRod(kit,head,[side*.095,.095,.10],[side*.07,.065,.115],.005,0x778269);
   }
-  box(head,0,.025,.106,.066,.022,.008,0x534c40);
+  box(head,0,.025,.106,.066,.022,.008,0x332622);
   for(const x of [-.025,-.01,.01,.025])box(head,x,.04,.112,.01,.009,.006,0xb5b59d);
   ellipsoid(head,-.023,.259,-.032,.127,.088,.105,0x45483b);
   for(let i=0;i<5;i++)ellipsoid(head,-.095+i*.038,.23,-.055,.025,.075,.04,0x45483b);
   }
   if(zombie){
-    box(chest,-.15,.02,.18,.095,.18,.013,0x644a37);head.rotation.z=.055*(v-1);
+    box(chest,-.15,.02,.18,.095,.18,.013,0x53332d);
+    if(v===0){chest.scale.set(1.13,1,1.08);}
+    if(v===1){chest.scale.set(.89,1,.92);}
+    head.rotation.x=.12;
+    for(let i=0;i<3;i++)charRod(kit,head,[-.10+i*.018,.10,.113],[-.086+i*.018,.044,.12],.003,0x604039);
+    for(let i=0;i<4;i++)box(chest,-.055+i*.036,.01,.177,.013,.17-i*.015,.012,i%2?0x7c5547:0x3c302d);
+    box(head,.035,.026,.112,.032,.042,.009,0x382a25);head.rotation.z=.055*(v-1);
     for(const side of [-1,1])charStrap(kit,chest,[side*.08,.35,.07],[side*.16,.23,.17],.055,0x454e43);
     for(let i=0;i<5;i++)box(chest,-.18+i*.09,-.17,.143,.06,.055+(i%2)*.05,.022,shirt,undefined,0,true);
     for(const arm of arms){for(let i=0;i<4;i++)ellipsoid(arm.hand,-.044+i*.028,-.092,.06,.015,.052,.022,skin);box(arm.upper,0,-.29,.06,.15,.03,.034,0x465244);}

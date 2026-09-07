@@ -1,3 +1,4 @@
+import {configureInfected,infectedRules,clearSight} from './infected.mjs';
 import { createCompanion, updateCompanion, commandCompanion } from './companion.mjs';
 import { RADIO } from './radio.mjs';
 import { createTutorial, updateTutorial } from './tutorial.mjs';
@@ -89,7 +90,7 @@ export class Game {
  has(id){return this.inventory.includes(id)}
  loadLevel(index,restart=false){
   if(restart){const e=this.entries[index];this.equipment={...e.equipment};this.inventory=[...e.inventory];this.health=e.health;this.kills=e.kills;this.totalTime=e.totalTime;}
-  this.level=index;this.unlocked=Math.max(this.unlocked,index);this.data=LEVELS[index];this.entities=clone(this.data.entities);this.zombies=clone(this.data.zombies);this.player={...this.data.start,facing:0,attack:0,hurt:0,action:null};this.path=[];this.target=null;this.selected=null;this.time=0;this.signal=-1;this.spawned=0;this.generatorOn=false;this.effects=[];this.mode='briefing';this.throwing=false;this.sneak=false;this.noise=0;this.flash=0;this.health=Math.max(85,this.health);this.pulse=0;
+  this.level=index;this.unlocked=Math.max(this.unlocked,index);this.data=LEVELS[index];this.entities=clone(this.data.entities);this.zombies=clone(this.data.zombies).map((z,i)=>configureInfected(z,i+index));this.player={...this.data.start,facing:0,attack:0,hurt:0,action:null};this.path=[];this.target=null;this.selected=null;this.time=0;this.signal=-1;this.spawned=0;this.generatorOn=false;this.effects=[];this.mode='briefing';this.throwing=false;this.sneak=false;this.noise=0;this.flash=0;this.health=Math.max(85,this.health);this.pulse=0;
   this.companionOpen=false;this.companion=createCompanion(this.player);const dogStart=[[-1,0],[0,1],[1,0],[0,-1]].map(([dx,dy])=>({x:this.player.x+dx,y:this.player.y+dy})).find(p=>!this.isBlocked(p.x,p.y));if(dogStart)Object.assign(this.companion,dogStart);this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
   if(!restart)this.entries[index]={equipment:{...this.equipment},inventory:[...this.inventory],health:this.health,kills:this.kills,totalTime:this.totalTime};
   this.history=[];const memory=['memory-checkpoint','memory-bunker','memory-rooftop'][index];if(!this.messages.some(m=>m.voiceId===memory))this.messages.push({id:'memory-'+index,text:RADIO[memory].text,voiceId:memory,sender:'Mara',level:index,time:this.totalTime});this.log(this.data.intro,'story',['checkpoint','bunker','rooftop'][index]);this.emit();
@@ -184,14 +185,15 @@ export class Game {
   if(this.player.attack<=0){const close=this.zombies.find(z=>z.hp>0&&distance(this.player,z)<1.12);if(close)this.hit(close)}
   if(!this.canAct)return;
   updateCompanion(this,dt);
-  for(const z of this.zombies){if(z.hp<=0||this.tutorial.active&&this.tutorial.index<3)continue;z.attack=Math.max(0,z.attack-dt);z.repath-=dt;const d=distance(z,this.player);const lured=z.lure&&z.lure.until>this.time;
-   if(d<(this.sneak?2.5:4.5)||this.noise>.5&&d<8)z.alert=true;
+  for(const z of this.zombies){if(z.hp<=0||this.tutorial.active&&this.tutorial.index<3)continue;z.attack=Math.max(0,z.attack-dt);z.repath-=dt;const d=distance(z,this.player);const rules=infectedRules(z);const lured=z.lure&&z.lure.until>this.time&&(z.kind!=='stalker'||z.lure.until-this.time>5.5);
+   if(d<(this.sneak?2.3:rules.sight)&&clearSight(this,z,this.player)||this.noise>.5&&d<8)z.alert=true;if(d>10&&this.noise<.2&&!lured)z.alert=false;
    let dest=lured?z.lure:z.alert?this.player:{x:z.home.x+Math.sin(this.time*.2+z.home.x)*1.5,y:z.home.y+Math.cos(this.time*.2+z.home.y)*1.5};
-   if(z.repath<=0){z.path=this.pathTo(z,dest)||[];z.repath=.65}
-   if(d>1||lured)this.advanceActor(z,z.path,lured?.9:z.alert?.85:.35,dt);
-   if(d<1.3&&!lured&&z.attack<=0){this.health=Math.max(0,this.health-Math.max(1,Math.round(7*(1-this.protection))));z.attack=1.2;z.action={type:'attack',remaining:.75,duration:.75};this.player.hurt=.45;this.flash=1;if(this.health===0){this.mode='dead';this.log('You were overwhelmed. Try the sector again.','warn');break}}
+   if(!lured&&z.alert&&z.kind==='stalker'&&d>2.5&&this.path.length)dest=this.path[Math.min(2,this.path.length-1)];
+   if(z.repath<=0){z.path=this.pathTo(z,dest)||[];z.repath=z.kind==='stalker'?.4:.65}
+   if(d>1||lured)this.advanceActor(z,z.path,lured?.9:z.alert?rules.speed:.35,dt);
+   if(d<1.3&&!lured&&z.attack<=0&&clearSight(this,z,this.player)){this.health=Math.max(0,this.health-Math.max(1,Math.round(rules.damage*(1-this.protection))));z.attack=rules.cooldown;z.action={type:'attack',remaining:.75,duration:.75};this.player.hurt=.45;this.flash=1;if(this.health===0){this.mode='dead';this.log('You were overwhelmed. Try the sector again.','warn');break}}
   }
-  if(this.level===2&&this.signal>0){this.signal=Math.max(0,this.signal-dt);const elapsed=35-this.signal;const thresholds=[1,14,25];while(this.spawned<3&&elapsed>=thresholds[this.spawned]){const points=[[2,16],[18,16],[2,4]];const p=points[this.spawned];const z=zombie('wave'+this.spawned,p[0],p[1]);z.alert=true;this.zombies.push(z);this.spawned++;this.log('Movement at the stairwell. Keep moving!','warn')}if(this.signal===0)this.log('Evacuation ready! Reach the glowing landing zone with the sample.','success','evac-ready');}
+  if(this.level===2&&this.signal>0){this.signal=Math.max(0,this.signal-dt);const elapsed=35-this.signal;const thresholds=[1,14,25];while(this.spawned<3&&elapsed>=thresholds[this.spawned]){const points=[[2,16],[18,16],[2,4]];const p=points[this.spawned];const z=configureInfected(zombie('wave'+this.spawned,p[0],p[1]),this.spawned);z.alert=true;this.zombies.push(z);this.spawned++;this.log('Movement at the stairwell. Keep moving!','warn')}if(this.signal===0)this.log('Evacuation ready! Reach the glowing landing zone with the sample.','success','evac-ready');}
   if(this.pulse>.12){this.pulse=0;this.emit()}
  }
  hit(z){this.action('attack',this.meleeCooldown);z.hurt=.4;this.tutorial.facts.hit=true;this.player.attack=this.meleeCooldown;this.player.facing=Math.atan2(z.x-this.player.x,z.y-this.player.y);z.hp=Math.max(0,z.hp-this.meleeDamage);this.noise=.65;this.effects.push({type:'hit',x:z.x,y:z.y,life:.3});z.alert=true;if(z.hp===0){this.kills++;this.log('Infected eliminated.');if(this.target?.id===z.id){this.target=null;this.selected=null;this.path=[]}}this.emit()}

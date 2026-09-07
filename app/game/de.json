@@ -469,5 +469,17 @@
   "Materials available": "Material vorhanden",
   "Place the required ingredients in the grid.": "Lege die benötigten Zutaten ins Rezeptfeld.",
   "Your backpack": "Dein Rucksack",
-  "Keyboard: select an ingredient, then select an empty grid cell. Worn equipment must be unequipped first.": "Tastatur: Wähle eine Zutat und danach ein leeres Rezeptfeld. Angelegte Ausrüstung musst du zuerst ablegen."
+  "Keyboard: select an ingredient, then select an empty grid cell. Worn equipment must be unequipped first.": "Tastatur: Wähle eine Zutat und danach ein leeres Rezeptfeld. Angelegte Ausrüstung musst du zuerst ablegen.",
+  "Named saves on this device. Create a new slot or explicitly overwrite an existing one.": "Benannte Spielstände auf diesem Gerät. Lege einen neuen Speicherplatz an oder überschreibe gezielt einen vorhandenen.",
+  "Save name": "Name des Spielstands",
+  "Create new save": "Neuen Spielstand anlegen",
+  "Overwrite with current game": "Mit aktuellem Stand überschreiben",
+  "Original save": "Bisheriger Spielstand",
+  "Saving failed. Check the name, available slots and browser storage.": "Speichern fehlgeschlagen. Prüfe den Namen, freie Plätze und den Browserspeicher.",
+  "Shambler": "Schlurfer",
+  "Runner": "Läufer",
+  "Stalker": "Pirschender",
+  "Slow and relentless. Tougher than it looks; easily distracted by sound.": "Langsam und unerbittlich. Hält viel aus, lässt sich aber leicht durch Geräusche ablenken.",
+  "Fast and fragile. Keep your distance or interrupt its rush.": "Schnell, aber verletzlich. Halte Abstand oder unterbrich seinen Ansturm.",
+  "Anticipates your route and quickly loses interest in distractions.": "Ahnt deinen Laufweg voraus und verliert schnell das Interesse an Ablenkungen."
 }
