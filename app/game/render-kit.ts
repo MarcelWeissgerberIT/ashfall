@@ -199,15 +199,15 @@ function charBatchRigid(kit:RenderKit,root:THREE.Object3D){
 function charMaraDetail(kit:RenderKit,d:any){
   const {box,ellipsoid,cylinder}=kit;
   const {head,chest,hips,arms,legs,wear,backpack}=d;
-  const skin=0xcba489,hair=0x493327,stitch=0x939784,cloth=0x536e70,leather=0x3d473b;
+  const skin=0xdab29a,hair=0x493327,stitch=0x939784,cloth=0x536e70,leather=0x3d473b;
   // One continuous sculpted surface instead of stacked nose, cheek and chin primitives.
-  const faceGeometry=kit.geometry('Mara:continuous-face:v1',()=>{
+  const faceGeometry=kit.geometry('Mara:continuous-face:v2',()=>{
     const geo=new THREE.SphereGeometry(1,64,48),p=geo.attributes.position;
     const bump=(x:number,y:number,cx:number,cy:number,sx:number,sy:number)=>Math.exp(-(((x-cx)/sx)**2+((y-cy)/sy)**2));
     for(let i=0;i<p.count;i++){
       const unitY=p.getY(i),front=Math.max(0,p.getZ(i)),y=.14+unitY*.205;
-      let x=p.getX(i)*(.139*(unitY<-.25?1+(unitY+.25)*.27:1)),z=p.getZ(i)*.122-.005;
-      if(front>0){z+=front*(.035*bump(x,y,0,.097,.025,.030)+.021*bump(x,y,0,.143,.018,.050)+.008*bump(x,y,0,.027,.043,.016)+.008*bump(x,y,0,-.014,.047,.035)-.012*bump(x,y,-.057,.151,.029,.018)-.012*bump(x,y,.057,.151,.029,.018));}
+      let x=p.getX(i)*(.139*(unitY<-.25?1+(unitY+.25)*.34:1)),z=p.getZ(i)*.122-.005;
+      if(front>0){z+=front*(.017*bump(x,y,0,.100,.032,.038)+.010*bump(x,y,0,.146,.023,.055)+.006*bump(x,y,-.067,.087,.044,.044)+.006*bump(x,y,.067,.087,.044,.044)+.008*bump(x,y,0,.027,.043,.016)+.008*bump(x,y,0,-.014,.047,.035)-.007*bump(x,y,-.057,.151,.034,.022)-.007*bump(x,y,.057,.151,.034,.022));}
       p.setXYZ(i,x,y,z);
     }geo.computeVertexNormals();return geo;
   });
@@ -215,15 +215,18 @@ function charMaraDetail(kit:RenderKit,d:any){
   d.eyes=[];
   for(const side of [-1,1]){
     ellipsoid(head,side*.136,.115,-.008,.016,.037,.017,skin);
-    const eye=charJoint(head,'Mara-eye',side*.055,.15,.111);d.eyes.push(eye);
-    ellipsoid(eye,0,0,0,.024,.0075,.005,0xd1c5ac);
-    ellipsoid(eye,0,0,.004,.007,.007,.002,0x587266);
-    ellipsoid(eye,0,0,.006,.003,.0045,.001,0x26302d);
+    const eye=charJoint(head,'Mara-eye',side*.055,.15,.113);d.eyes.push(eye);
+    ellipsoid(eye,0,0,0,.026,.010,.004,0xeee0cc);
+    ellipsoid(eye,0,0,.004,.008,.0085,.002,0x53796c);
+    ellipsoid(eye,0,0,.006,.0035,.0055,.001,0x26302d);
     ellipsoid(eye,-.002,.002,.007,.0014,.0014,.001,0xf4e5cf);
-    charRod(kit,head,[side*.079,.171,.109],[side*.034,.175,.115],.0035,hair);
+    charRod(kit,head,[side*.079,.174,.109],[side*.034,.178,.115],.0025,hair);
     charRod(kit,head,[side*.077,.158,.112],[side*.034,.159,.116],.002,0x796051);
   }
-  charRod(kit,head,[-.025,.028,.108],[.025,.028,.108],.0025,0xa47768);
+  // Soft cupid's bow and a subtle lower lip follow the face rather than protruding.
+  charRod(kit,head,[-.024,.029,.107],[0,.033,.110],.0028,0xb57e76);
+  charRod(kit,head,[0,.033,.110],[.024,.029,.107],.0028,0xb57e76);
+  ellipsoid(head,0,.025,.107,.021,.0035,.0025,0xc98f86);
   charRod(kit,head,[-.086,.187,.102],[-.078,.174,.11],.002,0xd8ac92);
   // Pulled-back dark hair and a short practical braid; the helmet leaves it visible.
   charProfile(kit,head,'swept-hair',[[.198,.144,.132,-.02],[.269,.133,.125,-.023],[.322,.101,.089,-.025],[.35,.03,.031,-.034],[.352,0,0,-.034]],hair);

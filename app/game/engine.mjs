@@ -108,6 +108,7 @@ export class Game {
  openInventory(){if(this.companionOpen)return;if(this.inventoryOpen||this.lootOpen)return;if(['playing','paused'].includes(this.mode)&&this.tutorial.active)this.tutorial.facts.inventoryViewed=true;this.inventoryReturnMode=this.mode;this.inventoryOpen=true;this.mode='paused';this.throwing=false;this.emit()}
  closeInventory(){if(!this.inventoryOpen&&!this.lootOpen)return;this.mode=this.inventoryReturnMode||'paused';this.inventoryReturnMode=null;this.inventoryOpen=false;this.lootOpen=false;this.lootContainerId=null;this.emit()}
  get canManageInventory(){return this.canAct||this.mode==='paused'&&(this.inventoryOpen||this.lootOpen)&&['playing','paused'].includes(this.inventoryReturnMode)}
+ get backpack(){const bag=[...this.inventory];for(const id of Object.values(this.equipment)){const i=bag.indexOf(id);if(i>=0)bag.splice(i,1)}return bag}
  get lootContainer(){return this.lootOpen?this.entities.find(e=>e.id===this.lootContainerId&&!e.removed):null}
  entityDistance(e){return Math.hypot(this.player.x-Math.max(e.x,Math.min(this.player.x,e.x+(e.w||1)-1)),this.player.y-Math.max(e.y,Math.min(this.player.y,e.y+(e.h||1)-1)))}
  openLoot(e){if(!this.canAct||this.inventoryOpen||this.lootOpen||e.type!=='container'||this.entityDistance(e)>1.5)return;this.inventoryReturnMode=this.mode;this.lootContainerId=e.id;this.lootOpen=true;e.open=true;this.mode='paused';this.path=[];this.target=null;this.throwing=false;this.log(e.contents.length?`Searching ${e.name}. Choose what to take.`:'Searched. This compartment is empty.');}
@@ -117,6 +118,7 @@ export class Game {
  transferItem(id,from,to){
   if(!this.canManageInventory||!ITEMS[id])return false;
   const slot=ITEMS[id].slot,fromLoot=from==='loot';
+  if(from==='bag'&&!this.backpack.includes(id))return false;
   if(fromLoot?!this.lootContainer?.contents.includes(id):!this.has(id))return false;
   if(['hand','body','head'].includes(from)&&this.equipment[from]!==id)return false;
   if(!['bag','loot','hand','body','head'].includes(from))return false;

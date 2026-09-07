@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {Game} from '../app/game/engine.mjs';
+const g=new Game();g.start(false);g.openInventory();
+assert(!g.backpack.includes('crowbar'));
+const weight=g.weight;assert(g.transferItem('crowbar','hand','bag'));assert(g.backpack.includes('crowbar'));assert.equal(g.weight,weight);
+assert(g.transferItem('crowbar','bag','hand'));assert(!g.backpack.includes('crowbar'));assert.equal(g.weight,weight);
+assert.equal(g.transferItem('crowbar','bag','ground'),false,'A worn copy cannot be dragged from the bag');
+g.inventory.push('crowbar');assert.equal(g.backpack.filter(v=>v==='crowbar').length,1);
+assert(g.transferItem('crowbar','bag','ground'));assert.equal(g.equipment.hand,'crowbar');assert(!g.backpack.includes('crowbar'));
+g.inventory.push('axe');assert(g.transferItem('axe','bag','hand'));assert(g.backpack.includes('crowbar'));assert(!g.backpack.includes('axe'));
+assert(g.transferItem('axe','hand','bag'));assert(g.backpack.includes('axe'));assert.equal(g.equipment.hand,null);
+console.log('Backpack separation verified: equipped copies, spare copies, swaps, weight conservation and slot-to-bag transfers.');
