@@ -122,7 +122,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     for(const z of [-.112,.112]){kit.box(door,0,.14,z,.97,.06,.025,0x7f9488,'brushedSteel');kit.box(door,0,2.13,z,.97,.06,.025,0x7f9488,'brushedSteel');kit.box(door,.33,.97,z,.07,.35,.07,0xb4baa4,'brushedSteel');if(e.type==='door')kit.box(door,0,1.55,z,.58,.36,.025,0xabc5bc,'glass');}
     for(let i=0;i<5;i++)box(g,-.48+i*.23,2.42,.26,.1,.22,.015,i%2?0xc7974c:0x202f28);
     box(g,.8,1.15,.27,.22,.3,.13,0x253a32);box(g,.8,1.27,.345,.1,.08,.015,0xf5af63,0xb16a25);
-    label(g,e.type==='door'?'LAB / 02':game.level===0?'BUNKER / 04':'ROOF / 07',0,2.96,0,.38,'#c8d3bd',true);
+    g.userData.sign=label(g,e.type==='door'?'LAB / 02':game.level===0?'BUNKER / 04':'ROOF / 07',0,2.96,0,.38,'#c8d3bd',true);
    }else if(e.type==='radio'){
     kit.box(g,0,0,0,.86,.6,.65,0x9da880,'carPaint');box(g,0,.6,0,.92,.1,.73,0xc3bea0);kit.box(g,0,.15,.34,.64,.28,.025,0x819481,'rubber');kit.box(g,.16,.26,.36,.11,.1,.01,0x89c394,undefined,0x34854d);cylinder(g,-.27,.7,-.2,.035,2.9,0x97a695);box(g,-.27,2.5,-.2,1.4,.045,.045,0x97a695);box(g,-.27,2,-.2,.8,.045,.045,0x97a695);
    }else if(e.type==='exit'){
@@ -228,7 +228,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
   const guideRing=dot(world,0,.06,0,.75,0xffc477);guideRing.visible=false;guideRing.renderOrder=20;(guideRing.material as THREE.MeshBasicMaterial).depthTest=false;
   const guideArrow=new THREE.Mesh(kit.geometry('guide-arrow',()=>new THREE.ConeGeometry(.19,.44,4)),new THREE.MeshBasicMaterial({color:0xffd599,depthTest:false}));guideArrow.rotation.z=Math.PI;guideArrow.renderOrder=21;guideArrow.userData.noPick=true;guideArrow.visible=false;world.add(guideArrow);kit.extras.add(guideArrow.material);
   let lastGuideFocus=game.tutorialFocus;
-  const targetLabel=label(scene,'',0,0,0,.7,'#f0e6c9',true);targetLabel.visible=false;let lastLabel='';
+  const targetLabel=label(scene,'',0,0,0,.7,'#f0e6c9',true);targetLabel.visible=false;targetLabel.material.depthTest=false;targetLabel.material.depthWrite=false;targetLabel.renderOrder=1000;let lastLabel='';
   const pathMaterial=new THREE.MeshBasicMaterial({color:0xe2c29a,transparent:true,opacity:.75,depthWrite:false});kit.extras.add(pathMaterial);
   pathDots=new THREE.InstancedMesh(kit.geometry('path-circle',()=>new THREE.CircleGeometry(.055,8)),pathMaterial,500);pathDots.count=0;pathDots.frustumCulled=false;world.add(pathDots);
   const rainCount=300,rainArray=new Float32Array(rainCount*6);for(let i=0;i<rainCount;i++){const x=hash(i,3)*42-21,y=hash(i,12)*18,z=hash(i,8)*42-21;rainArray.set([x,y,z,x-.075,y-.45,z+.04],i*6)}
@@ -280,7 +280,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     game.player.equipment=game.equipment;game.player.sneak=game.sneak;game.player.hp=game.health;
     const playing=game.canAct;if(playing){const b=optionsBounds();controls.follow({x:game.player.x-b.x,z:game.player.y-b.z},{x:game.companion.x-b.x,z:game.companion.y-b.z},dt);}
     animateCharacter(player,game.player,dt,playing,game.time);animatePuppy(puppy,game.companion,dt,playing,game.time);
-    for(const e of game.entities){let g=meshes.get(e.id);if(!g)g=makeObject(e);g.visible=!e.removed;
+    for(const e of game.entities){let g=meshes.get(e.id);if(!g)g=makeObject(e);g.visible=!e.removed;if(g.userData.sign)g.userData.sign.visible=hoverEntity?.id!==e.id;
       if(g.userData.door)g.userData.door.scale.x=(e.open||e.type==='exit'&&game.generatorOn)?.09:1;
       if(g.userData.lid)g.userData.lid.rotation.x=THREE.MathUtils.damp(g.userData.lid.rotation.x,e.open?-1.1:0,9,dt);
       if(g.userData.hatch)g.userData.hatch.rotation.x=THREE.MathUtils.damp(g.userData.hatch.rotation.x,e.open?g.userData.hatchAngle:0,9,dt);
@@ -302,7 +302,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     const pathKey=game.path.map((p:any)=>`${p.x}:${p.y}`).join('|');if(pathKey!==lastPath&&pathDots){lastPath=pathKey;pathDots.count=Math.min(500,game.path.length);game.path.slice(0,500).forEach((p:any,i:number)=>{matrix.compose(new THREE.Vector3(p.x,.035,p.y),rotation,new THREE.Vector3(1,1,1));pathDots!.setMatrixAt(i,matrix)});pathDots.instanceMatrix.needsUpdate=true;}
     const liveEffects=new Set(game.effects);for(const [e,m] of effects){if(!liveEffects.has(e)){effectRoot.remove(m);kit.extras.delete(m.material as THREE.Material);(m.material as THREE.Material).dispose();effects.delete(e)}}
     for(const e of game.effects){let m=effects.get(e);if(!m){m=kit.ring(effectRoot,e.x,e.y,e.type==='bottle'?.7:e.type==='hit'?.55:.8,e.type==='heal'?0x9ce3be:e.type==='hit'?0xeeb477:0xeac28c);effects.set(e,m)}(m.material as THREE.MeshBasicMaterial).opacity=Math.min(.8,e.life);m.scale.setScalar(e.type==='bottle'?.85+Math.sin(game.time*5)*.15:e.type==='hit'?.5+(.3-e.life):.8+(1-e.life)*.4);}
-    if(hoverEntity&&!hoverEntity.removed&&hoverEntity.hp!==0){targetLabel.position.copy(world.localToWorld(new THREE.Vector3(hoverEntity.x,hoverEntity.type==='prop'?3:2.25,hoverEntity.y)));targetLabel.visible=true;
+    if(hoverEntity&&!hoverEntity.removed&&hoverEntity.hp!==0){targetLabel.position.copy(world.localToWorld(new THREE.Vector3(hoverEntity.x,hoverEntity.type==='door'||hoverEntity.type==='exit'?3.35:hoverEntity.type==='prop'?3:2.25,hoverEntity.y)));targetLabel.visible=true;
       const text=translate(hoverEntity.name,game.language);if(text!==lastLabel){lastLabel=text;const material=targetLabel.material as THREE.SpriteMaterial,canvas=material.map!.image as HTMLCanvasElement,ctx=canvas.getContext('2d')!;ctx.clearRect(0,0,512,96);ctx.fillStyle='rgba(11,23,22,.94)';ctx.fillRect(0,0,512,96);ctx.fillStyle=hoverEntity.type==='zombie'?'#edb291':'#f1e4c6';ctx.font='500 40px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,256,48,488);material.map!.needsUpdate=true;}
     }else targetLabel.visible=false;
     rain.visible=level===0;rainMat.opacity=level===0?.14:.06;
