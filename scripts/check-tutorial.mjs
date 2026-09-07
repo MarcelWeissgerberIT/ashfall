@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { Game } from '../app/game/engine.mjs';
 import { TUTORIAL_STEPS, tutorialTarget, tutorialHint } from '../app/game/tutorial.mjs';
 
+import {craft,prepareRecipe} from '../app/game/crafting.mjs';
 let assertions=0;
 const check=(value,message)=>{assert.ok(value,message);assertions++};
 const step=g=>TUTORIAL_STEPS[g.tutorial.index]?.id;
@@ -36,7 +37,7 @@ function sneakLesson(g){
 {
   const g=guided();basics(g);sneakLesson(g);
   for(const [id,next] of [['guard','fuel'],['wreck','power']]){
-    g.acknowledgeTutorial();go(g,id);check(step(g)===next&&g.tutorial.reading,`${id} acquisition opens the next relevant lesson`);
+    g.acknowledgeTutorial();go(g,id);if(id==='guard')check(craft(g,'fuse',prepareRecipe(g,'fuse')),'Tutorial crafts fuse');check(step(g)===next&&g.tutorial.reading,`${id} acquisition opens the next relevant lesson`);
   }
   g.openInventory();g.drop('fuel');g.closeInventory();
   const dropped=tutorialTarget(g);
@@ -48,7 +49,7 @@ function sneakLesson(g){
   g.acknowledgeTutorial();go(g,'bunker');
   check(g.mode==='complete'&&g.tutorial.completed&&!g.tutorial.active&&!g.tutorial.reading,'Gate completes both the real mission and tutorial');
   g.next();g.start();check(g.level===1&&!g.tutorial.active&&g.canAct,'Station Zero starts as ordinary gameplay');
-  for(const id of ['locker','medical','lab-door','sample','roof'])go(g,id);
+  for(const id of ['locker','medical','lab-door','sample','roof']){go(g,id);if(id==='locker')craft(g,'samplecase',prepareRecipe(g,'samplecase'));}
   check(g.mode==='complete','Guided campaign continues through the playable bunker');
   g.next();g.start();for(const id of ['roof-store','roof-aid','radio'])go(g,id);
   while(g.signal>0){if(!g.path.length){const p=[[4,15],[16,16],[18,10],[10,10],[4,9]][Math.floor(g.time/5)%5];g.move(...p)}ticks(g,18);}
@@ -63,10 +64,10 @@ function sneakLesson(g){
   g.acknowledgeTutorial();g.use('bottle');g.throwBottle(8,15);
   check(step(g)==='fuse'&&g.tutorial.facts.threw,'A successful distraction is an alternative survival exercise');
   g.acknowledgeTutorial();go(g,'wreck');check(g.has('fuel')&&step(g)==='fuse','Fuel can be acquired before the guide asks for it');
-  go(g,'guard');check(step(g)==='power','Previously acquired fuel is accepted without an impossible repeat search');
+  go(g,'guard');craft(g,'fuse',prepareRecipe(g,'fuse'));check(step(g)==='power','Previously acquired fuel is accepted without an impossible repeat search');
 }
 {
-  const g=guided();basics(g);sneakLesson(g);g.acknowledgeTutorial();go(g,'guard');g.acknowledgeTutorial();
+  const g=guided();basics(g);sneakLesson(g);g.acknowledgeTutorial();go(g,'guard');craft(g,'fuse',prepareRecipe(g,'fuse'));g.acknowledgeTutorial();
   g.inventory=[...Array(11).fill('scrap'),'fuse'];go(g,'wreck');
   const trunk=g.entities.find(e=>e.id==='wreck');
   check(trunk.open&&trunk.contents.includes('fuel')&&!g.has('fuel')&&step(g)==='fuel','An opened overweight trunk does not complete the fuel exercise');

@@ -14,6 +14,7 @@ export const ITEMS = {
  fuse:{name:'Fuse',weight:0.2,kind:'quest',desc:'Fits the generator at the bunker entrance.'},
  fuel:{name:'Fuel',weight:2,kind:'quest',desc:'A small can of diesel for the generator.'},
  keycard:{name:'Keycard',weight:0.1,kind:'quest',desc:'Unlocks the laboratory and rooftop access.'},
+ samplecase:{name:'Sample carrier',weight:0.5,kind:'quest',desc:'An improvised protective carrier. Required to safely collect Sample N-04.'},
  sample:{name:'Sample N-04',weight:0.6,kind:'quest',desc:'The sealed sample must reach the evacuation point.'},
  battery:{name:'Battery',weight:1.5,kind:'quest',desc:'Powers the transmitter on the roof.'},
  scrap:{name:'Metal scrap',weight:1.2,kind:'salvage',desc:'Salvage. Can be dropped at any time.'},
@@ -31,13 +32,13 @@ const prop=(id,x,y,style,w=1,h=1)=>{
 const crate=(id,x,y,name,contents,desc)=>({id,x,y,type:'container',name,contents,desc,solid:true});
 const zombie=(id,x,y)=>({id,x,y,hp:76,maxHp:76,type:'zombie',name:'Infected',desc:'Reacts to proximity and noise. Click to attack.',attack:0,hurt:0,action:null,repath:0,path:[],home:{x,y},alert:false});
 export const LEVELS=[
- {name:'Ashes at the gate',place:'CHECKPOINT 04',tag:'OUTSKIRTS',weather:'RAIN · 8 °C',intro:'The city is lost. Station Zero lies beneath it. Find a way through the bunker gate.',hint:'Search the guard crate and the car trunk. The generator needs a fuse and fuel.',size:[21,19],start:{x:3,y:15},goals:['Find a Fuse and Fuel','Start the generator','Enter the bunker'],
+ {name:'Ashes at the gate',place:'CHECKPOINT 04',tag:'OUTSKIRTS',weather:'RAIN · 8 °C',intro:'Station Zero is calling. The gate fuse has burned out. Mara remembers repairing emergency radios: salvage metal, craft a replacement fuse, and get Koda inside.',hint:'Search the guard crate for metal scrap and a toolbox. Open Crafting and choose Assemble fuse. Find fuel in the car trunk, then power the gate.',size:[21,19],start:{x:3,y:15},goals:['Craft a Fuse and find Fuel','Start the generator','Enter the bunker'],
  entities:[
   prop('north-wall',3,0,'wall',8,1),prop('side-wall',0,1,'wall',1,8),prop('ruin',1,5,'wall',2,1),prop('ruin2',5,1,'wall',1,5),
   prop('bunker-shell',15,0,'wall',6,2),prop('bunker-left',14,2,'wall',2,2),prop('bunker-right',19,2,'wall',2,2),
   prop('barrier1',7,8,'barrier',3,1),prop('barrier2',13,9,'barrier',4,1),prop('car1',10,12,'car',2,3),prop('car2',4,9,'car',2,3),
   prop('rubble1',2,2,'rubble',2,2),prop('rubble2',19,13,'rubble',2,2),prop('tree1',2,7,'tree'),prop('tree2',18,8,'tree'),
-  crate('guard',3,4,'Guard crate',['fuse','medkit'],'A toolbox belonging to the guards. The lid reads: “Spare fuses”.'),
+  crate('guard',3,4,'Guard crate',['scrap','toolbox','medkit'],'The spare fuses are burned out. Salvage the metal and use these tools to assemble a replacement in Crafting.'),
   crate('wreck',13,14,'Car trunk',['fuel','bottle'],'The trunk is ajar. It smells of diesel.'),
   crate('supply',8,3,'Supply crate',['ration','bottle'],'Someone packed this for the coming winter.'),
   item('jacket1',5,16,'jacket'),item('helmet1',6,15,'helmet'),item('bottle1',4,14,'bottle'),item('scrap1',7,13,'scrap'),item('chair1',3,6,'chair'),item('tire1',6,11,'tire'),item('tools1',15,11,'toolbox'),item('medkit1',9,6,'medkit'),
@@ -45,12 +46,12 @@ export const LEVELS=[
   {id:'bunker',x:17,y:3,type:'exit',name:'Bunker gate',desc:'Leads deep beneath the city. The generator must be running.',solid:true},
   {id:'note1',x:7,y:16,type:'note',name:'Last radio message',desc:'“If anyone can hear this: Station Zero. Bring the sample to the roof. We will keep the frequency clear.”'}
  ],zombies:[zombie('z1',11,7),zombie('z2',17,12),zombie('z3',8,1)]},
- {name:'Station Zero',place:'BUNKER / LEVEL −02',tag:'UNDERGROUND',weather:'INDOORS · 14 °C',intro:'The emergency lights are on. Find a keycard, open the laboratory and bring Sample N-04 to the roof.',hint:'The keycard is in the maintenance locker in the western room. The laboratory is behind the security door.',size:[21,19],start:{x:3,y:15},goals:['Find the Keycard','Open the laboratory and recover the sample','Reach the rooftop access'],
+ {name:'Station Zero',place:'BUNKER / LEVEL −02',tag:'UNDERGROUND',weather:'INDOORS · 14 °C',intro:'Station Zero: the sample carrier is shattered. Mara must build a new one from metal and glass. Koda waits by the door while she prepares a safe way to carry N-04.',hint:'The maintenance locker holds a keycard, tools, metal and a bottle. Open Crafting, build a Sample carrier, then unlock the lab and collect N-04.',size:[21,19],start:{x:3,y:15},goals:['Find the Keycard','Craft a Sample carrier and recover the sample','Reach the rooftop access'],
  entities:[
   prop('nw',0,0,'wall',21,1),prop('ww',0,1,'wall',1,17),prop('ew',20,1,'wall',1,17),
   prop('divide1',9,1,'wall',1,6),prop('divide2',9,10,'wall',1,8),prop('lab1',10,7,'wall',4,1),prop('lab2',15,7,'wall',5,1),
   prop('bed1',2,8,'bed',1,3),prop('bed2',5,9,'bed',1,3),prop('desk1',12,2,'desk',3,1),prop('desk2',17,4,'desk',2,1),prop('vent1',2,1,'vent',3,2),
-  crate('locker',3,4,'Maintenance locker',['keycard','medkit'],'A bent locker. A keycard hangs inside.'),
+  crate('locker',3,4,'Maintenance locker',['keycard','medkit','toolbox','scrap','bottle'],'A maintenance note: metal shell, glass liner, toolkit. Build a Sample carrier before touching N-04.'),
   crate('medical',6,13,'Medical crate',['medkit','ration'],'Sterile bandages and a single can of food.'),
   item('vest1',4,12,'vest'),item('axe1',6,12,'axe'),item('lab-bottle',11,11,'bottle'),item('lab-chair',6,5,'chair'),item('lab-scrap',17,14,'scrap'),item('lab-tools',12,15,'toolbox'),
   {id:'lab-door',x:14,y:7,type:'door',name:'Laboratory door',desc:'Security level 2. Requires a keycard.',solid:true,open:false},
@@ -114,7 +115,7 @@ export class Game {
   this.level=index;this.unlocked=Math.max(this.unlocked,index);this.data=LEVELS[index];this.entities=clone(this.data.entities);this.zombies=clone(this.data.zombies).map((z,i)=>configureInfected(z,i+index));this.player={...this.data.start,facing:0,attack:0,hurt:0,action:null};this.path=[];this.target=null;this.selected=null;this.time=0;this.evacuation=0;this.signal=-1;this.spawned=0;this.generatorOn=false;this.effects=[];this.mode='briefing';this.throwing=false;this.sneak=false;this.noise=0;this.flash=0;this.health=Math.max(85,this.health);this.pulse=0;
   const bond=this.companion?.bond;this.companionOpen=false;this.companion=createCompanion(this.player);if(bond!==undefined)this.companion.bond=bond;const dogStart=[[-1,0],[0,1],[1,0],[0,-1]].map(([dx,dy])=>({x:this.player.x+dx,y:this.player.y+dy})).find(p=>!this.isBlocked(p.x,p.y));if(dogStart)Object.assign(this.companion,dogStart);this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
   if(!restart)this.entries[index]={equipment:{...this.equipment},inventory:[...this.inventory],health:this.health,kills:this.kills,totalTime:this.totalTime};
-  this.history=[];const memory=['memory-checkpoint','memory-bunker','memory-rooftop'][index];if(memory&&!this.messages.some(m=>m.voiceId===memory))this.messages.push({id:'memory-'+index,text:RADIO[memory].text,voiceId:memory,sender:'Mara',level:index,time:this.totalTime});this.log(this.data.intro,'story',['checkpoint','bunker','rooftop'][index]);this.emit();
+  this.history=[];const memory=['memory-checkpoint','memory-bunker','memory-rooftop'][index];if(memory&&!this.messages.some(m=>m.voiceId===memory))this.messages.push({id:'memory-'+index,text:RADIO[memory].text,voiceId:memory,sender:'Mara',level:index,time:this.totalTime});this.log(this.data.intro,'story',index<2?null:['checkpoint','bunker','rooftop'][index]);this.emit();
  }
  start(guided=this.tutorialEnabled){if(this.companionOpen)return;if(this.inventoryOpen||this.lootOpen)return;if(this.mode==='briefing'&&this.level===0){this.tutorialEnabled=guided;this.tutorial=createTutorial(guided)}if(this.mode==='briefing'||this.mode==='paused')this.mode='playing';this.emit()}
  commandCompanion(command){return commandCompanion(this,command)}
@@ -178,7 +179,7 @@ export class Game {
  throwBottle(x,y){if(!this.canAct||!this.throwing)return;const p={x,y};if(distance(this.player,p)>9){this.log('Too far. Bottles can travel up to 9 tiles.','warn');return}if(this.isBlocked(x,y)){this.log('Choose an empty tile for the distraction.','warn');return}if(!this.consume('bottle')){this.throwing=false;this.log('No bottles left in your backpack.','warn');return}this.throwing=false;for(const z of this.zombies){if(z.hp>0&&distance(z,p)<12){z.lure={x,y,until:this.time+8};z.repath=0;z.alert=true}}this.action('throw',.7);this.tutorial.facts.threw=true;this.effects.push({type:'bottle',x,y,life:8});this.noise=1;this.log('Glass shatters. The Infected follow the sound.');this.emit()}
  interact(e){
   if(e.removed)return;this.action('interact',.7);
-  if(e.type==='item'){if(this.addItem(e.item)){e.removed=true;this.selected=null;this.tutorial.facts.pickups++;}}
+  if(e.type==='item'){if(e.item==='sample'&&!this.has('samplecase')){this.log('Build a Sample carrier in Crafting before collecting N-04. The maintenance locker has the materials.','warn');return}if(this.addItem(e.item)){e.removed=true;this.selected=null;this.tutorial.facts.pickups++;}}
   else if(e.type==='container'){this.openLoot(e);return;}
   else if(e.type==='npc'||e.type==='mission'){if(e.done){this.log(e.desc,'story');return}if(e.prerequisite&&!this.entities.find(n=>n.id===e.prerequisite)?.done){this.log('Speak to Doctor Imani first.','warn');return}if(e.requires&&!this.has(e.requires)){this.log('Missing: '+ITEMS[e.requires].name+'.','warn');return}if(e.requires)this.consume(e.requires);e.done=true;this.log(e.desc,'story');}
   else if(e.type==='note')this.log(e.desc,'story');

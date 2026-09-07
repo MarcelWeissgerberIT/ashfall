@@ -1,22 +1,24 @@
 import assert from 'node:assert/strict';
 import {Game,LEVELS,CAPACITY,ITEMS} from '../app/game/engine.mjs';
+import {craft,prepareRecipe} from '../app/game/crafting.mjs';
 let assertions=0;
 function check(v,msg){assert.ok(v,msg);assertions++}
 function progress(g,seconds,heal=true){for(let i=0;i<seconds*60;i++){g.tick(1/60);if(heal&&g.health<=60&&g.has('medkit'))g.use('medkit');if(heal&&g.health<=75&&g.has('ration'))g.use('ration');if(g.mode==='dead')throw Error(`Died in level ${g.level+1} after ${g.time.toFixed(1)} seconds`);}}
 function go(g,id){g.select(id);let ticks=0;while((g.target||g.path.length)&&g.mode==='playing'&&ticks<60*150){progress(g,1/60);ticks++}check(ticks<60*150,`Interaction ${id} did not finish`);check(!g.target,`Target ${id} remains`);if(g.lootOpen){g.takeAllLoot();g.closeInventory()}}
 function campaign(loaded=false){const g=new Game();g.start();if(loaded){g.inventory.push('chair','tire','scrap');check(g.weight<14,'Starting load valid')}
  go(g,'bunker');check(g.mode==='playing','Bunker blocks without generator');
- go(g,'guard');check(g.has('fuse'),'Fuse retrieved from reachable guard crate');
+ if(loaded){g.drop('tire');g.drop('chair');}
+ go(g,'guard');check(craft(g,'fuse',prepareRecipe(g,'fuse')),'Fuse crafted from reachable guard supplies');
  if(loaded){g.drop('tire');g.drop('chair');}
  go(g,'wreck');check(g.has('fuel'),'Fuel retrieved');go(g,'generator');check(g.generatorOn,'Generator activated');check(!g.has('fuel')&&!g.has('fuse'),'Generator consumes ingredients');go(g,'bunker');check(g.mode==='complete','Level one completed through movement');
  const inventory=[...g.inventory];g.next();check(g.mode==='briefing'&&g.level===1,'Level two briefing');check(g.inventory.join()===inventory.join(),'Inventory carries to bunker');g.start();
- check(g.nearestPath(g.entities.find(e=>e.id==='sample'))===null,'Lab sample inaccessible through closed door');go(g,'lab-door');check(!g.entities.find(e=>e.id==='lab-door').open,'Lab door requires card');go(g,'locker');check(g.has('keycard'),'Keycard retrieved');go(g,'roof');check(g.mode==='playing','Dachzugang blocks without sample');go(g,'medical');go(g,'lab-door');check(g.entities.find(e=>e.id==='lab-door').open,'Door opens with card');go(g,'sample');check(g.has('sample'),'Sample secured');go(g,'roof');check(g.mode==='complete','Level two complete');
+ check(g.nearestPath(g.entities.find(e=>e.id==='sample'))===null,'Lab sample inaccessible through closed door');go(g,'lab-door');check(!g.entities.find(e=>e.id==='lab-door').open,'Lab door requires card');go(g,'locker');check(craft(g,'samplecase',prepareRecipe(g,'samplecase')),'Sample carrier crafted from locker supplies');while(g.count('toolbox')>1)g.drop('toolbox');check(g.has('keycard'),'Keycard retrieved');go(g,'roof');check(g.mode==='playing','Dachzugang blocks without sample');go(g,'medical');go(g,'lab-door');check(g.entities.find(e=>e.id==='lab-door').open,'Door opens with card');go(g,'sample');check(g.has('sample'),'Sample secured');go(g,'roof');check(g.mode==='complete','Level two complete');
  g.next();g.start();go(g,'evac');check(g.mode==='playing','Evac blocks before signal');go(g,'roof-store');check(g.has('battery'),'Battery retrieved');go(g,'roof-aid');go(g,'radio');check(g.signal>0,'Signal timer starts');check(!g.has('battery'),'Radio consumes battery');
  while(g.signal>0){const points=[[4,15],[16,16],[18,10],[10,10],[4,9]];const point=points[Math.floor(g.time/5)%points.length];if(!g.path.length)g.move(...point);progress(g,.3);}
  check(g.spawned===3,'Three finite waves spawned');go(g,'evac');check(g.evacuation>0,'Boarding animation started');progress(g,5.1);check(g.mode==='complete','Evacuation completed');
  g.next();g.start();check(g.zombies.length===0,'Haven is safe');go(g,'departure');check(g.mode==='playing','Colony tasks gate departure');go(g,'imani');check(!g.has('sample'),'Sample delivered');go(g,'levin');go(g,'haven-aid');go(g,'departure');check(g.mode==='complete','Colony mission accepted');
  g.next();g.start();go(g,'water-tools');go(g,'pump');check(g.entities.find(e=>e.id==='pump').done,'Water restored');go(g,'water-aid');go(g,'water-exit');check(g.mode==='complete','Waterworks completed');
- g.next();g.start();go(g,'rail-aid');go(g,'rail-battery');go(g,'relay');check(g.entities.find(e=>e.id==='relay').done,'Power restored');go(g,'home');check(g.mode==='complete','Return to colony');g.next();g.start();go(g,'imani');go(g,'levin');go(g,'departure');check(g.mode==='won','Expanded campaign completed');console.log(`Campaign ${loaded?'with full backpack':'without bottle use'}: won, ${g.kills} kills, ${g.health} HP, ${Math.round(g.totalTime)} seconds`);return g;
+ g.next();g.start();go(g,'rail-aid');while(g.weight>12.5&&g.count('medkit')>1)g.drop('medkit');go(g,'rail-battery');go(g,'relay');check(g.entities.find(e=>e.id==='relay').done,'Power restored');go(g,'home');check(g.mode==='complete','Return to colony');g.next();g.start();go(g,'imani');go(g,'levin');go(g,'departure');check(g.mode==='won','Expanded campaign completed');console.log(`Campaign ${loaded?'with full backpack':'without bottle use'}: won, ${g.kills} kills, ${g.health} HP, ${Math.round(g.totalTime)} seconds`);return g;
 }
 campaign();campaign(true);
 {

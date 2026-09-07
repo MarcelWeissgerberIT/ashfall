@@ -3,7 +3,7 @@ export const TUTORIAL_STEPS = [
   {id:'pickup',title:'Scavenge what you can carry',task:'Pick up the glass bottle near your starting position.',body:'Click the marked bottle. Mara walks into reach and picks it up automatically. Loose supplies and salvage can go in your backpack. Large structures and vehicles stay on the map, but some contain useful items.',control:'CLICK AN ITEM · PICK UP'},
   {id:'pack',title:'Know your equipment',task:'Open your inventory, inspect your gear, then close it.',body:'Press I or use the backpack button. Drag an item onto a matching equipment slot, or select it and click Equip. Drag worn gear back to your backpack to remove it. Hand, body, and head slots show your loadout. Only your held weapon deals its listed damage; only worn armor protects you. Find a jacket and helmet near the start. You can carry 14 kg. Dropped items stay where you leave them. Opening the backpack pauses the mission; close it with I, Escape, or the close button.',control:'I · OPEN / CLOSE BACKPACK'},
   {id:'survive',title:'Keep a low profile',task:'Switch to Sneak and walk two tiles. A hit or bottle throw also counts.',body:'The Infected can now react to you. Press Shift or click Walk to toggle Sneak: slower movement attracts less attention. Click an Infected to attack; Mara also defends herself at close range. Press 2 for a Bandage when injured. Press 3, then click open ground, to distract enemies with a bottle.',control:'SHIFT · SNEAK   2 · HEAL   3 · DISTRACT'},
-  {id:'fuse',title:'Search the guard crate',task:'Find the Fuse in the marked guard crate.',body:'The bunker has no power. First, click the guard crate in the northwest corner. Arriving opens a search window. Click Take on the Fuse, or drag it into your backpack. If your backpack is too heavy, open it, drop some salvage, then take the remaining items. Stay alert as you move across the checkpoint.',control:'CLICK A CONTAINER · SEARCH'},
+  {id:'fuse',title:'Repair what the city left behind',task:'Craft a Fuse using metal scrap and a toolbox from the guard crate.',body:'The gate fuse is burned out. Search the guard crate for metal scrap and a toolbox. Open Crafting in the top bar, choose Assemble fuse, and click Craft item. The grid prepares carried materials automatically; drag and drop works too. Metal is consumed, tools stay in your backpack.',control:'CRAFTING · ASSEMBLE FUSE'},
   {id:'fuel',title:'Find fuel in the wreck',task:'Search the car trunk for a Fuel canister.',body:'The generator also needs diesel. Click the marked car trunk in the southeast. Its contents stay visible until you take them. Take the Fuel and keep it with the Fuse. The crate or trunk keeps anything that did not fit in your backpack, so you can come back after making space.',control:'FUSE + FUEL · RESTORE POWER'},
   {id:'power',title:'Bring the generator online',task:'Carry both parts to the emergency generator and interact.',body:'Click the generator near the bunker entrance. Quest items are used automatically: the Fuse and Fuel are consumed to restore power. If you dropped a part, collect it first. The generator will tell you what is missing.',control:'CLICK THE GENERATOR · REPAIR'},
   {id:'bunker',title:'Leave the checkpoint',task:'Click the bunker gate to finish your first mission.',body:'Power is on and the gate is unlocked. Click it to enter. The next sector continues with your remaining gear and health, with health restored to at least 85. Inside Station Zero, find a Keycard, open the lab, and recover Sample N-04. You know the basics now.',control:'CLICK THE GATE · ENTER BUNKER'},
@@ -57,6 +57,7 @@ export function tutorialTarget(game) {
   }
   if(step==='pickup')return entity('bottle1')||game.entities.find(e=>!e.removed&&e.type==='item')||null;
   if(step==='pack')return null;
+  if(step==='fuse'&&game.has('scrap')&&game.has('toolbox'))return null;
   if(step==='fuse'||step==='fuel')return part(step);
   if(step==='power'){
     const missing=['fuse','fuel'].find(id=>!game.has(id));
@@ -66,6 +67,7 @@ export function tutorialTarget(game) {
 }
 
 export function tutorialHint(game) {
+  if(game.tutorial?.index===4&&game.has('scrap')&&game.has('toolbox'))return 'Open Crafting and assemble the Fuse. Your materials are ready.';
   const step=TUTORIAL_STEPS[game.tutorial?.index]?.id;
   if(step==='power'){
     const missing=['fuse','fuel'].filter(id=>!game.has(id));

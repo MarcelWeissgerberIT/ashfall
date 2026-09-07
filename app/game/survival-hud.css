@@ -41,3 +41,5 @@
 .intro-film{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#03090c}.intro-film-message{position:absolute;inset:35% 10% auto;text-align:center;background:#071217eb;padding:24px;border-radius:8px}.intro-film-message button{padding:12px 20px;margin:8px;border:1px solid #d7af75;border-radius:5px;background:#14252b;color:#eee8d8}.ashfall-intro .intro-controls{padding:10px;border-radius:6px;background:linear-gradient(90deg,#051013b0,transparent)}
 
 .intro-film-loading{position:absolute;left:5vw;bottom:5vh;padding:10px 16px;border-radius:5px;background:#071217df;color:#eee8d8}
+
+.chapter-presets{padding:14px;margin-bottom:20px;border:1px solid #806345;border-radius:8px}.chapter-presets h3{font-size:17px}.chapter-presets button{display:block;width:100%;text-align:left;margin-top:8px;white-space:normal}
