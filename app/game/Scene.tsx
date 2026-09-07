@@ -12,6 +12,7 @@ import { createMapCameraControls } from './camera-controls';
 import { buildWall, buildBarrier, buildVehicle } from './world-props';
 import { buildPickup } from './loot-assets';
 import { translate } from './i18n';
+import { createAtmosphere } from './atmosphere';
 import { createPuppy, animatePuppy } from './puppy';
 import { buildSectorDetails } from './sector-details';
 const COLORS={orange:0xf3bb78};
@@ -41,6 +42,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
   const composer=new EffectComposer(renderer,renderTarget);composer.addPass(new RenderPass(scene,camera));
   const bloom=new UnrealBloomPass(new THREE.Vector2(1,1),.27,.5,1.35);composer.addPass(bloom);const output=new OutputPass();composer.addPass(output);
   const world=new THREE.Group();scene.add(world);
+  let atmosphere:ReturnType<typeof createAtmosphere>|undefined;
   let renderedLanguage='',level=-1,terrain=new THREE.Group(),objectGroup=new THREE.Group(),actors=new THREE.Group(),deco=new THREE.Group(),skyline=new THREE.Group();
   const meshes=new Map<string,THREE.Group>(),pickables:THREE.Object3D[]=[];
   let puppy:THREE.Group,player:THREE.Group,tilePlane:THREE.Mesh,marker:THREE.Mesh|undefined,hoverEntity:any=null,hoverPoint:THREE.Vector3|null=null;
@@ -180,6 +182,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     }
   }
   function build(){
+    atmosphere?.dispose();
     for(const group of [terrain,objectGroup,actors,deco,skyline]){world.remove(group);kit.disposeLocal(group)}
     kit.disposeLocal(effectRoot);effects.clear();meshes.clear();pickables.length=0;
     if(pathDots)pathDots.count=0;if(marker)marker.visible=false;lastPath='';lastHover='';hoverEntity=null;hoverPoint=null;hoverRef.current(null);
@@ -209,6 +212,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
       const light=new THREE.PointLight(lightColor,level===1?14:21,7,2);light.position.set(x+.7,2.7,y);deco.add(light);
     }
     for(const e of game.entities)makeObject(e);
+    atmosphere=createAtmosphere(kit,deco,level,game.entities,(x,y)=>game.isBlocked(x,y));
     player=createCharacter(kit);actors.add(player);puppy=createPuppy(kit);actors.add(puppy);puppy.traverse(o=>{if(o instanceof THREE.Mesh&&!o.userData.noPick){o.userData.entity=game.companion;pickables.push(o)}});label(puppy,'KODA',0,.97,0,.17,'#e1cb95');
     for(const [i,z] of game.zombies.entries())addZombie(z,i);
     label(deco,level===0?'SECTOR 04':level===1?'STATION ZERO':'ROOF 07',w/2,-.73,h+.08,.42,'#98b4a6');
@@ -298,10 +302,10 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     }else targetLabel.visible=false;
     rain.visible=level===0;rainMat.opacity=level===0?.14:.06;
     if(playing&&rain.visible){for(let i=0;i<rainCount;i++){rainArray[i*6+1]-=dt*11;rainArray[i*6+4]-=dt*11;if(rainArray[i*6+1]<-.5){rainArray[i*6+1]=18;rainArray[i*6+4]=17.55}}rainGeo.attributes.position.needsUpdate=true;}
-    composer.render();frame=requestAnimationFrame(loop);
+    atmosphere?.update(game.time);composer.render();frame=requestAnimationFrame(loop);
   };
   frame=requestAnimationFrame(loop);
-  return()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();controls.dispose();
+  return()=>{disposed=true;atmosphere?.dispose();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();
     for(const g of [terrain,objectGroup,actors,deco,skyline,effectRoot])kit.disposeLocal(g);targetLabel.material.map?.dispose();targetLabel.material.dispose();kit.dispose();pathDots?.dispose();sun.shadow.dispose();rainGeo.dispose();rainMat.dispose();bloom.dispose();output.dispose();composer.dispose();environment.dispose();renderer.dispose();renderer.domElement.remove();sceneRef.current=null;
   };
  },[game]);
