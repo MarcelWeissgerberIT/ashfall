@@ -5,6 +5,7 @@ type Touch = Point & { startX:number; startY:number; moved:boolean };
 
 export function createMapCameraControls(canvas:HTMLCanvasElement, camera:THREE.OrthographicCamera, target:THREE.Vector3, offset:THREE.Vector3, options:{
   onZoom:(zoom:number)=>void;
+  onFollowChange?:(following:boolean)=>void;
   onTap:(event:PointerEvent)=>void;
   onHover:(event:PointerEvent)=>void;
   onClearHover:()=>void;
@@ -13,6 +14,9 @@ export function createMapCameraControls(canvas:HTMLCanvasElement, camera:THREE.O
   const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
   const ground=new THREE.Plane(new THREE.Vector3(0,1,0),0);
   const touches=new Map<number,Touch>();
+  let following=true,focusHold=0;const initialOffset=offset.clone();
+  function setFollowing(value:boolean){following=value;focusHold=0;options.onFollowChange?.(value);}
+  function rotate(direction:number){offset.applyAxisAngle(new THREE.Vector3(0,1,0),direction*Math.PI/4);updateCamera();options.onClearHover();}
   let multiTouch=false,drag:{id:number;point:Point}|null=null;
   const point=(event:PointerEvent):Point=>({x:event.clientX,y:event.clientY});
   function updateCamera(){
@@ -43,7 +47,7 @@ export function createMapCameraControls(canvas:HTMLCanvasElement, camera:THREE.O
     for(const id of ids)if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);
     canvas.style.cursor='crosshair';options.onClearHover();
   }
-  function reset(){cancelGestures();target.set(0,0,0);transform(DEFAULT_ZOOM);}
+  function reset(){cancelGestures();offset.copy(initialOffset);setFollowing(true);target.set(0,0,0);transform(DEFAULT_ZOOM);}
   function pair(){
     const [a,b]=[...touches.values()];
     return {center:{x:(a.x+b.x)/2,y:(a.y+b.y)/2},distance:Math.hypot(a.x-b.x,a.y-b.y)};
@@ -69,10 +73,10 @@ export function createMapCameraControls(canvas:HTMLCanvasElement, camera:THREE.O
       if(before){
         const after=pair();
         if(before.distance>2&&after.distance>2)transform(camera.zoom*after.distance/before.distance,before.center,after.center);
-      }else if(touch.moved||multiTouch)transform(camera.zoom,previous,point(event));
+      }else if(touch.moved||multiTouch){setFollowing(false);transform(camera.zoom,previous,point(event));}
       return;
     }
-    if(drag&&event.pointerId===drag.id){transform(camera.zoom,drag.point,point(event));drag.point=point(event);return;}
+    if(drag&&event.pointerId===drag.id){setFollowing(false);transform(camera.zoom,drag.point,point(event));drag.point=point(event);return;}
     if(event.pointerType!=='touch')options.onHover(event);
   }
   function up(event:PointerEvent){
@@ -94,6 +98,7 @@ export function createMapCameraControls(canvas:HTMLCanvasElement, camera:THREE.O
   }
   function key(event:KeyboardEvent){
     if(event.ctrlKey||event.metaKey||event.altKey)return;
+    if(event.key.toLowerCase()==='q'||event.key.toLowerCase()==='e'){event.preventDefault();if(!event.repeat)rotate(event.key.toLowerCase()==='q'?-1:1);return;}
     if(!['+','=','-','0'].includes(event.key))return;
     event.preventDefault();if(event.key==='0')reset();else transform(camera.zoom*(event.key==='-'?1/1.2:1.2));
   }
@@ -104,8 +109,21 @@ export function createMapCameraControls(canvas:HTMLCanvasElement, camera:THREE.O
   canvas.addEventListener('wheel',wheel,{passive:false});canvas.addEventListener('keydown',key);window.addEventListener('blur',cancelGestures);
   return {
     focus:(x:number,z:number,screen?:Point)=>{
-      cancelGestures();target.set(x,0,z);updateCamera();
+      cancelGestures();focusHold=3;target.set(x,0,z);updateCamera();
       if(screen){const at=groundAt(screen);if(at){target.add(new THREE.Vector3(x,0,z).sub(at));updateCamera();}}
+    },
+    rotate,setFollowing,
+    follow:(a:{x:number;z:number},b:{x:number;z:number},dt:number)=>{
+      focusHold=Math.max(0,focusHold-dt);if(!following||focusHold>0||camera.zoom<=1.05||drag||touches.size)return;
+      const desired=new THREE.Vector3((a.x+b.x)/2,0,(a.z+b.z)/2);
+      target.lerp(desired,1-Math.exp(-dt*5));updateCamera();
+      // Reserve space for character height and the lower HUD. Fit both companions
+      // when Koda searches farther away, without overriding a closer user zoom otherwise.
+      const right=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,0),up=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,1);
+      const delta=new THREE.Vector3(a.x-b.x,0,a.z-b.z);
+      const width=Math.abs(delta.dot(right))+3.2,height=Math.abs(delta.dot(up))+4.4;
+      const fit=clampZoom(Math.min((camera.right-camera.left)*.76/width,(camera.top-camera.bottom)*.58/height));
+      if(camera.zoom>fit+.01){camera.zoom=fit;camera.updateProjectionMatrix();options.onZoom(fit);}
     },
     setZoom:(zoom:number)=>{if(Math.abs(zoom-camera.zoom)>.00001)transform(zoom);},reset,cancelGestures,
     dispose(){

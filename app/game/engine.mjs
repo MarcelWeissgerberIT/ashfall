@@ -74,7 +74,7 @@ const clone=o=>JSON.parse(JSON.stringify(o));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 const key=(x,y)=>`${x},${y}`;
 export class Game {
- constructor({tutorial=false}={}){this.equipment={hand:'crowbar',body:null,head:null};this.tutorialDefault=tutorial;this.tutorialFocus=0;this.listeners=new Set();this.level=0;this.unlocked=0;this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.history=[];this.entries=[];this.effects=[];this.mode='briefing';this.sneak=false;this.muted=true;this.loadLevel(0);}
+ constructor({tutorial=false}={}){this.equipment={hand:'crowbar',body:null,head:null};this.tutorialDefault=tutorial;this.tutorialFocus=0;this.listeners=new Set();this.level=0;this.unlocked=0;this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.messages=[];this.history=[];this.entries=[];this.effects=[];this.mode='briefing';this.sneak=false;this.muted=true;this.loadLevel(0);}
  subscribe(fn){this.listeners.add(fn);return()=>this.listeners.delete(fn)}
  emit(){updateTutorial(this);for(const fn of this.listeners)fn()}
  itemSlot(id){return ITEMS[id]?.slot}
@@ -92,7 +92,7 @@ export class Game {
   this.level=index;this.unlocked=Math.max(this.unlocked,index);this.data=LEVELS[index];this.entities=clone(this.data.entities);this.zombies=clone(this.data.zombies);this.player={...this.data.start,facing:0,attack:0,hurt:0,action:null};this.path=[];this.target=null;this.selected=null;this.time=0;this.signal=-1;this.spawned=0;this.generatorOn=false;this.effects=[];this.mode='briefing';this.throwing=false;this.sneak=false;this.noise=0;this.flash=0;this.health=Math.max(85,this.health);this.pulse=0;
   this.companionOpen=false;this.companion=createCompanion(this.player);const dogStart=[[-1,0],[0,1],[1,0],[0,-1]].map(([dx,dy])=>({x:this.player.x+dx,y:this.player.y+dy})).find(p=>!this.isBlocked(p.x,p.y));if(dogStart)Object.assign(this.companion,dogStart);this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
   if(!restart)this.entries[index]={equipment:{...this.equipment},inventory:[...this.inventory],health:this.health,kills:this.kills,totalTime:this.totalTime};
-  this.history=[];this.log(this.data.intro,'story',['checkpoint','bunker','rooftop'][index]);this.emit();
+  this.history=[];const memory=['memory-checkpoint','memory-bunker','memory-rooftop'][index];if(!this.messages.some(m=>m.voiceId===memory))this.messages.push({id:'memory-'+index,text:RADIO[memory].text,voiceId:memory,sender:'Mara',level:index,time:this.totalTime});this.log(this.data.intro,'story',['checkpoint','bunker','rooftop'][index]);this.emit();
  }
  start(guided=this.tutorialEnabled){if(this.companionOpen)return;if(this.inventoryOpen||this.lootOpen)return;if(this.mode==='briefing'&&this.level===0){this.tutorialEnabled=guided;this.tutorial=createTutorial(guided)}if(this.mode==='briefing'||this.mode==='paused')this.mode='playing';this.emit()}
  commandCompanion(command){return commandCompanion(this,command)}
@@ -132,8 +132,8 @@ export class Game {
  }
  next(){if(this.mode==='complete'&&this.level<2)this.loadLevel(this.level+1)}
  restart(){this.loadLevel(this.level,true)}
- newGame(){this.equipment={hand:'crowbar',body:null,head:null};this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.entries=[];this.unlocked=0;this.loadLevel(0)}
- log(text,tone='info',voiceId=null){if(voiceId)this.lastRadio={id:'call-'+Math.random(),voiceId,text:RADIO[voiceId].text};this.history.unshift({text,tone,id:Math.random()});this.history=this.history.slice(0,5);this.emit()}
+ newGame(){this.equipment={hand:'crowbar',body:null,head:null};this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.messages=[];this.entries=[];this.unlocked=0;this.loadLevel(0)}
+ log(text,tone='info',voiceId=null){this.messages.push({id:'message-'+this.messages.length,text:voiceId?RADIO[voiceId].text:text,tone,voiceId,sender:voiceId?'Control':'Field log',level:this.level,time:this.totalTime});if(voiceId)this.lastRadio={id:'call-'+Math.random(),voiceId,text:RADIO[voiceId].text};this.history.unshift({text,tone,id:Math.random()});this.history=this.history.slice(0,5);this.emit()}
  isBlocked(x,y,ignore){if(x<0||y<0||x>=this.data.size[0]||y>=this.data.size[1])return true;return this.entities.some(e=>e.id!==ignore&&!e.removed&&e.solid&&!(e.type==='door'&&e.open)&&x>=e.x&&x<e.x+(e.w||1)&&y>=e.y&&y<e.y+(e.h||1))}
  pathTo(from,to){
   const sx=Math.round(from.x),sy=Math.round(from.y),tx=Math.round(to.x),ty=Math.round(to.y);

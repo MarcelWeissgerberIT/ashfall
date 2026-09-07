@@ -1,0 +1,23 @@
+[
+  {
+    "id": "memory-checkpoint",
+    "title": "Before the silence",
+    "text": "Before the outbreak, I repaired the emergency radios for this district. Three nights ago I heard scratching inside an abandoned ambulance. Koda was hiding under the seat, still wearing a collar much too big for him. I promised him we would leave this city together.",
+    "deTitle": "Vor der Stille",
+    "deText": "Vor dem Ausbruch habe ich die Notfunkgeräte dieses Viertels repariert. Vor drei Nächten hörte ich ein Kratzen in einem verlassenen Rettungswagen. Koda versteckte sich unter dem Sitz. Sein Halsband war ihm noch viel zu groß. Ich habe ihm versprochen, dass wir diese Stadt gemeinsam verlassen."
+  },
+  {
+    "id": "memory-bunker",
+    "title": "A familiar corridor",
+    "text": "I used to service the backup radio down here. My sister Lena worked in the laboratory. Her last message mentioned Sample N-04 and then the signal went dead. I do not know if she got out. Koda stays close whenever I stop at a door. Somehow that makes it easier to keep going.",
+    "deTitle": "Ein vertrauter Gang",
+    "deText": "Früher habe ich hier unten den Reservefunk gewartet. Meine Schwester Lena arbeitete im Labor. In ihrer letzten Nachricht erwähnte sie die Probe N-04. Dann brach der Empfang ab. Ich weiß nicht, ob sie es hinausgeschafft hat. Koda bleibt bei mir, wenn ich vor einer Tür stehen bleibe. Irgendwie macht das den nächsten Schritt leichter."
+  },
+  {
+    "id": "memory-rooftop",
+    "title": "A promise to keep",
+    "text": "Lena always said a working radio means someone can still find you. I kept her old frequency in my notebook. If the helicopter comes, there has to be room for Koda too. After this, I want him to know grass, sunlight, and a morning without sirens.",
+    "deTitle": "Ein Versprechen",
+    "deText": "Lena sagte immer: Solange das Funkgerät funktioniert, kann dich noch jemand finden. Ihre alte Frequenz steht noch in meinem Notizbuch. Wenn der Hubschrauber kommt, muss auch Platz für Koda sein. Danach soll er Gras kennenlernen, Sonnenlicht und einen Morgen ohne Sirenen."
+  }
+]

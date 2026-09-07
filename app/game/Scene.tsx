@@ -16,8 +16,11 @@ import { createAtmosphere } from './atmosphere';
 import { createPuppy, animatePuppy } from './puppy';
 import { buildSectorDetails } from './sector-details';
 const COLORS={orange:0xf3bb78};
-export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:any;onHover:(v:any)=>void;zoom:number;onZoomChange:(zoom:number)=>void;viewReset:number}){
+export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation,following,onFollowChange}:{game:any;onHover:(v:any)=>void;zoom:number;onZoomChange:(zoom:number)=>void;viewReset:number;rotation:number;following:boolean;onFollowChange:(v:boolean)=>void}){
  const host=useRef<HTMLDivElement>(null),sceneRef=useRef<ReturnType<typeof createMapCameraControls>|null>(null),hoverRef=useRef(onHover),zoomRef=useRef(onZoomChange);hoverRef.current=onHover;zoomRef.current=onZoomChange;
+ const followRef=useRef(onFollowChange);followRef.current=onFollowChange;const rotationRef=useRef(rotation);
+ useEffect(()=>{sceneRef.current?.rotate(rotation-rotationRef.current);rotationRef.current=rotation},[rotation]);
+ useEffect(()=>{sceneRef.current?.setFollowing(following)},[following]);
  useEffect(()=>{sceneRef.current?.setZoom(zoom)},[zoom]);
  useEffect(()=>{sceneRef.current?.reset()},[viewReset]);
  useEffect(()=>{
@@ -250,8 +253,9 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
   const resize=()=>{const width=hostNode.clientWidth,height=hostNode.clientHeight;if(!width||!height)return;renderer.setSize(width,height);composer.setSize(width,height);
     const aspect=width/height,half=Math.max(13.7,15.65/aspect);camera.left=-half*aspect;camera.right=half*aspect;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();
   };
+  const optionsBounds=()=>({x:(game.data.size[0]-1)/2,z:(game.data.size[1]-1)/2});
   const controls=createMapCameraControls(renderer.domElement,camera,cameraTarget,cameraOffset,{
-    onZoom:value=>zoomRef.current(value),onTap:click,onHover:move,onClearHover:leave,
+    onFollowChange:value=>followRef.current(value),onZoom:value=>zoomRef.current(value),onTap:click,onHover:move,onClearHover:leave,
     bounds:()=>({x:(game.data.size[0]-1)/2,z:(game.data.size[1]-1)/2}),
   });sceneRef.current=controls;
   const observer=new ResizeObserver(resize);observer.observe(hostNode);resize();let levelEntities=game.entities;
@@ -274,7 +278,8 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
       }
     }
     game.player.equipment=game.equipment;game.player.sneak=game.sneak;game.player.hp=game.health;
-    const playing=game.canAct;animateCharacter(player,game.player,dt,playing,game.time);animatePuppy(puppy,game.companion,dt,playing,game.time);
+    const playing=game.canAct;if(playing){const b=optionsBounds();controls.follow({x:game.player.x-b.x,z:game.player.y-b.z},{x:game.companion.x-b.x,z:game.companion.y-b.z},dt);}
+    animateCharacter(player,game.player,dt,playing,game.time);animatePuppy(puppy,game.companion,dt,playing,game.time);
     for(const e of game.entities){let g=meshes.get(e.id);if(!g)g=makeObject(e);g.visible=!e.removed;
       if(g.userData.door)g.userData.door.scale.x=(e.open||e.type==='exit'&&game.generatorOn)?.09:1;
       if(g.userData.lid)g.userData.lid.rotation.x=THREE.MathUtils.damp(g.userData.lid.rotation.x,e.open?-1.1:0,9,dt);

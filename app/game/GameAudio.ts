@@ -1,4 +1,4 @@
-export type RadioCue='checkpoint'|'generator'|'bunker'|'rooftop'|'signal'|'evac-ready'|'rescue';
+export type RadioCue='checkpoint'|'generator'|'bunker'|'rooftop'|'signal'|'evac-ready'|'rescue'|'memory-checkpoint'|'memory-bunker'|'memory-rooftop';
 export type AudioStatus={cue:RadioCue|null;playing:boolean;loading:boolean;error:string|null};
 
 // A quiet, original score built from slow minor chords, filtered wind and distant pulses.

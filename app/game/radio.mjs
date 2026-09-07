@@ -33,5 +33,17 @@ export const RADIO = {
     "title": "Hold for evacuation",
     "text": "Signal received, Mara. Evacuation in 35 seconds. The noise will draw them in. Keep moving. We are coming for you.",
     "duration": 12.912
+  },
+  "memory-checkpoint": {
+    "title": "Before the silence",
+    "text": "Before the outbreak, I repaired the emergency radios for this district. Three nights ago I heard scratching inside an abandoned ambulance. Koda was hiding under the seat, still wearing a collar much too big for him. I promised him we would leave this city together."
+  },
+  "memory-bunker": {
+    "title": "A familiar corridor",
+    "text": "I used to service the backup radio down here. My sister Lena worked in the laboratory. Her last message mentioned Sample N-04 and then the signal went dead. I do not know if she got out. Koda stays close whenever I stop at a door. Somehow that makes it easier to keep going."
+  },
+  "memory-rooftop": {
+    "title": "A promise to keep",
+    "text": "Lena always said a working radio means someone can still find you. I kept her old frequency in my notebook. If the helicopter comes, there has to be room for Koda too. After this, I want him to know grass, sunlight, and a morning without sirens."
   }
 };

@@ -1,0 +1,44 @@
+[
+  {
+    "file": "public/audio/radio/memory-checkpoint.mp3",
+    "voice": "en-GB-SoniaNeural",
+    "provider": "Microsoft Edge neural speech",
+    "text": "Before the outbreak, I repaired the emergency radios for this district. Three nights ago I heard scratching inside an abandoned ambulance. Koda was hiding under the seat, still wearing a collar much too big for him. I promised him we would leave this city together.",
+    "sha256": "ff89463dba18f23b5438bebabf91005f239ffbe39872fc86f341b7410b0eedb8"
+  },
+  {
+    "file": "public/audio/radio/de/memory-checkpoint.mp3",
+    "voice": "de-DE-KatjaNeural",
+    "provider": "Microsoft Edge neural speech",
+    "text": "Vor dem Ausbruch habe ich die Notfunkgeräte dieses Viertels repariert. Vor drei Nächten hörte ich ein Kratzen in einem verlassenen Rettungswagen. Koda versteckte sich unter dem Sitz. Sein Halsband war ihm noch viel zu groß. Ich habe ihm versprochen, dass wir diese Stadt gemeinsam verlassen.",
+    "sha256": "87a223e7c0c8182d65434f3db1092656a78610bafc85a198f97cc072c397ba85"
+  },
+  {
+    "file": "public/audio/radio/memory-bunker.mp3",
+    "voice": "en-GB-SoniaNeural",
+    "provider": "Microsoft Edge neural speech",
+    "text": "I used to service the backup radio down here. My sister Lena worked in the laboratory. Her last message mentioned Sample N-04 and then the signal went dead. I do not know if she got out. Koda stays close whenever I stop at a door. Somehow that makes it easier to keep going.",
+    "sha256": "da3f13a5660c64d2ca90899c7579097832f53e5a0fc61a9e88d3421ae0ce6697"
+  },
+  {
+    "file": "public/audio/radio/de/memory-bunker.mp3",
+    "voice": "de-DE-KatjaNeural",
+    "provider": "Microsoft Edge neural speech",
+    "text": "Früher habe ich hier unten den Reservefunk gewartet. Meine Schwester Lena arbeitete im Labor. In ihrer letzten Nachricht erwähnte sie die Probe N-04. Dann brach der Empfang ab. Ich weiß nicht, ob sie es hinausgeschafft hat. Koda bleibt bei mir, wenn ich vor einer Tür stehen bleibe. Irgendwie macht das den nächsten Schritt leichter.",
+    "sha256": "021346fbb9df4c85bbe8c5c34524023b4d147eb91278246cdee3deaffddd3fac"
+  },
+  {
+    "file": "public/audio/radio/memory-rooftop.mp3",
+    "voice": "en-GB-SoniaNeural",
+    "provider": "Microsoft Edge neural speech",
+    "text": "Lena always said a working radio means someone can still find you. I kept her old frequency in my notebook. If the helicopter comes, there has to be room for Koda too. After this, I want him to know grass, sunlight, and a morning without sirens.",
+    "sha256": "292c8233d82f714c7918a66cfdeb9ee1651d9dd9a929d7bb9f1c66acc9a18395"
+  },
+  {
+    "file": "public/audio/radio/de/memory-rooftop.mp3",
+    "voice": "de-DE-KatjaNeural",
+    "provider": "Microsoft Edge neural speech",
+    "text": "Lena sagte immer: Solange das Funkgerät funktioniert, kann dich noch jemand finden. Ihre alte Frequenz steht noch in meinem Notizbuch. Wenn der Hubschrauber kommt, muss auch Platz für Koda sein. Danach soll er Gras kennenlernen, Sonnenlicht und einen Morgen ohne Sirenen.",
+    "sha256": "5e6fd841c79fee219dfd32a2d770922cebcb9a2f8a6ed847db28b48154b190e5"
+  }
+]
