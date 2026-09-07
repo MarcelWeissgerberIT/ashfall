@@ -7,6 +7,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { createRenderKit, createCharacter, animateCharacter, type Surface } from './render-kit';
+import { tutorialTarget } from './tutorial.mjs';
 import { createMapCameraControls } from './camera-controls';
 import { buildWall, buildBarrier, buildVehicle } from './world-props';
 const COLORS={orange:0xf3bb78};
@@ -22,7 +23,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.6));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;
   renderer.domElement.tabIndex=0;
-  renderer.domElement.setAttribute('aria-label','Isometrische Spielkarte. Klicken zum Bewegen oder Interagieren. Mausrad oder zwei Finger zum Zoomen. Ziehen mit rechter Maustaste oder einem Finger verschiebt die Karte. Plus und Minus zoomen, 0 zeigt die ganze Karte.');
+  renderer.domElement.setAttribute('aria-label','Isometric game map. Click to move or interact. Use the mouse wheel or pinch with two fingers to zoom. Drag with the right mouse button or one finger to pan. Plus and minus zoom; 0 shows the whole map.');
   hostNode.appendChild(renderer.domElement);
   const scene=new THREE.Scene();scene.background=new THREE.Color(0x172c30);scene.fog=new THREE.FogExp2(0x172c30,.021);
   const camera=new THREE.OrthographicCamera(-18,18,14,-14,.1,160);const cameraOffset=new THREE.Vector3(28,33,28);const cameraTarget=new THREE.Vector3(0,0,0);
@@ -103,7 +104,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     for(const z of [-.112,.112]){kit.box(door,0,.14,z,.97,.06,.025,0x7f9488,'brushedSteel');kit.box(door,0,2.13,z,.97,.06,.025,0x7f9488,'brushedSteel');kit.box(door,.33,.97,z,.07,.35,.07,0xb4baa4,'brushedSteel');if(e.type==='door')kit.box(door,0,1.55,z,.58,.36,.025,0xabc5bc,'glass');}
     for(let i=0;i<5;i++)box(g,-.48+i*.23,2.42,.26,.1,.22,.015,i%2?0xc7974c:0x202f28);
     box(g,.8,1.15,.27,.22,.3,.13,0x253a32);box(g,.8,1.27,.345,.1,.08,.015,0xf5af63,0xb16a25);
-    label(g,e.type==='door'?'LAB / 02':game.level===0?'BUNKER / 04':'DACH / 07',0,2.96,0,.38,'#c8d3bd',true);
+    label(g,e.type==='door'?'LAB / 02':game.level===0?'BUNKER / 04':'ROOF / 07',0,2.96,0,.38,'#c8d3bd',true);
    }else if(e.type==='radio'){
     kit.box(g,0,0,0,.86,.6,.65,0x9da880,'carPaint');box(g,0,.6,0,.92,.1,.73,0xc3bea0);kit.box(g,0,.15,.34,.64,.28,.025,0x819481,'rubber');kit.box(g,.16,.26,.36,.11,.1,.01,0x89c394,undefined,0x34854d);cylinder(g,-.27,.7,-.2,.035,2.9,0x97a695);box(g,-.27,2.5,-.2,1.4,.045,.045,0x97a695);box(g,-.27,2,-.2,.8,.045,.045,0x97a695);
    }else if(e.type==='exit'){
@@ -112,7 +113,10 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     box(g,0,.02,0,.5,.02,.4,0xc0b891);
    }else if(e.type==='item'){
     const type=e.item;
-    if(type==='chair'){kit.box(g,0,.45,0,.65,.1,.65,0x9bac91,'canvas');kit.box(g,0,.6,-.29,.65,.6,.08,0x849b7e,'canvas');for(const x of [-.27,.27])for(const z of [-.27,.27])kit.box(g,x,0,z,.06,.45,.06,0x9ba18b,'brushedSteel')}
+    if(type==='jacket'||type==='vest'){kit.box(g,0,.04,0,.55,.13,.65,type==='jacket'?0x997748:0x4d6359,type==='jacket'?'jacket':'canvas');for(const x of [-.2,.2])kit.box(g,x,.17,0,.09,.04,.57,0x829475,'canvas');if(type==='jacket')for(const x of [-.35,.35])kit.box(g,x,.04,0,.21,.1,.45,0x997748,'jacket');else kit.box(g,0,.17,0,.3,.05,.32,0x3d5146,'brushedSteel');}
+    else if(type==='helmet'){kit.ellipsoid(g,0,.15,0,.29,.22,.3,0x7b8771,'brushedSteel');kit.cylinder(g,0,.07,0,.32,.06,0x68765e,.32,'brushedSteel');}
+    else if(type==='axe'){const handle=kit.box(g,0,.04,0,.065,.07,.87,0x9d7146,'wood');handle.rotation.y=.5;const blade=kit.box(g,.13,.06,.3,.31,.1,.2,0xc1c7b7,'brushedSteel');blade.rotation.y=.5;}
+    else if(type==='chair'){kit.box(g,0,.45,0,.65,.1,.65,0x9bac91,'canvas');kit.box(g,0,.6,-.29,.65,.6,.08,0x849b7e,'canvas');for(const x of [-.27,.27])for(const z of [-.27,.27])kit.box(g,x,0,z,.06,.45,.06,0x9ba18b,'brushedSteel')}
     else if(type==='tire'){const geo=kit.geometry('tire',()=>new THREE.TorusGeometry(.33,.14,8,16));const m=new THREE.Mesh(geo,kit.material(0x889487,'rubber'));m.rotation.x=Math.PI/2;m.position.y=.16;g.add(m)}
     else if(type==='bottle'){kit.cylinder(g,0,.02,0,.115,.34,0xb0c9b4,.115,'glass');kit.cylinder(g,0,.36,0,.055,.16,0x96b093,.055,'glass');}
     else if(type==='medkit'){kit.box(g,0,.04,0,.45,.2,.4,0xd8dcc6,'vinyl');box(g,0,.245,0,.09,.015,.27,0xa6533a);box(g,0,.245,0,.27,.015,.09,0xa6533a)}
@@ -193,7 +197,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     const planeMaterial=new THREE.MeshBasicMaterial({visible:false});kit.extras.add(planeMaterial);
     tilePlane=new THREE.Mesh(kit.geometry('map-plane',()=>new THREE.PlaneGeometry(w,h)),planeMaterial);tilePlane.rotation.x=-Math.PI/2;tilePlane.position.set((w-1)/2,.012,(h-1)/2);terrain.add(tilePlane);
     if(level===0){for(let y=1;y<h;y+=3)kit.box(deco,10.5,.01,y,.10,.009,1.25,0xc9c39b);groundText(deco,'QUARANTINE',10.3,17,5.8,.8);groundText(deco,'04',10.3,4,2.2,1.3);}
-    if(level===1){groundText(deco,'STATION NULL',4,17,5.7,.8,'#b8ccc0');groundText(deco,'LAB / N–04',14,5,4.2,.8,'#b0dad2');for(let y=2;y<18;y+=2)kit.box(deco,10.4,.009,y,.07,.009,1.6,0xb7a877);}
+    if(level===1){groundText(deco,'STATION ZERO',4,17,5.7,.8,'#b8ccc0');groundText(deco,'LAB / N-04',14,5,4.2,.8,'#b0dad2');for(let y=2;y<18;y+=2)kit.box(deco,10.4,.009,y,.07,.009,1.6,0xb7a877);}
     if(level===2){groundText(deco,'EVAC 07',15.5,12,4.3,.8);dot(deco,16,.026,10,2.75,0xc5bc93);for(const x of [13.5,18.5])for(const y of [7.5,12.5])kit.box(deco,x,0,y,.18,.12,.18,0xe6a558,undefined,0xe29e46);}
     environmentDetails();
     for(const [x,y] of (level===0?[[6,6],[14,3],[18,16]]:level===1?[[1,5],[10,3],[19,12]]:[[2,7],[18,5]])){
@@ -205,13 +209,16 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     for(const e of game.entities)makeObject(e);
     player=createCharacter(kit);actors.add(player);
     for(const [i,z] of game.zombies.entries())addZombie(z,i);
-    label(deco,level===0?'SEKTOR 04':level===1?'STATION NULL':'DACH 07',w/2,-.73,h+.08,.42,'#98b4a6');
+    label(deco,level===0?'SECTOR 04':level===1?'STATION ZERO':'ROOF 07',w/2,-.73,h+.08,.42,'#98b4a6');
   }
   function addZombie(z:any,variant=0){const g=createCharacter(kit,true,variant);g.userData.entity=z;
     g.traverse(o=>{if(o instanceof THREE.Mesh&&!o.userData.noPick){o.userData.entity=z;pickables.push(o)}});meshes.set(z.id,g);actors.add(g);return g;
   }
   build();
   marker=dot(world,game.player.x,.04,game.player.y,.49,COLORS.orange);marker.visible=false;
+  const guideRing=dot(world,0,.06,0,.75,0xffc477);guideRing.visible=false;guideRing.renderOrder=20;(guideRing.material as THREE.MeshBasicMaterial).depthTest=false;
+  const guideArrow=new THREE.Mesh(kit.geometry('guide-arrow',()=>new THREE.ConeGeometry(.19,.44,4)),new THREE.MeshBasicMaterial({color:0xffd599,depthTest:false}));guideArrow.rotation.z=Math.PI;guideArrow.renderOrder=21;guideArrow.userData.noPick=true;guideArrow.visible=false;world.add(guideArrow);kit.extras.add(guideArrow.material);
+  let lastGuideFocus=game.tutorialFocus;
   const targetLabel=label(scene,'',0,0,0,.7,'#f0e6c9',true);targetLabel.visible=false;let lastLabel='';
   const pathMaterial=new THREE.MeshBasicMaterial({color:0xe2c29a,transparent:true,opacity:.75,depthWrite:false});kit.extras.add(pathMaterial);
   pathDots=new THREE.InstancedMesh(kit.geometry('path-circle',()=>new THREE.CircleGeometry(.055,8)),pathMaterial,500);pathDots.count=0;pathDots.frustumCulled=false;world.add(pathDots);
@@ -246,7 +253,22 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
   const loop=(now:number)=>{
     if(disposed)return;const dt=last?Math.min((now-last)/1000,.06):0;last=now;game.tick(dt);
     if(levelEntities!==game.entities){levelEntities=game.entities;build();controls.reset();lastLabel='';}
-    const playing=game.mode==='playing';animateCharacter(player,game.player,dt,playing,game.time);
+    const guide=tutorialTarget(game);guideRing.visible=guideArrow.visible=!!guide&&game.mode==='playing';
+    if(guide){guideRing.position.set(guide.x,.065,guide.y);guideRing.scale.setScalar(.75*(1+Math.sin(now*.003)*.08));guideArrow.position.set(guide.x,2.1+Math.sin(now*.003)*.13,guide.y);}
+    if(lastGuideFocus!==game.tutorialFocus){
+      lastGuideFocus=game.tutorialFocus;
+      if(guide){
+        const rect=renderer.domElement.getBoundingClientRect(),card=hostNode.parentElement?.querySelector('.tutorial-card')?.getBoundingClientRect();
+        const screen={x:rect.left+rect.width/2,y:rect.top+rect.height/2};
+        if(card){
+          if(rect.right-card.right>200)screen.x=(card.right+24+rect.right-24)/2;
+          else screen.y=(Math.max(card.bottom+60,rect.top+140)+rect.bottom-210)/2;
+        }
+        controls.focus(guide.x-(game.data.size[0]-1)/2,guide.y-(game.data.size[1]-1)/2,screen);
+      }
+    }
+    game.player.equipment=game.equipment;game.player.sneak=game.sneak;game.player.hp=game.health;
+    const playing=game.canAct;animateCharacter(player,game.player,dt,playing,game.time);
     for(const e of game.entities){let g=meshes.get(e.id);if(!g)g=makeObject(e);g.visible=!e.removed;
       if(g.userData.door)g.userData.door.scale.x=(e.open||e.type==='exit'&&game.generatorOn)?.09:1;
       if(g.userData.lid)g.userData.lid.rotation.x=e.open?-1.1:0;

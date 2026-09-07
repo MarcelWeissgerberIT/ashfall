@@ -103,6 +103,10 @@ export function createMapCameraControls(canvas:HTMLCanvasElement, camera:THREE.O
   canvas.addEventListener('pointerleave',options.onClearHover);canvas.addEventListener('contextmenu',noMenu);
   canvas.addEventListener('wheel',wheel,{passive:false});canvas.addEventListener('keydown',key);window.addEventListener('blur',cancelGestures);
   return {
+    focus:(x:number,z:number,screen?:Point)=>{
+      cancelGestures();target.set(x,0,z);updateCamera();
+      if(screen){const at=groundAt(screen);if(at){target.add(new THREE.Vector3(x,0,z).sub(at));updateCamera();}}
+    },
     setZoom:(zoom:number)=>{if(Math.abs(zoom-camera.zoom)>.00001)transform(zoom);},reset,cancelGestures,
     dispose(){
       cancelGestures();

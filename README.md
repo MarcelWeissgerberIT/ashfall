@@ -1,26 +1,38 @@
 # ASHFALL — Dead Sector
 
-Isometrisches Zombie-Survival-Spiel mit drei zusammenhängenden Kapiteln. Die Welt wird in Three.js gerendert; die deterministische Simulation ist von der Darstellung getrennt.
+An isometric survival game with three connected, playable sectors: the Checkpoint, Station Zero, and the evacuation rooftop. Three.js renders the world; a separate simulation handles navigation, inventory, combat, and mission gates.
 
-## Spielen
+## Play
 
-- Boden anklicken: automatisch zum Ziel laufen.
-- Gegenstände, Kisten, Türen oder Zombies anklicken: hinlaufen und interagieren.
-- `2`: Verband. `3`: Flasche wählen und auf ein freies Feld werfen.
-- `Shift`: Schleichen. `Leertaste`: Pause.
-- Rucksack: Gegenstände untersuchen, benutzen oder wieder ablegen. 14 kg Traglast.
-- Jeder Sektor kann mit seiner ursprünglichen Ausrüstung neu gestartet werden.
+Start **Guided tutorial** in sector one to learn through eight practical exercises. Instructions pause the world; the first three exercises also keep enemies still. Real actions advance the guide, including actions completed out of order. Skip the tutorial at any time, or choose **Play without tutorial**. Later sectors play normally.
 
-Die Kampagne führt durch den Kontrollpunkt, Station Null und das Evakuierungsdach. Auftragsschlüssel bleiben beim Levelwechsel erhalten; Generator und Sender verbrauchen ihre passenden Bauteile. Der Spielstand gilt für die laufende Sitzung.
+- Click or tap open ground to move. Click items, containers, devices, doors, or enemies to approach and interact.
+- Wheel or pinch to zoom. Right/middle-drag or one-finger drag to pan. Focused map: `+`, `−`, `0`.
+- `I` or `1`: backpack and loadout. Select a carried item to equip, wear, use, or drop it. Capacity: 14 kg, including equipped items.
+- Hand: crowbar (38 damage / 0.7s), fire axe (54 / 1s), bottle, or bare hands (19 / 0.7s).
+- Body: reinforced jacket (15% reduction) or protective vest (30%). Head: patrol helmet (15%). Worn protection combines multiplicatively.
+- `2`: Bandage. `3`: ready a bottle, then click open ground within nine tiles. `Shift`: toggle Sneak. `Space`: pause.
+- Audio starts from the first mission-start click. Mute in the header or radio panel. Replay voiced calls, read transcripts, and adjust music and voice independently in the radio panel.
 
-## Entwicklung
+Equipment and supplies carry between sectors. Restart restores the inventory, equipment, and health recorded at sector entry. A new campaign resets everything. Progress lasts for the current page session.
 
-Node.js >= 22.13.0. `npm install`, dann `npm run dev`. `npm run build` erzeugt die Sites-Ausgabe.
+## Development and verification
 
-`node scripts/check-game.mjs` prüft zwei vollständige Kampagnendurchläufe über dieselben Lauf- und Interaktionsfunktionen wie im Spiel sowie Traglast, Ablenkung, Heilung, Türbedingungen, Pause, Neustart und Wellen. `npx tsc --noEmit` prüft die TypeScript-Integration.
+Node.js >= 22.13.0. Install with `npm install`, then `npm run dev`. `npm run build` creates the Sites output.
 
-## OpenArt-Grafiken
+- `node scripts/check-game.mjs`: two full campaigns, navigation, puzzles, health, carrying, distraction, inventory, and restart.
+- `node scripts/check-tutorial.mjs`: full guided campaign, actual action progression, reading pauses, recovery, optional training, and out-of-order tasks.
+- `node --experimental-strip-types scripts/check-camera.mjs`: real event handlers and Three camera projection, including targets placed outside the tutorial card.
+- `node --experimental-strip-types scripts/check-world-props.mjs`: geometry, footprints, UVs, batching, and resource reuse.
+- `node scripts/check-equipment.mjs`: weapon damage, armor, slots, checkpoints, pickups, and tutorial edge cases.
+- `node scripts/check-character.mjs`: articulated animation, gear visibility, foot plants, transitions, and pooled resource cleanup without a GPU.
+- `node scripts/check-audio.mjs`: radio triggers, MP3 hashes/captions, activation, pause/mute/replay races with a fake audio runtime.
+- `npx tsc --noEmit`: TypeScript integration.
 
-Die Grafikfassung ergänzt OpenArt-Oberflächen für Beton, Asphalt, rostigen Stahl und Steinpflaster, Gegenstandsbilder, Porträts und drei Sektorpanoramen. Die drei ursprünglichen Bildatlanten sowie ihre Prompts und Modellparameter liegen unter `art-source/openart-v3`. `scripts/prepare-art.cjs` extrahiert die Bilder reproduzierbar mit Sharp. Die fertigen WebP-Dateien sind bereits in `public/images/openart` enthalten.
+## Visuals and audio
 
-3D-Figuren verwenden nun gerundete Körperformen, Gelenkbewegungen und Ausrüstungsdetails. Die Welt hat Materialstrukturen, Pfützen, Kontaktschatten, sanftes Leuchten und Licht pro Sektor. Rechte oder mittlere Maustaste ziehen verschiebt die Kamera auch bei vergrößerter Ansicht.
+OpenArt surface atlases, inventory art, portraits, and sector illustrations ship in `public/images/openart`. Sources and prompts are in `art-source`. The 3D character rig, equipment, lighting, weather, and animated poses are code-native.
+
+The ambient score is composed procedurally with Web Audio: slow minor chords, filtered wind, distant pulses, reverb, and a distinct palette for each sector. Music lowers during radio speech and pauses.
+
+Seven prerecorded English neural radio calls ship in `public/audio/radio`. Credits and full scripts are in `credits.json`; `app/game/radio.mjs` supplies captions. The voice is en-GB-RyanNeural, synthesized through the edge-tts project. Playback requires no speech service, account, or API key. Runtime filtering supplies the radio timbre and static. Transcripts remain available with sound muted.

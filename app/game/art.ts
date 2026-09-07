@@ -19,9 +19,9 @@ export const ART = {
     bark: '/images/openart/v4/bark.webp',
   },
   sectors: [
-    { src: '/images/openart/checkpoint.webp', alt: 'Regennasser Kontrollpunkt mit verlassenem Bunkertor' },
-    { src: '/images/openart/laboratory.webp', alt: 'Verlassenes Bunkerlabor unter kaltem Notlicht' },
-    { src: '/images/openart/rooftop.webp', alt: 'Evakuierungsdach über der zerstörten Stadt im Abendlicht' },
+    { src: '/images/openart/checkpoint.webp', alt: 'Rain-soaked checkpoint with an abandoned bunker gate' },
+    { src: '/images/openart/laboratory.webp', alt: 'Abandoned bunker laboratory under cold emergency lighting' },
+    { src: '/images/openart/rooftop.webp', alt: 'Evacuation rooftop above the ruined city at dusk' },
   ],
   icons: '/images/openart/icons/',
 };

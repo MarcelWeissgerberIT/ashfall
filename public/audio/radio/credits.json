@@ -1,0 +1,80 @@
+{
+  "voice": "en-GB-RyanNeural",
+  "provider": "Microsoft Edge online neural text-to-speech via edge-tts",
+  "documentation": "https://github.com/rany2/edge-tts",
+  "format": "24 kHz, 48 kbps, mono MP3",
+  "cues": {
+    "bunker": {
+      "title": "Recover Sample N-04",
+      "text": "Control to Mara. Welcome to Station Zero. Find the keycard in the western maintenance locker. Open the laboratory, recover Sample N-04, and take it to the rooftop elevator. Do not leave the sample behind.",
+      "duration": 17.664
+    },
+    "rescue": {
+      "title": "Control, out",
+      "text": "Mara, you are clear. Sample N-04 is secure. We are leaving the city behind. You made it. Control, out.",
+      "duration": 12.72
+    },
+    "checkpoint": {
+      "title": "A way beneath the city",
+      "text": "Mara, this is Control. Station Zero lies beneath the checkpoint. Find a fuse in the guard crate, and fuel in the car trunk. Restore generator power, then enter the bunker. Keep your profile low.",
+      "duration": 17.16
+    },
+    "evac-ready": {
+      "title": "Move to the landing zone",
+      "text": "Mara, evacuation is ready. Reach the marked landing zone with Sample N-04. Move now. This is your way out.",
+      "duration": 11.808
+    },
+    "generator": {
+      "title": "Bunker gate unlocked",
+      "text": "Control to Mara. The generator is online. Bunker gate unlocked. Proceed inside, and stay alert.",
+      "duration": 10.464
+    },
+    "rooftop": {
+      "title": "The last frequency",
+      "text": "Mara, we have your position. Find the battery in rooftop storage, then power the longwave transmitter. Send your signal and hold out for 35 seconds. Keep Sample N-04 with you.",
+      "duration": 15.768
+    },
+    "signal": {
+      "title": "Hold for evacuation",
+      "text": "Signal received, Mara. Evacuation in 35 seconds. The noise will draw them in. Keep moving. We are coming for you.",
+      "duration": 12.912
+    }
+  },
+  "assets": [
+    {
+      "id": "bunker",
+      "sha256": "b0696dc28f30e62154767d68162f49d8acdc436050e2e1b5d0915791f493b519",
+      "duration": 17.664
+    },
+    {
+      "id": "rescue",
+      "sha256": "04bc8ffa9d815f547abd5952e092a00b5d39a4f46d14c8e666288eb3d08ef716",
+      "duration": 12.72
+    },
+    {
+      "id": "checkpoint",
+      "sha256": "453a0f10ac7e44d39eb750ee704d3beb1337d9d7c1b4caeb08e9b688bf031af9",
+      "duration": 17.16
+    },
+    {
+      "id": "evac-ready",
+      "sha256": "85daceb4f53b1c6d1759d2de6c45f9d46508df8d9657cbe096bae1a83012843b",
+      "duration": 11.808
+    },
+    {
+      "id": "generator",
+      "sha256": "3fdfb1fee6c6839f2fc9449657bf2b9e26dae39e5cd18655b998bc330cb757e2",
+      "duration": 10.464
+    },
+    {
+      "id": "rooftop",
+      "sha256": "0a9d40e8d9d63145a9ee0d64c6493ef0d3e0fbd1bb3aa7369600df4c510fd12e",
+      "duration": 15.768
+    },
+    {
+      "id": "signal",
+      "sha256": "4b182ae6fe82cf6e73f6715517155db50fae6ec00733e3db5d26de26fa94d792",
+      "duration": 12.912
+    }
+  ]
+}
