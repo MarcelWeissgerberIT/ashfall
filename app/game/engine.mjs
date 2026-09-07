@@ -69,8 +69,29 @@ export const LEVELS=[
   {id:'radio',x:10,y:7,type:'radio',name:'Longwave transmitter',desc:'The frequency is set. Only the battery is missing.',solid:true},
   {id:'evac',x:16,y:10,type:'exit',name:'Landing zone',desc:'Activate the transmitter and hold out for 35 seconds.',solid:false},
   {id:'roof-note',x:3,y:11,type:'note',name:'Evacuation plan',desc:'“35 seconds after the signal. Keep moving. We are only coming once.”'}
- ],zombies:[zombie('r1',11,3),zombie('r2',18,13)]}
+ ],zombies:[zombie('r1',11,3),zombie('r2',18,13)]},
+ {name:'Haven',place:'HAVEN / SAFE COLONY',tag:'A NEW BEGINNING',weather:'DAWN · 12 °C',intro:'Beyond the walls, people still live. Doctor Imani needs the sample. Engineer Levin needs your help restoring clean water. Koda finally has somewhere safe to rest.',hint:'Speak to Imani at the clinic, then Levin by the water tank. Collect supplies before leaving through the east gate.',size:[21,19],start:{x:4,y:14},goals:['Deliver the sample to Doctor Imani','Accept Levin’s water mission','Leave for the waterworks'],entities:[
+ prop('haven-n',0,0,'wall',21,1),prop('haven-w',0,1,'wall',1,17),prop('clinic',2,3,'vent',4,3),prop('garden',11,3,'tank',2,2),prop('bench',4,9,'desk',2,1),
+ {id:'imani',x:6,y:7,type:'npc',name:'Doctor Imani',desc:'Mara, your sample could save this colony. Koda can stay beside you. You are both welcome here.',requires:'sample'},
+ {id:'levin',x:13,y:7,type:'npc',name:'Engineer Levin',desc:'Our water filter has failed. Find the toolbox at the waterworks and repair the pump. Then recover a battery from the rail depot. We need both systems to survive.',prerequisite:'imani'},
+ crate('haven-aid',3,8,'Colony supplies',['medkit','medkit','ration','ration','bottle'],'Supplies for Mara and Koda. Take what you need.'),
+ {id:'departure',x:18,y:13,type:'exit',name:'Waterworks trail',desc:'Leave the colony after speaking to Imani and Levin.',solid:false}
+ ],zombies:[]},
+ {name:'Clean water',place:'OLD WATERWORKS',tag:'COLONY MISSION',weather:'MIST · 9 °C',intro:'Haven’s taps are running dry. Search the maintenance shed, repair the pump and open a route to the rail depot.',hint:'The western storage box contains tools. Reach the pump in the northeast. Barriers break enemy sightlines.',size:[21,19],start:{x:2,y:16},goals:['Recover a toolbox','Repair the colony water pump','Reach the rail depot trail'],entities:[
+ prop('water-n',0,0,'wall',21,1),prop('water-tank1',7,4,'tank',3,3),prop('water-tank2',13,3,'tank',3,3),prop('water-cover',8,11,'barrier',5,1),prop('water-car',4,10,'car',2,3),
+ crate('water-tools',3,4,'Maintenance supplies',['toolbox','medkit'],'The tools needed to repair the pump.'),crate('water-aid',15,14,'Worker supplies',['medkit','bottle','ration'],'A worker left a bag here.'),
+ {id:'pump',x:17,y:5,type:'mission',name:'Water pump',desc:'Repair the pump with a toolbox. The tools are consumed by the repair.',requires:'toolbox'},
+ {id:'water-exit',x:18,y:16,type:'exit',name:'Rail depot trail',desc:'Repair the pump before leaving.',solid:false}
+ ],zombies:[zombie('w1',6,6),zombie('w2',12,12),zombie('w3',17,9),zombie('w4',10,2)]},
+ {name:'Light for Haven',place:'ABANDONED RAIL DEPOT',tag:'COLONY MISSION',weather:'DUSK · 7 °C',intro:'The water is flowing. Now Haven needs power. Recover a battery from the depot, activate the relay and get back to the colony with Koda.',hint:'Search the eastern freight crate. The relay is in the northwest. Use the freight barriers to escape fast Infected.',size:[21,19],start:{x:3,y:16},goals:['Recover the relay battery','Activate the power relay','Return to Haven'],entities:[
+ prop('rail-n',0,0,'wall',21,1),prop('freight1',6,4,'vent',3,5),prop('freight2',12,9,'vent',3,5),prop('rail-cover',3,11,'barrier',3,1),prop('rail-car',16,3,'car',2,3),
+ crate('rail-battery',18,9,'Freight crate',['battery','medkit'],'An intact industrial battery.'),crate('rail-aid',4,7,'Signal crew supplies',['medkit','medkit','bottle','ration'],'Emergency supplies.'),
+ {id:'relay',x:3,y:3,type:'mission',name:'Power relay',desc:'Install a battery to restore power to Haven.',requires:'battery'},
+ {id:'home',x:18,y:16,type:'exit',name:'Return to Haven',desc:'Restore power before returning to the colony.',solid:false}
+ ],zombies:[zombie('d1',10,5),zombie('d2',17,12),zombie('d3',4,4),zombie('d4',10,16),zombie('d5',18,2)]}
+
 ];
+LEVELS.push({...JSON.parse(JSON.stringify(LEVELS[3])),name:'A home for two',intro:'The colony lights are on. Imani has news about the sample, and Levin has kept a place for Mara and Koda. Speak to them, then rest.',hint:'Talk to Imani and Levin. Reach the resting place to finish this chapter of your journey.',goals:['Hear Imani’s findings','Meet Levin again','Rest with Koda'],entities:JSON.parse(JSON.stringify(LEVELS[3].entities)).map(e=>e.id==='imani'?{...e,requires:null,desc:'N-04 slows the infection in our first tests. You gave us time, Mara. Koda is welcome in the clinic, too.'}:e.id==='levin'?{...e,desc:'Clean water. Warm rooms. You made it happen. There is a bed for you and a blanket for Koda.'}:e.id==='departure'?{...e,name:'Rest with Koda',desc:'A safe place at last. Speak to your new friends, then rest.'}:e)});
 const clone=o=>JSON.parse(JSON.stringify(o));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 const key=(x,y)=>`${x},${y}`;
@@ -90,10 +111,10 @@ export class Game {
  has(id){return this.inventory.includes(id)}
  loadLevel(index,restart=false){
   if(restart){const e=this.entries[index];this.equipment={...e.equipment};this.inventory=[...e.inventory];this.health=e.health;this.kills=e.kills;this.totalTime=e.totalTime;}
-  this.level=index;this.unlocked=Math.max(this.unlocked,index);this.data=LEVELS[index];this.entities=clone(this.data.entities);this.zombies=clone(this.data.zombies).map((z,i)=>configureInfected(z,i+index));this.player={...this.data.start,facing:0,attack:0,hurt:0,action:null};this.path=[];this.target=null;this.selected=null;this.time=0;this.signal=-1;this.spawned=0;this.generatorOn=false;this.effects=[];this.mode='briefing';this.throwing=false;this.sneak=false;this.noise=0;this.flash=0;this.health=Math.max(85,this.health);this.pulse=0;
-  this.companionOpen=false;this.companion=createCompanion(this.player);const dogStart=[[-1,0],[0,1],[1,0],[0,-1]].map(([dx,dy])=>({x:this.player.x+dx,y:this.player.y+dy})).find(p=>!this.isBlocked(p.x,p.y));if(dogStart)Object.assign(this.companion,dogStart);this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
+  this.level=index;this.unlocked=Math.max(this.unlocked,index);this.data=LEVELS[index];this.entities=clone(this.data.entities);this.zombies=clone(this.data.zombies).map((z,i)=>configureInfected(z,i+index));this.player={...this.data.start,facing:0,attack:0,hurt:0,action:null};this.path=[];this.target=null;this.selected=null;this.time=0;this.evacuation=0;this.signal=-1;this.spawned=0;this.generatorOn=false;this.effects=[];this.mode='briefing';this.throwing=false;this.sneak=false;this.noise=0;this.flash=0;this.health=Math.max(85,this.health);this.pulse=0;
+  const bond=this.companion?.bond;this.companionOpen=false;this.companion=createCompanion(this.player);if(bond!==undefined)this.companion.bond=bond;const dogStart=[[-1,0],[0,1],[1,0],[0,-1]].map(([dx,dy])=>({x:this.player.x+dx,y:this.player.y+dy})).find(p=>!this.isBlocked(p.x,p.y));if(dogStart)Object.assign(this.companion,dogStart);this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
   if(!restart)this.entries[index]={equipment:{...this.equipment},inventory:[...this.inventory],health:this.health,kills:this.kills,totalTime:this.totalTime};
-  this.history=[];const memory=['memory-checkpoint','memory-bunker','memory-rooftop'][index];if(!this.messages.some(m=>m.voiceId===memory))this.messages.push({id:'memory-'+index,text:RADIO[memory].text,voiceId:memory,sender:'Mara',level:index,time:this.totalTime});this.log(this.data.intro,'story',['checkpoint','bunker','rooftop'][index]);this.emit();
+  this.history=[];const memory=['memory-checkpoint','memory-bunker','memory-rooftop'][index];if(memory&&!this.messages.some(m=>m.voiceId===memory))this.messages.push({id:'memory-'+index,text:RADIO[memory].text,voiceId:memory,sender:'Mara',level:index,time:this.totalTime});this.log(this.data.intro,'story',['checkpoint','bunker','rooftop'][index]);this.emit();
  }
  start(guided=this.tutorialEnabled){if(this.companionOpen)return;if(this.inventoryOpen||this.lootOpen)return;if(this.mode==='briefing'&&this.level===0){this.tutorialEnabled=guided;this.tutorial=createTutorial(guided)}if(this.mode==='briefing'||this.mode==='paused')this.mode='playing';this.emit()}
  commandCompanion(command){return commandCompanion(this,command)}
@@ -131,9 +152,9 @@ export class Game {
   if(to==='loot'&&!fromLoot){if(!this.lootContainer)return false;if(['hand','body','head'].includes(from))this.equipment[from]=null;return this.storeLoot(id);}
   if(to==='ground'&&!fromLoot){if(['hand','body','head'].includes(from))this.equipment[from]=null;this.drop(id);return true}return false;
  }
- next(){if(this.mode==='complete'&&this.level<2)this.loadLevel(this.level+1)}
+ next(){if(this.mode==='complete'&&this.level<LEVELS.length-1)this.loadLevel(this.level+1)}
  restart(){this.loadLevel(this.level,true)}
- newGame(){this.equipment={hand:'crowbar',body:null,head:null};this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.messages=[];this.entries=[];this.unlocked=0;this.loadLevel(0)}
+ newGame(){this.equipment={hand:'crowbar',body:null,head:null};this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.messages=[];this.entries=[];this.unlocked=0;this.companion=undefined;this.loadLevel(0)}
  log(text,tone='info',voiceId=null){this.messages.push({id:'message-'+this.messages.length,text:voiceId?RADIO[voiceId].text:text,tone,voiceId,sender:voiceId?'Control':'Field log',level:this.level,time:this.totalTime});if(voiceId)this.lastRadio={id:'call-'+Math.random(),voiceId,text:RADIO[voiceId].text};this.history.unshift({text,tone,id:Math.random()});this.history=this.history.slice(0,5);this.emit()}
  isBlocked(x,y,ignore){if(x<0||y<0||x>=this.data.size[0]||y>=this.data.size[1])return true;return this.entities.some(e=>e.id!==ignore&&!e.removed&&e.solid&&!(e.type==='door'&&e.open)&&x>=e.x&&x<e.x+(e.w||1)&&y>=e.y&&y<e.y+(e.h||1))}
  pathTo(from,to){
@@ -144,8 +165,8 @@ export class Game {
   if(!found)return null;const path=[];let p={x:tx,y:ty};while(p){path.unshift(p);p=prev.get(key(p.x,p.y))}path.shift();return path;
  }
  nearestPath(e){const options=[];for(let dx=-1;dx<=(e.w||1);dx++)for(let dy=-1;dy<=(e.h||1);dy++){if(dx>=0&&dx<(e.w||1)&&dy>=0&&dy<(e.h||1)&&e.solid)continue;const t={x:e.x+dx,y:e.y+dy};if(distance(t,e)>1.45&&(!e.w&&!e.h))continue;const path=this.pathTo(this.player,t);if(path)options.push(path)}options.sort((a,b)=>a.length-b.length);return options[0]??null}
- move(x,y){if(!this.canAct)return;this.throwing=false;const path=this.pathTo(this.player,{x,y});if(path===null){this.log('The path is blocked there.','warn');return}this.target=null;this.selected=null;this.path=path;this.emit()}
- select(id){if(!this.canAct)return;const e=[...this.entities,...this.zombies].find(e=>e.id===id&&!e.removed&&e.hp!==0);if(!e)return;this.selected=e;this.throwing=false;
+ move(x,y){if(this.evacuation>0)return;if(!this.canAct)return;this.throwing=false;const path=this.pathTo(this.player,{x,y});if(path===null){this.log('The path is blocked there.','warn');return}this.target=null;this.selected=null;this.path=path;this.emit()}
+ select(id){if(this.evacuation>0)return;if(!this.canAct)return;const e=[...this.entities,...this.zombies].find(e=>e.id===id&&!e.removed&&e.hp!==0);if(!e)return;this.selected=e;this.throwing=false;
   if(e.type==='prop'){this.log(e.desc);this.emit();return}
   if(e.type==='zombie'){this.target=e;this.path=this.nearestPath(e)||[];this.emit();return}
   this.target=e;const path=this.nearestPath(e);if(path===null){this.target=null;this.log('No clear path. Open the door first.','warn');return}this.path=path;this.emit();
@@ -159,6 +180,7 @@ export class Game {
   if(e.removed)return;this.action('interact',.7);
   if(e.type==='item'){if(this.addItem(e.item)){e.removed=true;this.selected=null;this.tutorial.facts.pickups++;}}
   else if(e.type==='container'){this.openLoot(e);return;}
+  else if(e.type==='npc'||e.type==='mission'){if(e.done){this.log(e.desc,'story');return}if(e.prerequisite&&!this.entities.find(n=>n.id===e.prerequisite)?.done){this.log('Speak to Doctor Imani first.','warn');return}if(e.requires&&!this.has(e.requires)){this.log('Missing: '+ITEMS[e.requires].name+'.','warn');return}if(e.requires)this.consume(e.requires);e.done=true;this.log(e.desc,'story');}
   else if(e.type==='note')this.log(e.desc,'story');
   else if(e.type==='generator'){if(this.generatorOn){this.log('The generator is running. The bunker gate has power.','success');return}const missing=['fuse','fuel'].filter(id=>!this.has(id));if(missing.length){this.log('Missing: '+missing.map(id=>ITEMS[id].name).join(' and ')+'.','warn');return}this.consume('fuse');this.consume('fuel');this.generatorOn=true;this.noise=1;this.log('The generator starts. The bunker gate is unlocked.','success','generator');}
   else if(e.type==='door'){if(!this.has('keycard')){this.log('Locked. Find the keycard in the maintenance locker.','warn');return}e.open=!e.open;this.log(e.open?'The laboratory door is open.':'The laboratory door is closed.','success');}
@@ -167,13 +189,15 @@ export class Game {
    if(this.level===0&&!this.generatorOn){this.log('No power. Repair the generator first.','warn');return}
    if(this.level===1&&(!this.has('keycard')||!this.has('sample'))){this.log('You need the keycard and Sample N-04.','warn');return}
    if(this.level===2&&(this.signal!==0||!this.has('sample'))){this.log(this.signal!==0?'Evacuation has not arrived yet. Activate the transmitter and hold out.':'Retrieve the dropped Sample N-04. You cannot leave without it.','warn');return}
-   this.mode=this.level===2?'won':'complete';this.path=[];this.target=null;this.log(this.level===2?'You survived. The sample is safe.':'Sector secured. The way is clear.','success',this.level===2?'rescue':null);
+   if(this.level>=3&&!this.entities.filter(n=>n.type==='npc'||n.type==='mission').every(n=>n.done)){this.log('Complete the colony mission before leaving.','warn');return}
+   if(this.level===2){this.evacuation=5;this.path=[];this.target=null;this.log('Mara and Koda are boarding. Next stop: Haven.','success','rescue');return}
+   this.mode=this.level===LEVELS.length-1?'won':'complete';this.path=[];this.target=null;this.log(this.level===2?'You survived. The sample is safe.':'Sector secured. The way is clear.','success',this.level===2?'rescue':null);
   }this.emit();
  }
- objectives(){if(this.level===0)return [this.generatorOn||(this.has('fuse')&&this.has('fuel')),this.generatorOn,this.mode==='complete'];if(this.level===1)return [this.has('keycard'),this.has('sample'),this.mode==='complete'];return [this.has('battery')||this.signal>=0,this.signal===0,this.mode==='won']}
+ objectives(){if(this.level===3||this.level===6)return [!!this.entities.find(e=>e.id==='imani')?.done,!!this.entities.find(e=>e.id==='levin')?.done,['complete','won'].includes(this.mode)];if(this.level>=4){const mission=this.entities.find(e=>e.type==='mission');return [this.has(mission.requires)||!!mission.done,!!mission.done,['complete','won'].includes(this.mode)]}if(this.level===0)return [this.generatorOn||(this.has('fuse')&&this.has('fuel')),this.generatorOn,this.mode==='complete'];if(this.level===1)return [this.has('keycard'),this.has('sample'),this.mode==='complete'];return [this.has('battery')||this.signal>=0,this.signal===0,this.mode==='complete']}
  advanceActor(actor,path,speed,dt){if(!path.length)return;const p=path[0],dx=p.x-actor.x,dy=p.y-actor.y,dist=Math.hypot(dx,dy);actor.facing=Math.atan2(dx,dy);if(dist<speed*dt){actor.x=p.x;actor.y=p.y;path.shift()}else {actor.x+=dx/dist*speed*dt;actor.y+=dy/dist*speed*dt;}}
  tick(dt){
-  if(!this.canAct)return;dt=Math.min(dt,.06);this.time+=dt;this.totalTime+=dt;this.pulse+=dt;this.player.attack=Math.max(0,this.player.attack-dt);this.noise=Math.max(0,this.noise-dt*.15);this.flash=Math.max(0,this.flash-dt*2);this.effects=this.effects.filter(e=>(e.life-=dt)>0);
+  if(!this.canAct)return;dt=Math.min(dt,.06);if(this.evacuation>0){this.evacuation=Math.max(0,this.evacuation-dt);this.time+=dt;if(this.evacuation>3){for(const actor of [this.player,this.companion]){actor.x+=(16-actor.x)*Math.min(1,dt*3);actor.y+=(10.8-actor.y)*Math.min(1,dt*3);actor.facing=0;}}if(!this.evacuation){this.mode='complete';this.emit()}return;}this.time+=dt;this.totalTime+=dt;this.pulse+=dt;this.player.attack=Math.max(0,this.player.attack-dt);this.noise=Math.max(0,this.noise-dt*.15);this.flash=Math.max(0,this.flash-dt*2);this.effects=this.effects.filter(e=>(e.life-=dt)>0);
   for(const actor of [this.player,...this.zombies]){actor.hurt=Math.max(0,(actor.hurt||0)-dt);if(actor.action)actor.action.remaining=Math.max(0,actor.action.remaining-dt);}
   const target=this.target;
   if(target?.type==='zombie'&&target.hp>0){if(distance(this.player,target)>1.3){if(!this.path.length||distance(this.path[this.path.length-1],target)>1.5)this.path=this.nearestPath(target)||[]}else this.path=[];}

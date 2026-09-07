@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import ts from 'typescript';
+import {Game,LEVELS} from '../app/game/engine.mjs';
+import {createSave,restoreSave} from '../app/game/savegame.mjs';
+const g=new Game();g.inventory.push('sample');g.loadLevel(2);g.mode='won';const legacy=JSON.parse(createSave(g));delete legacy.state.evacuation;restoreSave(g,JSON.stringify(legacy));assert.equal(g.mode,'complete');g.next();assert.equal(g.level,3);assert.equal(g.zombies.length,0);
+g.start();g.interact(g.entities.find(e=>e.id==='imani'));const saved=createSave(g);restoreSave(g,saved);assert.equal(g.entities.find(e=>e.id==='imani').done,true);assert.equal(g.has('sample'),false);
+for(let i=3;i<LEVELS.length;i++){g.loadLevel(i);restoreSave(g,createSave(g));assert.equal(g.level,i);assert.equal(g.data.name,LEVELS[i].name);}
+g.inventory.push('sample');g.loadLevel(2);g.start();g.signal=0;g.interact(g.entities.find(e=>e.id==='evac'));assert.equal(g.evacuation,5);const state=createSave(g);restoreSave(g,state);assert.equal(g.evacuation,5);g.start();for(let i=0;i<310;i++)g.tick(1/60);assert.equal(g.mode,'complete');
+const threeURL=new URL('../node_modules/three/build/three.module.js',import.meta.url).href;
+const source=fs.readFileSync(new URL('../app/game/helicopter.ts',import.meta.url),'utf8').replace("from 'three'",`from '${threeURL}'`);
+const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
+const {animateHelicopter}=await import('data:text/javascript;base64,'+Buffer.from(js).toString('base64'));
+const THREE=await import(threeURL),helicopter=new THREE.Group();helicopter.userData.rotor=new THREE.Group();
+animateHelicopter(helicopter,9,0,0);assert.equal(helicopter.visible,false);
+animateHelicopter(helicopter,8,0,1);assert.equal(helicopter.visible,true);assert.ok(helicopter.position.y>6);
+animateHelicopter(helicopter,0,0,9);assert.equal(helicopter.position.y,.05);
+animateHelicopter(helicopter,0,4,10);assert.equal(helicopter.position.y,.05);
+animateHelicopter(helicopter,0,1,13);assert.ok(helicopter.position.y>5);
+console.log('Legacy finale migration, colony task persistence, all new sectors, saved boarding and helicopter arrival/landing/departure verified.');

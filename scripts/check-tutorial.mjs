@@ -52,7 +52,7 @@ function sneakLesson(g){
   check(g.mode==='complete','Guided campaign continues through the playable bunker');
   g.next();g.start();for(const id of ['roof-store','roof-aid','radio'])go(g,id);
   while(g.signal>0){if(!g.path.length){const p=[[4,15],[16,16],[18,10],[10,10],[4,9]][Math.floor(g.time/5)%5];g.move(...p)}ticks(g,18);}
-  go(g,'evac');check(g.mode==='won'&&g.spawned===3,'Tutorial campaign reaches the final evacuation');
+  go(g,'evac');for(let i=0;i<310;i++)g.tick(1/60);check(g.mode==='complete'&&g.spawned===3,'Tutorial campaign reaches the final evacuation');
   console.log(`Guided campaign: all three sectors won, ${g.kills} kills, ${g.health} HP.`);
 }
 {

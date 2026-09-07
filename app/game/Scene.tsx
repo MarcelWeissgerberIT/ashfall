@@ -15,6 +15,7 @@ import { translate } from './i18n';
 import { createAtmosphere } from './atmosphere';
 import { createPuppy, animatePuppy } from './puppy';
 import { buildSectorDetails } from './sector-details';
+import {createHelicopter,animateHelicopter} from './helicopter';
 const COLORS={orange:0xf3bb78};
 export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation,following,onFollowChange}:{game:any;onHover:(v:any)=>void;zoom:number;onZoomChange:(zoom:number)=>void;viewReset:number;rotation:number;following:boolean;onFollowChange:(v:boolean)=>void}){
  const host=useRef<HTMLDivElement>(null),sceneRef=useRef<ReturnType<typeof createMapCameraControls>|null>(null),hoverRef=useRef(onHover),zoomRef=useRef(onZoomChange);hoverRef.current=onHover;zoomRef.current=onZoomChange;
@@ -47,6 +48,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
   const world=new THREE.Group();scene.add(world);
   let atmosphere:ReturnType<typeof createAtmosphere>|undefined;
   let renderedLanguage='',level=-1,terrain=new THREE.Group(),objectGroup=new THREE.Group(),actors=new THREE.Group(),deco=new THREE.Group(),skyline=new THREE.Group();
+  let helicopter:THREE.Group|undefined;
   const meshes=new Map<string,THREE.Group>(),pickables:THREE.Object3D[]=[];
   let puppy:THREE.Group,player:THREE.Group,tilePlane:THREE.Mesh,marker:THREE.Mesh|undefined,hoverEntity:any=null,hoverPoint:THREE.Vector3|null=null;
   let pathDots:THREE.InstancedMesh|undefined;const effects=new Map<any,THREE.Mesh>();const effectRoot=new THREE.Group();world.add(effectRoot);
@@ -123,10 +125,12 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     for(let i=0;i<5;i++)box(g,-.48+i*.23,2.42,.26,.1,.22,.015,i%2?0xc7974c:0x202f28);
     box(g,.8,1.15,.27,.22,.3,.13,0x253a32);box(g,.8,1.27,.345,.1,.08,.015,0xf5af63,0xb16a25);
     g.userData.sign=label(g,e.type==='door'?'LAB / 02':game.level===0?'BUNKER / 04':'ROOF / 07',0,2.96,0,.38,'#c8d3bd',true);
+   }else if(e.type==='npc'){const person=createCharacter(kit,false,0);person.scale.setScalar(.9);g.userData.resident=person;g.add(person);label(g,e.name,0,2.7,0,.48,'#e9d6a8',true);
+   }else if(e.type==='mission'){kit.box(g,0,0,0,1,.9,.8,0x637c72,'brushedSteel');kit.box(g,0,.5,.42,.6,.2,.04,0xa6d8b8);cylinder(g,-.35,.9,0,.08,1,0xabb6a0);
    }else if(e.type==='radio'){
     kit.box(g,0,0,0,.86,.6,.65,0x9da880,'carPaint');box(g,0,.6,0,.92,.1,.73,0xc3bea0);kit.box(g,0,.15,.34,.64,.28,.025,0x819481,'rubber');kit.box(g,.16,.26,.36,.11,.1,.01,0x89c394,undefined,0x34854d);cylinder(g,-.27,.7,-.2,.035,2.9,0x97a695);box(g,-.27,2.5,-.2,1.4,.045,.045,0x97a695);box(g,-.27,2,-.2,.8,.045,.045,0x97a695);
    }else if(e.type==='exit'){
-    dot(g,0,.04,0,1.5,0x98bd93);groundText(g,'H',0,0,2,1.6,'#d3d6b7');
+    dot(g,0,.04,0,1.5,0x98bd93);groundText(g,game.level===2?'H':'→',0,0,2,1.6,'#d3d6b7');if(game.level>2)label(g,e.name,0,1.5,0,.5,'#d3d6b7',true);
    }else if(e.type==='note'){
     box(g,0,.02,0,.5,.02,.4,0xc0b891);
    }else if(e.type==='item'){
@@ -185,7 +189,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     }
   }
   function build(){
-    atmosphere?.dispose();
+    atmosphere?.dispose();helicopter=undefined;
     for(const group of [terrain,objectGroup,actors,deco,skyline]){world.remove(group);kit.disposeLocal(group)}
     kit.disposeLocal(effectRoot);effects.clear();meshes.clear();pickables.length=0;
     if(pathDots)pathDots.count=0;if(marker)marker.visible=false;lastPath='';lastHover='';hoverEntity=null;hoverPoint=null;hoverRef.current(null);
@@ -205,7 +209,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     tilePlane=new THREE.Mesh(kit.geometry('map-plane',()=>new THREE.PlaneGeometry(w,h)),planeMaterial);tilePlane.rotation.x=-Math.PI/2;tilePlane.position.set((w-1)/2,.012,(h-1)/2);terrain.add(tilePlane);
     if(level===0){for(let y=1;y<h;y+=3)kit.box(deco,10.5,.01,y,.10,.009,1.25,0xc9c39b);groundText(deco,'QUARANTINE',10.3,17,5.8,.8);groundText(deco,'04',10.3,4,2.2,1.3);}
     if(level===1){groundText(deco,'STATION ZERO',4,17,5.7,.8,'#b8ccc0');groundText(deco,'LAB / N-04',14,5,4.2,.8,'#b0dad2');for(let y=2;y<18;y+=2)kit.box(deco,10.4,.009,y,.07,.009,1.6,0xb7a877);}
-    if(level===2){groundText(deco,'EVAC 07',15.5,12,4.3,.8);dot(deco,16,.026,10,2.75,0xc5bc93);for(const x of [13.5,18.5])for(const y of [7.5,12.5])kit.box(deco,x,0,y,.18,.12,.18,0xe6a558,undefined,0xe29e46);}
+    if(level===2){helicopter=createHelicopter(kit);deco.add(helicopter);groundText(deco,'EVAC 07',15.5,12,4.3,.8);dot(deco,16,.026,10,2.75,0xc5bc93);for(const x of [13.5,18.5])for(const y of [7.5,12.5])kit.box(deco,x,0,y,.18,.12,.18,0xe6a558,undefined,0xe29e46);}
     environmentDetails();
     buildSectorDetails(kit,deco,level,game.entities,(x,y)=>game.isBlocked(x,y));
     for(const [x,y] of (level===0?[[6,6],[14,3],[18,16]]:level===1?[[1,5],[10,3],[19,12]]:[[2,7],[18,5]])){
@@ -218,7 +222,9 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     atmosphere=createAtmosphere(kit,deco,level,game.entities,(x,y)=>game.isBlocked(x,y));
     player=createCharacter(kit);actors.add(player);puppy=createPuppy(kit);actors.add(puppy);puppy.traverse(o=>{if(o instanceof THREE.Mesh&&!o.userData.noPick){o.userData.entity=game.companion;pickables.push(o)}});label(puppy,'KODA',0,.97,0,.17,'#e1cb95');
     for(const [i,z] of game.zombies.entries())addZombie(z,i);
-    label(deco,level===0?'SECTOR 04':level===1?'STATION ZERO':'ROOF 07',w/2,-.73,h+.08,.42,'#98b4a6');
+    if(level===5){for(const x of [10,11]){kit.box(deco,x,.015,9,.07,.04,17,0x73807b,'brushedSteel');}for(let z=1;z<18;z++)kit.box(deco,10.5,.001,z,1.8,.025,.16,0x71674e,'wood');}
+    if(level===3||level===6){sun.color.setHex(0xffd4a2);ambient.intensity=1.5;groundText(deco,'HAVEN',10,13,5,1);for(let x=9;x<16;x++){kit.box(deco,x,.05,3,.6,.12,3,0x665e3b);for(let z=2;z<5;z++)kit.box(deco,x,.17,z,.3,.4,.25,0x70955a);}}
+    label(deco,level>2?game.data.place:level===0?'SECTOR 04':level===1?'STATION ZERO':'ROOF 07',w/2,-.73,h+.08,.42,'#98b4a6');
   }
   function addZombie(z:any,variant=0){const g=createCharacter(kit,true,z.kind==='runner'?1:z.kind==='stalker'?2:z.kind==='shambler'?0:variant%3);g.userData.entity=z;
     g.traverse(o=>{if(o instanceof THREE.Mesh&&!o.userData.noPick){o.userData.entity=z;pickables.push(o)}});meshes.set(z.id,g);actors.add(g);return g;
@@ -277,10 +283,11 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
         controls.focus(guide.x-(game.data.size[0]-1)/2,guide.y-(game.data.size[1]-1)/2,screen);
       }
     }
+    if(helicopter){helicopter.visible=level===2;if(level===2)animateHelicopter(helicopter,game.signal,game.mode==='complete'?-1:game.evacuation||0,game.time)}
     game.player.equipment=game.equipment;game.player.sneak=game.sneak;game.player.hp=game.health;
     const playing=game.canAct;if(playing){const b=optionsBounds();controls.follow({x:game.player.x-b.x,z:game.player.y-b.z},{x:game.companion.x-b.x,z:game.companion.y-b.z},dt);}
-    animateCharacter(player,game.player,dt,playing,game.time);animatePuppy(puppy,game.companion,dt,playing,game.time);
-    for(const e of game.entities){let g=meshes.get(e.id);if(!g)g=makeObject(e);g.visible=!e.removed;if(g.userData.sign)g.userData.sign.visible=hoverEntity?.id!==e.id;
+    player.visible=!(game.evacuation>0&&game.evacuation<=3);puppy.visible=!(game.evacuation>0&&game.evacuation<=3);animateCharacter(player,game.player,dt,playing,game.time);animatePuppy(puppy,game.companion,dt,playing,game.time);
+    for(const e of game.entities){let g=meshes.get(e.id);if(!g)g=makeObject(e);g.visible=!e.removed;if(g.userData.resident)animateCharacter(g.userData.resident,{x:0,y:0,facing:e.id==='imani'?.2:-.4,hp:100,attack:0,hurt:0},dt,playing,game.time);if(g.userData.sign)g.userData.sign.visible=hoverEntity?.id!==e.id;
       if(g.userData.door)g.userData.door.scale.x=(e.open||e.type==='exit'&&game.generatorOn)?.09:1;
       if(g.userData.lid)g.userData.lid.rotation.x=THREE.MathUtils.damp(g.userData.lid.rotation.x,e.open?-1.1:0,9,dt);
       if(g.userData.hatch)g.userData.hatch.rotation.x=THREE.MathUtils.damp(g.userData.hatch.rotation.x,e.open?g.userData.hatchAngle:0,9,dt);

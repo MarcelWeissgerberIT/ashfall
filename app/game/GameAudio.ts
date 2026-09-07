@@ -18,6 +18,7 @@ export class GameAudio {
   private sector=-1;
   private beat=0;
   private nextBeat=0;
+  private nextRotor=0;
   private paused=false;
   private manual=false;
   private blocked=false;
@@ -71,6 +72,9 @@ export class GameAudio {
     this.setLanguage(game.language||'en');
     if(!this.context||!this.enabled)return;
     if(this.sector!==game.level){this.sector=game.level;this.makeBed();}
+    if(game.level===2&&game.signal>=0&&game.signal<=8&&game.canAct&&this.context.currentTime>=this.nextRotor){
+      const ctx=this.context,now=ctx.currentTime,osc=ctx.createOscillator(),gain=ctx.createGain();osc.type='triangle';osc.frequency.value=48;gain.gain.setValueAtTime(.075*(1-game.signal/10),now);gain.gain.exponentialRampToValueAtTime(.001,now+.09);osc.connect(gain).connect(this.music);osc.start(now);osc.stop(now+.1);osc.onended=()=>{osc.disconnect();gain.disconnect()};this.nextRotor=now+.11;
+    }
     const paused=!game.canAct;
     if(paused!==this.paused){this.paused=paused;this.mix()}
     const message=game.lastRadio;
