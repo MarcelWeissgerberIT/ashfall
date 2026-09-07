@@ -50,11 +50,11 @@ const director=async()=>{const statuses=[];const a=new GameAudio(s=>statuses.pus
 await run('Automatic cue is not duplicated by repeated sync',async()=>{
  const {a,media}=await director();try{const g=game();a.sync(g);a.sync(g);assert.equal(media.playCalls,1)}finally{a.dispose();await flush()}
 });
-for(const interruptedState of ['paused','inventory','dead']){
+for(const interruptedState of ['paused','inventory','loot','dead']){
  await run('Pending call is canceled when entering '+interruptedState,async()=>{
   const {a,media}=await director();try{
    const g=game();a.sync(g);const pauseBefore=media.pauseCalls;
-   g.canAct=false;g.mode=interruptedState==='dead'?'dead':'paused';g.inventoryOpen=interruptedState==='inventory';a.sync(g);
+   g.canAct=false;g.mode=interruptedState==='dead'?'dead':'paused';g.inventoryOpen=interruptedState==='inventory';g.lootOpen=interruptedState==='loot';a.sync(g);
    assert.ok(media.pauseCalls>pauseBefore,'sync did not call pause while status.loading=true');
   }finally{a.dispose();await flush()}
  });

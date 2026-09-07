@@ -8,7 +8,7 @@ const step=g=>TUTORIAL_STEPS[g.tutorial.index]?.id;
 const snapshot=g=>JSON.stringify({player:g.player,zombies:g.zombies,health:g.health,time:g.time,total:g.totalTime,effects:g.effects});
 function ticks(g,n=1){for(let i=0;i<n;i++){g.tick(1/60);if(g.canAct&&g.health<=60&&g.has('medkit'))g.use('medkit');assert.notEqual(g.mode,'dead','Survivor stays alive during tutorial');}}
 function settle(g){let n=0;while(g.canAct&&(g.target||g.path.length)&&n++<12000)ticks(g);check(n<12000,'Navigation reaches a task or a reading pause');}
-function go(g,id){g.select(id);settle(g);}
+function go(g,id){g.select(id);settle(g);if(g.lootOpen){g.takeAllLoot();g.closeInventory()}}
 function walk(g,x,y){g.move(x,y);settle(g);}
 function guided(){const g=new Game({tutorial:true});g.start();return g;}
 function basics(g){

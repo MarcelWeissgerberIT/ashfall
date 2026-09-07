@@ -8,7 +8,9 @@ Start **Guided tutorial** in sector one to learn through eight practical exercis
 
 - Click or tap open ground to move. Click items, containers, devices, doors, or enemies to approach and interact.
 - Wheel or pinch to zoom. Right/middle-drag or one-finger drag to pan. Focused map: `+`, `−`, `0`.
-- `I` or `1`: backpack and loadout. Select a carried item to equip, wear, use, or drop it. Capacity: 14 kg, including equipped items.
+- `I` or `1`: equipment workbench. Drag an item onto Hand, Body, or Head to equip it. Touchscreens use the grip in an item’s corner. Selecting an item also exposes Equip, Use, Store, and Drop buttons. Capacity: 14 kg, including equipped items. Rotate Mara’s live preview to inspect her clothing and gear.
+- Cars, crates, bedside storage, and desk drawers can be searched. Opening storage pauses the world and shows its real contents; Take or drag items into the backpack, or choose Take all that fits. Leftovers stay in the compartment. Drag carried items into the container to store them.
+- The main game fits the viewport. Mission details, radio controls, tutorial explanations, and equipment open in modals. Scrollable modal areas show a scrollbar and clickable “Scroll for more” cues when more content is available.
 - Hand: crowbar (38 damage / 0.7s), fire axe (54 / 1s), bottle, or bare hands (19 / 0.7s).
 - Body: reinforced jacket (15% reduction) or protective vest (30%). Head: patrol helmet (15%). Worn protection combines multiplicatively.
 - `2`: Bandage. `3`: ready a bottle, then click open ground within nine tiles. `Shift`: toggle Sneak. `Space`: pause.
@@ -24,14 +26,17 @@ Node.js >= 22.13.0. Install with `npm install`, then `npm run dev`. `npm run bui
 - `node scripts/check-tutorial.mjs`: full guided campaign, actual action progression, reading pauses, recovery, optional training, and out-of-order tasks.
 - `node --experimental-strip-types scripts/check-camera.mjs`: real event handlers and Three camera projection, including targets placed outside the tutorial card.
 - `node --experimental-strip-types scripts/check-world-props.mjs`: geometry, footprints, UVs, batching, and resource reuse.
+- `node scripts/check-loot.mjs`: manual searches, reachable vehicle compartments, storage, carrying limits, and drag transfers.
 - `node scripts/check-equipment.mjs`: weapon damage, armor, slots, checkpoints, pickups, and tutorial edge cases.
 - `node scripts/check-character.mjs`: articulated animation, gear visibility, foot plants, transitions, and pooled resource cleanup without a GPU.
 - `node scripts/check-audio.mjs`: radio triggers, MP3 hashes/captions, activation, pause/mute/replay races with a fake audio runtime.
 - `npx tsc --noEmit`: TypeScript integration.
 
+Repository-wide `npm run lint` is not clean: it reports strict typing, React mutability, and accessibility rules in game and bundled UI sources. Gameplay checks and the production build run independently.
+
 ## Visuals and audio
 
-OpenArt surface atlases, inventory art, portraits, and sector illustrations ship in `public/images/openart`. Sources and prompts are in `art-source`. The 3D character rig, equipment, lighting, weather, and animated poses are code-native.
+OpenArt surface atlases, inventory art, portraits, and sector illustrations ship in `public/images/openart`. Sources and prompts are in `art-source`. The new 17-item inventory atlas is in `public/images/loot/items-v2.png`, with its generation prompt in `art-source/items-v2/prompt.txt`. The detailed Mara rig, 17 pickup models, visible container contents, equipment, lighting, weather, and animated poses are code-native.
 
 The ambient score is composed procedurally with Web Audio: slow minor chords, filtered wind, distant pulses, reverb, and a distinct palette for each sector. Music lowers during radio speech and pauses.
 

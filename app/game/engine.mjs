@@ -21,7 +21,11 @@ export const ITEMS = {
  ration:{name:'Canned food',weight:0.5,kind:'food',desc:'A comforting memory. Restores 18 health.'},
 };
 const item=(id,x,y,itemId)=>({id,x,y,type:'item',item:itemId,name:ITEMS[itemId].name,desc:ITEMS[itemId].desc});
-const prop=(id,x,y,style,w=1,h=1)=>({id,x,y,type:'prop',style,w,h,name:({car:'Vehicle wreck',wall:'Concrete wall',barrier:'Concrete barrier',tank:'Water tank',vent:'Ventilation unit',bed:'Hospital bed',desk:'Lab table',tree:'Dead tree'})[style]||'Rubble',desc:'Too heavy to carry. You will have to walk around it.',solid:true});
+const prop=(id,x,y,style,w=1,h=1)=>{
+ const searchable=['car','desk','bed'].includes(style);
+ const contents=style==='car'?(id==='car2'?['toolbox','medkit','jacket']:['scrap','bottle','ration']):style==='desk'?(id==='desk1'?['bottle','ration']:['scrap','medkit']):['medkit'];
+ return {id,x,y,type:searchable?'container':'prop',style,w,h,name:({car:id==='car2'?'Abandoned utility van':'Abandoned sedan',wall:'Concrete wall',barrier:'Concrete barrier',tank:'Water tank',vent:'Ventilation unit',bed:'Hospital bed storage',desk:'Lab desk drawers',tree:'Dead tree'})[style]||'Rubble',desc:searchable?'Click to approach and search. Open compartments reveal their remaining contents.':'Too heavy to carry. You will have to walk around it.',solid:true,...(searchable?{contents}: {})};
+};
 const crate=(id,x,y,name,contents,desc)=>({id,x,y,type:'container',name,contents,desc,solid:true});
 const zombie=(id,x,y)=>({id,x,y,hp:76,maxHp:76,type:'zombie',name:'Infected',desc:'Reacts to proximity and noise. Click to attack.',attack:0,hurt:0,action:null,repath:0,path:[],home:{x,y},alert:false});
 export const LEVELS=[
@@ -72,6 +76,7 @@ export class Game {
  constructor({tutorial=false}={}){this.equipment={hand:'crowbar',body:null,head:null};this.tutorialDefault=tutorial;this.tutorialFocus=0;this.listeners=new Set();this.level=0;this.unlocked=0;this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.history=[];this.entries=[];this.effects=[];this.mode='briefing';this.sneak=false;this.muted=true;this.loadLevel(0);}
  subscribe(fn){this.listeners.add(fn);return()=>this.listeners.delete(fn)}
  emit(){updateTutorial(this);for(const fn of this.listeners)fn()}
+ itemSlot(id){return ITEMS[id]?.slot}
  get protection(){return 1-['body','head'].reduce((remaining,slot)=>remaining*(1-(ITEMS[this.equipment[slot]]?.protection||0)),1)}
  get meleeDamage(){return ITEMS[this.equipment.hand]?.damage||19}
  get meleeCooldown(){return ITEMS[this.equipment.hand]?.cooldown||.7}
@@ -84,20 +89,40 @@ export class Game {
  loadLevel(index,restart=false){
   if(restart){const e=this.entries[index];this.equipment={...e.equipment};this.inventory=[...e.inventory];this.health=e.health;this.kills=e.kills;this.totalTime=e.totalTime;}
   this.level=index;this.unlocked=Math.max(this.unlocked,index);this.data=LEVELS[index];this.entities=clone(this.data.entities);this.zombies=clone(this.data.zombies);this.player={...this.data.start,facing:0,attack:0,hurt:0,action:null};this.path=[];this.target=null;this.selected=null;this.time=0;this.signal=-1;this.spawned=0;this.generatorOn=false;this.effects=[];this.mode='briefing';this.throwing=false;this.sneak=false;this.noise=0;this.flash=0;this.health=Math.max(85,this.health);this.pulse=0;
-  this.inventoryOpen=false;this.inventoryReturnMode=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
+  this.inventoryOpen=false;this.inventoryReturnMode=null;this.lootOpen=false;this.lootContainerId=null;this.tutorialEnabled=this.level===0&&this.tutorialDefault;this.tutorial=createTutorial(this.tutorialEnabled);
   if(!restart)this.entries[index]={equipment:{...this.equipment},inventory:[...this.inventory],health:this.health,kills:this.kills,totalTime:this.totalTime};
   this.history=[];this.log(this.data.intro,'story',['checkpoint','bunker','rooftop'][index]);this.emit();
  }
- start(guided=this.tutorialEnabled){if(this.inventoryOpen)return;if(this.mode==='briefing'&&this.level===0){this.tutorialEnabled=guided;this.tutorial=createTutorial(guided)}if(this.mode==='briefing'||this.mode==='paused')this.mode='playing';this.emit()}
+ start(guided=this.tutorialEnabled){if(this.inventoryOpen||this.lootOpen)return;if(this.mode==='briefing'&&this.level===0){this.tutorialEnabled=guided;this.tutorial=createTutorial(guided)}if(this.mode==='briefing'||this.mode==='paused')this.mode='playing';this.emit()}
  get canAct(){return this.mode==='playing'&&!this.tutorial.reading}
  acknowledgeTutorial(){if(!this.tutorial.active||this.mode!=='playing'||this.inventoryOpen)return;this.tutorial.reading=false;this.tutorialFocus++;this.emit()}
  skipTutorial(){this.tutorial.active=false;this.tutorial.reading=false;this.tutorialEnabled=false;this.log('Tutorial skipped. Complete the checkpoint objectives at your own pace.')}
  focusTutorial(){this.tutorialFocus++;this.emit()}
  toggleSneak(){if(!this.canAct)return;this.sneak=!this.sneak;this.emit()}
- pause(){if(this.inventoryOpen)return;if(this.mode==='playing')this.mode='paused';else if(this.mode==='paused')this.mode='playing';this.emit()}
- openInventory(){if(this.inventoryOpen)return;if(['playing','paused'].includes(this.mode)&&this.tutorial.active)this.tutorial.facts.inventoryViewed=true;this.inventoryReturnMode=this.mode;this.inventoryOpen=true;this.mode='paused';this.throwing=false;this.emit()}
- closeInventory(){if(!this.inventoryOpen)return;this.mode=this.inventoryReturnMode||'paused';this.inventoryReturnMode=null;this.inventoryOpen=false;this.emit()}
- get canManageInventory(){return this.canAct||this.mode==='paused'&&this.inventoryOpen&&['playing','paused'].includes(this.inventoryReturnMode)}
+ pause(){if(this.inventoryOpen||this.lootOpen)return;if(this.mode==='playing')this.mode='paused';else if(this.mode==='paused')this.mode='playing';this.emit()}
+ openInventory(){if(this.inventoryOpen||this.lootOpen)return;if(['playing','paused'].includes(this.mode)&&this.tutorial.active)this.tutorial.facts.inventoryViewed=true;this.inventoryReturnMode=this.mode;this.inventoryOpen=true;this.mode='paused';this.throwing=false;this.emit()}
+ closeInventory(){if(!this.inventoryOpen&&!this.lootOpen)return;this.mode=this.inventoryReturnMode||'paused';this.inventoryReturnMode=null;this.inventoryOpen=false;this.lootOpen=false;this.lootContainerId=null;this.emit()}
+ get canManageInventory(){return this.canAct||this.mode==='paused'&&(this.inventoryOpen||this.lootOpen)&&['playing','paused'].includes(this.inventoryReturnMode)}
+ get lootContainer(){return this.lootOpen?this.entities.find(e=>e.id===this.lootContainerId&&!e.removed):null}
+ entityDistance(e){return Math.hypot(this.player.x-Math.max(e.x,Math.min(this.player.x,e.x+(e.w||1)-1)),this.player.y-Math.max(e.y,Math.min(this.player.y,e.y+(e.h||1)-1)))}
+ openLoot(e){if(!this.canAct||this.inventoryOpen||this.lootOpen||e.type!=='container'||this.entityDistance(e)>1.5)return;this.inventoryReturnMode=this.mode;this.lootContainerId=e.id;this.lootOpen=true;e.open=true;this.mode='paused';this.path=[];this.target=null;this.throwing=false;this.log(e.contents.length?`Searching ${e.name}. Choose what to take.`:'Searched. This compartment is empty.');}
+ takeLoot(id){const e=this.lootContainer;if(!e||!this.canManageInventory)return false;const index=e.contents.indexOf(id);if(index<0)return false;if(!this.addItem(id))return false;e.contents.splice(index,1);this.emit();return true}
+ takeAllLoot(){const e=this.lootContainer;if(!e||!this.canManageInventory)return;for(const id of [...e.contents])this.takeLoot(id)}
+ storeLoot(id){const e=this.lootContainer;if(!e||!this.canManageInventory||!this.has(id))return false;this.consume(id);e.contents.push(id);this.log(`Stored ${ITEMS[id].name} in ${e.name}.`);return true}
+ transferItem(id,from,to){
+  if(!this.canManageInventory||!ITEMS[id])return false;
+  const slot=ITEMS[id].slot,fromLoot=from==='loot';
+  if(fromLoot?!this.lootContainer?.contents.includes(id):!this.has(id))return false;
+  if(['hand','body','head'].includes(from)&&this.equipment[from]!==id)return false;
+  if(!['bag','loot','hand','body','head'].includes(from))return false;
+  if(['hand','body','head'].includes(to)){
+   if(slot!==to)return false;if(fromLoot&&!this.takeLoot(id))return false;
+   this.equipment[to]=id;this.log(`${ITEMS[id].name} equipped.`);return true;
+  }
+  if(to==='bag'){if(fromLoot)return this.takeLoot(id);if(['hand','body','head'].includes(from)){this.unequip(from);return true}return true}
+  if(to==='loot'&&!fromLoot){if(!this.lootContainer)return false;if(['hand','body','head'].includes(from))this.equipment[from]=null;return this.storeLoot(id);}
+  if(to==='ground'&&!fromLoot){if(['hand','body','head'].includes(from))this.equipment[from]=null;this.drop(id);return true}return false;
+ }
  next(){if(this.mode==='complete'&&this.level<2)this.loadLevel(this.level+1)}
  restart(){this.loadLevel(this.level,true)}
  newGame(){this.equipment={hand:'crowbar',body:null,head:null};this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.entries=[];this.unlocked=0;this.loadLevel(0)}
@@ -120,12 +145,12 @@ export class Game {
  addItem(id){if(this.weight+ITEMS[id].weight>CAPACITY+0.00001){this.log(`Too heavy: ${ITEMS[id].name}. Drop something from your backpack.`,'warn');return false}this.inventory.push(id);this.log(`Picked up ${ITEMS[id].name}.`,ITEMS[id].kind==='quest'?'success':'info');return true}
  consume(id){const i=this.inventory.indexOf(id);if(i<0)return false;this.inventory.splice(i,1);if(!this.has(id))for(const slot of ['hand','body','head'])if(this.equipment[slot]===id)this.equipment[slot]=null;return true}
  drop(id){if(!this.canManageInventory||!this.has(id))return;this.consume(id);let tile={x:Math.round(this.player.x),y:Math.round(this.player.y)};const offsets=[[0,0],[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,1],[2,0]];for(const [dx,dy] of offsets){const p={x:tile.x+dx,y:tile.y+dy};if(!this.isBlocked(p.x,p.y)&&!this.entities.some(e=>!e.removed&&e.x===p.x&&e.y===p.y&&e.type==='item')){tile=p;break}}this.entities.push(item('drop-'+Math.random(),tile.x,tile.y,id));this.log(`Dropped ${ITEMS[id].name}. You can pick it up again.`);this.emit()}
- use(id){if(!this.canManageInventory)return;if(!this.has(id)){this.log('You do not have any of that.','warn');return}const def=ITEMS[id];if(['weapon','armor'].includes(def.kind)){this.equip(id);return}if(def.kind==='heal'||def.kind==='food'){if(this.health>=100){this.log('You are already at full health.');return}this.consume(id);this.health=Math.min(100,this.health+(def.kind==='heal'?40:18));this.action('heal',1.2);this.effects.push({type:'heal',x:this.player.x,y:this.player.y,life:1});this.log(def.kind==='heal'?'Bandage applied. +40 health.':'Ate canned food. +18 health.','success')}else if(def.kind==='throw'){if(this.inventoryOpen){this.throwing=true;this.closeInventory()}else this.throwing=!this.throwing;this.log(this.throwing?'Click an empty tile within throwing range.':'Throw canceled.')}else this.log(def.desc);this.emit()}
+ use(id){if(!this.canManageInventory)return;if(!this.has(id)){this.log('You do not have any of that.','warn');return}const def=ITEMS[id];if(['weapon','armor'].includes(def.kind)){this.equip(id);return}if(def.kind==='heal'||def.kind==='food'){if(this.health>=100){this.log('You are already at full health.');return}this.consume(id);this.health=Math.min(100,this.health+(def.kind==='heal'?40:18));this.action('heal',1.2);this.effects.push({type:'heal',x:this.player.x,y:this.player.y,life:1});this.log(def.kind==='heal'?'Bandage applied. +40 health.':'Ate canned food. +18 health.','success')}else if(def.kind==='throw'){if(this.inventoryOpen||this.lootOpen){this.throwing=true;this.closeInventory()}else this.throwing=!this.throwing;this.log(this.throwing?'Click an empty tile within throwing range.':'Throw canceled.')}else this.log(def.desc);this.emit()}
  throwBottle(x,y){if(!this.canAct||!this.throwing)return;const p={x,y};if(distance(this.player,p)>9){this.log('Too far. Bottles can travel up to 9 tiles.','warn');return}if(this.isBlocked(x,y)){this.log('Choose an empty tile for the distraction.','warn');return}if(!this.consume('bottle')){this.throwing=false;this.log('No bottles left in your backpack.','warn');return}this.throwing=false;for(const z of this.zombies){if(z.hp>0&&distance(z,p)<12){z.lure={x,y,until:this.time+8};z.repath=0;z.alert=true}}this.action('throw',.7);this.tutorial.facts.threw=true;this.effects.push({type:'bottle',x,y,life:8});this.noise=1;this.log('Glass shatters. The Infected follow the sound.');this.emit()}
  interact(e){
   if(e.removed)return;this.action('interact',.7);
   if(e.type==='item'){if(this.addItem(e.item)){e.removed=true;this.selected=null;this.tutorial.facts.pickups++;}}
-  else if(e.type==='container'){e.open=true;if(!e.contents.length){this.log('Already searched. Nothing left here.');return}const remaining=[];for(const id of e.contents){if(!this.addItem(id))remaining.push(id)}e.contents=remaining;}
+  else if(e.type==='container'){this.openLoot(e);return;}
   else if(e.type==='note')this.log(e.desc,'story');
   else if(e.type==='generator'){if(this.generatorOn){this.log('The generator is running. The bunker gate has power.','success');return}const missing=['fuse','fuel'].filter(id=>!this.has(id));if(missing.length){this.log('Missing: '+missing.map(id=>ITEMS[id].name).join(' and ')+'.','warn');return}this.consume('fuse');this.consume('fuel');this.generatorOn=true;this.noise=1;this.log('The generator starts. The bunker gate is unlocked.','success','generator');}
   else if(e.type==='door'){if(!this.has('keycard')){this.log('Locked. Find the keycard in the maintenance locker.','warn');return}e.open=!e.open;this.log(e.open?'The laboratory door is open.':'The laboratory door is closed.','success');}
@@ -146,7 +171,7 @@ export class Game {
   if(target?.type==='zombie'&&target.hp>0){if(distance(this.player,target)>1.3){if(!this.path.length||distance(this.path[this.path.length-1],target)>1.5)this.path=this.nearestPath(target)||[]}else this.path=[];}
   if(this.path.length){const before={x:this.player.x,y:this.player.y};this.advanceActor(this.player,this.path,this.sneak?1.8:3.1,dt);const moved=distance(before,this.player);this.tutorial.facts.distance+=moved;if(this.sneak)this.tutorial.facts.sneakDistance+=moved;const step=this.tutorial.index;updateTutorial(this);if(this.tutorial.index!==step)this.emit();}
   if(!this.canAct)return;
-  if(target&&!this.path.length){if(target.type==='zombie'){if(target.hp<=0){this.target=null;this.selected=null}else if(distance(this.player,target)<=1.45&&this.player.attack<=0)this.hit(target);}else if(distance(this.player,target)<=1.5){this.target=null;this.interact(target);}}
+  if(target&&!this.path.length){if(target.type==='zombie'){if(target.hp<=0){this.target=null;this.selected=null}else if(distance(this.player,target)<=1.45&&this.player.attack<=0)this.hit(target);}else if(this.entityDistance(target)<=1.5){this.target=null;this.interact(target);}}
   if(!this.canAct)return;
   // A held melee weapon automatically defends at close range; click to actively pursue.
   if(this.player.attack<=0){const close=this.zombies.find(z=>z.hp>0&&distance(this.player,z)<1.12);if(close)this.hit(close)}

@@ -97,6 +97,7 @@ export function buildBarrier(kit:RenderKit,parent:THREE.Group,e:any){
 }
 
 export function buildVehicle(kit:RenderKit,parent:THREE.Group,e:any){
+  const hatch=new THREE.Group(),cargo=new THREE.Group();
   const van=e.id==='car2',g=new THREE.Group();g.position.set(.5,0,1);parent.add(g);
   const paint=van?0xb9b7a0:0x9aada1,surface:Surface=van?'steel':'carPaint';
   kit.box(g,0,.23,0,1.22,.18,2.45,0x69745f,'steel');kit.box(g,0,.48,0,1.4,.08,2.58,0x69745f,'steel');
@@ -134,19 +135,20 @@ export function buildVehicle(kit:RenderKit,parent:THREE.Group,e:any){
   for(const side of [-1,1])kit.box(g,side*.861,1.04,-.53,.17,.105,.14,paint,surface,0,true);
   const steering=mesh(kit,g,'vehicle-steering',()=>new THREE.TorusGeometry(.13,.021,6,16),0x8c9788,'rubber');steering.position.set(-.34,1,-.35);steering.rotation.x=-.5;
   if(van){
-    const roof=kit.box(g,0,roofY,.35,1.37,.1,1.88,0x9fac98,'brushedSteel',0,true);roof.rotation.z=.032;
+    const roof=kit.box(g,0,roofY,-.2,1.37,.1,.76,0x9fac98,'brushedSteel',0,true);roof.rotation.z=.032;
     for(const side of [-1,1]){kit.box(g,side*.728,.8,.75,.06,.76,1.19,paint,surface);kit.box(g,side*.765,.96,.75,.02,.09,1.08,0x9d5f41);kit.box(g,side*.765,.8,.33,.018,.77,.027,0x69745f,'steel');}
-    kit.box(g,0,.42,1.375,1.43,1.2,.065,paint,surface);kit.box(g,0,.47,1.418,.032,1.13,.02,0x69745f,'steel');
-    for(const x of [-.36,.36])kit.box(g,x,1.12,1.418,.51,.38,.023,0x92ada1,'glass');
+    hatch.position.set(0,1.62,1.375);kit.box(hatch,0,-1.2,0,1.43,1.2,.065,paint,surface);kit.box(hatch,0,-1.15,.043,.032,1.13,.02,0x69745f,'steel');
+    for(const x of [-.36,.36])kit.box(hatch,x,-.5,.043,.51,.38,.023,0x92ada1,'glass');
+    kit.box(g,0,.56,.84,1.35,.06,1.08,0x3d493e,'rubber');cargo.position.set(0,.63,.83);
     kit.box(g,0,.75,-1.02,1.4,.08,.7,paint,surface,0,true);
   }else{
     const roof=kit.box(g,0,roofY,.12,1.24,.08,.88,paint,surface,0,true);roof.rotation.z=-.055;
-    kit.box(g,0,.76,1.09,1.41,.08,.58,paint,surface,0,true);
+    hatch.position.set(0,.8,.79);kit.box(hatch,0,0,.30,1.41,.08,.6,paint,surface,0,true);kit.box(g,0,.51,1.1,1.3,.05,.53,0x364638,'rubber');cargo.position.set(0,.57,1.09);
     // A raised hood stays inside the original 2 × 3 collision footprint.
     kit.box(g,0,.55,-.98,.64,.23,.58,0x9fac98,'brushedSteel');
     for(const x of [-.22,0,.22])kit.cylinder(g,x,.76,-.93,.075,.13,0x69745f,.075,'steel');
     const hood=new THREE.Group();hood.position.set(0,.86,-.55);hood.rotation.x=.48;g.add(hood);kit.box(hood,0,0,-.39,1.42,.05,.78,paint,surface,0,true);
     pane(kit,g,'sedan-rear-glass',[[-.58,roofY-.02,.56],[.58,roofY-.02,.56],[.66,.83,.87],[-.66,.83,.87]],0x92ada1);
   }
-  batch(kit,g,`vehicle:${e.id}`);
+  batch(kit,g,`vehicle-v2:${e.id}`);g.add(hatch,cargo);parent.userData.hatch=hatch;parent.userData.hatchAngle=van?-1.4:-1.3;parent.userData.cargo=cargo;parent.userData.cargoScale=van?.7:.52;
 }

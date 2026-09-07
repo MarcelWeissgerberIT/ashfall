@@ -10,6 +10,7 @@ import { createRenderKit, createCharacter, animateCharacter, type Surface } from
 import { tutorialTarget } from './tutorial.mjs';
 import { createMapCameraControls } from './camera-controls';
 import { buildWall, buildBarrier, buildVehicle } from './world-props';
+import { buildPickup } from './loot-assets';
 const COLORS={orange:0xf3bb78};
 export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:any;onHover:(v:any)=>void;zoom:number;onZoomChange:(zoom:number)=>void;viewReset:number}){
  const host=useRef<HTMLDivElement>(null),sceneRef=useRef<ReturnType<typeof createMapCameraControls>|null>(null),hoverRef=useRef(onHover),zoomRef=useRef(onZoomChange);hoverRef.current=onHover;zoomRef.current=onZoomChange;
@@ -58,10 +59,10 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     const p=new THREE.Mesh(kit.geometry('unit-plane',()=>new THREE.PlaneGeometry(1,1)),m);p.scale.set(w,h,1);p.rotation.x=-Math.PI/2;p.position.set(x,.017,z);p.userData.noPick=true;g.add(p);
   };
   function makeObject(e:any){const g=new THREE.Group();g.position.set(e.x,0,e.y);g.userData.entity=e;const w=e.w||1,h=e.h||1;
-   currentSurface=e.type==='prop'?(['wall','barrier','rubble'].includes(e.style)?'concrete':e.style==='car'?'carPaint':e.style==='tree'?'bark':['vent','tank','desk','bed'].includes(e.style)?'brushedSteel':undefined):['generator','door','radio','exit'].includes(e.type)?'brushedSteel':undefined;
-   if(e.type==='prop'&&e.style!=='tree')kit.contact(g,(w-1)/2,(h-1)/2,w+.65,h+.6);
+   currentSurface=e.style?(['wall','barrier','rubble'].includes(e.style)?'concrete':e.style==='car'?'carPaint':e.style==='tree'?'bark':['vent','tank','desk','bed'].includes(e.style)?'brushedSteel':undefined):['generator','door','radio','exit'].includes(e.type)?'brushedSteel':undefined;
+   if(e.style&&e.style!=='tree')kit.contact(g,(w-1)/2,(h-1)/2,w+.65,h+.6);
    else if(!['exit','note'].includes(e.type))kit.contact(g,0,0,1.25,1.1);
-   if(e.type==='prop'){
+   if(e.style){
     if(e.style==='wall'){
      buildWall(kit,g,e,game.level);
     }else if(e.style==='barrier'){
@@ -81,10 +82,19 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     }else {
      for(let i=0;i<8;i++){const geo=kit.geometry(`rubble:${i}:${e.x}`,()=>new THREE.DodecahedronGeometry(.24+hash(i,e.x)*.5,0));const m=new THREE.Mesh(geo,mat(i%2?0x657066:0x48554b));m.position.set(hash(i,e.y)*(w-.3),.2+hash(i,33)*.25,hash(i,e.x)*(h-.3));m.rotation.set(i,.4,i*.7);m.castShadow=true;g.add(m)}
     }
+    if(e.type==='container'&&e.style!=='car'){
+     const drawer=new THREE.Group();drawer.position.set(e.style==='desk'?.25:0,e.style==='desk'?.25:.06,e.style==='desk'?.25:1.75);g.add(drawer);g.userData.drawer=drawer;g.userData.drawerClosedZ=drawer.position.z;
+     kit.box(drawer,0,0,0,.64,.05,.65,0x5b6b51,'wood');for(const x of [-.31,.31])kit.box(drawer,x,.04,0,.04,.19,.65,0x8e9a79,'brushedSteel');kit.box(drawer,0,.04,.31,.64,.22,.045,0x96a187,'brushedSteel');kit.box(drawer,0,.12,.35,.22,.035,.04,0xc3bd9e,'brushedSteel');
+     const cargo=new THREE.Group();cargo.position.set(0,.06,0);drawer.add(cargo);g.userData.cargo=cargo;g.userData.cargoScale=.4;
+    }
    }else if(e.type==='container'){
     const shell:Surface=e.id==='wreck'?'carPaint':['locker','medical','roof-aid'].includes(e.id)?'brushedSteel':'wood';
     const color=e.id==='medical'||e.id==='roof-aid'?0xcbd3c5:0x9ca28d;
-    kit.box(g,0,0,0,.86,.65,.8,color,shell);const lid=new THREE.Group();lid.position.set(0,.65,-.4);g.add(lid);kit.box(lid,0,0,.4,.92,.12,.87,color,shell);g.userData.lid=lid;
+    kit.box(g,0,0,0,.86,.1,.8,0x384d3e,shell);
+    for(const x of [-.405,.405])kit.box(g,x,.1,0,.05,.55,.8,color,shell);
+    for(const z of [-.375,.375])kit.box(g,0,.1,z,.76,.55,.05,color,shell);
+    const cargo=new THREE.Group();cargo.position.y=.36;g.add(cargo);g.userData.cargo=cargo;g.userData.cargoScale=.48;
+    const lid=new THREE.Group();lid.position.set(0,.65,-.4);g.add(lid);kit.box(lid,0,0,.4,.92,.12,.87,color,shell);g.userData.lid=lid;
     if(e.id==='wreck'){
       kit.box(g,0,.08,.415,.94,.12,.11,0xa1aa97,'brushedSteel');
       for(const x of [-.3,.3]){kit.box(g,x,.4,.415,.21,.13,.03,0x9f503b);kit.box(g,x,.41,.435,.09,.09,.012,0xd49d59);}
@@ -112,26 +122,14 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
    }else if(e.type==='note'){
     box(g,0,.02,0,.5,.02,.4,0xc0b891);
    }else if(e.type==='item'){
-    const type=e.item;
-    if(type==='jacket'||type==='vest'){kit.box(g,0,.04,0,.55,.13,.65,type==='jacket'?0x997748:0x4d6359,type==='jacket'?'jacket':'canvas');for(const x of [-.2,.2])kit.box(g,x,.17,0,.09,.04,.57,0x829475,'canvas');if(type==='jacket')for(const x of [-.35,.35])kit.box(g,x,.04,0,.21,.1,.45,0x997748,'jacket');else kit.box(g,0,.17,0,.3,.05,.32,0x3d5146,'brushedSteel');}
-    else if(type==='helmet'){kit.ellipsoid(g,0,.15,0,.29,.22,.3,0x7b8771,'brushedSteel');kit.cylinder(g,0,.07,0,.32,.06,0x68765e,.32,'brushedSteel');}
-    else if(type==='axe'){const handle=kit.box(g,0,.04,0,.065,.07,.87,0x9d7146,'wood');handle.rotation.y=.5;const blade=kit.box(g,.13,.06,.3,.31,.1,.2,0xc1c7b7,'brushedSteel');blade.rotation.y=.5;}
-    else if(type==='chair'){kit.box(g,0,.45,0,.65,.1,.65,0x9bac91,'canvas');kit.box(g,0,.6,-.29,.65,.6,.08,0x849b7e,'canvas');for(const x of [-.27,.27])for(const z of [-.27,.27])kit.box(g,x,0,z,.06,.45,.06,0x9ba18b,'brushedSteel')}
-    else if(type==='tire'){const geo=kit.geometry('tire',()=>new THREE.TorusGeometry(.33,.14,8,16));const m=new THREE.Mesh(geo,kit.material(0x889487,'rubber'));m.rotation.x=Math.PI/2;m.position.y=.16;g.add(m)}
-    else if(type==='bottle'){kit.cylinder(g,0,.02,0,.115,.34,0xb0c9b4,.115,'glass');kit.cylinder(g,0,.36,0,.055,.16,0x96b093,.055,'glass');}
-    else if(type==='medkit'){kit.box(g,0,.04,0,.45,.2,.4,0xd8dcc6,'vinyl');box(g,0,.245,0,.09,.015,.27,0xa6533a);box(g,0,.245,0,.27,.015,.09,0xa6533a)}
-    else if(type==='sample'){cylinder(g,0,0,0,.2,.55,0x8bcbb3);cylinder(g,0,.55,0,.23,.1,0xc2d3bb);box(g,0,.1,.17,.2,.25,.05,0x7ae4b0,0x228451)}
-    else if(type==='toolbox'){kit.box(g,0,.02,0,.6,.4,.45,0xb59968,'carPaint');kit.box(g,0,.42,0,.28,.09,.05,0x8c9889,'rubber')}
-    else if(type==='scrap'){for(let i=0;i<4;i++){const b=kit.box(g,(i-2)*.09,.02+i*.06,0,.2,.08,.6,0x90977d,i%2?'corrugated':'brushedSteel');b.rotation.y=i*.8}}
-    else if(type==='ration'){kit.cylinder(g,0,.02,0,.2,.33,0x9eab86,.2,'brushedSteel')}
-    else {kit.box(g,0,.03,0,.35,.3,.32,type==='fuel'?0xcdbd80:0xa8b19a,type==='fuel'?'carPaint':'brushedSteel')}
+    buildPickup(kit,g,e.item);
    }
    if(e.type!=='prop'){const r=dot(g,0,.03,0,.53,['generator','exit','radio','door'].includes(e.type)?0xdbab60:0x9dba98);g.userData.ring=r;}
    if(e.type!=='prop'){
      // Art and halos do not intercept clicks. A deliberate footprint keeps small loot and the helipad selectable.
      const hitMaterial=new THREE.MeshBasicMaterial({visible:false});kit.extras.add(hitMaterial);
      const hit=new THREE.Mesh(kit.geometry('hit-plane',()=>new THREE.PlaneGeometry(1,1)),hitMaterial);
-     hit.rotation.x=-Math.PI/2;hit.position.y=.028;const size=e.type==='exit'&&game.level===2?3:.85;hit.scale.set(size,size,1);g.add(hit);
+     hit.rotation.x=-Math.PI/2;hit.position.y=.028;const size=e.type==='exit'&&game.level===2?3:.85;hit.scale.set(e.w||size,e.h||size,1);hit.position.x=(w-1)/2;hit.position.z=(h-1)/2;g.add(hit);
    }
    g.traverse(o=>{if((o as THREE.Mesh).isMesh&&!o.userData.noPick){o.userData.entity=e;pickables.push(o)}});objectGroup.add(g);meshes.set(e.id,g);currentSurface=undefined;return g;
   }
@@ -271,7 +269,17 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     const playing=game.canAct;animateCharacter(player,game.player,dt,playing,game.time);
     for(const e of game.entities){let g=meshes.get(e.id);if(!g)g=makeObject(e);g.visible=!e.removed;
       if(g.userData.door)g.userData.door.scale.x=(e.open||e.type==='exit'&&game.generatorOn)?.09:1;
-      if(g.userData.lid)g.userData.lid.rotation.x=e.open?-1.1:0;
+      if(g.userData.lid)g.userData.lid.rotation.x=THREE.MathUtils.damp(g.userData.lid.rotation.x,e.open?-1.1:0,9,dt);
+      if(g.userData.hatch)g.userData.hatch.rotation.x=THREE.MathUtils.damp(g.userData.hatch.rotation.x,e.open?g.userData.hatchAngle:0,9,dt);
+      if(g.userData.drawer)g.userData.drawer.position.z=THREE.MathUtils.damp(g.userData.drawer.position.z,g.userData.drawerClosedZ+(e.open?.48:0),9,dt);
+      if(g.userData.cargo){
+        const cargo=g.userData.cargo as THREE.Group,signature=e.contents.join('|');cargo.visible=!!e.open;
+        if(g.userData.cargoSignature!==signature){
+          g.userData.cargoSignature=signature;for(const child of [...cargo.children]){kit.disposeLocal(child);cargo.remove(child)}
+          const items=e.contents.slice(0,6),columns=items.length>1?2:1,scale=g.userData.cargoScale||.45;
+          items.forEach((id:string,i:number)=>{const model=buildPickup(kit,cargo,id,{scale:scale*(items.length>1?.65:1),detail:'compact',decorative:true,yaw:i*.65});model.position.x=columns===1?0:(i%2-.5)*scale*.6;model.position.z=(Math.floor(i/columns)-(Math.ceil(items.length/columns)-1)/2)*scale*.6;});
+        }
+      }
       if(g.userData.ring){const active=e.type==='exit'&&(level===0?game.generatorOn:level===1?game.has('sample'):game.signal===0),hover=hoverEntity?.id===e.id||game.selected?.id===e.id;
         const m=g.userData.ring.material as THREE.MeshBasicMaterial;m.color.setHex(active?0x9ee2c0:hover?0xf7c991:0xa5b49b);m.opacity=hover||active?.9:e.type==='item'?.35:e.type==='container'&&e.open?.12:.25;
         g.userData.ring.scale.setScalar(g.userData.ring.userData.baseRadius*(active?1+Math.sin(game.time*3)*.08:1));

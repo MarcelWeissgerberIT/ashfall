@@ -140,16 +140,221 @@ function charRod(kit:RenderKit,parent:THREE.Object3D,a:number[],b:number[],r:num
   m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction.normalize());return m;
 }
 
+// Elliptical contour rings give faces, waists and armor a designed silhouette.
+// Geometry/UV variants use complete cache keys and remain owned by RenderKit.
+function charProfile(kit:RenderKit,parent:THREE.Object3D,name:string,rows:number[][],color:number,surface?:Surface,segments=24){
+  const metres=surface==='jacket'?.65:surface==='denim'?.5:surface==='canvas'?.6:1;
+  const geo=kit.geometry(`actor:v2:profile:${segments}:${metres}:${JSON.stringify(rows)}`,()=>{
+    const positions:number[]=[],uvs:number[]=[],indices:number[]=[];
+    const radius=Math.max(...rows.map(r=>Math.max(r[1],r[2])));
+    for(const [y,rx,rz,centerZ=0] of rows)for(let i=0;i<=segments;i++){
+      const angle=i/segments*Math.PI*2;positions.push(Math.sin(angle)*rx,y,Math.cos(angle)*rz+centerZ);
+      uvs.push(i/segments*2*Math.PI*radius/metres,y/(metres*.75));
+    }
+    for(let r=0;r<rows.length-1;r++)for(let i=0;i<segments;i++){
+      const a=r*(segments+1)+i,b=a+1,c=a+segments+1,d=c+1;indices.push(a,b,c,b,d,c);
+    }
+    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));g.setIndex(indices);g.computeVertexNormals();g.computeBoundingBox();return g;
+  });
+  const mesh=new THREE.Mesh(geo,kit.material(color,surface));mesh.name=name;mesh.castShadow=true;mesh.receiveShadow=true;parent.add(mesh);return mesh;
+}
+function charStrap(kit:RenderKit,parent:THREE.Object3D,a:number[],b:number[],width:number,color=0x596148,surface:Surface='canvas'){
+  const from=new THREE.Vector3(a[0],a[1],a[2]),to=new THREE.Vector3(b[0],b[1],b[2]),delta=to.clone().sub(from),length=delta.length();
+  const mesh=kit.box(parent,0,-length/2,0,width,length,.016,color,surface);
+  mesh.position.copy(from.add(to).multiplyScalar(.5));mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),delta.normalize());return mesh;
+}
+function charBuckle(kit:RenderKit,parent:THREE.Object3D,x:number,y:number,z:number,w=.045,h=.057,color=0xa1a38b){
+  const line=.009;
+  kit.box(parent,x,y-h/2,z,w,line,.013,color,'brushedSteel');kit.box(parent,x,y+h/2-line,z,w,line,.013,color,'brushedSteel');
+  kit.box(parent,x-w/2+line/2,y-h/2,z,line,h,.013,color,'brushedSteel');kit.box(parent,x+w/2-line/2,y-h/2,z,line,h,.013,color,'brushedSteel');
+  kit.box(parent,x,y-h/2,z,line,h,.018,color,'brushedSteel');
+}
+// Batch only rigid siblings with the same pooled material. Joint boundaries and
+// equipment visibility groups stay intact, so IK, hand tools and picking work.
+function charBatchRigid(kit:RenderKit,root:THREE.Object3D){
+  for(const child of [...root.children])if(!(child instanceof THREE.Mesh))charBatchRigid(kit,child);
+  const buckets=new Map<THREE.Material,THREE.Mesh[]>();
+  for(const child of root.children)if(child instanceof THREE.Mesh&&!child.userData.noPick&&!Array.isArray(child.material)){
+    const bucket=buckets.get(child.material)||[];bucket.push(child);buckets.set(child.material,bucket);
+  }
+  for(const [material,parts] of buckets){
+    if(parts.length<2)continue;
+    for(const part of parts)part.updateMatrix();
+    const key='actor:v2:rigid:'+parts.map(p=>`${p.geometry.uuid}:${p.matrix.elements.join(',')}`).join('|');
+    const geometry=kit.geometry(key,()=>{
+      const positions:number[]=[],normals:number[]=[],uvs:number[]=[],p=new THREE.Vector3(),n=new THREE.Vector3(),normalMatrix=new THREE.Matrix3();
+      for(const part of parts){
+        const g=part.geometry,pos=g.getAttribute('position'),normal=g.getAttribute('normal'),uv=g.getAttribute('uv'),index=g.getIndex();
+        normalMatrix.getNormalMatrix(part.matrix);
+        for(let i=0;i<(index?index.count:pos.count);i++){
+          const j=index?index.getX(i):i;p.fromBufferAttribute(pos,j).applyMatrix4(part.matrix);positions.push(p.x,p.y,p.z);
+          n.fromBufferAttribute(normal,j).applyMatrix3(normalMatrix).normalize();normals.push(n.x,n.y,n.z);uvs.push(uv?uv.getX(j):0,uv?uv.getY(j):0);
+        }
+      }
+      const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));g.computeBoundingBox();g.computeBoundingSphere();return g;
+    });
+    const mesh=new THREE.Mesh(geometry,material);mesh.name='rigid-detail';mesh.castShadow=parts.some(p=>p.castShadow);mesh.receiveShadow=parts.some(p=>p.receiveShadow);root.add(mesh);for(const part of parts)root.remove(part);
+  }
+}
+function charMaraDetail(kit:RenderKit,d:any){
+  const {box,ellipsoid,cylinder}=kit;
+  const {head,chest,hips,arms,legs,wear,backpack}=d;
+  const skin=0xcba489,hair=0x40392e,stitch=0x939784,cloth=0x627467,leather=0x3d473b;
+  // Adult facial planes: narrow jaw, cheekbones, brow, nose bridge and lids.
+  charProfile(kit,head,'Mara-face',[[ -.06,.025,.035,.045],[-.027,.081,.094,.025],[.033,.118,.119,.026],[.105,.139,.131,.011],[.185,.141,.132,0],[.26,.125,.12,-.014],[.316,.081,.076,-.017],[.337,0,0,-.021]],skin,undefined,28);
+  ellipsoid(head,0,.062,.126,.076,.045,.03,0xc69a7f);
+  ellipsoid(head,0,.122,.146,.029,.063,.034,skin);
+  ellipsoid(head,0,.085,.17,.034,.024,.027,skin);
+  for(const side of [-1,1]){
+    ellipsoid(head,side*.142,.116,-.002,.027,.052,.025,skin);
+    ellipsoid(head,side*.155,.114,.012,.008,.028,.011,0x987b64);
+    ellipsoid(head,side*.06,.145,.13,.045,.023,.018,0x8a7864);
+    box(head,side*.06,.139,.15,.063,.021,.008,0xc0bca0);
+    box(head,side*.06,.143,.156,.018,.015,.008,0x52675a);
+    box(head,side*.06,.145,.161,.009,.010,.005,0x27362e);
+    const brow=box(head,side*.058,.173,.143,.065,.014,.014,hair);brow.rotation.z=side*.07;
+    charStrap(kit,head,[side*.105,.067,.132],[side*.071,.04,.144],.008,0xb48c74);
+  }
+  box(head,0,.017,.149,.063,.008,.006,0x946f60);
+  ellipsoid(head,0,-.009,.12,.047,.023,.024,skin);
+  // Pulled-back dark hair and a short practical braid; the helmet leaves it visible.
+  charProfile(kit,head,'swept-hair',[[.198,.144,.132,-.02],[.269,.133,.125,-.023],[.322,.101,.089,-.025],[.35,.03,.031,-.034],[.352,0,0,-.034]],hair);
+  for(const side of [-1,1]){
+    const lock=ellipsoid(head,side*.123,.205,-.041,.029,.094,.115,hair);lock.rotation.z=-side*.12;
+    for(let i=0;i<3;i++)charRod(kit,head,[side*(.037+i*.026),.322-i*.009,.053],[side*(.035+i*.027),.255,-.125],.004,0x645643);
+  }
+  const pony=charJoint(head,'braid',0,.206,-.163);d.ponytail=pony;
+  ellipsoid(pony,0,-.029,-.025,.043,.073,.044,hair);
+  for(let i=0;i<4;i++)ellipsoid(pony,Math.sin(i*2)*.012,-.09-i*.041,-.017,.028-i*.003,.032,.027-i*.003,i%2?hair:0x514333);
+  cylinder(pony,0,-.069,-.018,.041,.025,0x626b4f,.039,'canvas');
+  // Shirt seams and collar stay visible when armor replaces the jacket.
+  for(const side of [-1,1]){
+    charStrap(kit,chest,[side*.063,.383,.073],[side*.131,.285,.162],.047,0x455d50);
+    charStrap(kit,chest,[side*.07,.356,.101],[side*.125,.277,.18],.012,0x859485);
+    box(chest,side*.185,.036,.165,.1,.094,.025,cloth,'canvas',0,true);
+    box(chest,side*.185,.112,.186,.103,.019,.009,stitch,'canvas');
+  }
+  box(chest,0,-.136,.157,.016,.38,.012,0x4a6253,'canvas');
+  for(let i=0;i<4;i++)ellipsoid(chest,0,-.055+i*.065,.171,.009,.009,.005,0x8a9580);
+  box(chest,-.198,.18,.175,.058,.065,.012,0x9d9c7c,'canvas');
+  box(chest,-.198,.2,.187,.041,.009,.008,0x495d4a);
+  // Belt loops, two rear pockets and cargo pockets articulate with the legs.
+  for(const x of [-.179,-.079,.079,.179])box(hips,x,.85,.16,.022,.085,.026,0x596459,'denim');
+  charBuckle(kit,hips,0,.893,.193,.066,.052);
+  for(const x of [-.113,.113]){box(hips,x,.768,-.156,.14,.113,.024,0x455449,'denim',0,true);box(hips,x,.846,-.175,.142,.013,.009,stitch,'canvas');}
+  for(const leg of legs){
+    const side=leg.side;
+    charStrap(kit,leg.hip,[side*.102,-.035,.012],[side*.096,-.326,.019],.012,0x768374);
+    const pocket=charJoint(leg.hip,'cargo-pocket',side*.1,-.14,0);pocket.rotation.y=side*Math.PI/2;
+    box(pocket,0,-.12,0,.137,.17,.055,0x4b5e50,'denim',0,true);box(pocket,0,.023,.017,.146,.03,.065,0x617060,'denim',0,true);
+    ellipsoid(pocket,0,.03,.054,.008,.008,.005,0xa4a58a);
+    box(leg.hip,0,-.396,.087,.145,.113,.036,0x586959,'canvas',0,true);
+    box(leg.knee,0,-.073,.092,.123,.04,.024,0x657261,'canvas');
+    charStrap(kit,leg.knee,[side*.078,-.045,.006],[side*.07,-.315,.014],.012,0x778272);
+    box(leg.knee,0,-.326,.062,.164,.043,.138,0x566650,'denim');
+    // Raised tongue, toe cap, welt, eyelets, crossed laces and rear pull tab.
+    box(leg.foot,0,-.058,.192,.214,.072,.119,0x39463b,'rubber',0,true);
+    box(leg.foot,0,-.081,.077,.234,.021,.365,0x727565,'rubber',0,true);
+    box(leg.foot,0,-.025,.097,.119,.172,.04,0x53604c,'canvas',0,true);
+    box(leg.foot,0,.092,-.111,.061,.096,.032,leather,'canvas');
+    for(let j=0;j<4;j++){
+      const y=.005+j*.031,z=.128-j*.012;
+      for(const x of [-.06,.06])ellipsoid(leg.foot,x,y,z,.011,.011,.007,0x909581);
+      charRod(kit,leg.foot,[-.051,y,z+.007],[.051,y+.023,z-.006],.007,0xaaa588,'canvas');
+      charRod(kit,leg.foot,[.051,y,z+.007],[-.051,y+.023,z-.006],.007,0xaaa588,'canvas');
+    }
+    for(const x of [-.08,.08])for(const z of [-.046,.044,.134,.22])box(leg.foot,x,-.101,z,.052,.027,.047,0x25332e,'rubber');
+  }
+  for(const arm of arms){
+    const side=arm===arms[0]?-1:1;
+    charStrap(kit,arm.upper,[side*.083,-.041,.018],[side*.079,-.277,.017],.012,0x879380);
+    box(arm.upper,0,-.272,0,.173,.037,.17,0x526a5a,'canvas',0,true);
+    box(arm.hand,0,-.043,-.039,.106,.065,.026,leather,'rubber',0,true);
+    box(arm.hand,0,.045,0,.133,.035,.133,0x66735a,'canvas',0,true);
+    for(let i=0;i<4;i++){
+      const finger=ellipsoid(arm.hand,-.042+i*.027,-.077,.033,.016,.032,.022,skin);finger.rotation.x=-.25;
+      ellipsoid(arm.hand,-.042+i*.027,-.04,.065,.016,.018,.017,0x53634a);
+    }
+    const thumb=ellipsoid(arm.hand,-side*.069,-.003,.042,.026,.04,.026,leather);thumb.rotation.z=-side*.4;
+    charBuckle(kit,arm.hand,0,.062,.074,.04,.026);
+  }
+  // Jacket: tailored seams, rolled collar, front panels, zip, patches and cuffs.
+  const jacket=wear.jacket[0];
+  for(const side of [-1,1]){
+    charStrap(kit,jacket,[side*.066,.38,.106],[side*.16,.255,.208],.086,0xc18b58,'jacket');
+    charStrap(kit,jacket,[side*.058,.378,.118],[side*.145,.26,.22],.012,0xe0b985,'canvas');
+    charStrap(kit,jacket,[side*.248,.228,.08],[side*.217,-.113,.106],.011,0xd5ad77,'canvas');
+    box(jacket,side*.151,.15,.212,.138,.017,.012,0xcfa36c,'jacket');
+    ellipsoid(jacket,side*.15,.125,.227,.008,.008,.005,0xabaf95);
+    charStrap(kit,jacket,[side*.204,-.064,.176],[side*.113,-.018,.207],.009,0xd4ae7b,'canvas');
+  }
+  for(let i=0;i<12;i++)box(jacket,0,-.09+i*.031,.214,.026,.009,.014,0xb1ad8d,'brushedSteel');
+  box(jacket,.025,.247,.215,.018,.04,.019,0xc5b393,'brushedSteel');
+  box(jacket,0,-.145,-.171,.272,.043,.018,0x916441,'jacket');
+  for(let i=1;i<wear.jacket.length;i++){
+    const sleeve=wear.jacket[i];
+    if(i%2){box(sleeve,0,-.261,-.053,.153,.07,.077,0x896640,'jacket',0,true);charStrap(kit,sleeve,[.094,-.03,.01],[.091,-.28,.021],.011,0xd0a270,'canvas');}
+    else {box(sleeve,0,-.279,.082,.137,.022,.014,0xc1a171,'canvas');charBuckle(kit,sleeve,0,-.287,.093,.045,.032);}
+  }
+  box(wear.jacket[1],-.09,-.14,.039,.017,.085,.078,0xa9ae87,'canvas');
+  box(wear.jacket[1],-.102,-.12,.079,.009,.03,.025,0x6b7251);
+  // Vest: contoured ceramic plate, MOLLE webbing, pouches and metal fasteners.
+  const vest=wear.vest[0];
+  for(const side of [-1,1]){
+    charStrap(kit,vest,[side*.188,.321,-.02],[side*.188,.073,.294],.053,0x7d8968);
+    charBuckle(kit,vest,side*.188,.182,.288,.054,.07);
+    box(vest,side*.253,-.055,.073,.021,.112,.185,0x7d8968,'canvas');
+  }
+  for(let row=0;row<3;row++)for(let col=0;col<4;col++)box(vest,-.139+col*.092,.086+row*.057,.284,.075,.014,.024,0x899477,'canvas');
+  for(const x of [-.18,0,.18]){box(vest,x,.056,.319,.131,.025,.075,0x74815f,'canvas');charBuckle(kit,vest,x,-.011,.315,.03,.044);}
+  box(vest,-.057,.247,.286,.055,.038,.012,0xb6b396,'canvas');box(vest,-.057,.259,.298,.03,.009,.006,0x515f46);
+  // Helmet reads as a separate hard shell with rim, panels, fasteners and webbing.
+  const helmet=wear.helmet[0];
+  charProfile(kit,helmet,'helmet-shell',[[.209,.209,.194,-.028],[.246,.211,.196,-.028],[.324,.176,.166,-.033],[.394,.098,.096,-.042],[.41,0,0,-.042]],0x5b7058,'carPaint');
+  for(const side of [-1,1]){
+    charStrap(kit,helmet,[side*.184,.21,.095],[side*.103,-.019,.107],.022,0x8b8c67);
+    ellipsoid(helmet,side*.194,.251,.083,.011,.012,.008,0xbdbea0);
+    box(helmet,side*.2,.264,-.019,.024,.028,.111,0x334b3e,'rubber');
+    for(let i=0;i<3;i++)box(helmet,side*.209,.261,-.058+i*.033,.016,.031,.008,0x98a28b,'brushedSteel');
+  }
+  charStrap(kit,helmet,[-.103,-.019,.107],[.103,-.019,.107],.02,0x8b8c67);
+  charBuckle(kit,helmet,.081,.016,.117,.032,.045);
+  box(helmet,0,.241,.213,.079,.07,.025,0x334b3e,'rubber',0,true);
+  box(helmet,0,.259,.228,.033,.031,.012,0x8e9c84,'brushedSteel');
+  // Backpack has a bedroll, compression straps, real buckles and a side canteen.
+  for(const side of [-1,1]){
+    charStrap(kit,chest,[side*.17,.345,-.139],[side*.207,.249,.172],.047,0x798167);
+    charStrap(kit,chest,[side*.207,.249,.172],[side*.174,-.12,.199],.047,0x798167);
+    charBuckle(kit,chest,side*.182,.02,.214,.049,.067);
+    charBuckle(kit,backpack,side*.175,.16,-.472,.048,.065);
+    box(backpack,side*.185,-.042,-.469,.025,.073,.025,0x5e6a4c,'canvas');
+  }
+  charStrap(kit,chest,[-.182,.052,.22],[.182,.052,.22],.025,0x6c7659);
+  charBuckle(kit,chest,.025,.052,.235,.051,.037);
+  const roll=charJoint(backpack,'bedroll',0,.47,-.28);roll.rotation.z=Math.PI/2;
+  cylinder(roll,0,-.265,0,.091,.53,0x8a8a68,.091,'canvas');
+  for(const y of [-.179,.153])cylinder(roll,0,y,0,.098,.029,0x515e45,.098,'canvas');
+  box(backpack,-.278,.185,-.257,.06,.031,.06,0x455c48,'rubber',0,true);
+  box(backpack,.256,-.12,-.272,.078,.282,.113,0x718365,'canvas',0,true);
+  charBuckle(kit,backpack,.253,.044,-.337,.036,.046);
+  // Grip wrappings distinguish weapons at close range; no new image assets.
+  for(let i=0;i<5;i++)cylinder(d.hands.crowbar,0,-.13+i*.034,0,.03,.012,0x788174,.03,'rubber');
+  for(let i=0;i<5;i++)cylinder(d.hands.axe,0,-.16+i*.037,0,.034,.012,0xa49471,.034,'canvas');
+  box(d.hands.axe,.174,-.543,.043,.098,.026,.01,0xd0d0b8,'brushedSteel');
+  box(d.hands.bottle,0,-.052,.077,.065,.018,.004,0x626f51);
+}
+
 export function createCharacter(kit:RenderKit,zombie=false,variant=0){
   const {box,ellipsoid,limb}=kit;
-  const v=((variant%3)+3)%3,skin=zombie?0xa2ad8b:0xcfa883;
+  const v=((variant%3)+3)%3,skin=zombie?0xa2ad8b:0xcba489;
   const shirt=zombie?[0x637263,0x877661,0x9b9b8d][v]:0x747d68;
-  const group=new THREE.Group();group.name=zombie?'infected':'survivor';
+  const group=new THREE.Group();group.name=zombie?'infected':'Mara';
   const body=charJoint(group,'body');
   const contact=kit.contact(group,0,0,1.4,1.12);
   const halo=kit.ring(group,0,0,zombie?.43:.53,zombie?0xb56d56:0xf4bd77,zombie?.3:.8);
   const hips=charJoint(body,'hips');
-  box(hips,0,.75,0,.43,.18,.29,0x34423b,'denim',0,true);
+  if(zombie)box(hips,0,.75,0,.43,.18,.29,0x34423b,'denim',0,true);
+  else charProfile(kit,hips,'cargo-waist',[[.741,.18,.129],[.784,.225,.153],[.858,.207,.146],[.922,.193,.133]],0x34423b,'denim');
   box(hips,0,.87,.005,.445,.045,.31,0x434c36,'canvas');
   box(hips,0,.87,.164,.08,.053,.027,0xa1a38b,'brushedSteel');
   const legs=[-1,1].map((side,i)=>{
@@ -163,10 +368,10 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     return {hip,knee,foot,side,plant:new THREE.Vector3(),planted:false,stance:false};
   });
   const chest=charJoint(body,'chest',0,1.01,0);
-  ellipsoid(chest,0,.135,0,.274,.33,.178,shirt,'canvas');
-  box(chest,0,-.15,0,.475,.25,.285,shirt,'canvas',0,true);
+  if(zombie){ellipsoid(chest,0,.135,0,.274,.33,.178,shirt,'canvas');box(chest,0,-.15,0,.475,.25,.285,shirt,'canvas',0,true);}
+  else charProfile(kit,chest,'layered-field-shirt',[[-.159,.194,.134],[-.07,.195,.14],[.095,.225,.166],[.227,.252,.171],[.313,.244,.145],[.365,.155,.108],[.39,.086,.078]],0x627467,'canvas');
   const arms=[-1,1].map((side,i)=>{
-    const upper=limb(chest,side*.324,.29,0,.086,.35,shirt,'canvas');upper.name=i?'right-shoulder':'left-shoulder';
+    const upper=limb(chest,side*(zombie?.324:.305),.29,0,zombie?.086:.079,.35,shirt,'canvas');upper.name=i?'right-shoulder':'left-shoulder';
     const elbow=limb(upper,0,-.35,0,.07,.32,skin);elbow.name=i?'right-elbow':'left-elbow';
     ellipsoid(upper,0,-.345,0,.075,.077,.074,skin);
     const hand=charJoint(elbow,i?'right-hand':'left-hand',0,-.32,0);
@@ -176,6 +381,7 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
   });
   const head=charJoint(chest,'head',0,.49,0);
   kit.cylinder(head,0,-.09,0,.075,.14,skin);
+  if(zombie){
   ellipsoid(head,0,.13,.006,.164,.215,.155,skin);
   ellipsoid(head,0,.08,.15,.046,.065,.047,skin);
   for(const x of [-.16,.16])ellipsoid(head,x,.11,0,.034,.064,.033,skin);
@@ -185,14 +391,14 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     box(head,x,.148,.166,.025,.016,.009,zombie?0xe4b27a:0x283e34,undefined,zombie?0x4f301b:0);
   }
   box(head,.012,.018,.146,.084,.019,.015,zombie?0x645342:0x8e6e52);
+  }
   if(zombie){box(chest,-.15,.02,.18,.095,.18,.013,0x644a37);head.rotation.z=.055*(v-1);}
   const wear={jacket:[] as THREE.Group[],vest:[] as THREE.Group[],helmet:[] as THREE.Group[]};
   const hands:Record<string,THREE.Group>={};
   let backpack:THREE.Group|undefined,bandage:THREE.Group|undefined;
   if(!zombie){
     const jacket=charJoint(chest,'equipment:body:jacket');wear.jacket.push(jacket);
-    ellipsoid(jacket,0,.135,-.005,.294,.343,.195,0xb77b47,'jacket');
-    box(jacket,0,-.155,0,.514,.27,.317,0xa87345,'jacket',0,true);
+    charProfile(kit,jacket,'field-jacket',[[-.159,.224,.164],[-.082,.223,.173],[.09,.246,.19],[.24,.273,.186],[.323,.261,.153],[.377,.126,.115]],0xaf784b,'jacket');
     box(jacket,0,-.10,.198,.021,.48,.014,0x494936);
     for(const x of [-.152,.152])box(jacket,x,.04,.192,.16,.128,.05,0x986d45,'jacket',0,true);
     for(const arm of arms){
@@ -208,7 +414,7 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     for(const x of [-.18,0,.18])box(vest,x,-.09,.272,.143,.18,.076,0x5d7257,'canvas',0,true);
     for(const x of [-.198,.198])box(vest,x,.275,.035,.078,.07,.36,0x718164,'canvas',0,true);
     const helmet=charJoint(head,'equipment:head:helmet');wear.helmet.push(helmet);
-    ellipsoid(helmet,0,.28,-.028,.208,.144,.192,0x506854,'carPaint');
+    // Contoured hard shell is added with Mara's other gear details.
     box(helmet,0,.211,.02,.409,.04,.389,0x3d5345,'rubber',0,true);
     box(helmet,0,.226,.177,.378,.035,.092,0x596f56,'brushedSteel',0,true);
     for(const side of [-1,1])box(helmet,side*.183,.083,-.035,.043,.155,.248,0x4b6252,'carPaint',0,true);
@@ -220,7 +426,7 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     box(backpack,0,-.068,-.416,.313,.224,.075,0x405a46,'canvas',0,true);
     for(const x of [-.188,.188]){
       box(backpack,x,-.089,-.46,.036,.52,.02,0x949577,'canvas');
-      charRod(kit,chest,[x,.345,-.15],[x,.03,.19],.022,0x5d6548,'canvas');
+      // Broad, fitted shoulder straps are added by charMaraDetail.
     }
     kit.cylinder(backpack,-.278,-.095,-.257,.068,.29,0x7d9480,.068,'brushedSteel');
     const crowbar=charJoint(arms[1].hand,'equipment:hand:crowbar');hands.crowbar=crowbar;
@@ -252,6 +458,7 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     started:false,lastX:0,lastY:0,phase:0,motion:0,speed:0,sneak:0,sprint:0,death:0,dead:false,wasMoving:false,
     workA:new THREE.Vector3(),workB:new THREE.Vector3(),workC:new THREE.Vector3(),workQ:new THREE.Quaternion()};
   group.userData=d;
+  if(!zombie){charMaraDetail(kit,d);charBatchRigid(kit,group);}
   return group;
 }
 
@@ -330,6 +537,7 @@ export function animateCharacter(group:THREE.Group,actor:any,dt:number,playing:b
   d.chest.rotation.set(.13*d.sneak+.16*d.sprint+(d.zombie?.15+sway*.055:0)-hurt*.17,-sway*.055, d.zombie?Math.sin(phase*.5+d.variant)*.035:sway*.012);
   d.head.rotation.set(-.08*d.sneak-.07*d.sprint-hurt*.13,Math.sin(time*.56+d.variant)*.065*(1-d.motion),d.zombie?.055*(d.variant-1):0);
   if(d.backpack){d.backpack.rotation.x=-Math.abs(sway)*.025;d.backpack.rotation.z=-sway*.027;}
+  if(d.ponytail){d.ponytail.rotation.x=.12+sway*.08;d.ponytail.rotation.z=-sway*.09;}
   const facing=group.rotation.y,sin=Math.sin(facing),cos=Math.cos(facing);
   for(let i=0;i<d.legs.length;i++){
     const leg=d.legs[i],phase01=(d.phase+i*.5)%1,stance=phase01<.62;

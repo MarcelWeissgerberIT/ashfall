@@ -71,12 +71,12 @@ export class GameAudio {
     const paused=!game.canAct;
     if(paused!==this.paused){this.paused=paused;this.mix()}
     const message=game.lastRadio;
-    if(message&&message.id!==this.heard&&['playing','won'].includes(game.mode)&&!game.inventoryOpen){
+    if(message&&message.id!==this.heard&&['playing','won'].includes(game.mode)&&!game.inventoryOpen&&!game.lootOpen){
       this.heard=message.id;
       if(this.status.cue!==message.voiceId||!this.status.playing&&!this.status.loading)void this.playRadio(message.voiceId,false);
       else this.manual=false;
     }
-    this.blocked=game.inventoryOpen||game.mode==='dead'||game.mode==='paused'&&!this.manual;
+    this.blocked=game.inventoryOpen||game.lootOpen||game.mode==='dead'||game.mode==='paused'&&!this.manual;
     if(this.voice&&this.status.cue&&!this.voice.ended){
       if(this.blocked){this.voice.pause();if(this.status.loading)this.report({loading:false});}
       else if(this.voice.paused&&!this.status.error)void this.voice.play().catch(()=>{});

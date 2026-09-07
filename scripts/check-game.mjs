@@ -3,7 +3,7 @@ import {Game,LEVELS,CAPACITY,ITEMS} from '../app/game/engine.mjs';
 let assertions=0;
 function check(v,msg){assert.ok(v,msg);assertions++}
 function progress(g,seconds,heal=true){for(let i=0;i<seconds*60;i++){g.tick(1/60);if(heal&&g.health<=60&&g.has('medkit'))g.use('medkit');if(heal&&g.health<=75&&g.has('ration'))g.use('ration');if(g.mode==='dead')throw Error(`Died in level ${g.level+1} after ${g.time.toFixed(1)} seconds`);}}
-function go(g,id){g.select(id);let ticks=0;while((g.target||g.path.length)&&g.mode==='playing'&&ticks<60*150){progress(g,1/60);ticks++}check(ticks<60*150,`Interaction ${id} did not finish`);check(!g.target,`Target ${id} remains`);}
+function go(g,id){g.select(id);let ticks=0;while((g.target||g.path.length)&&g.mode==='playing'&&ticks<60*150){progress(g,1/60);ticks++}check(ticks<60*150,`Interaction ${id} did not finish`);check(!g.target,`Target ${id} remains`);if(g.lootOpen){g.takeAllLoot();g.closeInventory()}}
 function campaign(loaded=false){const g=new Game();g.start();if(loaded){g.inventory.push('chair','tire','scrap');check(g.weight<14,'Starting load valid')}
  go(g,'bunker');check(g.mode==='playing','Bunker blocks without generator');
  go(g,'guard');check(g.has('fuse'),'Fuse retrieved from reachable guard crate');
