@@ -26,7 +26,7 @@ const Scene=dynamic(()=>import('./Scene'),{ssr:false,loading:()=> <div className
 const formatTime=(time:number)=>`${Math.floor(time/60).toString().padStart(2,'0')}:${Math.floor(time%60).toString().padStart(2,'0')}`;
 function GameClient(){
  const {language,setLanguage}=useLanguage();
- const [introOpen,setIntroOpen]=useState<boolean|null>(null);const introRef=useRef(false);introRef.current=!!introOpen;
+ const [introOpen,setIntroOpen]=useState<boolean|null>(null);
  useEffect(()=>{try{setIntroOpen(shouldShowIntro(localStorage))}catch{setIntroOpen(true)}},[]);
  const [game]=useState<any>(()=>new Game({tutorial:true}));const [,refresh]=useState(0);const [hover,setHover]=useState<any>(null);const [inventoryItem,setInventoryItem]=useState<string|null>(null);const [help,setHelp]=useState(false);const [panel,setPanel]=useState<'mission'|'radio'|'save'|'craft'|null>(null);const panelWasPlaying=useRef(false);const [confirmRestart,setConfirmRestart]=useState(false);const [zoom,setZoom]=useState(DEFAULT_ZOOM);const [viewReset,setViewReset]=useState(0);const [rotation,setRotation]=useState(0);const [following,setFollowing]=useState(true);const [sound,setSound]=useState(false);const [fullscreen,setFullscreen]=useState(false);const shell=useRef<HTMLDivElement>(null);const audio=useRef<GameAudio|null>(null);const audioChoice=useRef(false);const [audioStatus,setAudioStatus]=useState<AudioStatus>({cue:null,playing:false,loading:false,error:null});const [musicLevel,setMusicLevel]=useState(.38);const [voiceLevel,setVoiceLevel]=useState(.85);
  useEffect(()=>{game.language=language;game.emit()},[game,language]);
@@ -59,13 +59,12 @@ function GameClient(){
  const toggleHelp=()=>{if(game.mode==='playing')game.pause();setHelp(true)};
  const requestRestart=()=>{if(game.mode==='playing')game.pause();setConfirmRestart(true)};
  const full=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await shell.current?.requestFullscreen()}catch{game.log('Fullscreen is not available in this window.')}};
- const closeIntro=()=>{introRef.current=false;audio.current?.stopRadio();setIntroOpen(false);try{markIntroSeen(localStorage)}catch{}};
- const playIntro=async()=>{if(!await enableAudio()||!introRef.current)return false;await audio.current?.playRadio('memory-checkpoint',true);if(!introRef.current)audio.current?.stopRadio();return introRef.current;};
+ const closeIntro=()=>{audio.current?.stopRadio();setIntroOpen(false);try{markIntroSeen(localStorage)}catch{}};
  const resetView=()=>{setZoom(DEFAULT_ZOOM);setViewReset(n=>n+1)};
  const goals=game.objectives();const entity=game.selected||hover;const invIds=[...new Set<string>(game.inventory)];const selectedDef=inventoryItem?(ITEMS as any)[inventoryItem]:null;
  const guideTarget=tutorialTarget(game);const isStopped=!game.canAct;const command=(id:string)=>{setInventoryItem(id);game.use(id)};
  return <Localized><div className={`game-shell immersive-shell survival-hud sector-theme-${game.level}`} ref={shell}>
-  {introOpen&&<IntroCutscene game={game} onClose={closeIntro} onPlay={playIntro} onStop={()=>audio.current?.stopRadio()} portalContainer={fullscreen?shell.current:undefined}/>}
+  {introOpen&&<IntroCutscene onClose={closeIntro} portalContainer={fullscreen?shell.current:undefined}/>}
   <header className="topbar">
    <a className="brand" href="#" onClick={e=>e.preventDefault()} aria-label="Ashfall Dead Sector"><span className="brand-symbol"><Biohazard size={28}/></span><span><strong>ASHFALL<span className="brand-dot">.</span></strong><small>DEAD SECTOR</small></span></a>
    <div className="world-clock"><span className="live-dot"/> DAY 1,247 <span className="divider">/</span> 06:42 <span className="weather">{game.data.weather}</span></div>

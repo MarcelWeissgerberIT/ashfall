@@ -1,0 +1,12 @@
+{
+  "provider": "OpenArt",
+  "model": "kling-3-omni",
+  "historyId": "IJ85pQccO4szHkfMCxml",
+  "language": "en",
+  "durationSeconds": 15,
+  "resolution": "1920x1080",
+  "generatedSound": true,
+  "asset": "public/video/ashfall-prologue-en.mp4",
+  "story": "Mara finds Koda beside an abandoned ambulance and promises to leave the city together. They approach Station Zero.",
+  "narrationPrompt": "I found you in the silence, Koda. I promised we would leave together. Station Zero is still calling. This is our last way out."
+}
