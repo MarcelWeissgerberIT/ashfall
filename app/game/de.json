@@ -463,5 +463,11 @@
   "Enter the sector to craft.": "Betritt den Sektor, um etwas herzustellen.",
   "Find a toolbox in vehicles or storage.": "Finde einen Werkzeugkasten in Fahrzeugen oder Lagern.",
   "Collect the missing materials.": "Sammle die fehlenden Materialien.",
-  "Not enough carrying capacity.": "Nicht genug Tragkraft frei."
+  "Not enough carrying capacity.": "Nicht genug Tragkraft frei.",
+  "Back to inventory": "Zurück ins Inventar",
+  "Drag ingredients from your backpack into the recipe grid. Click a filled cell to return it. Items are consumed only when you craft.": "Ziehe Zutaten aus dem Rucksack ins Rezeptfeld. Klicke belegte Felder an, um Zutaten zurückzulegen. Erst beim Herstellen werden sie verbraucht.",
+  "Materials available": "Material vorhanden",
+  "Place the required ingredients in the grid.": "Lege die benötigten Zutaten ins Rezeptfeld.",
+  "Your backpack": "Dein Rucksack",
+  "Keyboard: select an ingredient, then select an empty grid cell. Worn equipment must be unequipped first.": "Tastatur: Wähle eine Zutat und danach ein leeres Rezeptfeld. Angelegte Ausrüstung musst du zuerst ablegen."
 }

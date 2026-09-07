@@ -485,14 +485,16 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     charRod(kit,crowbar,[0,-.59,0],[.07,-.655,.015],.026,0xaab5a2,'brushedSteel');
     charRod(kit,crowbar,[.07,-.655,.015],[.15,-.642,.015],.023,0xaab5a2,'brushedSteel');
     box(crowbar,0,-.15,0,.054,.19,.054,0x39493b,'rubber',0,true);
-    const axe=charJoint(arms[1].hand,'equipment:hand:axe');hands.axe=axe;
+    const axe=charJoint(arms[1].hand,'equipment:hand:axe');hands.axe=axe;axe.rotation.y=Math.PI/2;
     charRod(kit,axe,[0,.055,0],[0,-.635,0],.026,0x947958,'wood');
     box(axe,0,-.18,0,.061,.2,.058,0x46533e,'rubber',0,true);
-    const axeGeo=kit.geometry('actor:axe-blade:v1',()=>{
+    const axeGeo=kit.geometry('actor:axe-blade:v2',()=>{
       const shape=new THREE.Shape();shape.moveTo(-.06,-.44);shape.lineTo(.14,-.435);shape.lineTo(.305,-.40);shape.lineTo(.335,-.62);shape.lineTo(.17,-.60);shape.lineTo(-.065,-.555);shape.closePath();
-      const geo=new THREE.ExtrudeGeometry(shape,{depth:.065,bevelEnabled:true,bevelThickness:.008,bevelSize:.01,bevelSegments:1,steps:1});geo.translate(0,0,-.0325);return geo;
+      const geo=new THREE.ExtrudeGeometry(shape,{depth:.105,bevelEnabled:true,bevelThickness:.008,bevelSize:.01,bevelSegments:1,steps:1});geo.translate(0,0,-.0525);return geo;
     });
-    const blade=new THREE.Mesh(axeGeo,kit.material(0xa4b3a0,'brushedSteel'));blade.castShadow=true;blade.receiveShadow=true;axe.add(blade);
+    const blade=new THREE.Mesh(axeGeo,kit.material(0xa64d37,'brushedSteel'));blade.castShadow=true;blade.receiveShadow=true;axe.add(blade);
+    charRod(kit,axe,[.305,-.41,0],[.335,-.61,0],.027,0xc6d0c4,'brushedSteel');
+    box(axe,0,-.52,0,.10,.14,.12,0x674b39,'steel');
     const bottle=charJoint(arms[1].hand,'equipment:hand:bottle');hands.bottle=bottle;
     kit.cylinder(bottle,0,-.16,0,.066,.25,0x90b297,.066,'glass');
     kit.cylinder(bottle,0,.09,0,.033,.12,0xb0c7a8,.033,'glass');
