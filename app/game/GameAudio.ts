@@ -1,4 +1,4 @@
-export type RadioCue='checkpoint'|'generator'|'bunker'|'rooftop'|'signal'|'evac-ready'|'rescue'|'memory-checkpoint'|'memory-bunker'|'memory-rooftop';
+export type RadioCue=`story-${number}`|'checkpoint'|'generator'|'bunker'|'rooftop'|'signal'|'evac-ready'|'rescue'|'memory-checkpoint'|'memory-bunker'|'memory-rooftop';
 export type AudioStatus={cue:RadioCue|null;playing:boolean;loading:boolean;error:string|null};
 
 // A quiet, original score built from slow minor chords, filtered wind and distant pulses.
@@ -80,7 +80,7 @@ export class GameAudio {
     const paused=!game.canAct;
     if(paused!==this.paused){this.paused=paused;this.mix()}
     const message=game.lastRadio;
-    if(message&&message.id!==this.heard&&['playing','won'].includes(game.mode)&&!game.inventoryOpen&&!game.lootOpen){
+    if(message&&message.id!==this.heard&&!this.status.playing&&!this.status.loading&&['playing','won'].includes(game.mode)&&!game.inventoryOpen&&!game.lootOpen){
       this.heard=message.id;
       if(this.status.cue!==message.voiceId||!this.status.playing&&!this.status.loading)void this.playRadio(message.voiceId,false);
       else this.manual=false;

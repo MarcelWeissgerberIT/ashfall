@@ -43,3 +43,5 @@
 .intro-film-loading{position:absolute;left:5vw;bottom:5vh;padding:10px 16px;border-radius:5px;background:#071217df;color:#eee8d8}
 
 .chapter-presets{padding:14px;margin-bottom:20px;border:1px solid #806345;border-radius:8px}.chapter-presets h3{font-size:17px}.chapter-presets button{display:block;width:100%;text-align:left;margin-top:8px;white-space:normal}
+
+.mission-work{font-size:12px;color:#f0b876;padding-top:8px}.colony-briefing-mark{overflow-wrap:anywhere}.colony-briefing-mark span{font-size:15px!important}

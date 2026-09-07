@@ -7,7 +7,7 @@ import {Localized} from './i18n';
 import ItemIcon from './ItemIcon';
 const empty=()=>Array<string|null>(9).fill(null);
 export default function CraftingPanel({game,onInventory}:{game:any;onInventory:()=>void}){
- const initial=game.level===0&&!game.generatorOn?'fuse':game.level===1&&!game.has('sample')?'samplecase':'bandages';
+ const initial=game.data.recipe|| (game.level===0&&!game.generatorOn?'fuse':game.level===1&&!game.has('sample')?'samplecase':'bandages');
  const [selected,setSelected]=useState(initial),[done,setDone]=useState(false),[grid,setGrid]=useState(()=>prepareRecipe(game,initial) as (string|null)[]),[chosen,setChosen]=useState<string|null>(null),[drag,setDrag]=useState<{id:string;x:number;y:number}|null>(null);const session=useRef<{id:string;pointer:number}|null>(null);const state=recipeState(game,selected)!,r=state.recipe;
  const place=(id:string,index:number)=>{if(!state.active||!(id in r.ingredients))return;setGrid(old=>{const n=old.filter(v=>v===id).length;if(old[index]||n>=game.inventory.filter((v:string)=>v===id).length||n>=(r.ingredients as Record<string,number|undefined>)[id]!)return old;const next=[...old];next[index]=id;return next});setDone(false)};
  const placeRef=useRef(place);placeRef.current=place;

@@ -195,14 +195,14 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     if(pathDots)pathDots.count=0;if(marker)marker.visible=false;lastPath='';lastHover='';hoverEntity=null;hoverPoint=null;hoverRef.current(null);
     terrain=new THREE.Group();objectGroup=new THREE.Group();actors=new THREE.Group();deco=new THREE.Group();skyline=new THREE.Group();world.add(terrain,objectGroup,actors,deco,skyline);
     renderedLanguage=game.language;level=game.level;const [w,h]=game.data.size;world.position.set(-(w-1)/2,0,-(h-1)/2);cameraTarget.set(0,0,0);camera.position.copy(cameraOffset);camera.lookAt(cameraTarget);
-    const fogColor=level===0?0x213c40:level===1?0x11282b:0x3e4440;scene.background=new THREE.Color(fogColor);scene.fog=new THREE.FogExp2(fogColor,level===1?.020:.012);
+    const mood=game.data.theme;const fogColor=mood==='hospital'?0x153238:mood==='garden'||mood==='safe'?0x394a3b:mood==='industrial'?0x332c30:mood==='canal'?0x183c49:mood==='rooftop'?0x424c64:level===0?0x213c40:level===1?0x11282b:0x3e4440;scene.background=new THREE.Color(fogColor);scene.fog=new THREE.FogExp2(fogColor,level===1?.020:.012);
     ambient.color.setHex(level===2?0xb1c9cc:0xb0dce0);ambient.groundColor.setHex(level===1?0x2f413c:0x465040);ambient.intensity=level===1?1.3:1.12;
     sun.color.setHex(level===2?0xffb96a:level===1?0xadd6d0:0xeee3c0);sun.intensity=level===2?4:level===1?2.1:3;
     sun.position.set(level===2?-18:-11,level===2?13:22,3);fill.color.setHex(level===2?0x87b7c0:0x75b8c7);fill.intensity=level===1?1.1:1.3;
     renderer.toneMappingExposure=level===1?1.13:1.08;
     kit.box(terrain,(w-1)/2,-1,(h-1)/2,w+.4,.89,h+.4,0x6d7e74,'concrete');
     kit.box(terrain,(w-1)/2,-1.12,(h-1)/2,w+.15,.13,h+.15,0x293e37);
-    kit.box(terrain,(w-1)/2,-.11,(h-1)/2,w,.11,h,level===0?0xa1ada0:0xb0b8aa,level===0?'paving':level===1?'tiles':'concrete');
+    kit.box(terrain,(w-1)/2,-.11,(h-1)/2,w,.11,h,level===0?0xa1ada0:0xb0b8aa,game.data.theme==='hospital'?'tiles':game.data.theme==='street'?'asphalt':game.data.theme==='garden'||game.data.theme==='safe'?'paving':level===0?'paving':level===1?'tiles':'concrete');
     if(level===0)kit.box(terrain,10.55,.001,(h-1)/2,6.85,.007,h,0x89988c,'asphalt');
     // Invisible collision plane is deliberately separate from decoration and textures.
     const planeMaterial=new THREE.MeshBasicMaterial({visible:false});kit.extras.add(planeMaterial);
@@ -222,8 +222,16 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     atmosphere=createAtmosphere(kit,deco,level,game.entities,(x,y)=>game.isBlocked(x,y));
     player=createCharacter(kit);actors.add(player);puppy=createPuppy(kit);actors.add(puppy);puppy.traverse(o=>{if(o instanceof THREE.Mesh&&!o.userData.noPick){o.userData.entity=game.companion;pickables.push(o)}});label(puppy,'KODA',0,.97,0,.17,'#e1cb95');
     for(const [i,z] of game.zombies.entries())addZombie(z,i);
-    if(level===5){for(const x of [10,11]){kit.box(deco,x,.015,9,.07,.04,17,0x73807b,'brushedSteel');}for(let z=1;z<18;z++)kit.box(deco,10.5,.001,z,1.8,.025,.16,0x71674e,'wood');}
-    if(level===3||level===6){sun.color.setHex(0xffd4a2);ambient.intensity=1.5;groundText(deco,'HAVEN',10,13,5,1);for(let x=9;x<16;x++){kit.box(deco,x,.05,3,.6,.12,3,0x665e3b);for(let z=2;z<5;z++)kit.box(deco,x,.17,z,.3,.4,.25,0x70955a);}}
+    if(level===5||game.data.theme==='rail'){for(const x of [10,11]){kit.box(deco,x,.015,9,.07,.04,17,0x73807b,'brushedSteel');}for(let z=1;z<18;z++)kit.box(deco,10.5,.001,z,1.8,.025,.16,0x71674e,'wood');}
+    if(level===3||level===6||game.data.safe){sun.color.setHex(0xffd4a2);ambient.intensity=1.5;groundText(deco,'HAVEN',10,13,5,1);for(let x=9;x<16;x++){kit.box(deco,x,.05,3,.6,.12,3,0x665e3b);for(let z=2;z<5;z++)kit.box(deco,x,.17,z,.3,.4,.25,0x70955a);}}
+    if(game.data.storyChapter){
+      groundText(deco,'ASH / '+String(level+1).padStart(2,'0'),10,17,3.2,.6,'#bec8b4');
+      if(mood==='hospital'){sun.color.setHex(0x8cbcc4);sun.intensity=1.8;ambient.intensity=1.5;}
+      if(mood==='industrial'){sun.color.setHex(0xff9f6a);sun.intensity=2.2;}
+      if(mood==='rooftop'){sun.color.setHex(0x93aee5);sun.intensity=2.5;}
+      if(mood==='canal')for(let z=2;z<16;z+=3){kit.box(deco,.5,.006,z,.8,.012,2,0x295864);kit.box(deco,19.5,.006,z,.8,.012,2,0x295864);}
+      if(mood==='garden')for(let z=2;z<17;z+=2)for(const x of [1,19]){kit.box(deco,x,.02,z,.65,.18,.8,0x59633e);cylinder(deco,x,.2,z,.13,.6,0x77925d);}
+    }
     label(deco,level>2?game.data.place:level===0?'SECTOR 04':level===1?'STATION ZERO':'ROOF 07',w/2,-.73,h+.08,.42,'#98b4a6');
   }
   function addZombie(z:any,variant=0){const g=createCharacter(kit,true,z.kind==='runner'?1:z.kind==='stalker'?2:z.kind==='shambler'?0:variant%3);g.userData.entity=z;
@@ -300,7 +308,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
           items.forEach((id:string,i:number)=>{const model=buildPickup(kit,cargo,id,{scale:scale*(items.length>1?.65:1),detail:'compact',decorative:true,yaw:i*.65});model.position.x=columns===1?0:(i%2-.5)*scale*.6;model.position.z=(Math.floor(i/columns)-(Math.ceil(items.length/columns)-1)/2)*scale*.6;});
         }
       }
-      if(g.userData.ring){const active=e.type==='exit'&&(level===0?game.generatorOn:level===1?game.has('sample'):game.signal===0),hover=hoverEntity?.id===e.id||game.selected?.id===e.id||game.companion.foundId===e.id;
+      if(g.userData.ring){const active=e.type==='exit'&&(level===0?game.generatorOn:level===1?game.has('sample'):level>2?game.entities.filter((task:any)=>task.type==='mission'||task.type==='npc').every((task:any)=>task.done):game.signal===0),hover=hoverEntity?.id===e.id||game.selected?.id===e.id||game.companion.foundId===e.id;
         const m=g.userData.ring.material as THREE.MeshBasicMaterial;m.color.setHex(active?0x9ee2c0:hover?0xf7c991:0xa5b49b);m.opacity=hover||active?.9:e.type==='item'?.35:e.type==='container'&&e.open?.12:.25;
         g.userData.ring.scale.setScalar(g.userData.ring.userData.baseRadius*(active?1+Math.sin(game.time*3)*.08:1));
       }
@@ -312,7 +320,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     if(hoverEntity&&!hoverEntity.removed&&hoverEntity.hp!==0){targetLabel.position.copy(world.localToWorld(new THREE.Vector3(hoverEntity.x,hoverEntity.type==='door'||hoverEntity.type==='exit'?3.35:hoverEntity.type==='prop'?3:2.25,hoverEntity.y)));targetLabel.visible=true;
       const text=translate(hoverEntity.name,game.language);if(text!==lastLabel){lastLabel=text;const material=targetLabel.material as THREE.SpriteMaterial,canvas=material.map!.image as HTMLCanvasElement,ctx=canvas.getContext('2d')!;ctx.clearRect(0,0,512,96);ctx.fillStyle='rgba(11,23,22,.94)';ctx.fillRect(0,0,512,96);ctx.fillStyle=hoverEntity.type==='zombie'?'#edb291':'#f1e4c6';ctx.font='500 40px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,256,48,488);material.map!.needsUpdate=true;}
     }else targetLabel.visible=false;
-    rain.visible=level===0;rainMat.opacity=level===0?.14:.06;
+    rain.visible=level===0||game.data.theme==='street'||game.data.theme==='canal';rainMat.opacity=level===0?.14:.06;
     if(playing&&rain.visible){for(let i=0;i<rainCount;i++){rainArray[i*6+1]-=dt*11;rainArray[i*6+4]-=dt*11;if(rainArray[i*6+1]<-.5){rainArray[i*6+1]=18;rainArray[i*6+4]=17.55}}rainGeo.attributes.position.needsUpdate=true;}
     atmosphere?.update(game.time);composer.render();frame=requestAnimationFrame(loop);
   };

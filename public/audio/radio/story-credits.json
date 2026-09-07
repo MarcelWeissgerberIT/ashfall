@@ -1,0 +1,151 @@
+{
+  "provider": "Microsoft Edge online neural text-to-speech via edge-tts",
+  "voices": [
+    "en-GB-SoniaNeural",
+    "en-GB-RyanNeural",
+    "de-DE-KatjaNeural",
+    "de-DE-ConradNeural"
+  ],
+  "calls": [
+    {
+      "id": "story-0",
+      "language": "en",
+      "speaker": "Mara",
+      "text": "Before all this, I repaired radios. Every repair had a signature. Mine ended in seven. If you hear that pattern, Koda, it means something from the old world still works.",
+      "sha256": "6b6f333b262f529e3c582e0e56a67996521e11d9725343f9485a910289abf229"
+    },
+    {
+      "id": "story-0",
+      "language": "de",
+      "speaker": "Mara",
+      "text": "Vor all dem reparierte ich Funkgeräte. Jede Reparatur hatte eine Kennung. Meine endete auf sieben. Wenn du dieses Muster hörst, Koda, funktioniert noch etwas aus der alten Welt.",
+      "sha256": "8a88019a7a64f44aa48947e22214b84628fe94e00f19af27c84d0d4bc831f91d"
+    },
+    {
+      "id": "story-1",
+      "language": "en",
+      "speaker": "Control",
+      "text": "Station Zero sealed its records before the city fell. Some are medical. Others are evacuation orders. If a file mentions Aster, keep it. We do not yet know what that name means.",
+      "sha256": "b16a20e0cca2f07d1b4c208077ac48de8a4af414a878c6862c6a1a6f9815d2e6"
+    },
+    {
+      "id": "story-1",
+      "language": "de",
+      "speaker": "Control",
+      "text": "Station Zero versiegelte seine Akten vor dem Fall der Stadt. Manche sind medizinisch, andere Evakuierungsbefehle. Wenn eine Akte Aster erwähnt, bewahre sie auf. Wir wissen noch nicht, was dieser Name bedeutet.",
+      "sha256": "60d20185eefc1c0184a47b1b90e85f11ea5b77c90263c555e626ab8cf37badfb"
+    },
+    {
+      "id": "story-3",
+      "language": "en",
+      "speaker": "Imani",
+      "text": "Mara, the earliest hospital samples predate the public warning. That does not tell us who knew, or when. I need records before I draw conclusions. Please keep anything with a date on it.",
+      "sha256": "cc9f626b3ff345f3d4e8334b6b27452cf83102dbd081b5b19deee165ad58944e"
+    },
+    {
+      "id": "story-3",
+      "language": "de",
+      "speaker": "Imani",
+      "text": "Mara, die frühesten Krankenhausproben stammen aus der Zeit vor der öffentlichen Warnung. Das sagt uns noch nicht, wer wann etwas wusste. Ich brauche Akten, bevor ich Schlüsse ziehe. Bewahre alles mit einem Datum auf.",
+      "sha256": "1778c82c016121338f09ec8bd224cc14befe656757587deac78725b751a4d4ef"
+    },
+    {
+      "id": "story-6",
+      "language": "en",
+      "speaker": "Levin",
+      "text": "A damaged relay keeps sending seven pulses. Not a distress code. A maintenance signature. You went quiet when I played it. You do not have to explain yet. I have saved the recording.",
+      "sha256": "048326d6fbdac22a57d26d4d8ee091bdf2b910ea3952cb79ad4e2694313eea2d"
+    },
+    {
+      "id": "story-6",
+      "language": "de",
+      "speaker": "Levin",
+      "text": "Ein beschädigtes Relais sendet immer wieder sieben Impulse. Kein Notrufcode. Eine Wartungskennung. Du wurdest still, als ich sie abspielte. Du musst es noch nicht erklären. Ich habe die Aufnahme gespeichert.",
+      "sha256": "a57d88ae27c9ff3c82a9613bf3ab930fc5cdf2fb0b27c3521d282f193f83b0ec"
+    },
+    {
+      "id": "story-9",
+      "language": "en",
+      "speaker": "Mara",
+      "text": "There is an old number under Koda’s collar. I thought it was a shelter tag. Now I keep noticing the same prefix on ambulance forms. Somebody tried to keep track of him.",
+      "sha256": "c9f5f9685a0985ba1ed3c7f6f498bb1769fbb257258368aef31ad0520a5d8bc9"
+    },
+    {
+      "id": "story-9",
+      "language": "de",
+      "speaker": "Mara",
+      "text": "Unter Kodas Halsband steht eine alte Nummer. Ich dachte, es wäre eine Tierheimmarke. Jetzt fällt mir dieselbe Vorsilbe auf Rettungswagenformularen auf. Jemand wollte wissen, wo er ist.",
+      "sha256": "5c98e10d077f135e9e63efe4412497d05e45b895df593d29e2066b05946f00dd"
+    },
+    {
+      "id": "story-12",
+      "language": "en",
+      "speaker": "Levin",
+      "text": "Your name appears in the service manifest, Mara. But there are two different signatures. I will compare the changes separately. A name on a page is not the whole story.",
+      "sha256": "ad60b022413dfcbe7eb1dba9d7aa34f9ac40111c977491c75b2ded841151722d"
+    },
+    {
+      "id": "story-12",
+      "language": "de",
+      "speaker": "Levin",
+      "text": "Dein Name steht in der Wartungsliste, Mara. Aber es gibt zwei verschiedene Unterschriften. Ich vergleiche die Änderungen einzeln. Ein Name auf einer Seite ist nicht die ganze Geschichte.",
+      "sha256": "ea9ab7d02680ac981e15048a2eabd5cd32946d1ee262a93e5c55e81ea58f7728"
+    },
+    {
+      "id": "story-16",
+      "language": "en",
+      "speaker": "Mara",
+      "text": "Jonas always waited for the reply before he touched the transmitter again. I was the impatient one. I keep hearing that little pause in these recordings. I am not ready to call it a memory.",
+      "sha256": "270041f9a74e73b4b77700c98d117e9393e77453b2cd77c2df284b41a0d1a20a"
+    },
+    {
+      "id": "story-16",
+      "language": "de",
+      "speaker": "Mara",
+      "text": "Jonas wartete immer auf die Antwort, bevor er den Sender wieder berührte. Ich war die Ungeduldige. Ich höre diese kleine Pause ständig in den Aufnahmen. Ich bin noch nicht bereit, sie eine Erinnerung zu nennen.",
+      "sha256": "8356954ba09cb7cc04d2179cdb3dcdf0969293ecb852a24140df2b614478c641"
+    },
+    {
+      "id": "story-18",
+      "language": "en",
+      "speaker": "Imani",
+      "text": "Koda is healthy, but that does not make him a cure. Different animals respond differently. He is your companion, not a specimen. The answer must come from careful work with the cultures.",
+      "sha256": "1a420ddeb9773db38179e4da61f73993f28c3b7d73cec72351ff02a61abc2af7"
+    },
+    {
+      "id": "story-18",
+      "language": "de",
+      "speaker": "Imani",
+      "text": "Koda ist gesund, aber deshalb ist er kein Heilmittel. Verschiedene Tiere reagieren unterschiedlich. Er ist dein Begleiter, keine Versuchsprobe. Die Antwort muss aus sorgfältiger Arbeit mit den Kulturen kommen.",
+      "sha256": "37111bd6bdc92794c6c8f755a93cb5029dac490e80c6b7cd1adf1f131c426886"
+    },
+    {
+      "id": "story-22",
+      "language": "en",
+      "speaker": "Imani",
+      "text": "The trial failed this morning. I am keeping the result. We are not going to repeat Aster by hiding the numbers we dislike. Hope has to survive being honest.",
+      "sha256": "d5489d5ac21c6a49b432d244fb355d2d166d4b6071ca93b2d3a19711b15dbda0"
+    },
+    {
+      "id": "story-22",
+      "language": "de",
+      "speaker": "Imani",
+      "text": "Der Versuch ist heute Morgen gescheitert. Ich bewahre das Ergebnis auf. Wir werden Aster nicht wiederholen, indem wir unerwünschte Zahlen verstecken. Hoffnung muss Ehrlichkeit aushalten.",
+      "sha256": "cce9c54fc29e58d49b816e8e361c768c30beb64eca79db590771b07c1bbe93d5"
+    },
+    {
+      "id": "story-26",
+      "language": "en",
+      "speaker": "Jonas",
+      "text": "I have a reply from another settlement. They want the original records, not a speech. Once they have copies, no single tower owns the truth. Keep that channel open, sister.",
+      "sha256": "e1a6429e6ba666041abf1dca6664924e57c4467c685dacf53367333f066fee8c"
+    },
+    {
+      "id": "story-26",
+      "language": "de",
+      "speaker": "Jonas",
+      "text": "Ich habe eine Antwort aus einer anderen Siedlung. Sie wollen die Originalakten, keine Rede. Sobald sie Kopien haben, gehört die Wahrheit keinem einzelnen Turm mehr. Halte den Kanal offen, Schwester.",
+      "sha256": "bc5d1a7326c1d54ee5d8597119eec5132f967766e32d375d9515beedc1bc4abd"
+    }
+  ]
+}

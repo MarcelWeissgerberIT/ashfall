@@ -1,3 +1,5 @@
+import {updateStoryEvents} from './story-events.mjs';
+import {makeCampaignChapters} from './campaign-chapters.mjs';
 import {configureInfected,infectedRules,clearSight} from './infected.mjs';
 import { createCompanion, updateCompanion, commandCompanion } from './companion.mjs';
 import { RADIO } from './radio.mjs';
@@ -93,11 +95,14 @@ export const LEVELS=[
 
 ];
 LEVELS.push({...JSON.parse(JSON.stringify(LEVELS[3])),name:'A home for two',intro:'The colony lights are on. Imani has news about the sample, and Levin has kept a place for Mara and Koda. Speak to them, then rest.',hint:'Talk to Imani and Levin. Reach the resting place to finish this chapter of your journey.',goals:['Hear Imani’s findings','Meet Levin again','Rest with Koda'],entities:JSON.parse(JSON.stringify(LEVELS[3].entities)).map(e=>e.id==='imani'?{...e,requires:null,desc:'N-04 slows the infection in our first tests. You gave us time, Mara. Koda is welcome in the clinic, too.'}:e.id==='levin'?{...e,desc:'Clean water. Warm rooms. You made it happen. There is a bed for you and a blanket for Koda.'}:e.id==='departure'?{...e,name:'Rest with Koda',desc:'A safe place at last. Speak to your new friends, then rest.'}:e)});
+LEVELS[6].intro='Haven has light and clean water. Imani and Levin welcome Mara back, but a familiar service code is calling from beyond the walls.';
+LEVELS[6].entities.find(e=>e.id==='departure').desc='Rest with Koda, then follow the mysterious transmission.';
+LEVELS.push(...makeCampaignChapters());
 const clone=o=>JSON.parse(JSON.stringify(o));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 const key=(x,y)=>`${x},${y}`;
 export class Game {
- constructor({tutorial=false}={}){this.equipment={hand:'crowbar',body:null,head:null};this.tutorialDefault=tutorial;this.tutorialFocus=0;this.listeners=new Set();this.level=0;this.unlocked=0;this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.messages=[];this.history=[];this.entries=[];this.effects=[];this.mode='briefing';this.sneak=false;this.muted=true;this.loadLevel(0);}
+ constructor({tutorial=false}={}){this.equipment={hand:'crowbar',body:null,head:null};this.tutorialDefault=tutorial;this.tutorialFocus=0;this.listeners=new Set();this.level=0;this.unlocked=0;this.inventory=['crowbar','medkit','bottle'];this.health=100;this.kills=0;this.totalTime=0;this.messages=[];this.lastRadio={id:'opening',voiceId:'checkpoint',text:RADIO.checkpoint.text};this.history=[];this.entries=[];this.effects=[];this.mode='briefing';this.sneak=false;this.muted=true;this.loadLevel(0);}
  subscribe(fn){this.listeners.add(fn);return()=>this.listeners.delete(fn)}
  emit(){updateTutorial(this);for(const fn of this.listeners)fn()}
  itemSlot(id){return ITEMS[id]?.slot}
@@ -181,7 +186,7 @@ export class Game {
   if(e.removed)return;this.action('interact',.7);
   if(e.type==='item'){if(e.item==='sample'&&!this.has('samplecase')){this.log('Build a Sample carrier in Crafting before collecting N-04. The maintenance locker has the materials.','warn');return}if(this.addItem(e.item)){e.removed=true;this.selected=null;this.tutorial.facts.pickups++;}}
   else if(e.type==='container'){this.openLoot(e);return;}
-  else if(e.type==='npc'||e.type==='mission'){if(e.done){this.log(e.desc,'story');return}if(e.prerequisite&&!this.entities.find(n=>n.id===e.prerequisite)?.done){this.log('Speak to Doctor Imani first.','warn');return}if(e.requires&&!this.has(e.requires)){this.log('Missing: '+ITEMS[e.requires].name+'.','warn');return}if(e.requires)this.consume(e.requires);e.done=true;this.log(e.desc,'story');}
+  else if(e.type==='npc'||e.type==='mission'){if(e.done){this.log(e.desc,'story');return}if(e.prerequisite&&!this.entities.find(n=>n.id===e.prerequisite)?.done){this.log('Complete the previous objective first.','warn');return}if(e.requires&&!this.has(e.requires)){this.log('Missing: '+ITEMS[e.requires].name+'.','warn');return}if(e.duration&&!e.workReady){if(e.remaining===undefined)e.remaining=e.duration;this.noise=1;this.log('Stay close to the station while it transmits. Progress is kept if you move away.','warn');return}if(e.requires&&!e.keepRequired)this.consume(e.requires);e.done=true;this.log(e.desc,'story');}
   else if(e.type==='note')this.log(e.desc,'story');
   else if(e.type==='generator'){if(this.generatorOn){this.log('The generator is running. The bunker gate has power.','success');return}const missing=['fuse','fuel'].filter(id=>!this.has(id));if(missing.length){this.log('Missing: '+missing.map(id=>ITEMS[id].name).join(' and ')+'.','warn');return}this.consume('fuse');this.consume('fuel');this.generatorOn=true;this.noise=1;this.log('The generator starts. The bunker gate is unlocked.','success','generator');}
   else if(e.type==='door'){if(!this.has('keycard')){this.log('Locked. Find the keycard in the maintenance locker.','warn');return}e.open=!e.open;this.log(e.open?'The laboratory door is open.':'The laboratory door is closed.','success');}
@@ -191,15 +196,18 @@ export class Game {
    if(this.level===1&&(!this.has('keycard')||!this.has('sample'))){this.log('You need the keycard and Sample N-04.','warn');return}
    if(this.level===2&&(this.signal!==0||!this.has('sample'))){this.log(this.signal!==0?'Evacuation has not arrived yet. Activate the transmitter and hold out.':'Retrieve the dropped Sample N-04. You cannot leave without it.','warn');return}
    if(this.level>=3&&!this.entities.filter(n=>n.type==='npc'||n.type==='mission').every(n=>n.done)){this.log('Complete the colony mission before leaving.','warn');return}
+   updateStoryEvents(this,true);
    if(this.level===2){this.evacuation=5;this.path=[];this.target=null;this.log('Mara and Koda are boarding. Next stop: Haven.','success','rescue');return}
    this.mode=this.level===LEVELS.length-1?'won':'complete';this.path=[];this.target=null;this.log(this.level===2?'You survived. The sample is safe.':'Sector secured. The way is clear.','success',this.level===2?'rescue':null);
   }this.emit();
  }
- objectives(){if(this.level===3||this.level===6)return [!!this.entities.find(e=>e.id==='imani')?.done,!!this.entities.find(e=>e.id==='levin')?.done,['complete','won'].includes(this.mode)];if(this.level>=4){const mission=this.entities.find(e=>e.type==='mission');return [this.has(mission.requires)||!!mission.done,!!mission.done,['complete','won'].includes(this.mode)]}if(this.level===0)return [this.generatorOn||(this.has('fuse')&&this.has('fuel')),this.generatorOn,this.mode==='complete'];if(this.level===1)return [this.has('keycard'),this.has('sample'),this.mode==='complete'];return [this.has('battery')||this.signal>=0,this.signal===0,this.mode==='complete']}
+ objectives(){if(this.data.storyChapter)return [!!this.entities.find(e=>e.id==='story-a')?.done,!!this.entities.find(e=>e.id==='story-b')?.done,['complete','won'].includes(this.mode)];if(this.level===3||this.level===6)return [!!this.entities.find(e=>e.id==='imani')?.done,!!this.entities.find(e=>e.id==='levin')?.done,['complete','won'].includes(this.mode)];if(this.level>=4){const mission=this.entities.find(e=>e.type==='mission');return [this.has(mission.requires)||!!mission.done,!!mission.done,['complete','won'].includes(this.mode)]}if(this.level===0)return [this.generatorOn||(this.has('fuse')&&this.has('fuel')),this.generatorOn,this.mode==='complete'];if(this.level===1)return [this.has('keycard'),this.has('sample'),this.mode==='complete'];return [this.has('battery')||this.signal>=0,this.signal===0,this.mode==='complete']}
  advanceActor(actor,path,speed,dt){if(!path.length)return;const p=path[0],dx=p.x-actor.x,dy=p.y-actor.y,dist=Math.hypot(dx,dy);actor.facing=Math.atan2(dx,dy);if(dist<speed*dt){actor.x=p.x;actor.y=p.y;path.shift()}else {actor.x+=dx/dist*speed*dt;actor.y+=dy/dist*speed*dt;}}
  tick(dt){
   if(!this.canAct)return;dt=Math.min(dt,.06);if(this.evacuation>0){this.evacuation=Math.max(0,this.evacuation-dt);this.time+=dt;if(this.evacuation>3){for(const actor of [this.player,this.companion]){actor.x+=(16-actor.x)*Math.min(1,dt*3);actor.y+=(10.8-actor.y)*Math.min(1,dt*3);actor.facing=0;}}if(!this.evacuation){this.mode='complete';this.emit()}return;}this.time+=dt;this.totalTime+=dt;this.pulse+=dt;this.player.attack=Math.max(0,this.player.attack-dt);this.noise=Math.max(0,this.noise-dt*.15);this.flash=Math.max(0,this.flash-dt*2);this.effects=this.effects.filter(e=>(e.life-=dt)>0);
   for(const actor of [this.player,...this.zombies]){actor.hurt=Math.max(0,(actor.hurt||0)-dt);if(actor.action)actor.action.remaining=Math.max(0,actor.action.remaining-dt);}
+  updateStoryEvents(this);
+  for(const station of this.entities){if(station.remaining>0&&!station.done&&this.entityDistance(station)<=1.8){station.remaining=Math.max(0,station.remaining-dt);if(!station.remaining){station.workReady=true;this.interact(station)}}}
   const target=this.target;
   if(target?.type==='zombie'&&target.hp>0){if(distance(this.player,target)>1.3){if(!this.path.length||distance(this.path[this.path.length-1],target)>1.5)this.path=this.nearestPath(target)||[]}else this.path=[];}
   if(this.path.length){const before={x:this.player.x,y:this.player.y};this.advanceActor(this.player,this.path,this.sneak?1.8:3.1,dt);const moved=distance(before,this.player);this.tutorial.facts.distance+=moved;if(this.sneak)this.tutorial.facts.sneakDistance+=moved;const step=this.tutorial.index;updateTutorial(this);if(this.tutorial.index!==step)this.emit();}

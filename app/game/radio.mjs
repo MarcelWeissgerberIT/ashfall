@@ -1,3 +1,5 @@
+import storyCalls from './story-calls.json' with {type:'json'};
+/** @type {Record<string, {title:string,text:string,duration?:number}>} */
 export const RADIO = {
   "bunker": {
     "title": "Recover Sample N-04",
@@ -47,3 +49,5 @@ export const RADIO = {
     "text": "Lena always said a working radio means someone can still find you. I kept her old frequency in my notebook. If the helicopter comes, there has to be room for Koda too. After this, I want him to know grass, sunlight, and a morning without sirens."
   }
 };
+
+for(const call of storyCalls)RADIO[call.id]={title:call.title,text:call.text};
