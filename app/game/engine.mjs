@@ -19,7 +19,7 @@ export const ITEMS = {
  scrap:{name:'Metal scrap',weight:1.2,kind:'salvage',desc:'Salvage. Can be dropped at any time.'},
  chair:{name:'Folding chair',weight:2.4,kind:'salvage',desc:'Still usable. But every item adds weight.'},
  tire:{name:'Car tire',weight:4,kind:'salvage',desc:'Portable, but heavy. Might be best to leave it behind.'},
- toolbox:{name:'Toolbox',weight:2.2,kind:'salvage',desc:'Old tools. A small collection from another time.'},
+ toolbox:{name:'Toolbox',weight:2.2,kind:'salvage',desc:'A portable case containing crafting tools. Required by several recipes; kept after crafting.'},
  ration:{name:'Canned food',weight:0.5,kind:'food',desc:'A comforting memory. Restores 18 health.'},
 };
 const item=(id,x,y,itemId)=>({id,x,y,type:'item',item:itemId,name:ITEMS[itemId].name,desc:ITEMS[itemId].desc});

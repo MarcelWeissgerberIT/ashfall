@@ -556,5 +556,12 @@
   "Record the game view with sound · Up to 2 minutes": "Spielansicht mit Ton aufnehmen · Bis zu 2 Minuten",
   "Recording is unavailable in this browser.": "Dieser Browser unterstützt die Aufnahme nicht.",
   "Enable audio before recording.": "Aktiviere vor der Aufnahme den Ton.",
-  "Recording failed. Please try again.": "Aufnahme fehlgeschlagen. Bitte erneut versuchen."
+  "Recording failed. Please try again.": "Aufnahme fehlgeschlagen. Bitte erneut versuchen.",
+  "Prepare recipe": "Rezept vorbereiten",
+  "Carried items and equipment": "Mitgeführte Gegenstände und Ausrüstung",
+  "Choose a recipe to prepare owned ingredients automatically. You can also drag items into the grid. Nothing is consumed until you craft.": "Wähle ein Rezept: Vorhandene Zutaten werden automatisch bereitgelegt. Du kannst sie auch ins Raster ziehen. Erst beim Herstellen werden sie verbraucht.",
+  "Equipped ingredients can be used too. Crafting consumes them and clears their equipment slot. Required tools are kept.": "Auch angelegte Zutaten sind nutzbar. Beim Herstellen werden sie verbraucht und der Ausrüstungsplatz wird frei. Benötigte Werkzeuge bleiben erhalten.",
+  "This recipe will consume equipped gear when you craft.": "Dieses Rezept verbraucht beim Herstellen angelegte Ausrüstung.",
+  "A portable case containing crafting tools. Required by several recipes; kept after crafting.": "Ein tragbarer Kasten mit Werkzeug. Für mehrere Rezepte erforderlich; bleibt nach dem Herstellen erhalten.",
+  "Equipped": "Angelegt"
 }
