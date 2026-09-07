@@ -1,0 +1,44 @@
+[
+  {
+    "name": "concrete-gpt",
+    "model": "gpt-image-2",
+    "historyId": "M4mVfJuzwVvnkc6gtOei",
+    "prompt": "Production game material texture, one single full-frame flat orthographic albedo photograph. Seamlessly tileable in both axes, perfectly uniform diffuse lighting, no perspective, no cast shadows, no directional illumination, no objects, no borders, no text. Photoreal fine grain and believable weathering at multiple scales. Restrained desaturated palette for an abandoned dystopian city. This is a usable texture map, not an illustration. Aged pale grey poured concrete wall, fine aggregate visible, irregular hairline cracks, a few chipped areas, subtle vertical mineral leaching and tiny dark pores, sparse muted moss in cracks. Damage restrained, no large holes, no rebar."
+  },
+  {
+    "historyId": "rDJSjQnPE5lqSj45sekR",
+    "model": "nano-banana-pro",
+    "media": "image",
+    "mode": "text2image",
+    "status": "PENDING",
+    "name": "concrete-nano",
+    "prompt": "Production game material texture, one single full-frame flat orthographic albedo photograph. Seamlessly tileable in both axes, perfectly uniform diffuse lighting, no perspective, no cast shadows, no directional illumination, no objects, no borders, no text. Photoreal fine grain and believable weathering at multiple scales. Restrained desaturated palette for an abandoned dystopian city. This is a usable texture map, not an illustration. Aged pale grey poured concrete wall, fine aggregate visible, irregular hairline cracks, a few chipped areas, subtle vertical mineral leaching and tiny dark pores, sparse muted moss in cracks. Damage restrained, no large holes, no rebar."
+  },
+  {
+    "historyId": "tLZyRBTqa3m3Ls4g9Oq4",
+    "model": "gpt-image-2",
+    "media": "image",
+    "mode": "text2image",
+    "status": "PENDING",
+    "name": "asphalt",
+    "prompt": "Production game material texture, one single full-frame flat orthographic albedo photograph. Seamlessly tileable in both axes, perfectly uniform diffuse lighting, no perspective, no cast shadows, no directional illumination, no objects, no borders, no text. Photoreal fine grain and believable weathering at multiple scales. Restrained desaturated palette for an abandoned dystopian city. This is a usable texture map, not an illustration. Weathered dark charcoal asphalt road, coarse embedded stones, branching repaired cracks and subtle damp dark patches. No road markings, no puddles reflecting sky, no litter. Strong readable grain, realistic scale."
+  },
+  {
+    "historyId": "WnjxhDpJD9MkE1jzlmZg",
+    "model": "nano-banana-pro",
+    "media": "image",
+    "mode": "text2image",
+    "status": "PENDING",
+    "name": "tiles",
+    "prompt": "Production game material texture, one single full-frame flat orthographic albedo photograph. Seamlessly tileable in both axes, perfectly uniform diffuse lighting, no perspective, no cast shadows, no directional illumination, no objects, no borders, no text. Photoreal fine grain and believable weathering at multiple scales. Restrained desaturated palette for an abandoned dystopian city. This is a usable texture map, not an illustration. Old hospital ceramic floor, square pale desaturated sage green tiles in a perfectly regular orthogonal grid, narrow dark grout, some chipped glaze and a few cracked tiles, ingrained dirt near grout and subtle damp staining. Flat measured texture, no reflections, no large missing tiles."
+  },
+  {
+    "historyId": "Mu5HEyoSZjW1TVsK9Bev",
+    "model": "gpt-image-2",
+    "media": "image",
+    "mode": "text2image",
+    "status": "PENDING",
+    "name": "car-paint",
+    "prompt": "Production game material texture, one single full-frame flat orthographic albedo photograph. Seamlessly tileable in both axes, perfectly uniform diffuse lighting, no perspective, no cast shadows, no directional illumination, no objects, no borders, no text. Photoreal fine grain and believable weathering at multiple scales. Restrained desaturated palette for an abandoned dystopian city. This is a usable texture map, not an illustration. Oxidized dark desaturated teal automotive paint over steel, scattered irregular patches of muted reddish brown rust, fine flaking paint edges, hairline scratches and streaks. No vehicle components, no panel seams, no bolts, no text. Mostly intact faded paint with twenty percent corrosion."
+  }
+]

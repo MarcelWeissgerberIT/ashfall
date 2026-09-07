@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { buildWall, buildBarrier, buildVehicle } from '../app/game/world-props.ts';
 import { buildSectorDetails } from '../app/game/sector-details.ts';
 import { buildPickup, PICKUP_IDS } from '../app/game/loot-assets.ts';
+import { buildMissionStation } from '../app/game/mission-props.ts';
 import { ITEMS, LEVELS } from '../app/game/engine.mjs';
 
 // Geometry-only renderer adapter: no browser, texture loading or GPU required.
@@ -56,3 +57,10 @@ for(const [level,data] of LEVELS.entries()){
 }
 for(const g of geometries.values())g.dispose();for(const m of materials.values())m.dispose();
 console.log(`${objects} wall, barrier and vehicle models passed: finite geometry, collision footprints, batching (${totalDraws} total draws), repeat builds reuse geometry.`);
+
+for(const e of [{duration:12},{requires:'samplecase'},{requires:'toolbox'},{requires:'axe'},{requires:'fuse'}]){
+ const root=new THREE.Group();buildMissionStation(kit,root,e);root.updateMatrixWorld(true);const b=new THREE.Box3().setFromObject(root);
+ assert(b.min.x>=-.5&&b.max.x<=.5&&b.min.z>=-.5&&b.max.z<=.5,'Mission prop stays in its interaction footprint');
+ let count=0;root.traverse(o=>{if(o.isMesh){count++;for(const a of Object.values(o.geometry.attributes))assert([...a.array].every(Number.isFinite));}});assert(count<40,'Bounded mission draw count');
+}
+console.log('Five mission silhouettes: finite geometry, unchanged footprint and bounded mesh count.');

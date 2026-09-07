@@ -15,6 +15,7 @@ import { translate } from './i18n';
 import { createAtmosphere } from './atmosphere';
 import { createPuppy, animatePuppy } from './puppy';
 import { buildSectorDetails } from './sector-details';
+import {buildMissionStation} from './mission-props';
 import {createHelicopter,animateHelicopter} from './helicopter';
 const COLORS={orange:0xf3bb78};
 export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation,following,onFollowChange}:{game:any;onHover:(v:any)=>void;zoom:number;onZoomChange:(zoom:number)=>void;viewReset:number;rotation:number;following:boolean;onFollowChange:(v:boolean)=>void}){
@@ -126,7 +127,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     box(g,.8,1.15,.27,.22,.3,.13,0x253a32);box(g,.8,1.27,.345,.1,.08,.015,0xf5af63,0xb16a25);
     g.userData.sign=label(g,e.type==='door'?'LAB / 02':game.level===0?'BUNKER / 04':'ROOF / 07',0,2.96,0,.38,'#c8d3bd',true);
    }else if(e.type==='npc'){const person=createCharacter(kit,false,0);person.scale.setScalar(.9);g.userData.resident=person;g.add(person);label(g,e.name,0,2.7,0,.48,'#e9d6a8',true);
-   }else if(e.type==='mission'){kit.box(g,0,0,0,1,.9,.8,0x637c72,'brushedSteel');kit.box(g,0,.5,.42,.6,.2,.04,0xa6d8b8);cylinder(g,-.35,.9,0,.08,1,0xabb6a0);
+   }else if(e.type==='mission'){buildMissionStation(kit,g,e);
    }else if(e.type==='radio'){
     kit.box(g,0,0,0,.86,.6,.65,0x9da880,'carPaint');box(g,0,.6,0,.92,.1,.73,0xc3bea0);kit.box(g,0,.15,.34,.64,.28,.025,0x819481,'rubber');kit.box(g,.16,.26,.36,.11,.1,.01,0x89c394,undefined,0x34854d);cylinder(g,-.27,.7,-.2,.035,2.9,0x97a695);box(g,-.27,2.5,-.2,1.4,.045,.045,0x97a695);box(g,-.27,2,-.2,.8,.045,.045,0x97a695);
    }else if(e.type==='exit'){

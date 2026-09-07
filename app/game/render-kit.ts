@@ -4,7 +4,7 @@ import { ART } from './art';
 export type Surface = keyof typeof ART.surfaces;
 // Metres per repeat keep planks, tile joints and fabric grain at a consistent scale.
 const SURFACES:Record<Surface,{metres:number;roughness:number;metalness:number;bump:number;tint:number}>={
-  concrete:{metres:2.5,roughness:.94,metalness:.025,bump:.025,tint:.42},
+  concrete:{metres:2.5,roughness:.94,metalness:.025,bump:.018,tint:.64},
   asphalt:{metres:2.5,roughness:.91,metalness:.025,bump:.025,tint:.42},
   steel:{metres:2.5,roughness:.69,metalness:.28,bump:.025,tint:.42},
   paving:{metres:2.5,roughness:.91,metalness:.025,bump:.085,tint:.42},
@@ -27,6 +27,7 @@ export function createRenderKit(renderer: THREE.WebGLRenderer) {
   const textures=new Set<THREE.Texture>();
   const maps={} as Record<Surface,THREE.Texture>;
   const detailMaps={} as Record<Surface,THREE.Texture>;
+  const roughnessMaps:Partial<Record<Surface,THREE.Texture>>={};
   let disposed=false;
   for(const [name,url] of Object.entries(ART.surfaces)) {
     const texture=new THREE.TextureLoader().load(url,loaded=>{if(disposed)loaded.dispose()});
@@ -36,6 +37,7 @@ export function createRenderKit(renderer: THREE.WebGLRenderer) {
     textures.add(texture);maps[name as Surface]=texture;
     const detail=new THREE.TextureLoader().load(url.replace('.webp','-detail.webp'),loaded=>{if(disposed)loaded.dispose()});
     detail.wrapS=detail.wrapT=THREE.MirroredRepeatWrapping;detail.anisotropy=texture.anisotropy;textures.add(detail);detailMaps[name as Surface]=detail;
+    if(url.includes('/v5/')){const rough=new THREE.TextureLoader().load(url.replace('.webp','-roughness.webp'),loaded=>{if(disposed)loaded.dispose()});rough.wrapS=rough.wrapT=THREE.MirroredRepeatWrapping;rough.anisotropy=texture.anisotropy;textures.add(rough);roughnessMaps[name as Surface]=rough;}
   }
   const material=(color:number,surface?:Surface,glow=0)=>{
     const key=`${color}:${surface}:${glow}`;
@@ -45,7 +47,7 @@ export function createRenderKit(renderer: THREE.WebGLRenderer) {
       if(profile)tint.lerp(new THREE.Color(0xffffff),profile.tint);
       materials.set(key,new THREE.MeshStandardMaterial({
         color:tint,map:surface?maps[surface]:null,bumpMap:surface?detailMaps[surface]:null,bumpScale:profile?.bump??0,roughness:profile?.roughness??.9,
-        metalness:profile?.metalness??.025,emissive:glow,emissiveIntensity:glow?2.2:0,
+        roughnessMap:surface?roughnessMaps[surface]||null:null,metalness:profile?.metalness??.025,emissive:glow,emissiveIntensity:glow?2.2:0,
       }));
     }
     return materials.get(key)!;

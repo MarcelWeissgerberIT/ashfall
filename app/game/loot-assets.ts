@@ -16,7 +16,7 @@ import type { RenderKit, Surface } from './render-kit';
  */
 export const PICKUP_IDS = [
   'crowbar', 'axe', 'jacket', 'vest', 'helmet', 'medkit', 'bottle', 'fuse',
-  'fuel', 'keycard', 'sample', 'battery', 'scrap', 'chair', 'tire', 'toolbox', 'ration',
+  'fuel', 'keycard', 'sample', 'samplecase', 'battery', 'scrap', 'chair', 'tire', 'toolbox', 'ration',
 ] as const;
 export type PickupId = typeof PICKUP_IDS[number];
 export type PickupOptions = {
@@ -298,6 +298,16 @@ export function buildPickup(
       R([-.053, .018, -.316], [.039, .018, -.363], .01, C.seam, 'canvas');
       R([.039, .018, -.363], [.042, .024, -.189], .01, C.seam, 'canvas');
       if (detailed) B(model, -.064, .033, -.079, .034, .004, .073, C.ivory);
+      break;
+    }
+    case 'samplecase': {
+      B(model,0,.015,0,.48,.25,.34,C.ivory,'brushedSteel');
+      B(model,0,.265,0,.49,.045,.35,C.green,'carPaint');
+      for(const x of [-.17,.17]){B(model,x,.055,0,.025,.24,.355,C.edge,'brushedSteel');B(model,x,.2,.18,.05,.1,.025,C.dark);}
+      R([-.09,.315,0],[-.09,.38,0],.014,C.dark,'rubber');
+      R([-.09,.38,0],[.09,.38,0],.014,C.dark,'rubber');
+      R([.09,.38,0],[.09,.315,0],.014,C.dark,'rubber');
+      B(model,0,.1,.174,.13,.09,.006,C.green);B(model,0,.105,.181,.023,.075,.006,C.ivory);B(model,0,.131,.182,.09,.023,.006,C.ivory);
       break;
     }
     case 'sample': {

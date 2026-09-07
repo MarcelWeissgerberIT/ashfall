@@ -1,15 +1,15 @@
 /** OpenArt atlases, cropped into individual runtime materials and illustrations. */
 export const ART = {
   surfaces: {
-    concrete: '/images/openart/concrete.webp',
-    asphalt: '/images/openart/asphalt.webp',
+    concrete: '/images/openart/v5/concrete.webp',
+    asphalt: '/images/openart/v5/asphalt.webp',
     steel: '/images/openart/steel.webp',
     paving: '/images/openart/paving.webp',
     wood: '/images/openart/v4/wood.webp',
-    carPaint: '/images/openart/v4/car-paint.webp',
+    carPaint: '/images/openart/v5/car-paint.webp',
     rubber: '/images/openart/v4/rubber.webp',
     brushedSteel: '/images/openart/v4/brushed-steel.webp',
-    tiles: '/images/openart/v4/tiles.webp',
+    tiles: '/images/openart/v5/tiles.webp',
     vinyl: '/images/openart/v4/vinyl.webp',
     corrugated: '/images/openart/v4/corrugated.webp',
     glass: '/images/openart/v4/glass.webp',
