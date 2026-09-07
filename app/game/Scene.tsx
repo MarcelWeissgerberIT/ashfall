@@ -11,6 +11,7 @@ import { tutorialTarget } from './tutorial.mjs';
 import { createMapCameraControls } from './camera-controls';
 import { buildWall, buildBarrier, buildVehicle } from './world-props';
 import { buildPickup } from './loot-assets';
+import { buildSectorDetails } from './sector-details';
 const COLORS={orange:0xf3bb78};
 export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:any;onHover:(v:any)=>void;zoom:number;onZoomChange:(zoom:number)=>void;viewReset:number}){
  const host=useRef<HTMLDivElement>(null),sceneRef=useRef<ReturnType<typeof createMapCameraControls>|null>(null),hoverRef=useRef(onHover),zoomRef=useRef(onZoomChange);hoverRef.current=onHover;zoomRef.current=onZoomChange;
@@ -198,6 +199,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset}:{game:a
     if(level===1){groundText(deco,'STATION ZERO',4,17,5.7,.8,'#b8ccc0');groundText(deco,'LAB / N-04',14,5,4.2,.8,'#b0dad2');for(let y=2;y<18;y+=2)kit.box(deco,10.4,.009,y,.07,.009,1.6,0xb7a877);}
     if(level===2){groundText(deco,'EVAC 07',15.5,12,4.3,.8);dot(deco,16,.026,10,2.75,0xc5bc93);for(const x of [13.5,18.5])for(const y of [7.5,12.5])kit.box(deco,x,0,y,.18,.12,.18,0xe6a558,undefined,0xe29e46);}
     environmentDetails();
+    buildSectorDetails(kit,deco,level,game.entities,(x,y)=>game.isBlocked(x,y));
     for(const [x,y] of (level===0?[[6,6],[14,3],[18,16]]:level===1?[[1,5],[10,3],[19,12]]:[[2,7],[18,5]])){
       kit.box(deco,x,0,y,.09,3.2,.09,0x576960,'steel');kit.box(deco,x+.35,3.13,y,.8,.08,.11,0x788e78,'steel');
       const lightColor=level===1?0x82ecde:0xffbc74;

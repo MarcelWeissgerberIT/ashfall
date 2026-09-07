@@ -36,7 +36,7 @@ Repository-wide `npm run lint` is not clean: it reports strict typing, React mut
 
 ## Visuals and audio
 
-OpenArt surface atlases, inventory art, portraits, and sector illustrations ship in `public/images/openart`. Sources and prompts are in `art-source`. The new 17-item inventory atlas is in `public/images/loot/items-v2.png`, with its generation prompt in `art-source/items-v2/prompt.txt`. The detailed Mara rig, 17 pickup models, visible container contents, equipment, lighting, weather, and animated poses are code-native.
+OpenArt surface atlases, inventory art, portraits, and sector illustrations ship in `public/images/openart`. Sources and prompts are in `art-source`. The new 17-item inventory atlas is in `public/images/loot/items-v2.png`, with its generation prompt in `art-source/items-v2/prompt.txt`. The detailed Mara rig, 17 pickup models, visible container contents, equipment, lighting, weather, and animated poses are code-native. Mara has a weathered red scarf with secondary motion, curved hair strands, blinking eyes, facial detail, and personal equipment. The equipment preview switches between the full outfit and a face close-up. Each sector adds batched architectural dressing: checkpoint drainage and fencing, bunker service pipes and bed rails, and rooftop cable trays and gutters.
 
 The ambient score is composed procedurally with Web Audio: slow minor chords, filtered wind, distant pulses, reverb, and a distinct palette for each sector. Music lowers during radio speech and pauses.
 

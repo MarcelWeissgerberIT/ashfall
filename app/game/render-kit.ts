@@ -199,34 +199,67 @@ function charBatchRigid(kit:RenderKit,root:THREE.Object3D){
 function charMaraDetail(kit:RenderKit,d:any){
   const {box,ellipsoid,cylinder}=kit;
   const {head,chest,hips,arms,legs,wear,backpack}=d;
-  const skin=0xcba489,hair=0x40392e,stitch=0x939784,cloth=0x627467,leather=0x3d473b;
+  const skin=0xcba489,hair=0x493327,stitch=0x939784,cloth=0x536e70,leather=0x3d473b;
   // Adult facial planes: narrow jaw, cheekbones, brow, nose bridge and lids.
   charProfile(kit,head,'Mara-face',[[ -.06,.025,.035,.045],[-.027,.081,.094,.025],[.033,.118,.119,.026],[.105,.139,.131,.011],[.185,.141,.132,0],[.26,.125,.12,-.014],[.316,.081,.076,-.017],[.337,0,0,-.021]],skin,undefined,28);
   ellipsoid(head,0,.062,.126,.076,.045,.03,0xc69a7f);
   ellipsoid(head,0,.122,.146,.029,.063,.034,skin);
   ellipsoid(head,0,.085,.17,.034,.024,.027,skin);
+  d.eyes=[];
   for(const side of [-1,1]){
     ellipsoid(head,side*.142,.116,-.002,.027,.052,.025,skin);
     ellipsoid(head,side*.155,.114,.012,.008,.028,.011,0x987b64);
     ellipsoid(head,side*.06,.145,.13,.045,.023,.018,0x8a7864);
-    box(head,side*.06,.139,.15,.063,.021,.008,0xc0bca0);
-    box(head,side*.06,.143,.156,.018,.015,.008,0x52675a);
-    box(head,side*.06,.145,.161,.009,.010,.005,0x27362e);
+    const eye=charJoint(head,'Mara-eye',side*.06,.148,.148);d.eyes.push(eye);
+    ellipsoid(eye,0,0,0,.031,.011,.012,0xd7cfb7);
+    ellipsoid(eye,-side*.002,0,.01,.010,.010,.004,0x647f70);
+    ellipsoid(eye,-side*.002,0,.014,.0045,.007,.002,0x202c2a);
+    ellipsoid(eye,-side*.003,.004,.016,.002,.002,.001,0xf5e5c9);
+    charRod(kit,head,[side*.086,.161,.146],[side*.033,.162,.151],.004,0x70564a);
+    for(let i=0;i<4;i++)ellipsoid(head,side*(.065+i*.012),.106-(i%2)*.009,.139,.0024,.002,.0015,0xa07860);
     const brow=box(head,side*.058,.173,.143,.065,.014,.014,hair);brow.rotation.z=side*.07;
     charStrap(kit,head,[side*.105,.067,.132],[side*.071,.04,.144],.008,0xb48c74);
   }
   box(head,0,.017,.149,.063,.008,.006,0x946f60);
   ellipsoid(head,0,-.009,.12,.047,.023,.024,skin);
+  // A healed brow scar and subtle lip planes remain legible in the close-up.
+  charStrap(kit,head,[-.098,.192,.13],[-.083,.161,.15],.004,0xdcb59a);
+  ellipsoid(head,0,.023,.15,.033,.006,.005,0x9c7062);
+  ellipsoid(head,0,.011,.15,.028,.006,.006,0xba8976);
   // Pulled-back dark hair and a short practical braid; the helmet leaves it visible.
   charProfile(kit,head,'swept-hair',[[.198,.144,.132,-.02],[.269,.133,.125,-.023],[.322,.101,.089,-.025],[.35,.03,.031,-.034],[.352,0,0,-.034]],hair);
   for(const side of [-1,1]){
     const lock=ellipsoid(head,side*.123,.205,-.041,.029,.094,.115,hair);lock.rotation.z=-side*.12;
     for(let i=0;i<3;i++)charRod(kit,head,[side*(.037+i*.026),.322-i*.009,.053],[side*(.035+i*.027),.255,-.125],.004,0x645643);
   }
+  // Curved locks follow the skull, with a loose strand beside the left cheek.
+  const hairPaths=[[[.02,.343,.01],[.105,.308,.07],[.143,.24,.035],[.105,.20,-.135]], [[-.025,.34,.035],[-.11,.30,.083],[-.141,.228,.03],[-.10,.20,-.135]], [[-.12,.275,.061],[-.149,.23,.089],[-.137,.155,.102],[-.13,.09,.084]]];
+  hairPaths.forEach((points,i)=>{const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p as [number,number,number])));const geo=kit.geometry('Mara:hair-lock:'+i,()=>new THREE.TubeGeometry(curve,18,i===2?.009:.011,5,false));const m=new THREE.Mesh(geo,kit.material(i===2?hair:0x725039));m.castShadow=true;head.add(m)});
   const pony=charJoint(head,'braid',0,.206,-.163);d.ponytail=pony;
   ellipsoid(pony,0,-.029,-.025,.043,.073,.044,hair);
   for(let i=0;i<4;i++)ellipsoid(pony,Math.sin(i*2)*.012,-.09-i*.041,-.017,.028-i*.003,.032,.027-i*.003,i%2?hair:0x514333);
   cylinder(pony,0,-.069,-.018,.041,.025,0x626b4f,.039,'canvas');
+  // A faded oxblood scarf is Mara's identifying accent at isometric distance.
+  const scarf=charJoint(chest,'Mara-scarf');
+  charProfile(kit,scarf,'Mara-scarf-wrap',[[.35,.117,.113,.018],[.39,.13,.117,.012],[.435,.101,.088,.006]],0x85483c,'canvas');
+  for(let i=0;i<3;i++)charStrap(kit,scarf,[-.104,.36+i*.02,.086],[.10,.38+i*.014,.092],.013,i===1?0xad6c50:0x623c34,'canvas');
+  const tail=charJoint(chest,'Mara-scarf-tail',.095,.382,.195);d.scarfTail=tail;
+  charStrap(kit,tail,[0,0,0],[.065,-.10,.13],.085,0x85483c,'canvas');
+  charStrap(kit,tail,[.065,-.10,.13],[.04,-.23,.15],.083,0x85483c,'canvas');
+  for(let i=0;i<4;i++)charRod(kit,tail,[.013+i*.018,-.225,.15],[.013+i*.018,-.251-(i%2)*.014,.15],.004,0xa26c52,'canvas');
+  charStrap(kit,tail,[.013,-.12,.144],[.013,-.217,.154],.009,0xc29268,'canvas');
+  // Field watch, stitched repairs and an emergency locator clipped to the pack.
+  box(arms[0].elbow,0,-.28,.073,.09,.038,.034,0x2e3937,'rubber',0,true);
+  box(arms[0].elbow,0,-.274,.095,.05,.024,.01,0x9eb7a3,'glass');
+  box(arms[0].elbow,.005,-.269,.103,.008,.013,.003,0xc7cdad);
+  box(backpack,.277,.15,-.275,.083,.14,.068,0xb99858,'carPaint',0,true);
+  box(backpack,.28,.19,-.314,.045,.045,.008,0x243934);
+  box(backpack,.28,.22,-.32,.017,.012,.008,0xbadeaa);
+  charRod(kit,backpack,[.278,.285,-.275],[.278,.365,-.276],.008,0x3e5144,'rubber');
+  box(backpack,.018,.055,-.461,.165,.098,.011,0xb2a67e,'canvas');
+  box(backpack,.018,.098,-.47,.109,.01,.006,0x615e48);
+  for(let i=0;i<5;i++)box(backpack,-.042+i*.027,.065,-.47,.012,.009,.005,0x655b46);
+  for(const leg of legs){for(let i=0;i<4;i++)charStrap(kit,leg.hip,[-.043+i*.025,-.30,.098],[-.031+i*.025,-.265,.10],.005,0xb7ac89,'canvas');}
   // Shirt seams and collar stay visible when armor replaces the jacket.
   for(const side of [-1,1]){
     charStrap(kit,chest,[side*.063,.383,.073],[side*.131,.285,.162],.047,0x455d50);
@@ -347,7 +380,7 @@ function charMaraDetail(kit:RenderKit,d:any){
 export function createCharacter(kit:RenderKit,zombie=false,variant=0){
   const {box,ellipsoid,limb}=kit;
   const v=((variant%3)+3)%3,skin=zombie?0xa2ad8b:0xcba489;
-  const shirt=zombie?[0x637263,0x877661,0x9b9b8d][v]:0x747d68;
+  const shirt=zombie?[0x637263,0x877661,0x9b9b8d][v]:0x536e70;
   const group=new THREE.Group();group.name=zombie?'infected':'Mara';
   const body=charJoint(group,'body');
   const contact=kit.contact(group,0,0,1.4,1.12);
@@ -369,7 +402,7 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
   });
   const chest=charJoint(body,'chest',0,1.01,0);
   if(zombie){ellipsoid(chest,0,.135,0,.274,.33,.178,shirt,'canvas');box(chest,0,-.15,0,.475,.25,.285,shirt,'canvas',0,true);}
-  else charProfile(kit,chest,'layered-field-shirt',[[-.159,.194,.134],[-.07,.195,.14],[.095,.225,.166],[.227,.252,.171],[.313,.244,.145],[.365,.155,.108],[.39,.086,.078]],0x627467,'canvas');
+  else charProfile(kit,chest,'layered-field-shirt',[[-.159,.194,.134],[-.07,.195,.14],[.095,.225,.166],[.227,.252,.171],[.313,.244,.145],[.365,.155,.108],[.39,.086,.078]],0x536e70,'canvas');
   const arms=[-1,1].map((side,i)=>{
     const upper=limb(chest,side*(zombie?.324:.305),.29,0,zombie?.086:.079,.35,shirt,'canvas');upper.name=i?'right-shoulder':'left-shoulder';
     const elbow=limb(upper,0,-.35,0,.07,.32,skin);elbow.name=i?'right-elbow':'left-elbow';
@@ -537,7 +570,9 @@ export function animateCharacter(group:THREE.Group,actor:any,dt:number,playing:b
   d.chest.rotation.set(.13*d.sneak+.16*d.sprint+(d.zombie?.15+sway*.055:0)-hurt*.17,-sway*.055, d.zombie?Math.sin(phase*.5+d.variant)*.035:sway*.012);
   d.head.rotation.set(-.08*d.sneak-.07*d.sprint-hurt*.13,Math.sin(time*.56+d.variant)*.065*(1-d.motion),d.zombie?.055*(d.variant-1):0);
   if(d.backpack){d.backpack.rotation.x=-Math.abs(sway)*.025;d.backpack.rotation.z=-sway*.027;}
-  if(d.ponytail){d.ponytail.rotation.x=.12+sway*.08;d.ponytail.rotation.z=-sway*.09;}
+  if(d.ponytail){d.ponytail.rotation.x=.12+sway*.12+d.sprint*.08;d.ponytail.rotation.z=-sway*.12;}
+  if(d.scarfTail){d.scarfTail.rotation.x=-.05+Math.sin(time*3.3)*.035+sway*.10;d.scarfTail.rotation.z=sway*.07;}
+  if(d.eyes){const blinkPhase=(time+1.2)%4.9,blink=blinkPhase<.16?Math.sin(blinkPhase/.16*Math.PI):0;for(const eye of d.eyes)eye.scale.y=1-blink*.88;}
   const facing=group.rotation.y,sin=Math.sin(facing),cos=Math.cos(facing);
   for(let i=0;i<d.legs.length;i++){
     const leg=d.legs[i],phase01=(d.phase+i*.5)%1,stance=phase01<.62;

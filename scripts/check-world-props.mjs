@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { buildWall, buildBarrier, buildVehicle } from '../app/game/world-props.ts';
+import { buildSectorDetails } from '../app/game/sector-details.ts';
 import { buildPickup, PICKUP_IDS } from '../app/game/loot-assets.ts';
 import { ITEMS, LEVELS } from '../app/game/engine.mjs';
 
@@ -46,5 +47,12 @@ for(const id of PICKUP_IDS)for(const detail of ['full','compact']){
  }
 }
 console.log(`${pickupChecks} pickup geometry checks passed for all 17 items, full/compact detail, rotation and pooled resources.`);
+for(const [level,data] of LEVELS.entries()){
+ const blocked=(x,y)=>data.entities.some(e=>e.solid&&x>=e.x&&x<e.x+(e.w||1)&&y>=e.y&&y<e.y+(e.h||1));
+ const root=buildSectorDetails(kit,new THREE.Group(),level,data.entities,blocked);let draws=0;
+ root.traverse(o=>{if(o.isMesh){draws++;assert(o.userData.noPick,'Architectural detail cannot intercept movement');for(const attr of Object.values(o.geometry.attributes))assert([...attr.array].every(Number.isFinite),'Finite sector geometry');}});
+ assert(draws<=40,'Sector dressing remains batched');const count=geometries.size;buildSectorDetails(kit,new THREE.Group(),level,data.entities,blocked);assert.equal(geometries.size,count,'Dressing restart reuses resources');
+ console.log(`Sector ${level+1}: architectural dressing verified, ${draws} batched draws.`);
+}
 for(const g of geometries.values())g.dispose();for(const m of materials.values())m.dispose();
 console.log(`${objects} wall, barrier and vehicle models passed: finite geometry, collision footprints, batching (${totalDraws} total draws), repeat builds reuse geometry.`);
