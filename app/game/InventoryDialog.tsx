@@ -12,7 +12,7 @@ import ScrollRegion from './ScrollRegion';
 import { useItemDrag } from './useItemDrag';
 
 const kinds:Record<string,string>={weapon:'Weapon',armor:'Protection',heal:'Medical supply',food:'Food',throw:'Distraction',quest:'Mission item',salvage:'Salvage'};
-export default function InventoryDialog({game,portalContainer}:{game:any;portalContainer?:HTMLElement|null}){
+export default function InventoryDialog({game,portalContainer,onCraft}:{game:any;onCraft?:()=>void;portalContainer?:HTMLElement|null}){
  const [selection,setSelection]=useState<{id:string;from:string}|null>(null);
  const {drag,begin,clicked,zoneClass}=useItemDrag(game),container=game.lootContainer;
  const ids=[...new Set<string>(game.backpack)],lootIds=[...new Set<string>(container?.contents||[])];
@@ -26,7 +26,7 @@ export default function InventoryDialog({game,portalContainer}:{game:any;portalC
   </div>};
  return <Localized><Dialog open={open} onOpenChange={v=>{if(!v)game.closeInventory()}}>
   <DialogContent className="inventory-dialog workbench-dialog" showCloseButton={false} portalContainer={portalContainer}>
-   <header className="workbench-header"><div><span className="pack-eyebrow">FIELD EQUIPMENT · WORLD PAUSED <LanguageSwitch/></span><DialogTitle>{container?<PackageOpen size={25}/>:<Backpack size={25}/>} {container?container.name:'Mara’s equipment'}</DialogTitle><DialogDescription>{!game.canManageInventory?'Preview only. Enter the sector to change equipment.':container?'Choose what to take. Drag with the corner grip; leftovers stay here.':'Drag gear by its corner grip onto a slot, or select an item and choose Equip.'}</DialogDescription></div><button className="pack-close" aria-label="Close inventory and return to game" onClick={()=>game.closeInventory()}><X size={21}/></button></header>
+   <header className="workbench-header"><div><span className="pack-eyebrow">FIELD EQUIPMENT · WORLD PAUSED <LanguageSwitch/>{onCraft&&<button className="language-toggle" onClick={onCraft}>Crafting</button>}</span><DialogTitle>{container?<PackageOpen size={25}/>:<Backpack size={25}/>} {container?container.name:'Mara’s equipment'}</DialogTitle><DialogDescription>{!game.canManageInventory?'Preview only. Enter the sector to change equipment.':container?'Choose what to take. Drag with the corner grip; leftovers stay here.':'Drag gear by its corner grip onto a slot, or select an item and choose Equip.'}</DialogDescription></div><button className="pack-close" aria-label="Close inventory and return to game" onClick={()=>game.closeInventory()}><X size={21}/></button></header>
    <div className="workbench-capacity"><span>{game.weight.toFixed(1)} / {CAPACITY} kg</span><Progress locale="en-US" value={game.weight/CAPACITY*100} aria-label="Backpack carry weight"/><strong>{(CAPACITY-game.weight).toFixed(1)} kg free</strong></div>
    <div className="workbench-body">
     <section className="equipment-bay" aria-label="Character and equipment slots">

@@ -5,6 +5,7 @@ export function translate(text:string,language='en'):string {
  if(language!=='de')return text;const key=text.trim(),dict=dictionary as Record<string,string>;
  if(dict[key])return text.replace(key,dict[key]);
  const dynamic:[RegExp,(...parts:string[])=>string][]=[
+ [/^Crafted: (\d+) x (.+)\.$/,(_,n,item)=>'Hergestellt: '+n+' x '+translate(item,'de')+'.'],
  [/^Picked up (.+)\.$/,(_,a)=>translate(a,'de')+' aufgehoben.'],
  [/^Searching (.+)\. Choose what to take\.$/,(_,a)=>translate(a,'de')+' durchsuchen. Wähle deine Beute.'],
  [/^Too heavy: (.+)\. Drop something from your backpack\.$/,(_,a)=>'Zu schwer: '+translate(a,'de')+'. Lege etwas aus dem Rucksack ab.'],
