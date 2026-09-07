@@ -563,5 +563,8 @@
   "Equipped ingredients can be used too. Crafting consumes them and clears their equipment slot. Required tools are kept.": "Auch angelegte Zutaten sind nutzbar. Beim Herstellen werden sie verbraucht und der Ausrüstungsplatz wird frei. Benötigte Werkzeuge bleiben erhalten.",
   "This recipe will consume equipped gear when you craft.": "Dieses Rezept verbraucht beim Herstellen angelegte Ausrüstung.",
   "A portable case containing crafting tools. Required by several recipes; kept after crafting.": "Ein tragbarer Kasten mit Werkzeug. Für mehrere Rezepte erforderlich; bleibt nach dem Herstellen erhalten.",
-  "Equipped": "Angelegt"
+  "Equipped": "Angelegt",
+  "Tab recording is unavailable here. Open ASHFALL in Chrome, Edge or Safari.": "Tab-Aufnahmen sind hier nicht verfügbar. Öffne ASHFALL in Chrome, Edge oder Safari.",
+  "Recording canceled. Select the ASHFALL tab to include dialogs and overlays.": "Aufnahme abgebrochen. Wähle den ASHFALL-Tab, um Dialoge und Einblendungen aufzunehmen.",
+  "Record the entire ASHFALL tab with dialogs and sound · Select the game tab · Up to 2 minutes": "Gesamten ASHFALL-Tab mit Dialogen und Ton aufnehmen · Spieltab auswählen · Bis zu 2 Minuten"
 }
