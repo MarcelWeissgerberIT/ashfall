@@ -1,3 +1,4 @@
+import briefings from './chapter-briefings.json' with {type:'json'};
 import storyCalls from './story-calls.json' with {type:'json'};
 /** @type {Record<string, {title:string,text:string,duration?:number}>} */
 export const RADIO = {
@@ -50,4 +51,4 @@ export const RADIO = {
   }
 };
 
-for(const call of storyCalls)RADIO[call.id]={title:call.title,text:call.text};
+for(const call of [...storyCalls,...briefings])RADIO[call.id]={title:call.title,text:call.text};

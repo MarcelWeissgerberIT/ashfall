@@ -110,6 +110,27 @@ await run('Replay wiring launches one call when unmuting in mission',async()=>{
   assert.equal(media.playCalls,1,'enableAudio sync auto-started the cue, then replayRadio restarted it');
  }finally{a.dispose();await flush()}
 });
+await run('Queued chapter calls play in order without replacing a running voice',async()=>{
+ const {a,media}=await director();try{
+  const g=game();g.time=5;g.messages=[{id:'briefing-event-0',level:0,voiceId:'briefing-0'}];
+  a.sync(g);media.finishPlay();await flush();assert.equal(media.src,'/audio/radio/briefing-0.mp3');
+  g.messages.push({id:'background-0',level:0,voiceId:'story-0'},{id:'mission-update',level:0,voiceId:'generator'});
+  a.sync(g);assert.equal(media.playCalls,1);
+  media.ended=true;media.paused=true;media.onended();a.sync(g);assert.equal(media.src,'/audio/radio/story-0.mp3');
+  media.ended=false;media.finishPlay();await flush();
+  media.ended=true;media.paused=true;media.onended();a.sync(g);assert.equal(media.src,'/audio/radio/generator.mp3');
+  media.ended=false;media.finishPlay();await flush();a.sync(g);assert.equal(media.playCalls,3);
+ }finally{a.dispose();await flush()}
+});
+await run('Entering a new chapter stops the previous voice and clears its queue',async()=>{
+ const {a,media}=await director();try{
+  const g=game();g.time=10;g.messages=[{id:'briefing-event-0',level:0,voiceId:'briefing-0'},{id:'background-0',level:0,voiceId:'story-0'}];
+  a.sync(g);media.finishPlay();await flush();
+  g.level=1;g.time=0;g.mode='briefing';g.canAct=false;a.sync(g);assert.equal(media.paused,true);
+  g.time=5;g.mode='playing';g.canAct=true;g.messages.push({id:'briefing-event-1',level:1,voiceId:'briefing-1'});a.sync(g);
+  assert.equal(media.src,'/audio/radio/briefing-1.mp3');
+ }finally{a.dispose();await flush()}
+});
 await run('Every trigger has a file and matching prerecorded caption',async()=>{
  const credits=JSON.parse(fs.readFileSync(checkout+'/public/audio/radio/credits.json','utf8'));
  for(const asset of credits.assets){

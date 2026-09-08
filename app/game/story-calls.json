@@ -18,6 +18,15 @@
     "deText": "Station Zero versiegelte seine Akten vor dem Fall der Stadt. Manche sind medizinisch, andere Evakuierungsbefehle. Wenn eine Akte Aster erwähnt, bewahre sie auf. Wir wissen noch nicht, was dieser Name bedeutet."
   },
   {
+    "level": 2,
+    "id": "story-2",
+    "title": "Room for two",
+    "deTitle": "Platz für zwei",
+    "sender": "Mara",
+    "text": "When I found Koda, the ambulance door was still open. I could not find anyone to ask whose dog he was. So I made him a promise. If I found a way out, it would be for both of us.",
+    "deText": "Als ich Koda fand, stand die Rettungswagentür noch offen. Niemand war da, den ich nach seinem Besitzer fragen konnte. Also gab ich ihm ein Versprechen. Wenn ich einen Ausweg fände, dann für uns beide."
+  },
+  {
     "level": 3,
     "id": "story-3",
     "title": "Before the alarm",
@@ -25,6 +34,24 @@
     "sender": "Imani",
     "text": "Mara, the earliest hospital samples predate the public warning. That does not tell us who knew, or when. I need records before I draw conclusions. Please keep anything with a date on it.",
     "deText": "Mara, die frühesten Krankenhausproben stammen aus der Zeit vor der öffentlichen Warnung. Das sagt uns noch nicht, wer wann etwas wusste. Ich brauche Akten, bevor ich Schlüsse ziehe. Bewahre alles mit einem Datum auf."
+  },
+  {
+    "level": 4,
+    "id": "story-4",
+    "title": "The sound of taps",
+    "deTitle": "Das Geräusch der Hähne",
+    "sender": "Levin",
+    "text": "Before the collapse, nobody listened to a water pump. Now the whole colony knows when ours stops. Take your time with the repair, Mara. A steady flow is worth more than a quick fix.",
+    "deText": "Vor dem Zusammenbruch hörte niemand einer Wasserpumpe zu. Jetzt merkt die ganze Kolonie, wenn unsere stillsteht. Nimm dir Zeit für die Reparatur, Mara. Ein verlässlicher Durchfluss ist mehr wert als eine schnelle Notlösung."
+  },
+  {
+    "level": 5,
+    "id": "story-5",
+    "title": "The night shift",
+    "deTitle": "Die Nachtschicht",
+    "sender": "Mara",
+    "text": "Jonas used to meet me after the late shift. He complained about the cold, then handed me the warm gloves he had brought anyway. I keep expecting to see him on a platform like this.",
+    "deText": "Jonas holte mich früher nach der Spätschicht ab. Er schimpfte über die Kälte und gab mir dann die warmen Handschuhe, die er trotzdem mitgebracht hatte. Ich erwarte noch immer, ihn auf so einem Bahnsteig zu sehen."
   },
   {
     "level": 6,
@@ -36,6 +63,24 @@
     "deText": "Ein beschädigtes Relais sendet immer wieder sieben Impulse. Kein Notrufcode. Eine Wartungskennung. Du wurdest still, als ich sie abspielte. Du musst es noch nicht erklären. Ich habe die Aufnahme gespeichert."
   },
   {
+    "level": 7,
+    "id": "story-7",
+    "title": "A repair that lasted",
+    "deTitle": "Eine Reparatur, die blieb",
+    "sender": "Mara",
+    "text": "I used to put a small pencil mark inside every radio I repaired. Not for the company. For whoever opened it next. A way of saying someone had been here and tried to make it work.",
+    "deText": "Ich machte früher einen kleinen Bleistiftstrich in jedes reparierte Funkgerät. Nicht für die Firma. Für den Menschen, der es als Nächstes öffnen würde. Ein Zeichen, dass jemand hier war und versucht hatte, es zum Laufen zu bringen."
+  },
+  {
+    "level": 8,
+    "id": "story-8",
+    "title": "The spare key",
+    "deTitle": "Der Ersatzschlüssel",
+    "sender": "Mara",
+    "text": "We kept the spare key under a plant that Lena always forgot to water. Jonas said it was the safest place in the building because nobody would steal a dead fern. I wish I could hear that argument again.",
+    "deText": "Der Ersatzschlüssel lag unter einer Pflanze, die Lena ständig zu gießen vergaß. Jonas meinte, das sei der sicherste Ort im Haus, weil niemand einen vertrockneten Farn stehlen würde. Ich würde diesen Streit gern noch einmal hören."
+  },
+  {
     "level": 9,
     "id": "story-9",
     "title": "A worn tag",
@@ -43,6 +88,24 @@
     "sender": "Mara",
     "text": "There is an old number under Koda’s collar. I thought it was a shelter tag. Now I keep noticing the same prefix on ambulance forms. Somebody tried to keep track of him.",
     "deText": "Unter Kodas Halsband steht eine alte Nummer. Ich dachte, es wäre eine Tierheimmarke. Jetzt fällt mir dieselbe Vorsilbe auf Rettungswagenformularen auf. Jemand wollte wissen, wo er ist."
+  },
+  {
+    "level": 10,
+    "id": "story-10",
+    "title": "Names on paper",
+    "deTitle": "Namen auf Papier",
+    "sender": "Imani",
+    "text": "Do not let the word transferred become an answer by itself. We need dates, destinations and the name of the person who signed. These records describe people. Someone may still be waiting for them.",
+    "deText": "Lass das Wort verlegt nicht als Antwort genügen. Wir brauchen Daten, Ziele und den Namen unter der Unterschrift. Diese Akten beschreiben Menschen. Vielleicht wartet noch jemand auf sie."
+  },
+  {
+    "level": 11,
+    "id": "story-11",
+    "title": "Blankets",
+    "deTitle": "Decken",
+    "sender": "Mara",
+    "text": "You know this smell, do you not, Koda? Old blankets, soap, a little rain. I used to think home was an address. Watching you now, I think it might be something you recognize before you can explain it.",
+    "deText": "Du kennst diesen Geruch, nicht wahr, Koda? Alte Decken, Seife, ein bisschen Regen. Früher hielt ich Zuhause für eine Adresse. Wenn ich dich so sehe, ist es vielleicht etwas, das man erkennt, bevor man es erklären kann."
   },
   {
     "level": 12,
@@ -54,6 +117,33 @@
     "deText": "Dein Name steht in der Wartungsliste, Mara. Aber es gibt zwei verschiedene Unterschriften. Ich vergleiche die Änderungen einzeln. Ein Name auf einer Seite ist nicht die ganze Geschichte."
   },
   {
+    "level": 13,
+    "id": "story-13",
+    "title": "Leave a light",
+    "deTitle": "Ein Licht bleibt an",
+    "sender": "Levin",
+    "text": "I have left a lamp by the east gate. Nothing official. Just something to look for when you come back. You do not have to solve the whole world before you are allowed a warm meal.",
+    "deText": "Ich habe eine Lampe am Osttor angelassen. Nichts Offizielles. Nur etwas, nach dem du bei deiner Rückkehr Ausschau halten kannst. Du musst nicht die ganze Welt retten, bevor du eine warme Mahlzeit verdient hast."
+  },
+  {
+    "level": 14,
+    "id": "story-14",
+    "title": "Under the new paint",
+    "deTitle": "Unter der neuen Farbe",
+    "sender": "Mara",
+    "text": "My father taught me to look beneath a fresh coat of paint before buying an old machine. I thought he meant rust. Here, every new inspection sticker makes me wonder what someone wanted covered.",
+    "deText": "Mein Vater sagte, vor dem Kauf einer alten Maschine solle ich unter die frische Farbe sehen. Ich dachte, er meinte Rost. Hier frage ich mich bei jedem neuen Prüfaufkleber, was jemand verdecken wollte."
+  },
+  {
+    "level": 15,
+    "id": "story-15",
+    "title": "Keep the original",
+    "deTitle": "Das Original bewahren",
+    "sender": "Imani",
+    "text": "Photograph the pages before you move them. Water can erase a date with one careless touch. A copy helps us read. The original helps us show that we did not invent what we found.",
+    "deText": "Fotografiere die Seiten, bevor du sie bewegst. Wasser kann ein Datum bei einer unvorsichtigen Berührung verwischen. Eine Kopie hilft beim Lesen. Das Original hilft zu zeigen, dass wir unseren Fund nicht erfunden haben."
+  },
+  {
     "level": 16,
     "id": "story-16",
     "title": "What silence hides",
@@ -61,6 +151,15 @@
     "sender": "Mara",
     "text": "Jonas always waited for the reply before he touched the transmitter again. I was the impatient one. I keep hearing that little pause in these recordings. I am not ready to call it a memory.",
     "deText": "Jonas wartete immer auf die Antwort, bevor er den Sender wieder berührte. Ich war die Ungeduldige. Ich höre diese kleine Pause ständig in den Aufnahmen. Ich bin noch nicht bereit, sie eine Erinnerung zu nennen."
+  },
+  {
+    "level": 17,
+    "id": "story-17",
+    "title": "Small footsteps",
+    "deTitle": "Kleine Schritte",
+    "sender": "Mara",
+    "text": "When the sirens started, I listened for engines and missed the quieter sounds. Footsteps. A door opening. Koda whining under a seat. I try to listen differently now. The small sounds matter.",
+    "deText": "Als die Sirenen losgingen, hörte ich auf Motoren und überhörte die leiseren Geräusche. Schritte. Eine Tür. Koda, der unter einem Sitz winselte. Heute versuche ich anders zuzuhören. Die kleinen Geräusche zählen."
   },
   {
     "level": 18,
@@ -72,6 +171,33 @@
     "deText": "Koda ist gesund, aber deshalb ist er kein Heilmittel. Verschiedene Tiere reagieren unterschiedlich. Er ist dein Begleiter, keine Versuchsprobe. Die Antwort muss aus sorgfältiger Arbeit mit den Kulturen kommen."
   },
   {
+    "level": 19,
+    "id": "story-19",
+    "title": "Following the water",
+    "deTitle": "Dem Wasser folgen",
+    "sender": "Mara",
+    "text": "There used to be a path beside the reservoir where we went when nobody wanted to talk. Jonas always walked ahead, then waited at the next bend. I am holding on to that. The possibility that he is waiting.",
+    "deText": "Am Reservoir gab es einen Weg, den wir gingen, wenn niemand reden wollte. Jonas lief immer voraus und wartete dann hinter der nächsten Kurve. Daran halte ich mich fest. An der Möglichkeit, dass er wartet."
+  },
+  {
+    "level": 20,
+    "id": "story-20",
+    "title": "Clear channel",
+    "deTitle": "Freier Kanal",
+    "sender": "Levin",
+    "text": "I am keeping the maintenance channel clear for you. No routine traffic, no announcements. If you hear a weak voice, let it finish. We can wait for the details until everyone knows they have been heard.",
+    "deText": "Ich halte den Wartungskanal für dich frei. Kein Routineverkehr, keine Durchsagen. Wenn du eine schwache Stimme hörst, lass sie ausreden. Die Einzelheiten können warten, bis alle wissen, dass sie gehört wurden."
+  },
+  {
+    "level": 21,
+    "id": "story-21",
+    "title": "Almost there",
+    "deTitle": "Fast da",
+    "sender": "Mara",
+    "text": "I have imagined finding Jonas so many times that I do not know what I will say first. Probably something useless about his coat. Then I will get him out. Some things can wait until we are safe.",
+    "deText": "Ich habe mir so oft vorgestellt, Jonas zu finden, dass ich nicht weiß, was ich zuerst sagen werde. Vermutlich etwas Belangloses über seinen Mantel. Dann hole ich ihn heraus. Manches kann warten, bis wir sicher sind."
+  },
+  {
     "level": 22,
     "id": "story-22",
     "title": "Keep the failures",
@@ -81,6 +207,33 @@
     "deText": "Der Versuch ist heute Morgen gescheitert. Ich bewahre das Ergebnis auf. Wir werden Aster nicht wiederholen, indem wir unerwünschte Zahlen verstecken. Hoffnung muss Ehrlichkeit aushalten."
   },
   {
+    "level": 23,
+    "id": "story-23",
+    "title": "A careful hand",
+    "deTitle": "Eine ruhige Hand",
+    "sender": "Mara",
+    "text": "Lena used to label everything twice. I teased her for it. She said the second label was for the day the first one got wet. I am grateful for every small thing she refused to leave to chance.",
+    "deText": "Lena beschriftete früher alles zweimal. Ich zog sie damit auf. Sie sagte, das zweite Etikett sei für den Tag, an dem das erste nass würde. Ich bin dankbar für jede Kleinigkeit, die sie nicht dem Zufall überlassen wollte."
+  },
+  {
+    "level": 24,
+    "id": "story-24",
+    "title": "One switch at a time",
+    "deTitle": "Ein Schalter nach dem anderen",
+    "sender": "Levin",
+    "text": "Do not rush the shutdown. A fan going quiet can sound like success while pressure builds somewhere else. Watch the seals, then the gauges. We are trying to leave the next crew a place they can enter safely.",
+    "deText": "Überstürze die Abschaltung nicht. Ein verstummender Lüfter kann nach Erfolg klingen, während anderswo Druck entsteht. Erst die Dichtungen, dann die Anzeigen. Wir wollen der nächsten Mannschaft einen Ort hinterlassen, den sie sicher betreten kann."
+  },
+  {
+    "level": 25,
+    "id": "story-25",
+    "title": "What the paper cannot say",
+    "deTitle": "Was das Papier nicht sagt",
+    "sender": "Jonas",
+    "text": "When you find the order, keep everything attached to it. Routing slips, timestamps, even the blank pages. We spent too long being told there was no record. This time, nobody gets to choose which parts survive.",
+    "deText": "Wenn du den Befehl findest, bewahre alles auf, was dazugehört. Laufzettel, Zeitstempel, selbst leere Seiten. Zu lange hieß es, es gebe keine Aufzeichnung. Diesmal entscheidet niemand, welche Teile übrig bleiben."
+  },
+  {
     "level": 26,
     "id": "story-26",
     "title": "More than one voice",
@@ -88,5 +241,32 @@
     "sender": "Jonas",
     "text": "I have a reply from another settlement. They want the original records, not a speech. Once they have copies, no single tower owns the truth. Keep that channel open, sister.",
     "deText": "Ich habe eine Antwort aus einer anderen Siedlung. Sie wollen die Originalakten, keine Rede. Sobald sie Kopien haben, gehört die Wahrheit keinem einzelnen Turm mehr. Halte den Kanal offen, Schwester."
+  },
+  {
+    "level": 27,
+    "id": "story-27",
+    "title": "A different silence",
+    "deTitle": "Eine andere Stille",
+    "sender": "Mara",
+    "text": "Koda used to wake every time a motor stopped. I did too. We learned that silence could mean trouble. I want to give him a morning when quiet is only quiet. Nothing to run from.",
+    "deText": "Koda wachte früher auf, sobald ein Motor verstummte. Ich auch. Wir lernten, dass Stille Gefahr bedeuten konnte. Ich möchte ihm einen Morgen schenken, an dem Ruhe einfach Ruhe ist. Nichts, vor dem wir fliehen müssen."
+  },
+  {
+    "level": 28,
+    "id": "story-28",
+    "title": "Questions before answers",
+    "deTitle": "Fragen vor Antworten",
+    "sender": "Imani",
+    "text": "Hope needs careful records as much as good news. We repeat the measurements, share the failures and ask permission before anyone takes a risk. That is how this becomes something people can trust.",
+    "deText": "Hoffnung braucht sorgfältige Aufzeichnungen genauso wie gute Nachrichten. Wir wiederholen Messungen, teilen Fehlschläge und fragen um Erlaubnis, bevor jemand ein Risiko eingeht. So entsteht etwas, dem Menschen vertrauen können."
+  },
+  {
+    "level": 29,
+    "id": "story-29",
+    "title": "A bowl by the door",
+    "deTitle": "Ein Napf an der Tür",
+    "sender": "Ada",
+    "text": "There is a bowl for Koda by the clinic door. And a chair for you, Mara. You do not have to be on your way somewhere every time we see you. Sometimes coming home is the whole task.",
+    "deText": "An der Kliniktür steht ein Napf für Koda. Und ein Stuhl für dich, Mara. Du musst nicht bei jedem Besuch schon wieder auf dem Weg irgendwohin sein. Manchmal ist Heimkommen die ganze Aufgabe."
   }
 ]

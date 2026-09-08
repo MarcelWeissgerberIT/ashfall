@@ -1,0 +1,805 @@
+{
+  "provider": "Microsoft Edge online neural text-to-speech via edge-tts",
+  "recordings": [
+    {
+      "id": "story-4",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Before the collapse, nobody listened to a water pump. Now the whole colony knows when ours stops. Take your time with the repair, Mara. A steady flow is worth more than a quick fix.",
+      "sha256": "cf17f0a8f0b20b44245f66926093feed22e16e69461c76d38fb784d5aea0105e"
+    },
+    {
+      "id": "story-2",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Als ich Koda fand, stand die Rettungswagentür noch offen. Niemand war da, den ich nach seinem Besitzer fragen konnte. Also gab ich ihm ein Versprechen. Wenn ich einen Ausweg fände, dann für uns beide.",
+      "sha256": "ea7fafad78c4def0d5d1960d4597a54952ae7fd5beb12f6b90860cc293a6ad94"
+    },
+    {
+      "id": "story-4",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Vor dem Zusammenbruch hörte niemand einer Wasserpumpe zu. Jetzt merkt die ganze Kolonie, wenn unsere stillsteht. Nimm dir Zeit für die Reparatur, Mara. Ein verlässlicher Durchfluss ist mehr wert als eine schnelle Notlösung.",
+      "sha256": "6f737870d0afce38d4ab02519ec1e65781c50ae92bc4f7dcd40915440313aa72"
+    },
+    {
+      "id": "story-2",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "When I found Koda, the ambulance door was still open. I could not find anyone to ask whose dog he was. So I made him a promise. If I found a way out, it would be for both of us.",
+      "sha256": "0082db5babf8056ab64f1b75fc0f65a7026f4331fefd19b50ee7ffeed0ac14a5"
+    },
+    {
+      "id": "story-5",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Jonas holte mich früher nach der Spätschicht ab. Er schimpfte über die Kälte und gab mir dann die warmen Handschuhe, die er trotzdem mitgebracht hatte. Ich erwarte noch immer, ihn auf so einem Bahnsteig zu sehen.",
+      "sha256": "8e5c89bf5e2188a30c955d7094882f69ac0dbb1b39ec3f94aa675f846ec859a5"
+    },
+    {
+      "id": "story-7",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ich machte früher einen kleinen Bleistiftstrich in jedes reparierte Funkgerät. Nicht für die Firma. Für den Menschen, der es als Nächstes öffnen würde. Ein Zeichen, dass jemand hier war und versucht hatte, es zum Laufen zu bringen.",
+      "sha256": "5fa54adb14adc9b31eabeae5f06d8a7dc44ac72d2e21b9eb6a3a5d05cf7adc91"
+    },
+    {
+      "id": "story-5",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Jonas used to meet me after the late shift. He complained about the cold, then handed me the warm gloves he had brought anyway. I keep expecting to see him on a platform like this.",
+      "sha256": "9b1ce2c72fbc1d7afc326034fcaf0c39617671c1af19eb087c2200ff651d75bd"
+    },
+    {
+      "id": "story-7",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "I used to put a small pencil mark inside every radio I repaired. Not for the company. For whoever opened it next. A way of saying someone had been here and tried to make it work.",
+      "sha256": "04e66a0787d2b252366acf00969d1c4436fa4b26f06467a775e2af29d557e52d"
+    },
+    {
+      "id": "story-10",
+      "language": "en",
+      "speaker": "Imani",
+      "voice": "en-GB-LibbyNeural",
+      "text": "Do not let the word transferred become an answer by itself. We need dates, destinations and the name of the person who signed. These records describe people. Someone may still be waiting for them.",
+      "sha256": "37a5646ab3c0e5d595a3d1f508ca77913df933a1eddc51eedd5554b392721956"
+    },
+    {
+      "id": "story-8",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Der Ersatzschlüssel lag unter einer Pflanze, die Lena ständig zu gießen vergaß. Jonas meinte, das sei der sicherste Ort im Haus, weil niemand einen vertrockneten Farn stehlen würde. Ich würde diesen Streit gern noch einmal hören.",
+      "sha256": "0b9b3c5ce7c014752315456485163f0195c299c80f279f13a6cc45a815880d55"
+    },
+    {
+      "id": "story-10",
+      "language": "de",
+      "speaker": "Imani",
+      "voice": "de-DE-AmalaNeural",
+      "text": "Lass das Wort verlegt nicht als Antwort genügen. Wir brauchen Daten, Ziele und den Namen unter der Unterschrift. Diese Akten beschreiben Menschen. Vielleicht wartet noch jemand auf sie.",
+      "sha256": "359fea63a1769929d2bd60c7f58fc84e4a5ecb692ac892083ef3ea47102f4f32"
+    },
+    {
+      "id": "story-8",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "We kept the spare key under a plant that Lena always forgot to water. Jonas said it was the safest place in the building because nobody would steal a dead fern. I wish I could hear that argument again.",
+      "sha256": "c6235545e260d92d094a22c133c18849eb1cca8f538c60f366d407496073e99d"
+    },
+    {
+      "id": "story-11",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Du kennst diesen Geruch, nicht wahr, Koda? Alte Decken, Seife, ein bisschen Regen. Früher hielt ich Zuhause für eine Adresse. Wenn ich dich so sehe, ist es vielleicht etwas, das man erkennt, bevor man es erklären kann.",
+      "sha256": "03b7bc4dd50328205409c80bda7db19036806190fa4ee40af591f65e5f5bac7c"
+    },
+    {
+      "id": "story-13",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "I have left a lamp by the east gate. Nothing official. Just something to look for when you come back. You do not have to solve the whole world before you are allowed a warm meal.",
+      "sha256": "d51908636b58fadbd697a4d62cd7b0f8f3711a54796cb3c160e932931184de27"
+    },
+    {
+      "id": "story-13",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Ich habe eine Lampe am Osttor angelassen. Nichts Offizielles. Nur etwas, nach dem du bei deiner Rückkehr Ausschau halten kannst. Du musst nicht die ganze Welt retten, bevor du eine warme Mahlzeit verdient hast.",
+      "sha256": "9a9869381a4cb0749eb1579c93da0c02aeb1465ce5cf16743faaf93146e31b30"
+    },
+    {
+      "id": "story-14",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Mein Vater sagte, vor dem Kauf einer alten Maschine solle ich unter die frische Farbe sehen. Ich dachte, er meinte Rost. Hier frage ich mich bei jedem neuen Prüfaufkleber, was jemand verdecken wollte.",
+      "sha256": "c5060afec6c06d507bc21f259317f7f51a02940f89ac935f2a78c7d5df8f5f37"
+    },
+    {
+      "id": "story-11",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "You know this smell, do you not, Koda? Old blankets, soap, a little rain. I used to think home was an address. Watching you now, I think it might be something you recognize before you can explain it.",
+      "sha256": "a9e0f53262bd3a803fe5f8ceccb69107ea04882ebc3776ed457c424654b20da3"
+    },
+    {
+      "id": "story-14",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "My father taught me to look beneath a fresh coat of paint before buying an old machine. I thought he meant rust. Here, every new inspection sticker makes me wonder what someone wanted covered.",
+      "sha256": "0c1d539688d88b1d3935060fa03b9e1a799a033073c8d6b4f7e6b263e426d100"
+    },
+    {
+      "id": "story-15",
+      "language": "en",
+      "speaker": "Imani",
+      "voice": "en-GB-LibbyNeural",
+      "text": "Photograph the pages before you move them. Water can erase a date with one careless touch. A copy helps us read. The original helps us show that we did not invent what we found.",
+      "sha256": "eddb421c17055ad30776fe89ad35e487e8d3058985dbbb7acd76cc5b37133dc3"
+    },
+    {
+      "id": "story-15",
+      "language": "de",
+      "speaker": "Imani",
+      "voice": "de-DE-AmalaNeural",
+      "text": "Fotografiere die Seiten, bevor du sie bewegst. Wasser kann ein Datum bei einer unvorsichtigen Berührung verwischen. Eine Kopie hilft beim Lesen. Das Original hilft zu zeigen, dass wir unseren Fund nicht erfunden haben.",
+      "sha256": "3348cebc9641ca9a4ae3cf61ead298e00b1093532d1c45f1cc70c735f611ef3d"
+    },
+    {
+      "id": "story-17",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Als die Sirenen losgingen, hörte ich auf Motoren und überhörte die leiseren Geräusche. Schritte. Eine Tür. Koda, der unter einem Sitz winselte. Heute versuche ich anders zuzuhören. Die kleinen Geräusche zählen.",
+      "sha256": "d74bc909e4cd40638ad88507b2cf3d3eeffbdaa739894514bc29352e5a1fb081"
+    },
+    {
+      "id": "story-19",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Am Reservoir gab es einen Weg, den wir gingen, wenn niemand reden wollte. Jonas lief immer voraus und wartete dann hinter der nächsten Kurve. Daran halte ich mich fest. An der Möglichkeit, dass er wartet.",
+      "sha256": "3e5b7db7579941a3eb01e9129d7dcd5f390522465b5b4230c02b1d85587b40d1"
+    },
+    {
+      "id": "story-17",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "When the sirens started, I listened for engines and missed the quieter sounds. Footsteps. A door opening. Koda whining under a seat. I try to listen differently now. The small sounds matter.",
+      "sha256": "0a975cd63ef36239327c7f623ad4bbd1801f6f98ac98f36811f47fa5f828eddb"
+    },
+    {
+      "id": "story-20",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "I am keeping the maintenance channel clear for you. No routine traffic, no announcements. If you hear a weak voice, let it finish. We can wait for the details until everyone knows they have been heard.",
+      "sha256": "7b2a351de44674808b72edd7f5e991abcd10a434c8f4ce79ec721c921b770532"
+    },
+    {
+      "id": "story-20",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Ich halte den Wartungskanal für dich frei. Kein Routineverkehr, keine Durchsagen. Wenn du eine schwache Stimme hörst, lass sie ausreden. Die Einzelheiten können warten, bis alle wissen, dass sie gehört wurden.",
+      "sha256": "b3c7357f2a7eb6e87297c996f15f6477afec05706f65b70171c6cb5122aec8c8"
+    },
+    {
+      "id": "story-19",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "There used to be a path beside the reservoir where we went when nobody wanted to talk. Jonas always walked ahead, then waited at the next bend. I am holding on to that. The possibility that he is waiting.",
+      "sha256": "eb48562c5a43126b1e2adf4e9edbb92aa0c4fdedc84f3a1930d23af14925a62d"
+    },
+    {
+      "id": "story-21",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ich habe mir so oft vorgestellt, Jonas zu finden, dass ich nicht weiß, was ich zuerst sagen werde. Vermutlich etwas Belangloses über seinen Mantel. Dann hole ich ihn heraus. Manches kann warten, bis wir sicher sind.",
+      "sha256": "74e47b6c968ea0ca02ab2c6990d9caeb88437218fca055b859b2296fcf68cca2"
+    },
+    {
+      "id": "story-23",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Lena beschriftete früher alles zweimal. Ich zog sie damit auf. Sie sagte, das zweite Etikett sei für den Tag, an dem das erste nass würde. Ich bin dankbar für jede Kleinigkeit, die sie nicht dem Zufall überlassen wollte.",
+      "sha256": "e647897e0325b917f7cde15b4272ee2310f00abe0e3b5035f15eaa799b238075"
+    },
+    {
+      "id": "story-24",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Do not rush the shutdown. A fan going quiet can sound like success while pressure builds somewhere else. Watch the seals, then the gauges. We are trying to leave the next crew a place they can enter safely.",
+      "sha256": "3d809ebbcf48d1a51db4f5ec75d9674bcf36b418f8b209b7c35b0c2607a2cace"
+    },
+    {
+      "id": "story-21",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "I have imagined finding Jonas so many times that I do not know what I will say first. Probably something useless about his coat. Then I will get him out. Some things can wait until we are safe.",
+      "sha256": "95ea8c4a2b82cf18468637966b0e27bbcc0ab564f3a7ab55a7eed2edabf3f0fb"
+    },
+    {
+      "id": "story-23",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Lena used to label everything twice. I teased her for it. She said the second label was for the day the first one got wet. I am grateful for every small thing she refused to leave to chance.",
+      "sha256": "dbb1e6628de6954c2247d3a1595863aa8568aa24d9d81772e87de72f4a37416f"
+    },
+    {
+      "id": "story-24",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Überstürze die Abschaltung nicht. Ein verstummender Lüfter kann nach Erfolg klingen, während anderswo Druck entsteht. Erst die Dichtungen, dann die Anzeigen. Wir wollen der nächsten Mannschaft einen Ort hinterlassen, den sie sicher betreten kann.",
+      "sha256": "97fa2af14b5216f7dce3db0cf6a412eb5ea5fe721448d755c91aa5379b25f195"
+    },
+    {
+      "id": "story-25",
+      "language": "en",
+      "speaker": "Jonas",
+      "voice": "en-US-GuyNeural",
+      "text": "When you find the order, keep everything attached to it. Routing slips, timestamps, even the blank pages. We spent too long being told there was no record. This time, nobody gets to choose which parts survive.",
+      "sha256": "c025cbffd5237fa630aeb145e7dd37b8fb3e398b45dd63a24f6ec68a47e53a71"
+    },
+    {
+      "id": "story-25",
+      "language": "de",
+      "speaker": "Jonas",
+      "voice": "de-DE-KillianNeural",
+      "text": "Wenn du den Befehl findest, bewahre alles auf, was dazugehört. Laufzettel, Zeitstempel, selbst leere Seiten. Zu lange hieß es, es gebe keine Aufzeichnung. Diesmal entscheidet niemand, welche Teile übrig bleiben.",
+      "sha256": "590f5cd0a1af36a65b9f798d82cce160bf3173bff287d2a408d166a64240b326"
+    },
+    {
+      "id": "story-27",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Koda wachte früher auf, sobald ein Motor verstummte. Ich auch. Wir lernten, dass Stille Gefahr bedeuten konnte. Ich möchte ihm einen Morgen schenken, an dem Ruhe einfach Ruhe ist. Nichts, vor dem wir fliehen müssen.",
+      "sha256": "ad8907a7e804b3871ad66b6a54502d869e32fb38a4608ed27ef050614d1605ad"
+    },
+    {
+      "id": "story-28",
+      "language": "en",
+      "speaker": "Imani",
+      "voice": "en-GB-LibbyNeural",
+      "text": "Hope needs careful records as much as good news. We repeat the measurements, share the failures and ask permission before anyone takes a risk. That is how this becomes something people can trust.",
+      "sha256": "374f2ed60339e2a3c204e29349f4e72b43bbe9a4865c62bf99ccaa5814ae0dd3"
+    },
+    {
+      "id": "story-28",
+      "language": "de",
+      "speaker": "Imani",
+      "voice": "de-DE-AmalaNeural",
+      "text": "Hoffnung braucht sorgfältige Aufzeichnungen genauso wie gute Nachrichten. Wir wiederholen Messungen, teilen Fehlschläge und fragen um Erlaubnis, bevor jemand ein Risiko eingeht. So entsteht etwas, dem Menschen vertrauen können.",
+      "sha256": "a67f93fd08a96bd62ae9f5d1840150b3715da59b6c9b890ca9c3b879486d1f45"
+    },
+    {
+      "id": "story-29",
+      "language": "en",
+      "speaker": "Ada",
+      "voice": "en-US-JennyNeural",
+      "text": "There is a bowl for Koda by the clinic door. And a chair for you, Mara. You do not have to be on your way somewhere every time we see you. Sometimes coming home is the whole task.",
+      "sha256": "5a5fe28448a9cc0ad2c64c92cfc96334870a19430666157413a89c05815cc085"
+    },
+    {
+      "id": "story-27",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Koda used to wake every time a motor stopped. I did too. We learned that silence could mean trouble. I want to give him a morning when quiet is only quiet. Nothing to run from.",
+      "sha256": "68f36e378bfeebb6ca738a73dc88d5e72af7e320f50de32dc7f6f3d25eb4df01"
+    },
+    {
+      "id": "story-29",
+      "language": "de",
+      "speaker": "Ada",
+      "voice": "de-DE-KatjaNeural",
+      "text": "An der Kliniktür steht ein Napf für Koda. Und ein Stuhl für dich, Mara. Du musst nicht bei jedem Besuch schon wieder auf dem Weg irgendwohin sein. Manchmal ist Heimkommen die ganze Aufgabe.",
+      "sha256": "6d8b2c2e88d56d81db1cc5281c37d261c17ad948ad3c8e1604a3ecc0c006536c"
+    },
+    {
+      "id": "briefing-0",
+      "language": "de",
+      "speaker": "Control",
+      "voice": "de-DE-ConradNeural",
+      "text": "Mara, Station Zero liegt unter dem Kontrollpunkt. Suche Metallschrott und einen Werkzeugkasten. Baue eine Ersatzsicherung, finde Treibstoff und starte den Generator. Halte Koda bei dir und erreiche das Bunkertor.",
+      "sha256": "61973b29b9ff36e41925275f78805e143139c253b6d8d54aec540a6c7cf3212d"
+    },
+    {
+      "id": "briefing-1",
+      "language": "en",
+      "speaker": "Control",
+      "voice": "en-GB-RyanNeural",
+      "text": "You are inside Station Zero. Find the keycard. Build a protective sample carrier from metal scrap and a glass bottle, using your toolbox. Then open the laboratory, secure N-04 and reach the roof access.",
+      "sha256": "b29023920a36f8b259f26705d9ae75ad3f02729a2c55147d67768babe804d94b"
+    },
+    {
+      "id": "briefing-0",
+      "language": "en",
+      "speaker": "Control",
+      "voice": "en-GB-RyanNeural",
+      "text": "Mara, Station Zero lies beneath the checkpoint. Search for metal scrap and a toolbox. Build a replacement fuse, find fuel, then restore generator power. Keep Koda close and reach the bunker gate.",
+      "sha256": "374bd77db9e2526a4dcc33d918cc2800775617187f9bd66d1fd1cd9f256b8c4f"
+    },
+    {
+      "id": "briefing-1",
+      "language": "de",
+      "speaker": "Control",
+      "voice": "de-DE-ConradNeural",
+      "text": "Du bist in Station Zero. Finde die Schlüsselkarte. Baue mit dem Werkzeugkasten einen Probenbehälter aus Metallschrott und einer Glasflasche. Öffne dann das Labor, sichere N-04 und erreiche den Dachzugang.",
+      "sha256": "1bf8179ce87ac4f4c39ff76e5d8148e278890b49db339cb2ec50d8ede1674977"
+    },
+    {
+      "id": "briefing-2",
+      "language": "en",
+      "speaker": "Control",
+      "voice": "en-GB-RyanNeural",
+      "text": "A light circles above the rooftops. Power the transmitter and hold out until evacuation arrives.",
+      "sha256": "b8d442529b35883ee38d634e94a290881ca098f2b4f976549594e5d348b14b3e"
+    },
+    {
+      "id": "briefing-2",
+      "language": "de",
+      "speaker": "Control",
+      "voice": "de-DE-ConradNeural",
+      "text": "Ein Licht kreist über den Dächern. Versorge den Sender mit Strom und halte bis zur Evakuierung durch.",
+      "sha256": "88f8f66430b140bf17dcda6c70374c11e0d0004573ece70c1db9c8002a1452af"
+    },
+    {
+      "id": "briefing-3",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Beyond the walls, people still live. Doctor Imani needs the sample. Engineer Levin needs your help restoring clean water. Koda finally has somewhere safe to rest.",
+      "sha256": "090beb6bea42553f69486d959fee6675b3cd7ce99730e0ead6d37e2a63e20cab"
+    },
+    {
+      "id": "briefing-4",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Haven’s taps are running dry. Search the maintenance shed, repair the pump and open a route to the rail depot.",
+      "sha256": "68cb4485199dc1f0db44f49220199595a06d93dc7874d91af726264418284689"
+    },
+    {
+      "id": "briefing-3",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Hinter den Mauern leben noch Menschen. Doktor Imani braucht die Probe. Ingenieur Levin braucht Hilfe bei der Wasserversorgung. Koda kann endlich sicher ausruhen.",
+      "sha256": "61e6fb776dc8abdc531a742d143c35027b21891e0dae71d669634605f0ba19a7"
+    },
+    {
+      "id": "briefing-5",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Das Wasser fließt wieder. Jetzt braucht Haven Strom. Berge eine Batterie im Depot, aktiviere das Relais und kehre mit Koda zur Kolonie zurück.",
+      "sha256": "a5c3dbea35b4c63552d8cb2d53e733965806fbd0891fe6b858fadfa7d5b56281"
+    },
+    {
+      "id": "briefing-5",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "The water is flowing. Now Haven needs power. Recover a battery from the depot, activate the relay and get back to the colony with Koda.",
+      "sha256": "3ccadcfe68a42d5155644042cc78c2a563bbd7586905a743665e42fc0ff8f3b1"
+    },
+    {
+      "id": "briefing-4",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Havens Wasserhähne bleiben trocken. Durchsuche den Wartungsschuppen, repariere die Pumpe und finde den Weg zum Bahndepot.",
+      "sha256": "fd8e322622d16e735c12031f68c5bf9f10ee425d3e748bac1495292d5c621f0a"
+    },
+    {
+      "id": "briefing-6",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Haven has light and clean water. Imani and Levin welcome Mara back, but a familiar service code is calling from beyond the walls.",
+      "sha256": "0109961f3c8d49a081e0cb903e4ecb79a73cefbe3266d0ec14b7238524042df2"
+    },
+    {
+      "id": "briefing-7",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "A transmission repeats Mara’s old service code. Follow it to the district relay before the signal dies.",
+      "sha256": "4ac5a364ae03f9433dfa2340fbce43fa3620179583d9b205bfdab9d0c277b083"
+    },
+    {
+      "id": "briefing-6",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Haven hat Licht und sauberes Wasser. Imani und Levin heißen Mara willkommen, doch hinter den Mauern ruft eine vertraute Dienstkennung.",
+      "sha256": "c4976a13f5b1837bde93b745d33373899e159dd95a525d27899e2c354bc3335c"
+    },
+    {
+      "id": "briefing-8",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Mara returns to the home she abandoned. Her brother Jonas left a recorder behind a broken service panel.",
+      "sha256": "5a8efc8a14d8263c864ca2a0295328e6c533d657eb7569beb89d0698cf5ce4e7"
+    },
+    {
+      "id": "briefing-7",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Ein Funkspruch wiederholt Maras alte Dienstkennung. Folge ihm zum Bezirksrelais, bevor das Signal verstummt.",
+      "sha256": "2b284fabf3f5ad68476e03ffd8c8bee01939f4819b88d96c40291f1586cd57a1"
+    },
+    {
+      "id": "briefing-8",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Mara kehrt in ihre verlassene Wohnung zurück. Ihr Bruder Jonas versteckte ein Aufnahmegerät hinter einer defekten Wartungsklappe.",
+      "sha256": "bb006e1b70eb9d866a6fa5e5de29e4486ab409bcfcc87ca0606d81379f7415e5"
+    },
+    {
+      "id": "briefing-9",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "An evacuation bus never reached the depot. Restore its recorder and trace the passengers’ last route.",
+      "sha256": "80d70483f695b8ddd9bbe38367ef33d1354bc25518e173ad14c9357e6eba4cc2"
+    },
+    {
+      "id": "briefing-9",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Ein Evakuierungsbus erreichte das Depot nie. Versorge seinen Rekorder mit Strom und verfolge die letzte Route der Fahrgäste.",
+      "sha256": "5950147b76fcc68a843e53f9431f7ac05c174c72e4108bc7514e4bc3c78b01d5"
+    },
+    {
+      "id": "briefing-10",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "The hospital intake desk still holds sealed transport records. Recover them without spreading the contaminated dust.",
+      "sha256": "161bdb170b6de9cdae3c1d63994793085117c570ab4d982b3947f6683bad14d9"
+    },
+    {
+      "id": "briefing-10",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "In der Krankenhausaufnahme liegen versiegelte Transportakten. Berge sie, ohne den kontaminierten Staub zu verteilen.",
+      "sha256": "0d1b978f101f70c41860e7e18e14173130d334854340b4065deb4482d15a0f73"
+    },
+    {
+      "id": "briefing-11",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Ein Tierheim nutzte Mercys Transportnetz. Koda zieht zu seinem beschädigten Tor. Durchsuche die Registrierung.",
+      "sha256": "25322f770fed1e897146a40d6851bdff342135539989d06e8bfc70113c7c4450"
+    },
+    {
+      "id": "briefing-11",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "A veterinary shelter used Mercy’s transport network. Koda pulls toward its broken gate. Search the registration office.",
+      "sha256": "48b631ecbb29d9029cf4e55893887cf7b233ad4c64cbed79e004aedddfbd09db"
+    },
+    {
+      "id": "briefing-12",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Kehre mit den Krankenhausbelegen nach Haven zurück. Imani und Levin gleichen sie mit Maras Wartungsbuch ab.",
+      "sha256": "5486e25fa5b5f39b9af4b8f4039eb0887905a02f669944d7d8495e8d36c98e48"
+    },
+    {
+      "id": "briefing-12",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Return to Haven with the hospital evidence. Imani and Levin must compare it with Mara’s service log.",
+      "sha256": "f566fc9162dd84d1ceb0ea32b7d06dfc47ccad583d25f7fac58a2ab3b955545f"
+    },
+    {
+      "id": "briefing-13",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Reach an Aster filter station. Bring its local terminal online and retrieve the release manifest.",
+      "sha256": "16adebb49dcd8e433cead23d1464ef2031cf2d5ed84f93126811c1a0b3473136"
+    },
+    {
+      "id": "briefing-14",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Imani needs a sealed filter sample. The station still exhales dust; secure the extractor before opening the archive.",
+      "sha256": "26221b817528a110260c7c8367295cc81e4edb41105c7f3b41a5c92d5b12bb41"
+    },
+    {
+      "id": "briefing-13",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Erreiche eine Aster-Filterstation. Starte das lokale Terminal und berge die Freigabeliste.",
+      "sha256": "603b64b2643eb84af5c52728b0e7a9e7bfa2b612c3f4bf419ad01ac26e3d16d4"
+    },
+    {
+      "id": "briefing-14",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Imani braucht eine versiegelte Filterprobe. Die Station stößt noch Staub aus. Sichere den Abzug, bevor du das Archiv öffnest.",
+      "sha256": "cce2b658b94413e94b0cf2aff010124c3bb8a12d4ef886f28ec0614c931573e7"
+    },
+    {
+      "id": "briefing-15",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Ein überflutetes Wartungsarchiv enthält den ersten Vorfallsbericht. Repariere die Entwässerung und kopiere die Beweise.",
+      "sha256": "5a8b222f8a3d55c19e956804059b6d91305b87169b1f35e54aa4036bd233ca92"
+    },
+    {
+      "id": "briefing-15",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "A flooded service archive contains the first incident report. Restart the drainage controls and copy the evidence.",
+      "sha256": "dbafe616354e47791a19e65936a01c213a36fe965b9ab1c8fb3bef64f2859af8"
+    },
+    {
+      "id": "briefing-17",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "The path north is blocked by collapsed barricades. Prepare a fire axe and reach the quarantine records.",
+      "sha256": "fa3d6f4c138a8d315552a63035e57f549675efce73286d5096356ff15dd32069"
+    },
+    {
+      "id": "briefing-16",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Jonas hinterlegte im Rangierbahnhof eine Evakuierungszeitleiste. Versorge den isolierten Rekorder mit Strom.",
+      "sha256": "4b3eab350e423eb5bb592db434e66c64038a3aed82cc50126d1dad7984cb8f13"
+    },
+    {
+      "id": "briefing-16",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Jonas cached an evacuation timeline at the switching yard. Power its isolated recorder.",
+      "sha256": "9a858bc4be7dafa6ef939e78714c608ccdc430440a4236870e8cbc4f3fe0da59"
+    },
+    {
+      "id": "briefing-17",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Eingestürzte Barrikaden versperren den Weg nach Norden. Bereite eine Feuerwehraxt vor und erreiche die Quarantäneakten.",
+      "sha256": "1d5cbe10757d379bc5ea9250e15a5fc37f1e839a0e56427bc34d9526149fc325"
+    },
+    {
+      "id": "briefing-18",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "A small refuge answers Koda’s registration number. Reach Ada and ask about Jonas and the evacuation.",
+      "sha256": "e126f739bfe98d107c72eb76c71e225722fa46d65b7c03d7c34926838322cac1"
+    },
+    {
+      "id": "briefing-18",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Eine kleine Zuflucht antwortet auf Kodas Registriernummer. Erreiche Ada und frage nach Jonas und der Evakuierung.",
+      "sha256": "001c40e2dc7179dd77ce2c146cdef79e173d2ff574a5f57b5720dcf8b2ca5e3c"
+    },
+    {
+      "id": "briefing-19",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Haven’s new water supply passes an old monitoring station. Repair it before the colony draws from the reservoir.",
+      "sha256": "07cd93c56c830825aadeabbecf891820f92a783fbe2d09f8fc8a4a5199f36625"
+    },
+    {
+      "id": "briefing-19",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Havens neue Wasserversorgung führt an einer alten Messstation vorbei. Repariere sie, bevor die Kolonie Reservoirwasser nutzt.",
+      "sha256": "8d0cf60e539a46d2b913a87f199ccd1a28a9dc7f060675f5769eb7a49f55c8f9"
+    },
+    {
+      "id": "briefing-20",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "A narrow-band transmitter is Jonas’s last known contact. Restore its power and hold the signal long enough to connect.",
+      "sha256": "cfc5439c31ad9cfcc5ddf8c95ca9e9991a4b8b01df63789a74ec4d502d01f4d4"
+    },
+    {
+      "id": "briefing-20",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Ein Schmalbandsender ist Jonas’ letzter bekannter Kontakt. Stelle den Strom wieder her und halte das Signal bis zur Verbindung.",
+      "sha256": "ac3a97ab1a7458dfc803b2a67ed4ad8c75c3e11dbfa3cd5a2e7ad803ccc7aba4"
+    },
+    {
+      "id": "briefing-21",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Reach Jonas’s shelter and repair its emergency lift. He cannot walk out without it.",
+      "sha256": "884d89ae914773b7041848c4b90b2fc9181c0b753a4face7f2938b733b445101"
+    },
+    {
+      "id": "briefing-21",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Erreiche Jonas’ Unterschlupf und repariere den Notaufzug. Ohne ihn kann er den Ort nicht verlassen.",
+      "sha256": "cc7739d88b5f93a5c32e96f12c41c73d61d2ed7c2636e520734bdf6a07df0388"
+    },
+    {
+      "id": "briefing-22",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Jonas and Ada reach Haven. Compare their evidence with Imani’s findings and decide what the colony must do next.",
+      "sha256": "06aabd73c160b638624185f608ea122d800dc2871679dbeb81929ed3d9702922"
+    },
+    {
+      "id": "briefing-22",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Jonas und Ada erreichen Haven. Vergleiche ihre Beweise mit Imanis Ergebnissen und kläre den nächsten Schritt.",
+      "sha256": "3e95bda840777ebd058ae55261ced6ea7a76e1c9f99aa69728cc7692c5afb979"
+    },
+    {
+      "id": "briefing-23",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Berge lebensfähige Ausgangskulturen aus der Biobank. Baue einen Schutzbehälter und stabilisiere den Kühlkreislauf.",
+      "sha256": "3dfc87925e03b8534b7f0f1045c4ca1dadae41c3ae1d9db48ec34d241417bfc0"
+    },
+    {
+      "id": "briefing-23",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Recover viable starter cultures from the biobank. Build a protective carrier and stabilize the cooling circuit.",
+      "sha256": "7f17982a2d2f884832e54e7eabbce26956a7a15cb0aacc2f0aab6121f31ebbcc"
+    },
+    {
+      "id": "briefing-24",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "The plants share an emergency circuit. Repair the old interlock so shutting one down will not overload the others.",
+      "sha256": "4a5ed5f8274d02247416e70c4b0e8742beff2448298837a3d3152d6eae7d1a04"
+    },
+    {
+      "id": "briefing-24",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Die Anlagen teilen einen Notstromkreis. Repariere die Verriegelung, damit eine Abschaltung die anderen nicht überlastet.",
+      "sha256": "e05848d02617646c72750869d0bebeea5b723b3cdf445ffb8faf3ff43724a816"
+    },
+    {
+      "id": "briefing-25",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "The public entrance is sealed. Open a service passage and reach Vale’s local archive without restarting the ventilation.",
+      "sha256": "c85e46dba0bb218f0c10b6fc656532d559844ae0d891aa1a0cddfc022ab737c0"
+    },
+    {
+      "id": "briefing-25",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Der öffentliche Eingang ist versiegelt. Öffne einen Wartungsweg und erreiche Vales lokales Archiv, ohne die Lüftung zu starten.",
+      "sha256": "79d3ff73736d8cae5050d5caa168fd127b56f27fc78a5adc8c8c7360437a0a45"
+    },
+    {
+      "id": "briefing-26",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Broadcast the unedited records. Hold the rooftop uplink until neighboring settlements receive the archive.",
+      "sha256": "681e989eccf7acd31e60e0fe2ca92e5fa12307ade527202c84c70e3f257f0b1c"
+    },
+    {
+      "id": "briefing-27",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "The truth is out, but the plant is still breathing. Seal the source chambers and stop the final fan bank.",
+      "sha256": "1b3d8c683868a1c23deb21cf725d74a17c34a9a7223b450ab3640a1566f3de9c"
+    },
+    {
+      "id": "briefing-27",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Die Wahrheit ist bekannt, doch die Anlage atmet noch. Versiegle die Quellkammern und stoppe die letzte Lüfterbank.",
+      "sha256": "30ea1ca5422765ed9a11aff12f2e2e7cc1e223e0210d1fd428426780ff1aff31"
+    },
+    {
+      "id": "briefing-26",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Sende die unbearbeiteten Akten. Halte die Dachverbindung, bis benachbarte Siedlungen das Archiv empfangen haben.",
+      "sha256": "046e686cf443f984af86f74f4b8010588145e7b4c1eabfeb41baf5a930aae38b"
+    },
+    {
+      "id": "briefing-29",
+      "language": "en",
+      "speaker": "Ada",
+      "voice": "en-US-JennyNeural",
+      "text": "Return to Haven. The gates are open to new arrivals, the records belong to everyone, and Mara no longer has to carry the truth alone.",
+      "sha256": "03dcdbb22fe084b34527eb49efc362a30dfeb62df980c1deab3bec3cadc88110"
+    },
+    {
+      "id": "briefing-28",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Carry Imani’s trial cultures to an independent clinic. Repair its testing station and transmit the results to Haven.",
+      "sha256": "6c23f6c8e8de5f56199a1a4c5ada30aeecfeb40cb38d3fe53b29e185af982569"
+    },
+    {
+      "id": "briefing-28",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Bringe Imanis Versuchskulturen in eine unabhängige Klinik. Repariere die Teststation und übertrage die Ergebnisse nach Haven.",
+      "sha256": "ab817ae19ef8149b7b442b6bf2e346c8bff2d73f5a40e84143e2faee8ba2b22a"
+    },
+    {
+      "id": "briefing-29",
+      "language": "de",
+      "speaker": "Ada",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Kehre nach Haven zurück. Die Tore stehen Neuankömmlingen offen, die Akten gehören allen und Mara muss die Wahrheit nicht länger allein tragen.",
+      "sha256": "b460031ef6bd4669d491202cdf6c05009149bd6ba275557de739eea78efb09d5"
+    }
+  ]
+}

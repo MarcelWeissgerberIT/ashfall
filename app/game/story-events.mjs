@@ -1,3 +1,4 @@
+import briefings from './chapter-briefings.json' with {type:'json'};
 import background from './background-notes.json' with {type:'json'};
 import calls from './story-calls.json' with {type:'json'};
 const quietNotes=[
@@ -9,6 +10,12 @@ const quietNotes=[
 ];
 export const STORY_NOTE_DE=Object.fromEntries([...quietNotes,...background]);
 export function updateStoryEvents(game,force=false){
+ const briefing=briefings.find(c=>c.level===game.level);
+ const briefId='briefing-event-'+game.level;
+ if(briefing&&(force||game.time>=5)&&!game.messages.some(m=>m.id===briefId)){
+  game.log(briefing.text,'story',briefing.id);
+  const message=game.messages.at(-1);message.id=briefId;message.sender=briefing.sender;
+ }
  const voice=calls.find(c=>c.level===game.level);
  const id='background-'+game.level;
  if(!force&&game.time<12||game.messages.some(m=>m.id===id))return;

@@ -1,4 +1,4 @@
-export type RadioCue=`story-${number}`|'checkpoint'|'generator'|'bunker'|'rooftop'|'signal'|'evac-ready'|'rescue'|'memory-checkpoint'|'memory-bunker'|'memory-rooftop';
+export type RadioCue=`briefing-${number}`|`story-${number}`|'checkpoint'|'generator'|'bunker'|'rooftop'|'signal'|'evac-ready'|'rescue'|'memory-checkpoint'|'memory-bunker'|'memory-rooftop';
 export type AudioStatus={cue:RadioCue|null;playing:boolean;loading:boolean;error:string|null};
 
 // A quiet, original score built from slow minor chords, filtered wind and distant pulses.
@@ -25,6 +25,8 @@ export class GameAudio {
   private manual=false;
   private blocked=false;
   private heard='';
+  private queuedHeard=new Set<string>();
+  private missionTime=0;
   private language='en';
   private disposed=false;
   private enableRequest=0;
@@ -73,15 +75,18 @@ export class GameAudio {
   sync(game:any){
     this.setLanguage(game.language||'en');
     if(!this.context||!this.enabled)return;
-    if(this.sector!==game.level){this.sector=game.level;this.makeBed();}
+    if(this.sector!==game.level||game.time<this.missionTime){if(this.sector>=0)this.stopRadio();this.queuedHeard.clear();this.heard='';this.sector=game.level;this.makeBed();}
+    this.missionTime=game.time||0;
     if(game.level===2&&game.signal>=0&&game.signal<=8&&game.canAct&&this.context.currentTime>=this.nextRotor){
       const ctx=this.context,now=ctx.currentTime,osc=ctx.createOscillator(),gain=ctx.createGain();osc.type='triangle';osc.frequency.value=48;gain.gain.setValueAtTime(.075*(1-game.signal/10),now);gain.gain.exponentialRampToValueAtTime(.001,now+.09);osc.connect(gain).connect(this.music);osc.start(now);osc.stop(now+.1);osc.onended=()=>{osc.disconnect();gain.disconnect()};this.nextRotor=now+.11;
     }
     const paused=!game.canAct;
     if(paused!==this.paused){this.paused=paused;this.mix()}
-    const message=game.lastRadio;
+    const voiceMessages=Array.isArray(game.messages)?game.messages.filter((m:any)=>m.level===game.level&&m.voiceId&&!m.voiceId.startsWith('memory-')):null;
+    if(this.manual&&this.status.cue)voiceMessages?.filter((m:any)=>m.voiceId===this.status.cue).forEach((m:any)=>this.queuedHeard.add(m.id));
+    const message=voiceMessages?voiceMessages.find((m:any)=>!this.queuedHeard.has(m.id)):game.lastRadio;
     if(message&&message.id!==this.heard&&!this.status.playing&&!this.status.loading&&['playing','won'].includes(game.mode)&&!game.inventoryOpen&&!game.lootOpen){
-      this.heard=message.id;
+      this.heard=message.id;this.queuedHeard.add(message.id);
       if(this.status.cue!==message.voiceId||!this.status.playing&&!this.status.loading)void this.playRadio(message.voiceId,false);
       else this.manual=false;
     }

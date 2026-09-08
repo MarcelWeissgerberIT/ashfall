@@ -1,0 +1,272 @@
+[
+  {
+    "id": "briefing-0",
+    "level": 0,
+    "sender": "Control",
+    "title": "Mission: Ashes at the gate",
+    "deTitle": "Auftrag: Asche am Tor",
+    "text": "Mara, Station Zero lies beneath the checkpoint. Search for metal scrap and a toolbox. Build a replacement fuse, find fuel, then restore generator power. Keep Koda close and reach the bunker gate.",
+    "deText": "Mara, Station Zero liegt unter dem Kontrollpunkt. Suche Metallschrott und einen Werkzeugkasten. Baue eine Ersatzsicherung, finde Treibstoff und starte den Generator. Halte Koda bei dir und erreiche das Bunkertor."
+  },
+  {
+    "id": "briefing-1",
+    "level": 1,
+    "sender": "Control",
+    "title": "Mission: Station Zero",
+    "deTitle": "Auftrag: Station Zero",
+    "text": "You are inside Station Zero. Find the keycard. Build a protective sample carrier from metal scrap and a glass bottle, using your toolbox. Then open the laboratory, secure N-04 and reach the roof access.",
+    "deText": "Du bist in Station Zero. Finde die Schlüsselkarte. Baue mit dem Werkzeugkasten einen Probenbehälter aus Metallschrott und einer Glasflasche. Öffne dann das Labor, sichere N-04 und erreiche den Dachzugang."
+  },
+  {
+    "id": "briefing-2",
+    "level": 2,
+    "sender": "Control",
+    "title": "Mission: The last frequency",
+    "deTitle": "Auftrag: Die letzte Frequenz",
+    "text": "A light circles above the rooftops. Power the transmitter and hold out until evacuation arrives.",
+    "deText": "Ein Licht kreist über den Dächern. Versorge den Sender mit Strom und halte bis zur Evakuierung durch."
+  },
+  {
+    "id": "briefing-3",
+    "level": 3,
+    "sender": "Levin",
+    "title": "Mission: Haven",
+    "deTitle": "Auftrag: Haven",
+    "text": "Beyond the walls, people still live. Doctor Imani needs the sample. Engineer Levin needs your help restoring clean water. Koda finally has somewhere safe to rest.",
+    "deText": "Hinter den Mauern leben noch Menschen. Doktor Imani braucht die Probe. Ingenieur Levin braucht Hilfe bei der Wasserversorgung. Koda kann endlich sicher ausruhen."
+  },
+  {
+    "id": "briefing-4",
+    "level": 4,
+    "sender": "Levin",
+    "title": "Mission: Clean water",
+    "deTitle": "Auftrag: Sauberes Wasser",
+    "text": "Haven’s taps are running dry. Search the maintenance shed, repair the pump and open a route to the rail depot.",
+    "deText": "Havens Wasserhähne bleiben trocken. Durchsuche den Wartungsschuppen, repariere die Pumpe und finde den Weg zum Bahndepot."
+  },
+  {
+    "id": "briefing-5",
+    "level": 5,
+    "sender": "Levin",
+    "title": "Mission: Light for Haven",
+    "deTitle": "Auftrag: Licht für Haven",
+    "text": "The water is flowing. Now Haven needs power. Recover a battery from the depot, activate the relay and get back to the colony with Koda.",
+    "deText": "Das Wasser fließt wieder. Jetzt braucht Haven Strom. Berge eine Batterie im Depot, aktiviere das Relais und kehre mit Koda zur Kolonie zurück."
+  },
+  {
+    "id": "briefing-6",
+    "level": 6,
+    "sender": "Levin",
+    "title": "Mission: A home for two",
+    "deTitle": "Auftrag: Ein Zuhause für zwei",
+    "text": "Haven has light and clean water. Imani and Levin welcome Mara back, but a familiar service code is calling from beyond the walls.",
+    "deText": "Haven hat Licht und sauberes Wasser. Imani und Levin heißen Mara willkommen, doch hinter den Mauern ruft eine vertraute Dienstkennung."
+  },
+  {
+    "id": "briefing-7",
+    "level": 7,
+    "sender": "Levin",
+    "title": "Mission: The familiar signal",
+    "deTitle": "Auftrag: Das vertraute Signal",
+    "text": "A transmission repeats Mara’s old service code. Follow it to the district relay before the signal dies.",
+    "deText": "Ein Funkspruch wiederholt Maras alte Dienstkennung. Folge ihm zum Bezirksrelais, bevor das Signal verstummt."
+  },
+  {
+    "id": "briefing-8",
+    "level": 8,
+    "sender": "Levin",
+    "title": "Mission: Apartment 4B",
+    "deTitle": "Auftrag: Wohnung 4B",
+    "text": "Mara returns to the home she abandoned. Her brother Jonas left a recorder behind a broken service panel.",
+    "deText": "Mara kehrt in ihre verlassene Wohnung zurück. Ihr Bruder Jonas versteckte ein Aufnahmegerät hinter einer defekten Wartungsklappe."
+  },
+  {
+    "id": "briefing-9",
+    "level": 9,
+    "sender": "Levin",
+    "title": "Mission: The night bus",
+    "deTitle": "Auftrag: Der Nachtbus",
+    "text": "An evacuation bus never reached the depot. Restore its recorder and trace the passengers’ last route.",
+    "deText": "Ein Evakuierungsbus erreichte das Depot nie. Versorge seinen Rekorder mit Strom und verfolge die letzte Route der Fahrgäste."
+  },
+  {
+    "id": "briefing-10",
+    "level": 10,
+    "sender": "Levin",
+    "title": "Mission: Mercy intake",
+    "deTitle": "Auftrag: Mercy-Aufnahme",
+    "text": "The hospital intake desk still holds sealed transport records. Recover them without spreading the contaminated dust.",
+    "deText": "In der Krankenhausaufnahme liegen versiegelte Transportakten. Berge sie, ohne den kontaminierten Staub zu verteilen."
+  },
+  {
+    "id": "briefing-11",
+    "level": 11,
+    "sender": "Levin",
+    "title": "Mission: A name on the collar",
+    "deTitle": "Auftrag: Ein Name am Halsband",
+    "text": "A veterinary shelter used Mercy’s transport network. Koda pulls toward its broken gate. Search the registration office.",
+    "deText": "Ein Tierheim nutzte Mercys Transportnetz. Koda zieht zu seinem beschädigten Tor. Durchsuche die Registrierung."
+  },
+  {
+    "id": "briefing-12",
+    "level": 12,
+    "sender": "Levin",
+    "title": "Mission: The missing two days",
+    "deTitle": "Auftrag: Die fehlenden zwei Tage",
+    "text": "Return to Haven with the hospital evidence. Imani and Levin must compare it with Mara’s service log.",
+    "deText": "Kehre mit den Krankenhausbelegen nach Haven zurück. Imani und Levin gleichen sie mit Maras Wartungsbuch ab."
+  },
+  {
+    "id": "briefing-13",
+    "level": 13,
+    "sender": "Levin",
+    "title": "Mission: Aster maintenance",
+    "deTitle": "Auftrag: Aster-Wartung",
+    "text": "Reach an Aster filter station. Bring its local terminal online and retrieve the release manifest.",
+    "deText": "Erreiche eine Aster-Filterstation. Starte das lokale Terminal und berge die Freigabeliste."
+  },
+  {
+    "id": "briefing-14",
+    "level": 14,
+    "sender": "Levin",
+    "title": "Mission: Dust in the ducts",
+    "deTitle": "Auftrag: Staub in den Schächten",
+    "text": "Imani needs a sealed filter sample. The station still exhales dust; secure the extractor before opening the archive.",
+    "deText": "Imani braucht eine versiegelte Filterprobe. Die Station stößt noch Staub aus. Sichere den Abzug, bevor du das Archiv öffnest."
+  },
+  {
+    "id": "briefing-15",
+    "level": 15,
+    "sender": "Levin",
+    "title": "Mission: The flooded archive",
+    "deTitle": "Auftrag: Das geflutete Archiv",
+    "text": "A flooded service archive contains the first incident report. Restart the drainage controls and copy the evidence.",
+    "deText": "Ein überflutetes Wartungsarchiv enthält den ersten Vorfallsbericht. Repariere die Entwässerung und kopiere die Beweise."
+  },
+  {
+    "id": "briefing-16",
+    "level": 16,
+    "sender": "Levin",
+    "title": "Mission: Seven minutes",
+    "deTitle": "Auftrag: Sieben Minuten",
+    "text": "Jonas cached an evacuation timeline at the switching yard. Power its isolated recorder.",
+    "deText": "Jonas hinterlegte im Rangierbahnhof eine Evakuierungszeitleiste. Versorge den isolierten Rekorder mit Strom."
+  },
+  {
+    "id": "briefing-17",
+    "level": 17,
+    "sender": "Levin",
+    "title": "Mission: The northern cordon",
+    "deTitle": "Auftrag: Der nördliche Sperrring",
+    "text": "The path north is blocked by collapsed barricades. Prepare a fire axe and reach the quarantine records.",
+    "deText": "Eingestürzte Barrikaden versperren den Weg nach Norden. Bereite eine Feuerwehraxt vor und erreiche die Quarantäneakten."
+  },
+  {
+    "id": "briefing-18",
+    "level": 18,
+    "sender": "Levin",
+    "title": "Mission: Ada’s refuge",
+    "deTitle": "Auftrag: Adas Zuflucht",
+    "text": "A small refuge answers Koda’s registration number. Reach Ada and ask about Jonas and the evacuation.",
+    "deText": "Eine kleine Zuflucht antwortet auf Kodas Registriernummer. Erreiche Ada und frage nach Jonas und der Evakuierung."
+  },
+  {
+    "id": "briefing-19",
+    "level": 19,
+    "sender": "Levin",
+    "title": "Mission: The reservoir line",
+    "deTitle": "Auftrag: Die Reservoir-Leitung",
+    "text": "Haven’s new water supply passes an old monitoring station. Repair it before the colony draws from the reservoir.",
+    "deText": "Havens neue Wasserversorgung führt an einer alten Messstation vorbei. Repariere sie, bevor die Kolonie Reservoirwasser nutzt."
+  },
+  {
+    "id": "briefing-20",
+    "level": 20,
+    "sender": "Levin",
+    "title": "Mission: The observatory",
+    "deTitle": "Auftrag: Das Observatorium",
+    "text": "A narrow-band transmitter is Jonas’s last known contact. Restore its power and hold the signal long enough to connect.",
+    "deText": "Ein Schmalbandsender ist Jonas’ letzter bekannter Kontakt. Stelle den Strom wieder her und halte das Signal bis zur Verbindung."
+  },
+  {
+    "id": "briefing-21",
+    "level": 21,
+    "sender": "Levin",
+    "title": "Mission: The weather station",
+    "deTitle": "Auftrag: Die Wetterstation",
+    "text": "Reach Jonas’s shelter and repair its emergency lift. He cannot walk out without it.",
+    "deText": "Erreiche Jonas’ Unterschlupf und repariere den Notaufzug. Ohne ihn kann er den Ort nicht verlassen."
+  },
+  {
+    "id": "briefing-22",
+    "level": 22,
+    "sender": "Levin",
+    "title": "Mission: A table for four",
+    "deTitle": "Auftrag: Ein Tisch für vier",
+    "text": "Jonas and Ada reach Haven. Compare their evidence with Imani’s findings and decide what the colony must do next.",
+    "deText": "Jonas und Ada erreichen Haven. Vergleiche ihre Beweise mit Imanis Ergebnissen und kläre den nächsten Schritt."
+  },
+  {
+    "id": "briefing-23",
+    "level": 23,
+    "sender": "Levin",
+    "title": "Mission: The cold chain",
+    "deTitle": "Auftrag: Die Kühlkette",
+    "text": "Recover viable starter cultures from the biobank. Build a protective carrier and stabilize the cooling circuit.",
+    "deText": "Berge lebensfähige Ausgangskulturen aus der Biobank. Baue einen Schutzbehälter und stabilisiere den Kühlkreislauf."
+  },
+  {
+    "id": "briefing-24",
+    "level": 24,
+    "sender": "Levin",
+    "title": "Mission: Blackout protocol",
+    "deTitle": "Auftrag: Abschaltprotokoll",
+    "text": "The plants share an emergency circuit. Repair the old interlock so shutting one down will not overload the others.",
+    "deText": "Die Anlagen teilen einen Notstromkreis. Repariere die Verriegelung, damit eine Abschaltung die anderen nicht überlastet."
+  },
+  {
+    "id": "briefing-25",
+    "level": 25,
+    "sender": "Levin",
+    "title": "Mission: Under the tower",
+    "deTitle": "Auftrag: Unter dem Turm",
+    "text": "The public entrance is sealed. Open a service passage and reach Vale’s local archive without restarting the ventilation.",
+    "deText": "Der öffentliche Eingang ist versiegelt. Öffne einen Wartungsweg und erreiche Vales lokales Archiv, ohne die Lüftung zu starten."
+  },
+  {
+    "id": "briefing-26",
+    "level": 26,
+    "sender": "Levin",
+    "title": "Mission: The open frequency",
+    "deTitle": "Auftrag: Die offene Frequenz",
+    "text": "Broadcast the unedited records. Hold the rooftop uplink until neighboring settlements receive the archive.",
+    "deText": "Sende die unbearbeiteten Akten. Halte die Dachverbindung, bis benachbarte Siedlungen das Archiv empfangen haben."
+  },
+  {
+    "id": "briefing-27",
+    "level": 27,
+    "sender": "Levin",
+    "title": "Mission: Seal the source",
+    "deTitle": "Auftrag: Die Quelle versiegeln",
+    "text": "The truth is out, but the plant is still breathing. Seal the source chambers and stop the final fan bank.",
+    "deText": "Die Wahrheit ist bekannt, doch die Anlage atmet noch. Versiegle die Quellkammern und stoppe die letzte Lüfterbank."
+  },
+  {
+    "id": "briefing-28",
+    "level": 28,
+    "sender": "Levin",
+    "title": "Mission: A measured hope",
+    "deTitle": "Auftrag: Eine vorsichtige Hoffnung",
+    "text": "Carry Imani’s trial cultures to an independent clinic. Repair its testing station and transmit the results to Haven.",
+    "deText": "Bringe Imanis Versuchskulturen in eine unabhängige Klinik. Repariere die Teststation und übertrage die Ergebnisse nach Haven."
+  },
+  {
+    "id": "briefing-29",
+    "level": 29,
+    "sender": "Ada",
+    "title": "Mission: The morning after",
+    "deTitle": "Auftrag: Der Morgen danach",
+    "text": "Return to Haven. The gates are open to new arrivals, the records belong to everyone, and Mara no longer has to carry the truth alone.",
+    "deText": "Kehre nach Haven zurück. Die Tore stehen Neuankömmlingen offen, die Akten gehören allen und Mara muss die Wahrheit nicht länger allein tragen."
+  }
+]
