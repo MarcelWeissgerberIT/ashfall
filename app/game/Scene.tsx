@@ -1,4 +1,5 @@
 'use client';
+import {buildChapterLandmark} from './chapter-landmarks';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -74,7 +75,9 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
    if(e.style&&e.style!=='tree')kit.contact(g,(w-1)/2,(h-1)/2,w+.65,h+.6);
    else if(!['exit','note'].includes(e.type))kit.contact(g,0,0,1.25,1.1);
    if(e.style){
-    if(e.style==='wall'){
+    if(game.data.storyChapter && e.id==='structure-0'){
+     buildChapterLandmark(kit,g,e,game.data.theme,game.level);
+    }else if(e.style==='wall'){
      buildWall(kit,g,e,game.level);
     }else if(e.style==='barrier'){
      buildBarrier(kit,g,e);

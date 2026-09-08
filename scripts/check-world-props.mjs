@@ -1,3 +1,4 @@
+import {buildChapterLandmark} from '../app/game/chapter-landmarks.ts';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { buildWall, buildBarrier, buildVehicle } from '../app/game/world-props.ts';
@@ -64,3 +65,13 @@ for(const e of [{duration:12},{requires:'samplecase'},{requires:'toolbox'},{requ
  let count=0;root.traverse(o=>{if(o.isMesh){count++;for(const a of Object.values(o.geometry.attributes))assert([...a.array].every(Number.isFinite));}});assert(count<40,'Bounded mission draw count');
 }
 console.log('Five mission silhouettes: finite geometry, unchanged footprint and bounded mesh count.');
+
+let landmarks=0;
+for(const [chapter,data] of LEVELS.entries())if(data.storyChapter){
+ const e=data.entities.find(e=>e.id==='structure-0'),g=new THREE.Group();buildChapterLandmark(kit,g,e,data.theme,chapter);g.updateMatrixWorld(true);
+ const bounds=new THREE.Box3().setFromObject(g);
+ assert(bounds.min.x>=-.501&&bounds.max.x<=e.w-.499,`Landmark ${chapter} X footprint`);
+ assert(bounds.min.z>=-.501&&bounds.max.z<=e.h-.499,`Landmark ${chapter} Z footprint ${bounds.min.z}..${bounds.max.z}`);
+ g.traverse(o=>{if(o.isMesh)for(const attr of Object.values(o.geometry.attributes))assert([...attr.array].every(Number.isFinite));});landmarks++;
+}
+assert.equal(landmarks,23);console.log('23 chapter landmarks: finite geometry and unchanged collision footprints.');

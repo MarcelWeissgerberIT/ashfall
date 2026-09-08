@@ -223,6 +223,7 @@ function charMaraDetail(kit:RenderKit,d:any){
     ellipsoid(eye,0,0,.006,.0035,.0055,.001,0x26302d);
     ellipsoid(eye,-.002,.002,.007,.0014,.0014,.001,0xf4e5cf);
     charRod(kit,head,[side*.079,.174,.109],[side*.034,.178,.115],.0025,hair);
+    charRod(kit,head,[side*.077,.142,.113],[side*.035,.142,.115],.0016,0xbb8e7d);
     charRod(kit,head,[side*.077,.158,.112],[side*.034,.159,.116],.002,0x796051);
   }
   // Soft cupid's bow and a subtle lower lip follow the face rather than protruding.
@@ -252,6 +253,11 @@ function charMaraDetail(kit:RenderKit,d:any){
   charStrap(kit,tail,[.065,-.10,.13],[.04,-.23,.15],.083,0x85483c,'canvas');
   for(let i=0;i<4;i++)charRod(kit,tail,[.013+i*.018,-.225,.15],[.013+i*.018,-.251-(i%2)*.014,.15],.004,0xa26c52,'canvas');
   charStrap(kit,tail,[.013,-.12,.144],[.013,-.217,.154],.009,0xc29268,'canvas');
+  // Sculpted rolled cuffs, shoulder folds and raised seams soften the cylindrical sleeves.
+  for(const arm of arms){
+    charProfile(kit,arm.upper,'Mara-rolled-sleeve',[[-.285,.073,.077],[-.27,.083,.082],[-.245,.085,.086],[-.19,.079,.082],[-.07,.087,.09],[0,.085,.087]],cloth);
+    for(let i=0;i<3;i++)charRod(kit,arm.upper,[-.055,-.09-i*.046,.064],[.046,-.112-i*.046,.07],.0035,0x7b8e89);
+  }
   // Field watch, stitched repairs and an emergency locator clipped to the pack.
   box(arms[0].elbow,0,-.28,.073,.09,.038,.034,0x2e3937,'rubber',0,true);
   box(arms[0].elbow,0,-.274,.095,.05,.024,.01,0x9eb7a3,'glass');
@@ -413,7 +419,11 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     return {hip,knee,foot,side,plant:new THREE.Vector3(),planted:false,stance:false};
   });
   const chest=charJoint(body,'chest',0,1.01,0);
-  if(zombie){ellipsoid(chest,0,.135,0,.274,.33,.178,shirt,'canvas');box(chest,0,-.15,0,.475,.25,.285,shirt,'canvas',0,true);}
+  if(zombie){
+    charProfile(kit,chest,'infected-coat-'+v,[[-.18,.22,.15],[0,.20,.14],[.15,v===0?.29:.24,.17,-.025],[.29,.26,.19,-.045],[.37,.16,.12,-.05],[.39,.075,.075]],shirt,'canvas');
+    // Uneven shoulder blades and a collapsed collar distinguish the infected silhouette.
+    ellipsoid(chest,-.14,.23,-.13,.13,.16,.11,shirt);
+  }
   else charProfile(kit,chest,'layered-field-shirt',[[-.159,.194,.134],[-.07,.195,.14],[.095,.225,.166],[.227,.252,.171],[.313,.244,.145],[.365,.155,.108],[.39,.086,.078]],0x536e70,'canvas');
   const arms=[-1,1].map((side,i)=>{
     const upper=limb(chest,side*(zombie?.324:.305),.29,0,zombie?.086:.079,.35,shirt,'canvas');upper.name=i?'right-shoulder':'left-shoulder';
@@ -435,8 +445,14 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     ellipsoid(head,side*.135,.115,-.01,.024,.042,.025,skin);
     charRod(kit,head,[side*.095,.095,.10],[side*.07,.065,.115],.005,0x778269);
   }
-  box(head,0,.025,.106,.066,.022,.008,0x332622);
-  for(const x of [-.025,-.01,.01,.025])box(head,x,.04,.112,.01,.009,.006,0xb5b59d);
+  const jaw=charJoint(head,'infected-jaw',0,.048,.035);head.userData.jaw=jaw;
+  ellipsoid(jaw,0,-.027,.055,.056,.041,.067,0x625e50);
+  box(jaw,0,-.01,.106,.072,.027,.014,0x2b2424);
+  for(const x of [-.025,-.01,.01,.025])box(jaw,x,.007,.112,.009,.012,.008,0xb5b59d);
+  for(const side of [-1,1]){
+    ellipsoid(head,side*.105,.087,.077,.027,.037,.016,0x737665);
+    charRod(kit,head,[side*.03,.19,.10],[side*.105,.177,.091],.007,0x596154);
+  }
   ellipsoid(head,-.023,.259,-.032,.127,.088,.105,0x45483b);
   for(let i=0;i<5;i++)ellipsoid(head,-.095+i*.038,.23,-.055,.025,.075,.04,0x45483b);
   }
@@ -444,6 +460,16 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     box(chest,-.15,.02,.18,.095,.18,.013,0x53332d);
     if(v===0){chest.scale.set(1.13,1,1.08);}
     if(v===1){chest.scale.set(.89,1,.92);}
+    if(v===0){ // Heavy former security worker: torn shoulder protection.
+      for(const arm of arms)ellipsoid(arm.upper,0,-.055,-.025,.116,.13,.105,0x404e48);
+      for(const x of [-.13,0,.13])box(chest,x,.04,.18,.10,.18,.044,0x3e4b42);
+    }else if(v===1){ // Lean scavenger with exposed sinews and a ragged hood.
+      charProfile(kit,head,'infected-hood',[[.18,.151,.14,-.035],[.28,.135,.124,-.04],[.34,.072,.083,-.05],[.36,0,0,-.06]],0x5d5548);
+      for(const arm of arms)for(const x of [-.025,.025])charRod(kit,arm.elbow,[x,-.025,.065],[x*.5,-.27,.059],.006,0x7e7965);
+    }else{ // Former clinical worker with a displaced respirator and gown.
+      box(head,.065,.04,.10,.055,.048,.025,0x9dafa1,undefined,0,true);
+      for(const side of [-1,1])charStrap(kit,chest,[side*.04,.31,.12],[side*.17,-.09,.17],.062,0xb0b5a3);
+    }
     head.rotation.x=.12;
     for(let i=0;i<3;i++)charRod(kit,head,[-.10+i*.018,.10,.113],[-.086+i*.018,.044,.12],.003,0x604039);
     for(let i=0;i<4;i++)box(chest,-.055+i*.036,.01,.177,.013,.17-i*.015,.012,i%2?0x7c5547:0x3c302d);
@@ -519,7 +545,8 @@ export function createCharacter(kit:RenderKit,zombie=false,variant=0){
     started:false,lastX:0,lastY:0,phase:0,motion:0,speed:0,sneak:0,sprint:0,death:0,dead:false,wasMoving:false,
     workA:new THREE.Vector3(),workB:new THREE.Vector3(),workC:new THREE.Vector3(),workQ:new THREE.Quaternion()};
   group.userData=d;
-  if(!zombie){charMaraDetail(kit,d);charBatchRigid(kit,group);}
+  if(!zombie)charMaraDetail(kit,d);
+  charBatchRigid(kit,group);
   return group;
 }
 
@@ -580,6 +607,7 @@ export function animateCharacter(group:THREE.Group,actor:any,dt:number,playing:b
   const cycle=d.zombie?.84:charMix(charMix(1.03,.76,d.sneak),1.25,d.sprint);
   if(moving)d.phase=(d.phase+distance/cycle)%1;
   const phase=d.phase*Math.PI*2,breath=Math.sin(time*(d.zombie?1.45:2.1)+d.variant*1.8);
+  if(d.zombie&&d.head.userData.jaw)d.head.userData.jaw.rotation.x=.1+.065*(1+breath)+(actor.action?.type==='attack'?.18:0);
   const hurt=charClamp(Number(actor.hurt)||0);
   const action=actor.action;
   const active=action&&action.remaining>0&&action.duration>0;

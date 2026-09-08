@@ -65,13 +65,13 @@ check('switching weapons preserves the existing attack cooldown', () => {
 });
 
 for (const [body, head, damage] of [
-  [null, null, 7], ['jacket', null, 6], ['vest', null, 5],
-  [null, 'helmet', 6], ['jacket', 'helmet', 5], ['vest', 'helmet', 4],
+  [null, null, 8], ['jacket', null, 7], ['vest', null, 6],
+  [null, 'helmet', 7], ['jacket', 'helmet', 6], ['vest', 'helmet', 5],
 ]) check(`actual incoming armor damage: ${body ?? 'no body'} / ${head ?? 'no head'}`, () => {
   const game = playing(); add(game, 'jacket', 'vest', 'helmet');
   if (body) game.equip(body);
   if (head) game.equip(head);
-  adjacentEnemy(game, true); game.tick(.001);
+  const enemy=adjacentEnemy(game, true); enemy.kind='shambler'; game.tick(.001);
   assert.equal(game.health, 100 - damage, 'Only worn armor reduces the real zombie hit');
 });
 

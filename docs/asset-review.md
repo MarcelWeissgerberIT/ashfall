@@ -22,3 +22,12 @@ Reviewed the material files, render pipeline, pickup meshes, mission meshes and 
 For this material batch GPT Image 2 supplied the better concrete candidate. Nano Banana Pro supplied usable regular tiles. Use controlled same-prompt comparisons and inspect actual resolution; a model's maximum advertised resolution is not the CLI default. Existing Kling 3 Omni video generation remains useful for cutscenes; changing the video model cannot improve the realtime game meshes.
 
 Generation IDs and exact prompts: art-source/openart-v5/jobs.json. Rebuild processed materials with scripts/prepare-materials-v5.cjs. Geometry checks include the five mission variants and all collectible meshes.
+
+## 8 September — realtime models and animation
+
+- Extended Mara's existing sculpted face/IK rig with lower eyelids, contoured sleeves and shoulder folds. Preserved equipment articulation and existing braid/scarf motion.
+- Infected now have contoured coats, asymmetric backs, articulated jaws and three differentiated outfits matching shambler/runner/stalker variants. Rigid detail is batched within joints.
+- Koda has two-bone legs, level paws, speed-based trot/bound blending, damped turns, ear/tail follow-through, sniff/feed and play-bow transitions, and a defensive lunge. Care preview uses the same rig as the game. These are procedural animations, not motion capture.
+- First major structure in each of the 23 extension chapters uses a theme-specific landmark: clinic, observatory, filter plant, canopy/garden, rail shelter or street frontage. Existing footprints and routes are retained; these are seven landmark families, not 23 bespoke buildings.
+- Validated finite animation transforms, pawn clearance, equipment articulation, resource cleanup, 23 landmark footprints and campaign traversal with source-level tests. No browser visual playtest.
+- Updated an obsolete armor-test expectation from the former 7-damage enemy to the existing 8-damage shambler, explicitly fixing the fixture's enemy kind. Combat code was unchanged.
