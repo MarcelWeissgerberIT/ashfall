@@ -11,3 +11,12 @@ const staged=new Game();staged.start(false);staged.inventory.push('jacket');cons
 const held=new Game();held.start(false);held.inventory.push('scrap','toolbox');const original=JSON.stringify({inventory:held.inventory,equipment:held.equipment});const prepared=prepareRecipe(held,'axe');assert.equal(JSON.stringify({inventory:held.inventory,equipment:held.equipment}),original,'Preparation does not mutate inventory or gear');assert.equal(prepared.filter(x=>x==='crowbar').length,1);assert(craft(held,'axe',prepared));assert.equal(held.equipment.hand,null);assert(held.has('axe'));assert(held.has('toolbox'));assert.equal(craft(held,'axe',prepared),false,'Stale prepared recipe cannot duplicate output');
 const partial=new Game();partial.start(false);partial.inventory=['scrap'];partial.equipment={hand:null,body:null,head:null};assert.equal(prepareRecipe(partial,'crowbar').filter(Boolean).length,1);assert.equal(craft(partial,'crowbar',prepareRecipe(partial,'crowbar')),false);
 console.log('Automatic preparation, held ingredients, partial recipes, retained toolbox and repeat-click safety verified.');
+
+// The sample carrier must combine two distinct gathered materials, never a tool alone.
+for(const materials of [[],['scrap'],['bottle']]){
+ const game=new Game();game.start(false);game.inventory=['toolbox',...materials];game.equipment={hand:null,body:null,head:null};
+ const before=JSON.stringify(game.inventory);assert.equal(craft(game,'samplecase',prepareRecipe(game,'samplecase')),false);assert.equal(JSON.stringify(game.inventory),before);
+}
+const carrier=new Game();carrier.start(false);carrier.inventory=['toolbox','scrap','bottle'];carrier.equipment={hand:null,body:null,head:null};
+assert(craft(carrier,'samplecase',prepareRecipe(carrier,'samplecase')));assert.deepEqual(carrier.inventory,['toolbox','samplecase']);
+console.log('Sample carrier requires both metal and glass; both consumed, toolbox retained.');
