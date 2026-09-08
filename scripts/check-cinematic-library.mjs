@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {seenCinematics,rememberCinematic} from '../app/game/cinematic-library.mjs';
+const data=new Map(),storage={getItem:k=>data.get(k)??null,setItem:(k,v)=>data.set(k,v)};
+const ids=(game={})=>seenCinematics(storage,game).map(f=>f.id);
+assert.deepEqual(ids(),[]);
+storage.setItem('ashfall-intro-v1','seen');assert.deepEqual(ids(),['intro']);
+rememberCinematic(storage,'evac');rememberCinematic(storage,'evac');assert.deepEqual(ids(),['intro','evac']);
+rememberCinematic(storage,'invalid');assert.deepEqual(ids(),['intro','evac']);
+data.clear();assert.deepEqual(ids({level:3}),['intro','evac']);assert.deepEqual(ids({level:0,unlocked:3}),['intro','evac']);assert.deepEqual(ids({level:2,unlocked:2}),[]);
+storage.setItem('ashfall-cinematics-v1','broken');storage.setItem('ashfall-intro-v1','seen');assert.deepEqual(ids(),['intro']);
+assert.deepEqual(seenCinematics({getItem(){throw Error('denied')}},{level:3}).map(f=>f.id),['intro','evac']);
+assert.doesNotThrow(()=>rememberCinematic({getItem(){throw Error('denied')},setItem(){throw Error('denied')}},'intro'));
+console.log('Cinematic archive: unlocks, legacy saves, deduplication and unavailable/corrupt storage passed.');
