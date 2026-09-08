@@ -268,5 +268,545 @@
     "deTitle": "Auftrag: Der Morgen danach",
     "text": "Return to Haven. The gates are open to new arrivals, the records belong to everyone, and Mara no longer has to carry the truth alone.",
     "deText": "Kehre nach Haven zurück. Die Tore stehen Neuankömmlingen offen, die Akten gehören allen und Mara muss die Wahrheit nicht länger allein tragen."
+  },
+  {
+    "id": "briefing-30",
+    "level": 30,
+    "title": "Mission: The second departure",
+    "deTitle": "Auftrag: Der zweite Aufbruch",
+    "sender": "Levin",
+    "text": "Meet Lena's courier at Haven and prepare the clinic route.",
+    "deText": "Triff Lenas Boten in Haven und bereite die Klinikroute vor."
+  },
+  {
+    "id": "briefing-31",
+    "level": 31,
+    "title": "Mission: The eastern relay",
+    "deTitle": "Auftrag: Das Ost-Relais",
+    "sender": "Levin",
+    "text": "Repair the eastern relay and retrieve Lena's last route update.",
+    "deText": "Repariere das Ost-Relais und berge Lenas letzte Routenmeldung."
+  },
+  {
+    "id": "briefing-32",
+    "level": 32,
+    "title": "Mission: Across the freight bridge",
+    "deTitle": "Auftrag: Über die Frachtbrücke",
+    "sender": "Levin",
+    "text": "Repair the bridge controls and signal the route back to Haven.",
+    "deText": "Repariere die Brückensteuerung und melde den Weg nach Haven."
+  },
+  {
+    "id": "briefing-33",
+    "level": 33,
+    "title": "Mission: The field dispensary",
+    "deTitle": "Auftrag: Die Feldapotheke",
+    "sender": "Levin",
+    "text": "Recover the convoy's sealed treatment log and transmit its destination.",
+    "deText": "Berge das versiegelte Behandlungsbuch des Konvois und sende sein Ziel."
+  },
+  {
+    "id": "briefing-34",
+    "level": 34,
+    "title": "Mission: School without bells",
+    "deTitle": "Auftrag: Schule ohne Glocken",
+    "sender": "Levin",
+    "text": "Power the school's emergency recorder and find the transfer schedule.",
+    "deText": "Versorge den Notrekorder der Schule mit Strom und finde den Verlegungsplan."
+  },
+  {
+    "id": "briefing-35",
+    "level": 35,
+    "title": "Mission: Glasshouse lights",
+    "deTitle": "Auftrag: Lichter im Gewächshaus",
+    "sender": "Levin",
+    "text": "Restore the greenhouse lights and contact its night watch.",
+    "deText": "Stelle die Gewächshausbeleuchtung wieder her und kontaktiere die Nachtwache."
+  },
+  {
+    "id": "briefing-36",
+    "level": 36,
+    "title": "Mission: The ferryman's ledger",
+    "deTitle": "Auftrag: Das Buch des Fährmanns",
+    "sender": "Levin",
+    "text": "Repair the ferry winch and copy its passenger ledger.",
+    "deText": "Repariere die Fährwinde und kopiere das Fahrgastbuch."
+  },
+  {
+    "id": "briefing-37",
+    "level": 37,
+    "title": "Mission: Low-water crossing",
+    "deTitle": "Auftrag: Querung bei Niedrigwasser",
+    "sender": "Levin",
+    "text": "Power the navigation beacon and mark a safe crossing.",
+    "deText": "Versorge das Leuchtfeuer mit Strom und markiere eine sichere Querung."
+  },
+  {
+    "id": "briefing-38",
+    "level": 38,
+    "title": "Mission: A familiar repair",
+    "deTitle": "Auftrag: Eine vertraute Reparatur",
+    "sender": "Levin",
+    "text": "Open the aid crew's service cabinet and recover its route card.",
+    "deText": "Öffne den Wartungsschrank der Helfer und berge ihre Routenkarte."
+  },
+  {
+    "id": "briefing-39",
+    "level": 39,
+    "title": "Mission: Orchard station",
+    "deTitle": "Auftrag: Obstgartenstation",
+    "sender": "Levin",
+    "text": "Restore the station signal and request entry to the clinic grounds.",
+    "deText": "Stelle das Stationssignal wieder her und bitte um Zugang zum Klinikgelände."
+  },
+  {
+    "id": "briefing-40",
+    "level": 40,
+    "title": "Mission: The sheltered gate",
+    "deTitle": "Auftrag: Das geschützte Tor",
+    "sender": "Levin",
+    "text": "Clear the blocked service passage and open the clinic approach.",
+    "deText": "Räume den versperrten Wartungsweg und öffne den Klinikzugang."
+  },
+  {
+    "id": "briefing-41",
+    "level": 41,
+    "title": "Mission: Two sisters",
+    "deTitle": "Auftrag: Zwei Schwestern",
+    "sender": "Levin",
+    "text": "Meet Lena and compare the family's surviving messages.",
+    "deText": "Triff Lena und vergleiche die erhaltenen Familiennachrichten."
+  },
+  {
+    "id": "briefing-42",
+    "level": 42,
+    "title": "Mission: The parents' route",
+    "deTitle": "Auftrag: Der Weg der Eltern",
+    "sender": "Levin",
+    "text": "Restart the northern dispatch recorder and trace the aid train.",
+    "deText": "Starte den nördlichen Einsatzrekorder und verfolge den Hilfszug."
+  },
+  {
+    "id": "briefing-43",
+    "level": 43,
+    "title": "Mission: The volunteer platform",
+    "deTitle": "Auftrag: Der Helferbahnsteig",
+    "sender": "Levin",
+    "text": "Repair the platform lift and recover the volunteer assignments.",
+    "deText": "Repariere den Bahnsteigaufzug und berge die Helferzuweisungen."
+  },
+  {
+    "id": "briefing-44",
+    "level": 44,
+    "title": "Mission: The transit house",
+    "deTitle": "Auftrag: Das Durchgangshaus",
+    "sender": "Levin",
+    "text": "Secure the transit house records and send the family entries to Lena.",
+    "deText": "Sichere die Unterlagen des Durchgangshauses und sende die Familieneinträge an Lena."
+  },
+  {
+    "id": "briefing-45",
+    "level": 45,
+    "title": "Mission: A route corrected",
+    "deTitle": "Auftrag: Eine korrigierte Route",
+    "sender": "Levin",
+    "text": "Compare the conflicting records with Lena and plan the northern search.",
+    "deText": "Vergleiche die widersprüchlichen Akten mit Lena und plane die Suche im Norden."
+  },
+  {
+    "id": "briefing-46",
+    "level": 46,
+    "title": "Mission: The snowline repeater",
+    "deTitle": "Auftrag: Das Relais an der Schneegrenze",
+    "sender": "Levin",
+    "text": "Repair the high repeater and listen for the northern aid crew.",
+    "deText": "Repariere das Höhenrelais und suche nach den nördlichen Funkhelfern."
+  },
+  {
+    "id": "briefing-47",
+    "level": 47,
+    "title": "Mission: Service road north",
+    "deTitle": "Auftrag: Wartungsstraße nach Norden",
+    "sender": "Levin",
+    "text": "Clear the fallen barriers and mark the aid crew's last shelter.",
+    "deText": "Räume die gefallenen Sperren und markiere den letzten Unterschlupf der Helfer."
+  },
+  {
+    "id": "briefing-48",
+    "level": 48,
+    "title": "Mission: The mobile ward",
+    "deTitle": "Auftrag: Die mobile Station",
+    "sender": "Levin",
+    "text": "Restore the ward recorder and locate the hospital's current camp.",
+    "deText": "Stelle den Stationsrekorder wieder her und finde das aktuelle Krankenhauslager."
+  },
+  {
+    "id": "briefing-49",
+    "level": 49,
+    "title": "Mission: Clean-air passage",
+    "deTitle": "Auftrag: Durchgang zur sauberen Luft",
+    "sender": "Levin",
+    "text": "Seal the leaking service duct and transmit a safe approach route.",
+    "deText": "Dichte den undichten Wartungsschacht ab und melde einen sicheren Zugang."
+  },
+  {
+    "id": "briefing-50",
+    "level": 50,
+    "title": "Mission: A father's voice",
+    "deTitle": "Auftrag: Die Stimme des Vaters",
+    "sender": "Levin",
+    "text": "Power the hilltop receiver and establish contact with Elias.",
+    "deText": "Versorge den Höhenempfänger mit Strom und stelle Kontakt zu Elias her."
+  },
+  {
+    "id": "briefing-51",
+    "level": 51,
+    "title": "Mission: The ward gate",
+    "deTitle": "Auftrag: Das Stationstor",
+    "sender": "Levin",
+    "text": "Repair the hospital's access mechanism and request a supervised visit.",
+    "deText": "Repariere den Krankenhauszugang und bitte um einen begleiteten Besuch."
+  },
+  {
+    "id": "briefing-52",
+    "level": 52,
+    "title": "Mission: The unfinished letter",
+    "deTitle": "Auftrag: Der unvollendete Brief",
+    "sender": "Levin",
+    "text": "Collect Elias's protected belongings and copy Ruth's last letter.",
+    "deText": "Sammle Elias' geschützte Sachen ein und kopiere Ruths letzten Brief."
+  },
+  {
+    "id": "briefing-53",
+    "level": 53,
+    "title": "Mission: No more missed departures",
+    "deTitle": "Auftrag: Keine verpassten Abfahrten mehr",
+    "sender": "Levin",
+    "text": "Meet Elias and arrange the family's route back together.",
+    "deText": "Triff Elias und organisiere den gemeinsamen Rückweg der Familie."
+  },
+  {
+    "id": "briefing-54",
+    "level": 54,
+    "title": "Mission: A transport made ready",
+    "deTitle": "Auftrag: Ein Transport wird vorbereitet",
+    "sender": "Levin",
+    "text": "Repair the medical transport controls and confirm a safe departure.",
+    "deText": "Repariere die Steuerung des Krankentransports und bestätige eine sichere Abfahrt."
+  },
+  {
+    "id": "briefing-55",
+    "level": 55,
+    "title": "Mission: The return beacon",
+    "deTitle": "Auftrag: Das Rückkehr-Leuchtfeuer",
+    "sender": "Levin",
+    "text": "Restore the crossing beacon so the medical convoy can return.",
+    "deText": "Stelle das Leuchtfeuer wieder her, damit der Krankenkonvoi zurückkehren kann."
+  },
+  {
+    "id": "briefing-56",
+    "level": 56,
+    "title": "Mission: Three names answered",
+    "deTitle": "Auftrag: Drei Namen haben geantwortet",
+    "sender": "Levin",
+    "text": "Bring Elias to Lena and share the reunion with Jonas over radio.",
+    "deText": "Bringe Elias zu Lena und teile die Wiedervereinigung mit Jonas über Funk."
+  },
+  {
+    "id": "briefing-57",
+    "level": 57,
+    "title": "Mission: The southern manifest",
+    "deTitle": "Auftrag: Das südliche Fahrgastverzeichnis",
+    "sender": "Levin",
+    "text": "Recover the southern transport manifest and preserve its signatures.",
+    "deText": "Berge das südliche Fahrgastverzeichnis und bewahre seine Unterschriften."
+  },
+  {
+    "id": "briefing-58",
+    "level": 58,
+    "title": "Mission: The lighthouse frequency",
+    "deTitle": "Auftrag: Die Leuchtturmfrequenz",
+    "sender": "Levin",
+    "text": "Power the long-range transmitter and request Bellweather's archive.",
+    "deText": "Versorge den Fernsender mit Strom und fordere Bellweathers Archiv an."
+  },
+  {
+    "id": "briefing-59",
+    "level": 59,
+    "title": "Mission: Together toward the coast",
+    "deTitle": "Auftrag: Gemeinsam zur Küste",
+    "sender": "Levin",
+    "text": "Meet the reunited family and prepare the journey to Bellweather.",
+    "deText": "Triff die wiedervereinte Familie und bereite die Reise nach Bellweather vor."
+  },
+  {
+    "id": "briefing-60",
+    "level": 60,
+    "title": "Mission: The coastward road",
+    "deTitle": "Auftrag: Die Straße zur Küste",
+    "sender": "Levin",
+    "text": "Clear the coastal approach and contact Bellweather's watch.",
+    "deText": "Räume den Küstenzugang und kontaktiere Bellweathers Wache."
+  },
+  {
+    "id": "briefing-61",
+    "level": 61,
+    "title": "Mission: The arrivals hall",
+    "deTitle": "Auftrag: Die Ankunftshalle",
+    "sender": "Levin",
+    "text": "Power the arrivals terminal and locate Ruth's transport entry.",
+    "deText": "Versorge das Ankunftsterminal mit Strom und finde Ruths Transporteintrag."
+  },
+  {
+    "id": "briefing-62",
+    "level": 62,
+    "title": "Mission: The keeper of names",
+    "deTitle": "Auftrag: Die Hüterin der Namen",
+    "sender": "Levin",
+    "text": "Meet Sera and ask what became of Ruth's group.",
+    "deText": "Triff Sera und frage nach Ruths Gruppe."
+  },
+  {
+    "id": "briefing-63",
+    "level": 63,
+    "title": "Mission: The shore clinic",
+    "deTitle": "Auftrag: Die Küstenklinik",
+    "sender": "Levin",
+    "text": "Secure the clinic's evacuation log and compare its dates with Sera.",
+    "deText": "Sichere das Evakuierungsbuch der Klinik und vergleiche die Daten mit Sera."
+  },
+  {
+    "id": "briefing-64",
+    "level": 64,
+    "title": "Mission: The inland school",
+    "deTitle": "Auftrag: Die Schule im Landesinneren",
+    "sender": "Levin",
+    "text": "Repair the archive cabinet and recover the children's arrival record.",
+    "deText": "Repariere den Archivschrank und berge die Ankunftsliste der Kinder."
+  },
+  {
+    "id": "briefing-65",
+    "level": 65,
+    "title": "Mission: The last transport channel",
+    "deTitle": "Auftrag: Der Kanal des letzten Transports",
+    "sender": "Levin",
+    "text": "Restore the lighthouse recorder and copy the final transport call.",
+    "deText": "Stelle den Leuchtturmrekorder wieder her und kopiere den letzten Transportruf."
+  },
+  {
+    "id": "briefing-66",
+    "level": 66,
+    "title": "Mission: The maintenance lodge",
+    "deTitle": "Auftrag: Die Wartungshütte",
+    "sender": "Levin",
+    "text": "Clear the lodge entrance and retrieve the sheltered group's ledger.",
+    "deText": "Räume den Hütteneingang und berge das Buch der untergebrachten Gruppe."
+  },
+  {
+    "id": "briefing-67",
+    "level": 67,
+    "title": "Mission: The witness route",
+    "deTitle": "Auftrag: Der Weg der Zeugin",
+    "sender": "Levin",
+    "text": "Restore the roadside beacon and reach the returning relief team's records.",
+    "deText": "Stelle das Straßenleuchtfeuer wieder her und erreiche die Unterlagen der Hilfsmannschaft."
+  },
+  {
+    "id": "briefing-68",
+    "level": 68,
+    "title": "Mission: What the record says",
+    "deTitle": "Auftrag: Was die Akte sagt",
+    "sender": "Levin",
+    "text": "Recover Tessa's sealed medical ledger and verify Ruth's identity.",
+    "deText": "Berge Tessas versiegeltes Krankenbuch und überprüfe Ruths Identität."
+  },
+  {
+    "id": "briefing-69",
+    "level": 69,
+    "title": "Mission: A witness, not a rumor",
+    "deTitle": "Auftrag: Eine Zeugin statt eines Gerüchts",
+    "sender": "Levin",
+    "text": "Meet Tessa and hear Ruth's final days without rushing her account.",
+    "deText": "Triff Tessa und höre Ruths letzte Tage an, ohne ihren Bericht zu drängen."
+  },
+  {
+    "id": "briefing-70",
+    "level": 70,
+    "title": "Mission: The cloth pouch",
+    "deTitle": "Auftrag: Der Stoffbeutel",
+    "sender": "Levin",
+    "text": "Open the protected belongings cabinet and recover Ruth's pouch.",
+    "deText": "Öffne den geschützten Schrank und berge Ruths Beutel."
+  },
+  {
+    "id": "briefing-71",
+    "level": 71,
+    "title": "Mission: A place to remember",
+    "deTitle": "Auftrag: Ein Ort zum Erinnern",
+    "sender": "Levin",
+    "text": "Visit the named memorial with the family and place Ruth's photograph.",
+    "deText": "Besuche mit der Familie die Gedenkstätte und lege Ruths Foto nieder."
+  },
+  {
+    "id": "briefing-72",
+    "level": 72,
+    "title": "Mission: The journey after answers",
+    "deTitle": "Auftrag: Die Reise nach den Antworten",
+    "sender": "Levin",
+    "text": "Meet the family and decide what to carry home to Haven.",
+    "deText": "Triff die Familie und entscheide, was sie nach Haven mitnehmen."
+  },
+  {
+    "id": "briefing-73",
+    "level": 73,
+    "title": "Mission: The names network",
+    "deTitle": "Auftrag: Das Netzwerk der Namen",
+    "sender": "Levin",
+    "text": "Repair Bellweather's relay and agree a shared missing-person protocol.",
+    "deText": "Repariere Bellweathers Relais und vereinbare ein gemeinsames Vermisstenverfahren."
+  },
+  {
+    "id": "briefing-74",
+    "level": 74,
+    "title": "Mission: Copies that travel",
+    "deTitle": "Auftrag: Kopien auf Reisen",
+    "sender": "Levin",
+    "text": "Secure archive copies and establish the first courier handover.",
+    "deText": "Sichere Archivkopien und organisiere die erste Botenübergabe."
+  },
+  {
+    "id": "briefing-75",
+    "level": 75,
+    "title": "Mission: A call for someone else",
+    "deTitle": "Auftrag: Ein Ruf für jemand anderen",
+    "sender": "Levin",
+    "text": "Power an isolated receiver and deliver a verified family message.",
+    "deText": "Versorge einen abgelegenen Empfänger mit Strom und übermittle eine geprüfte Familiennachricht."
+  },
+  {
+    "id": "briefing-76",
+    "level": 76,
+    "title": "Mission: The unfinished rescue",
+    "deTitle": "Auftrag: Die unvollendete Rettung",
+    "sender": "Levin",
+    "text": "Repair a refuge's evacuation winch and confirm all residents are accounted for.",
+    "deText": "Repariere die Evakuierungswinde einer Zuflucht und bestätige alle Bewohner."
+  },
+  {
+    "id": "briefing-77",
+    "level": 77,
+    "title": "Mission: Everyone on the list",
+    "deTitle": "Auftrag: Alle auf der Liste",
+    "sender": "Levin",
+    "text": "Meet the rescued residents and reconcile the departure and arrival lists.",
+    "deText": "Triff die Geretteten und gleiche Abfahrts- und Ankunftslisten ab."
+  },
+  {
+    "id": "briefing-78",
+    "level": 78,
+    "title": "Mission: A clinic without secrets",
+    "deTitle": "Auftrag: Eine Klinik ohne Geheimnisse",
+    "sender": "Levin",
+    "text": "Deliver Lena's shared research records and stabilize the study archive.",
+    "deText": "Überbringe Lenas gemeinsame Forschungsakten und sichere das Studienarchiv."
+  },
+  {
+    "id": "briefing-79",
+    "level": 79,
+    "title": "Mission: The clean-air workshop",
+    "deTitle": "Auftrag: Die Werkstatt für saubere Luft",
+    "sender": "Levin",
+    "text": "Repair a filter training rig and document safe isolation steps.",
+    "deText": "Repariere eine Filter-Übungsanlage und dokumentiere sichere Isolationsschritte."
+  },
+  {
+    "id": "briefing-80",
+    "level": 80,
+    "title": "Mission: The apprenticeship",
+    "deTitle": "Auftrag: Die Ausbildung",
+    "sender": "Levin",
+    "text": "Restore a practice relay and guide the next repair crew through its checks.",
+    "deText": "Stelle ein Übungsrelais wieder her und führe das nächste Team durch die Prüfungen."
+  },
+  {
+    "id": "briefing-81",
+    "level": 81,
+    "title": "Mission: A road home",
+    "deTitle": "Auftrag: Eine Straße nach Hause",
+    "sender": "Levin",
+    "text": "Clear the return corridor and mark shelter stops for the family convoy.",
+    "deText": "Räume den Rückweg und markiere Unterkünfte für den Familienkonvoi."
+  },
+  {
+    "id": "briefing-82",
+    "level": 82,
+    "title": "Mission: The last missing receipt",
+    "deTitle": "Auftrag: Die letzte fehlende Quittung",
+    "sender": "Levin",
+    "text": "Recover the convoy's last receipt and confirm the family is on its way.",
+    "deText": "Berge die letzte Konvoiquittung und bestätige den Aufbruch der Familie."
+  },
+  {
+    "id": "briefing-83",
+    "level": 83,
+    "title": "Mission: The gate kept open",
+    "deTitle": "Auftrag: Das offen gehaltene Tor",
+    "sender": "Levin",
+    "text": "Meet Haven's watch and prepare a welcome for the returning convoy.",
+    "deText": "Triff Havens Wache und bereite den Empfang des Rückkonvois vor."
+  },
+  {
+    "id": "briefing-84",
+    "level": 84,
+    "title": "Mission: The table, made larger",
+    "deTitle": "Auftrag: Der größere Tisch",
+    "sender": "Levin",
+    "text": "Bring the family together and share Ruth's photograph at the table.",
+    "deText": "Bringe die Familie zusammen und teile Ruths Foto am Tisch."
+  },
+  {
+    "id": "briefing-85",
+    "level": 85,
+    "title": "Mission: The public archive",
+    "deTitle": "Auftrag: Das öffentliche Archiv",
+    "sender": "Levin",
+    "text": "Secure the community archive and return each original to its owner.",
+    "deText": "Sichere das Gemeinschaftsarchiv und gib jedes Original seinem Besitzer zurück."
+  },
+  {
+    "id": "briefing-86",
+    "level": 86,
+    "title": "Mission: A frequency for tomorrow",
+    "deTitle": "Auftrag: Eine Frequenz für morgen",
+    "sender": "Levin",
+    "text": "Power the permanent network beacon and hand its watch to the community.",
+    "deText": "Versorge das dauerhafte Netzleuchtfeuer mit Strom und übergib die Wache der Gemeinschaft."
+  },
+  {
+    "id": "briefing-87",
+    "level": 87,
+    "title": "Mission: A garden for Ruth",
+    "deTitle": "Auftrag: Ein Garten für Ruth",
+    "sender": "Levin",
+    "text": "Repair the garden water line and prepare a memorial space with the family.",
+    "deText": "Repariere die Gartenwasserleitung und gestalte mit der Familie einen Erinnerungsort."
+  },
+  {
+    "id": "briefing-88",
+    "level": 88,
+    "title": "Mission: Nothing left unsaid",
+    "deTitle": "Auftrag: Nichts bleibt ungesagt",
+    "sender": "Levin",
+    "text": "Speak with Lena, Jonas and Elias and choose a quiet evening at home.",
+    "deText": "Sprich mit Lena, Jonas und Elias und wähle einen ruhigen Abend zu Hause."
+  },
+  {
+    "id": "briefing-89",
+    "level": 89,
+    "title": "Mission: A home worth staying for",
+    "deTitle": "Auftrag: Ein Zuhause zum Bleiben",
+    "sender": "Levin",
+    "text": "Return to Koda and the family garden, then hand over the evening radio watch.",
+    "deText": "Kehre zu Koda und dem Familiengarten zurück und übergib die abendliche Funkwache."
   }
 ]

@@ -7,4 +7,4 @@ for(const film of CINEMATICS){
  assert.equal(bytes.toString('ascii',4,8),'ftyp',film.id+' is not MP4');
  assert(fs.existsSync('public'+film.poster),film.id+' poster missing');
 }
-console.log('All 11 cinematic files and posters exist, with MP4 containers.');
+console.log('All 31 cinematic files and posters exist, with MP4 containers.');

@@ -268,5 +268,605 @@
     "sender": "Ada",
     "text": "There is a bowl for Koda by the clinic door. And a chair for you, Mara. You do not have to be on your way somewhere every time we see you. Sometimes coming home is the whole task.",
     "deText": "An der Kliniktür steht ein Napf für Koda. Und ein Stuhl für dich, Mara. Du musst nicht bei jedem Besuch schon wieder auf dem Weg irgendwohin sein. Manchmal ist Heimkommen die ganze Aufgabe."
+  },
+  {
+    "id": "story-30",
+    "level": 30,
+    "title": "Field report: The second departure",
+    "deTitle": "Feldbericht: Der zweite Aufbruch",
+    "sender": "Mara",
+    "text": "Lena moved her patients east when the clinic roof failed. Her courier left a relay address, not a farewell.",
+    "deText": "Lena brachte ihre Patienten nach Osten, als das Klinikdach einstürzte. Ihr Bote hinterließ eine Relaisadresse, keinen Abschied.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-31",
+    "level": 31,
+    "title": "Field report: The eastern relay",
+    "deTitle": "Feldbericht: Das Ost-Relais",
+    "sender": "Mara",
+    "text": "The clinic convoy crossed the freight district at dawn. The dispatch board identifies a protected pedestrian bridge.",
+    "deText": "Der Klinikkonvoi durchquerte bei Tagesanbruch das Frachtviertel. Die Einsatztafel nennt eine geschützte Fußgängerbrücke.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-32",
+    "level": 32,
+    "title": "Field report: Across the freight bridge",
+    "deTitle": "Feldbericht: Über die Frachtbrücke",
+    "sender": "Mara",
+    "text": "A field clinic still answers Lena's call sign beyond the bridge. Mara hears her sister's recorded promise to wait at the next safe stop.",
+    "deText": "Hinter der Brücke antwortet eine Feldklinik noch auf Lenas Rufzeichen. Mara hört das aufgezeichnete Versprechen ihrer Schwester, am nächsten sicheren Halt zu warten.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-33",
+    "level": 33,
+    "title": "Field report: The field dispensary",
+    "deTitle": "Feldbericht: Die Feldapotheke",
+    "sender": "Mara",
+    "text": "The staff moved everyone inland after a contaminated dust storm. No patients were left behind; a school now houses the clinic.",
+    "deText": "Das Personal brachte nach einem verseuchten Staubsturm alle ins Landesinnere. Niemand blieb zurück; eine Schule beherbergt jetzt die Klinik.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-34",
+    "level": 34,
+    "title": "Field report: School without bells",
+    "deTitle": "Feldbericht: Schule ohne Glocken",
+    "sender": "Mara",
+    "text": "Lena signed every transfer, including people too weak to walk. The supply route ends at a greenhouse refuge.",
+    "deText": "Lena unterschrieb jede Verlegung, auch für Menschen, die nicht gehen konnten. Der Versorgungsweg endet an einer Gewächshauszuflucht.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-35",
+    "level": 35,
+    "title": "Field report: Glasshouse lights",
+    "deTitle": "Feldbericht: Lichter im Gewächshaus",
+    "sender": "Mara",
+    "text": "The watch confirms Lena left a message for Mara, alive and unhurt. A working ferry is the last crossing before Lena's new clinic.",
+    "deText": "Die Wache bestätigt, dass Lena Mara eine Nachricht hinterließ, lebend und unverletzt. Eine funktionierende Fähre ist die letzte Querung vor Lenas neuer Klinik.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-36",
+    "level": 36,
+    "title": "Field report: The ferryman's ledger",
+    "deTitle": "Feldbericht: Das Buch des Fährmanns",
+    "sender": "Mara",
+    "text": "An older passenger named Elias Voss crossed months before Lena. Mara's father may have survived the first evacuation.",
+    "deText": "Ein älterer Fahrgast namens Elias Voss setzte Monate vor Lena über. Maras Vater könnte die erste Evakuierung überlebt haben.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-37",
+    "level": 37,
+    "title": "Field report: Low-water crossing",
+    "deTitle": "Feldbericht: Querung bei Niedrigwasser",
+    "sender": "Mara",
+    "text": "Elias traveled with an aid crew repairing evacuation radios. The crew used the same pencil marks Mara learned as a child.",
+    "deText": "Elias reiste mit Helfern, die Evakuierungsfunkgeräte reparierten. Die Mannschaft nutzte dieselben Bleistiftmarkierungen, die Mara als Kind lernte.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-38",
+    "level": 38,
+    "title": "Field report: A familiar repair",
+    "deTitle": "Feldbericht: Eine vertraute Reparatur",
+    "sender": "Mara",
+    "text": "The repair inside is unmistakably Elias's careful work. Lena's clinic and their father's old route meet at the orchard station.",
+    "deText": "Die Reparatur darin trägt unverkennbar Elias' sorgfältige Handschrift. Lenas Klinik und die alte Route ihres Vaters treffen sich an der Obstgartenstation.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-39",
+    "level": 39,
+    "title": "Field report: Orchard station",
+    "deTitle": "Feldbericht: Obstgartenstation",
+    "sender": "Mara",
+    "text": "Lena answers in person and asks Mara to use the sheltered gate. The sisters are finally within walking distance.",
+    "deText": "Lena antwortet persönlich und bittet Mara, das geschützte Tor zu nutzen. Die Schwestern sind endlich nur noch wenige Schritte voneinander entfernt.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-40",
+    "level": 40,
+    "title": "Field report: The sheltered gate",
+    "deTitle": "Feldbericht: Das geschützte Tor",
+    "sender": "Mara",
+    "text": "Koda leads Mara around a collapsed ambulance shelter. Through the gate, Lena recognizes Mara's red scarf.",
+    "deText": "Koda führt Mara um einen eingestürzten Rettungswagenunterstand. Hinter dem Tor erkennt Lena Maras roten Schal.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-41",
+    "level": 41,
+    "title": "Field report: Two sisters",
+    "deTitle": "Feldbericht: Zwei Schwestern",
+    "sender": "Mara",
+    "text": "Lena is alive; her silence came from broken routes, not abandonment. Their mother Ruth last traveled with Elias toward the northern shelters.",
+    "deText": "Lena lebt; ihr Schweigen lag an zerstörten Wegen, nicht an einem Abschied. Ihre Mutter Ruth reiste zuletzt mit Elias zu den nördlichen Unterkünften.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-42",
+    "level": 42,
+    "title": "Field report: The parents' route",
+    "deTitle": "Feldbericht: Der Weg der Eltern",
+    "sender": "Mara",
+    "text": "Elias and Ruth boarded together, then volunteered at separate stops. The family split while helping others, not while fleeing each other.",
+    "deText": "Elias und Ruth stiegen gemeinsam ein und halfen dann an verschiedenen Halten. Die Familie trennte sich beim Helfen, nicht auf der Flucht voreinander.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-43",
+    "level": 43,
+    "title": "Field report: The volunteer platform",
+    "deTitle": "Feldbericht: Der Helferbahnsteig",
+    "sender": "Mara",
+    "text": "Ruth joined a children's evacuation; Elias stayed with the radio crew. Both intended to reunite at the northern transit house.",
+    "deText": "Ruth begleitete eine Kinderevakuierung; Elias blieb bei den Funkhelfern. Beide wollten sich im nördlichen Durchgangshaus wiedersehen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-44",
+    "level": 44,
+    "title": "Field report: The transit house",
+    "deTitle": "Feldbericht: Das Durchgangshaus",
+    "sender": "Mara",
+    "text": "A storm forced Ruth's transport south before Elias arrived. Elias kept searching north with an outdated destination.",
+    "deText": "Ein Sturm zwang Ruths Transport nach Süden, bevor Elias ankam. Elias suchte mit einem überholten Ziel weiter im Norden.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-45",
+    "level": 45,
+    "title": "Field report: A route corrected",
+    "deTitle": "Feldbericht: Eine korrigierte Route",
+    "sender": "Mara",
+    "text": "Dates explain the contradiction; neither parent knew the route had changed. Mara follows Elias first while Lena traces Ruth's southern transport.",
+    "deText": "Die Daten erklären den Widerspruch; keiner wusste von der Routenänderung. Mara folgt zuerst Elias, während Lena Ruths Südtransport verfolgt.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-46",
+    "level": 46,
+    "title": "Field report: The snowline repeater",
+    "deTitle": "Feldbericht: Das Relais an der Schneegrenze",
+    "sender": "Mara",
+    "text": "A weak crew signal still carries Elias's maintenance signature. The crew shelters near a reservoir service road.",
+    "deText": "Ein schwaches Mannschaftssignal trägt noch Elias' Wartungskennung. Die Mannschaft sucht Schutz an einer Reservoir-Wartungsstraße.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-47",
+    "level": 47,
+    "title": "Field report: Service road north",
+    "deTitle": "Feldbericht: Wartungsstraße nach Norden",
+    "sender": "Mara",
+    "text": "The crew moved an injured radio engineer to a mobile hospital. The engineer is listed as Elias Voss, conscious on arrival.",
+    "deText": "Die Mannschaft brachte einen verletzten Funktechniker in ein mobiles Krankenhaus. Der Techniker ist als Elias Voss verzeichnet, bei Ankunft bei Bewusstsein.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-48",
+    "level": 48,
+    "title": "Field report: The mobile ward",
+    "deTitle": "Feldbericht: Die mobile Station",
+    "sender": "Mara",
+    "text": "The hospital moved to clean air beyond a damaged filtration depot. Elias recorded Mara's old home frequency as his family contact.",
+    "deText": "Das Krankenhaus zog in saubere Luft hinter einem beschädigten Filterdepot. Elias gab Maras alte Hausfrequenz als Familienkontakt an.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-49",
+    "level": 49,
+    "title": "Field report: Clean-air passage",
+    "deTitle": "Feldbericht: Durchgang zur sauberen Luft",
+    "sender": "Mara",
+    "text": "The sealed duct protects the road without restarting the damaged plant. Mara can approach the hospital without exposing its patients.",
+    "deText": "Der abgedichtete Schacht schützt die Straße, ohne die beschädigte Anlage zu starten. Mara kann das Krankenhaus erreichen, ohne dessen Patienten zu gefährden.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-50",
+    "level": 50,
+    "title": "Field report: A father's voice",
+    "deTitle": "Feldbericht: Die Stimme des Vaters",
+    "sender": "Mara",
+    "text": "Elias answers; he thought the southern relays had gone silent forever. He asks whether both his daughters are alive, and Mara can finally say yes.",
+    "deText": "Elias antwortet; er glaubte, die südlichen Relais seien für immer verstummt. Er fragt, ob beide Töchter leben, und Mara kann endlich Ja sagen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-51",
+    "level": 51,
+    "title": "Field report: The ward gate",
+    "deTitle": "Feldbericht: Das Stationstor",
+    "sender": "Mara",
+    "text": "The staff protect recovering patients through a quiet, controlled entrance. Elias is recovering from an injury and can travel with assistance.",
+    "deText": "Das Personal schützt Genesende durch einen ruhigen, kontrollierten Eingang. Elias erholt sich von einer Verletzung und kann mit Hilfe reisen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-52",
+    "level": 52,
+    "title": "Field report: The unfinished letter",
+    "deTitle": "Feldbericht: Der unvollendete Brief",
+    "sender": "Mara",
+    "text": "Ruth wrote of a southern refuge called Bellweather, before its route changed. The letter has no final goodbye, only instructions to keep asking.",
+    "deText": "Ruth schrieb von einer südlichen Zuflucht namens Bellweather, bevor sich deren Route änderte. Der Brief enthält keinen endgültigen Abschied, nur die Bitte, weiterzufragen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-53",
+    "level": 53,
+    "title": "Field report: No more missed departures",
+    "deTitle": "Feldbericht: Keine verpassten Abfahrten mehr",
+    "sender": "Mara",
+    "text": "Mara and Elias reunite; each believed the other had stopped answering. They agree to search for Ruth using records, not guesses.",
+    "deText": "Mara und Elias finden sich wieder; beide glaubten, der andere antworte nicht mehr. Sie wollen Ruth anhand von Unterlagen suchen, nicht anhand von Vermutungen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-54",
+    "level": 54,
+    "title": "Field report: A transport made ready",
+    "deTitle": "Feldbericht: Ein Transport wird vorbereitet",
+    "sender": "Mara",
+    "text": "The hospital releases Elias with rest instructions and a named escort. Lena prepares the orchard clinic to receive their father.",
+    "deText": "Das Krankenhaus entlässt Elias mit Ruheanweisungen und einer benannten Begleitung. Lena bereitet die Obstgartenklinik auf ihren Vater vor.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-55",
+    "level": 55,
+    "title": "Field report: The return beacon",
+    "deTitle": "Feldbericht: Das Rückkehr-Leuchtfeuer",
+    "sender": "Mara",
+    "text": "The ferry crew keeps the crossing open for the recovering passengers. Mara sends the first confirmed family reunion report to Haven.",
+    "deText": "Die Fährmannschaft hält die Querung für die Genesenden offen. Mara sendet die erste bestätigte Familien-Wiedervereinigung nach Haven.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-56",
+    "level": 56,
+    "title": "Field report: Three names answered",
+    "deTitle": "Feldbericht: Drei Namen haben geantwortet",
+    "sender": "Mara",
+    "text": "Jonas hears his father's voice from Haven; three searches now have answers. Ruth's name remains open, and the family will follow it together.",
+    "deText": "Jonas hört in Haven seinen Vater; drei Suchen haben nun Antworten. Ruths Name bleibt offen, und die Familie wird ihm gemeinsam folgen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-57",
+    "level": 57,
+    "title": "Field report: The southern manifest",
+    "deTitle": "Feldbericht: Das südliche Fahrgastverzeichnis",
+    "sender": "Mara",
+    "text": "Ruth's transport reached Bellweather before the coastal evacuation closed. A named witness signed for her group at the old lighthouse road.",
+    "deText": "Ruths Transport erreichte Bellweather vor dem Ende der Küstenevakuierung. Ein benannter Zeuge quittierte ihre Gruppe an der alten Leuchtturmstraße.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-58",
+    "level": 58,
+    "title": "Field report: The lighthouse frequency",
+    "deTitle": "Feldbericht: Die Leuchtturmfrequenz",
+    "sender": "Mara",
+    "text": "A coastal community answers and offers access to its preserved records. There is no promise of an easy answer, but there is someone to ask.",
+    "deText": "Eine Küstengemeinschaft antwortet und bietet Zugang zu ihren erhaltenen Akten. Es gibt kein Versprechen einer leichten Antwort, aber jemanden, den sie fragen können.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-59",
+    "level": 59,
+    "title": "Field report: Together toward the coast",
+    "deTitle": "Feldbericht: Gemeinsam zur Küste",
+    "sender": "Mara",
+    "text": "Elias can travel; Lena and Jonas help organize a route that keeps everyone named. Mara leaves with Koda knowing she no longer searches alone.",
+    "deText": "Elias kann reisen; Lena und Jonas helfen, einen Weg mit vollständigen Namenslisten zu planen. Mara bricht mit Koda auf und weiß, dass sie nicht mehr allein sucht.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-60",
+    "level": 60,
+    "title": "Field report: The coastward road",
+    "deTitle": "Feldbericht: Die Straße zur Küste",
+    "sender": "Mara",
+    "text": "The community kept its records even when outside radio traffic stopped. The watch directs Mara to the old arrivals hall.",
+    "deText": "Die Gemeinschaft bewahrte ihre Akten auch beim Ausfall des Außenfunks. Die Wache führt Mara zur alten Ankunftshalle.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-61",
+    "level": 61,
+    "title": "Field report: The arrivals hall",
+    "deTitle": "Feldbericht: Die Ankunftshalle",
+    "sender": "Mara",
+    "text": "Ruth arrived alive with the children she was helping. A volunteer coordinator named Sera recorded their first night.",
+    "deText": "Ruth kam mit den Kindern, denen sie half, lebend an. Eine Helferkoordinatorin namens Sera dokumentierte ihre erste Nacht.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-62",
+    "level": 62,
+    "title": "Field report: The keeper of names",
+    "deTitle": "Feldbericht: Die Hüterin der Namen",
+    "sender": "Mara",
+    "text": "Sera remembers Ruth repairing blankets while waiting for news of her family. Ruth later joined the refuge's evacuation team at the shore clinic.",
+    "deText": "Sera erinnert sich an Ruth, die Decken flickte und auf Familiennachrichten wartete. Ruth schloss sich später dem Evakuierungsteam der Küstenklinik an.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-63",
+    "level": 63,
+    "title": "Field report: The shore clinic",
+    "deTitle": "Feldbericht: Die Küstenklinik",
+    "sender": "Mara",
+    "text": "The clinic evacuated after a roof fire, with each patient assigned an escort. Ruth escorted two children toward the inland school.",
+    "deText": "Die Klinik wurde nach einem Dachbrand mit benannten Patientenbegleitern evakuiert. Ruth begleitete zwei Kinder zur Schule im Landesinneren.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-64",
+    "level": 64,
+    "title": "Field report: The inland school",
+    "deTitle": "Feldbericht: Die Schule im Landesinneren",
+    "sender": "Mara",
+    "text": "Both children reached the school; Ruth returned to help the last transport. The final transport's radio was monitored from the lighthouse.",
+    "deText": "Beide Kinder erreichten die Schule; Ruth kehrte zum letzten Transport zurück. Der Funk des letzten Transports wurde am Leuchtturm mitgehört.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-65",
+    "level": 65,
+    "title": "Field report: The last transport channel",
+    "deTitle": "Feldbericht: Der Kanal des letzten Transports",
+    "sender": "Mara",
+    "text": "Ruth's voice names every passenger before the road becomes impassable. The group took shelter at a maintenance lodge inland.",
+    "deText": "Ruths Stimme nennt jeden Fahrgast, bevor die Straße unpassierbar wird. Die Gruppe suchte Schutz in einer Wartungshütte im Landesinneren.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-66",
+    "level": 66,
+    "title": "Field report: The maintenance lodge",
+    "deTitle": "Feldbericht: Die Wartungshütte",
+    "sender": "Mara",
+    "text": "The ledger records illness after exposure during the clinic evacuation. Ruth stayed with the sick while a healthy group went for help.",
+    "deText": "Das Buch verzeichnet Erkrankungen nach einer Belastung bei der Klinikräumung. Ruth blieb bei den Kranken, während eine gesunde Gruppe Hilfe holte.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-67",
+    "level": 67,
+    "title": "Field report: The witness route",
+    "deTitle": "Feldbericht: Der Weg der Zeugin",
+    "sender": "Mara",
+    "text": "The relief team reached the lodge two days later, too late for several patients. A nurse named Tessa recorded each death and protected the belongings.",
+    "deText": "Die Helfer erreichten die Hütte zwei Tage später, für mehrere Patienten zu spät. Eine Schwester namens Tessa dokumentierte jeden Tod und bewahrte die persönlichen Sachen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-68",
+    "level": 68,
+    "title": "Field report: What the record says",
+    "deTitle": "Feldbericht: Was die Akte sagt",
+    "sender": "Mara",
+    "text": "Ruth Voss died at the lodge; the ledger matches her name and family details. Mara has a documented answer, and asks to speak with the witness.",
+    "deText": "Ruth Voss starb in der Hütte; das Buch bestätigt Namen und Familienangaben. Mara hat eine dokumentierte Antwort und möchte mit der Zeugin sprechen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-69",
+    "level": 69,
+    "title": "Field report: A witness, not a rumor",
+    "deTitle": "Feldbericht: Eine Zeugin statt eines Gerüchts",
+    "sender": "Mara",
+    "text": "Tessa confirms Ruth's death and says she was cared for and never alone. Ruth left a small cloth pouch for her family.",
+    "deText": "Tessa bestätigt Ruths Tod und dass sie versorgt wurde und nie allein war. Ruth hinterließ ihrer Familie einen kleinen Stoffbeutel.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-70",
+    "level": 70,
+    "title": "Field report: The cloth pouch",
+    "deTitle": "Feldbericht: Der Stoffbeutel",
+    "sender": "Mara",
+    "text": "Inside are a family photograph, a repaired glove and an unfinished note. The note asks her children to take care of each other, not to keep searching forever.",
+    "deText": "Darin liegen ein Familienfoto, ein geflickter Handschuh und eine unvollendete Notiz. Die Notiz bittet ihre Kinder, füreinander da zu sein, nicht endlos weiterzusuchen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-71",
+    "level": 71,
+    "title": "Field report: A place to remember",
+    "deTitle": "Feldbericht: Ein Ort zum Erinnern",
+    "sender": "Mara",
+    "text": "Elias, Lena and Jonas share what they remember; Mara can finally stop asking where. Koda waits beside her while the family gives Ruth a shared goodbye.",
+    "deText": "Elias, Lena und Jonas teilen Erinnerungen; Mara muss nicht mehr nach dem Ort fragen. Koda wartet neben ihr, während die Familie gemeinsam Abschied nimmt.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-72",
+    "level": 72,
+    "title": "Field report: The journey after answers",
+    "deTitle": "Feldbericht: Die Reise nach den Antworten",
+    "sender": "Mara",
+    "text": "They will bring Ruth's belongings and copies of the records, with the witnesses' consent. Mara wants other families to find answers without repeating her entire journey.",
+    "deText": "Sie nehmen Ruths Sachen und mit Einverständnis der Zeugen Kopien der Akten mit. Mara möchte, dass andere Familien Antworten ohne ihre ganze Reise finden.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-73",
+    "level": 73,
+    "title": "Field report: The names network",
+    "deTitle": "Feldbericht: Das Netzwerk der Namen",
+    "sender": "Mara",
+    "text": "Each entry will distinguish confirmed news from an unverified lead. Families may choose which personal details are shared.",
+    "deText": "Jeder Eintrag unterscheidet bestätigte Nachrichten von ungeprüften Spuren. Familien entscheiden, welche persönlichen Angaben geteilt werden.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-74",
+    "level": 74,
+    "title": "Field report: Copies that travel",
+    "deTitle": "Feldbericht: Kopien auf Reisen",
+    "sender": "Mara",
+    "text": "The courier carries records for Haven and brings back requests from waiting families. The network starts with a few names, carefully checked.",
+    "deText": "Der Bote trägt Akten nach Haven und bringt Anfragen wartender Familien zurück. Das Netzwerk beginnt mit wenigen, sorgfältig geprüften Namen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-75",
+    "level": 75,
+    "title": "Field report: A call for someone else",
+    "deTitle": "Feldbericht: Ein Ruf für jemand anderen",
+    "sender": "Mara",
+    "text": "A waiting parent hears that their adult daughter reached Bellweather. Mara recognizes the silence before relief and gives them time.",
+    "deText": "Ein wartender Elternteil erfährt, dass seine erwachsene Tochter Bellweather erreichte. Mara erkennt die Stille vor der Erleichterung und lässt ihnen Zeit.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-76",
+    "level": 76,
+    "title": "Field report: The unfinished rescue",
+    "deTitle": "Feldbericht: Die unvollendete Rettung",
+    "sender": "Mara",
+    "text": "A broken mechanism, not a missing convoy, stranded the residents. Their names reach the network before the convoy leaves.",
+    "deText": "Ein defekter Mechanismus, kein verschwundener Konvoi, hielt die Bewohner fest. Ihre Namen erreichen das Netzwerk vor der Abfahrt.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-77",
+    "level": 77,
+    "title": "Field report: Everyone on the list",
+    "deTitle": "Feldbericht: Alle auf der Liste",
+    "sender": "Mara",
+    "text": "Every departure has a matching arrival; no one disappears between two forms. Mara sends Haven a method that can outlast any one rescuer.",
+    "deText": "Jeder Abfahrt entspricht eine Ankunft; niemand verschwindet zwischen Formularen. Mara sendet Haven ein Verfahren, das einzelne Retter überdauern kann.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-78",
+    "level": 78,
+    "title": "Field report: A clinic without secrets",
+    "deTitle": "Feldbericht: Eine Klinik ohne Geheimnisse",
+    "sender": "Mara",
+    "text": "The clinics compare careful treatment research, including failures and limitations. There is progress, but no instant cure or promise to reverse every loss.",
+    "deText": "Die Kliniken vergleichen sorgfältige Behandlungsforschung samt Fehlschlägen und Grenzen. Es gibt Fortschritte, aber keine sofortige Heilung oder Umkehr jedes Verlusts.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-79",
+    "level": 79,
+    "title": "Field report: The clean-air workshop",
+    "deTitle": "Feldbericht: Die Werkstatt für saubere Luft",
+    "sender": "Mara",
+    "text": "Elias helps new crews recognize the failures his family learned too late. Maintenance knowledge becomes shared protection instead of a hidden signature.",
+    "deText": "Elias hilft neuen Teams, die von seiner Familie zu spät erkannten Fehler zu sehen. Wartungswissen wird gemeinsamer Schutz statt verborgener Kennung.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-80",
+    "level": 80,
+    "title": "Field report: The apprenticeship",
+    "deTitle": "Feldbericht: Die Ausbildung",
+    "sender": "Mara",
+    "text": "Mara teaches the crew to ask why an alarm was silenced before replacing it. They sign their work openly and keep the original fault report.",
+    "deText": "Mara lehrt das Team, vor dem Austausch nach dem Grund einer Alarmabschaltung zu fragen. Sie unterschreiben ihre Arbeit offen und bewahren den ursprünglichen Fehlerbericht.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-81",
+    "level": 81,
+    "title": "Field report: A road home",
+    "deTitle": "Feldbericht: Eine Straße nach Hause",
+    "sender": "Mara",
+    "text": "The route now carries patients, couriers and reunions in both directions. Mara's search has become a road other people can use.",
+    "deText": "Die Route trägt jetzt Patienten, Boten und Wiedervereinigungen in beide Richtungen. Maras Suche ist zu einer Straße für andere geworden.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-82",
+    "level": 82,
+    "title": "Field report: The last missing receipt",
+    "deTitle": "Feldbericht: Die letzte fehlende Quittung",
+    "sender": "Mara",
+    "text": "Lena, Jonas and Elias each have a confirmed place on the return transport. Ruth's belongings travel with them under the family's name.",
+    "deText": "Lena, Jonas und Elias haben jeweils einen bestätigten Platz im Rücktransport. Ruths Sachen reisen unter dem Familiennamen mit ihnen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-83",
+    "level": 83,
+    "title": "Field report: The gate kept open",
+    "deTitle": "Feldbericht: Das offen gehaltene Tor",
+    "sender": "Mara",
+    "text": "Ada saved a quiet room for Elias and a patch of shade for Koda. This arrival will not need a second search to find anyone.",
+    "deText": "Ada hielt ein ruhiges Zimmer für Elias und ein schattiges Plätzchen für Koda frei. Nach dieser Ankunft braucht es keine neue Suche nach jemandem.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-84",
+    "level": 84,
+    "title": "Field report: The table, made larger",
+    "deTitle": "Feldbericht: Der größere Tisch",
+    "sender": "Mara",
+    "text": "The empty place is acknowledged, not hidden beneath a celebration. Mara can be glad they are together and grieve their mother at the same time.",
+    "deText": "Der leere Platz wird benannt und nicht hinter einer Feier verborgen. Mara darf sich über das Zusammensein freuen und zugleich um ihre Mutter trauern.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-85",
+    "level": 85,
+    "title": "Field report: The public archive",
+    "deTitle": "Feldbericht: Das öffentliche Archiv",
+    "sender": "Mara",
+    "text": "The archive keeps consent, corrections and evidence together. No director or rescuer alone decides whose story survives.",
+    "deText": "Das Archiv bewahrt Einwilligungen, Korrekturen und Belege gemeinsam auf. Kein Direktor oder Retter entscheidet allein, wessen Geschichte erhalten bleibt.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-86",
+    "level": 86,
+    "title": "Field report: A frequency for tomorrow",
+    "deTitle": "Feldbericht: Eine Frequenz für morgen",
+    "sender": "Mara",
+    "text": "Neighboring settlements answer with names, repairs and offers of help. Mara can turn off her own radio without leaving everyone unheard.",
+    "deText": "Nachbarsiedlungen antworten mit Namen, Reparaturen und Hilfsangeboten. Mara kann ihr eigenes Funkgerät ausschalten, ohne alle ungehört zu lassen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-87",
+    "level": 87,
+    "title": "Field report: A garden for Ruth",
+    "deTitle": "Feldbericht: Ein Garten für Ruth",
+    "sender": "Mara",
+    "text": "They plant something living beside Ruth's name without pretending it replaces her. Koda falls asleep in the shade while the family finishes together.",
+    "deText": "Sie pflanzen etwas Lebendiges neben Ruths Namen, ohne es als Ersatz zu betrachten. Koda schläft im Schatten ein, während die Familie gemeinsam fertig wird.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-88",
+    "level": 88,
+    "title": "Field report: Nothing left unsaid",
+    "deTitle": "Feldbericht: Nichts bleibt ungesagt",
+    "sender": "Mara",
+    "text": "They share apologies and memories without assigning one person all the blame. Mara's family search is complete; their life together can continue.",
+    "deText": "Sie teilen Entschuldigungen und Erinnerungen, ohne einem Menschen alle Schuld zu geben. Maras Familiensuche ist abgeschlossen; ihr gemeinsames Leben kann weitergehen.",
+    "afterObjectives": true
+  },
+  {
+    "id": "story-89",
+    "level": 89,
+    "title": "Field report: A home worth staying for",
+    "deTitle": "Feldbericht: Ein Zuhause zum Bleiben",
+    "sender": "Mara",
+    "text": "Mara has found her living family, learned Ruth's fate and built a place for their memories. For once, the next morning is not another search. It is a life she chooses to stay for.",
+    "deText": "Mara hat ihre lebende Familie gefunden, Ruths Schicksal erfahren und Erinnerungen einen Ort gegeben. Zum ersten Mal ist der nächste Morgen keine weitere Suche. Es ist ein Leben, für das sie bleibt.",
+    "afterObjectives": true
   }
 ]

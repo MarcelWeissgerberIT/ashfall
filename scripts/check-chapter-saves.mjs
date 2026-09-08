@@ -13,4 +13,4 @@ for(let level=0;level<3;level++){
  if(level===0){const crate=game.entities.find(e=>e.id==='guard');assert(!crate.contents.includes('fuse'));game.inventory.push(...crate.contents);assert(craft(game,'fuse',prepareRecipe(game,'fuse')));game.inventory.push('fuel');game.interact(game.entities.find(e=>e.id==='generator'));assert(game.generatorOn);}
  if(level===1){const sample=game.entities.find(e=>e.id==='sample');game.interact(sample);assert(!game.has('sample')&&!sample.removed);game.inventory.push('scrap','bottle','toolbox');assert(craft(game,'samplecase',prepareRecipe(game,'samplecase')));game.interact(sample);assert(game.has('sample'));const loaded=new Game();restoreSave(loaded,createSave(game));assert(loaded.has('samplecase'));}
 }
-assert.throws(()=>chapterSave(3));console.log('All three chapter saves, crafting gates and round-trip persistence passed.');
+assert.throws(()=>chapterSave(90));console.log('All three chapter saves, crafting gates and round-trip persistence passed.');

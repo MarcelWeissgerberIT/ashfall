@@ -17,6 +17,7 @@ export function updateStoryEvents(game,force=false){
   const message=game.messages.at(-1);message.id=briefId;message.sender=briefing.sender;
  }
  const voice=calls.find(c=>c.level===game.level);
+ if(voice?.afterObjectives&&!force&&!game.entities.find(e=>e.id==='story-b')?.done)return;
  const id='background-'+game.level;
  if(!force&&game.time<12||game.messages.some(m=>m.id===id))return;
  // Hold story calls until the opening mission traffic has had time to finish.

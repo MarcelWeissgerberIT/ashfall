@@ -25,7 +25,7 @@ export default function IntroCutscene({onClose,portalContainer,kind='intro',audi
  <video ref={video} className="intro-film" src={film.src} poster={film.poster||ART.sectors[0].src} autoPlay muted={!sound} playsInline preload="auto"
  onEnded={onClose} onError={()=>setError(true)} onPause={()=>setPaused(true)} onWaiting={()=>setLoading(true)} onPlaying={()=>{setPaused(false);setLoading(false)}}
  onTimeUpdate={event=>{const p=event.currentTarget;setProgress(p.duration?p.currentTime/p.duration*100:0)}}/>
- <header className="intro-controls"><span>{'ASHFALL / '+film.title.toUpperCase()}</span><button onClick={onClose}>{replay?'Back to cinematics':kind==='intro'?'Skip intro':kind==='finale'?'Finish story':'Continue journey'} <span>Esc</span></button></header>
+ <header className="intro-controls"><span>{'ASHFALL / '+film.title.toUpperCase()}</span><button onClick={onClose}>{replay?'Back to cinematics':kind==='intro'?'Skip intro':kind==='finale-90'?'Finish story':'Continue journey'} <span>Esc</span></button></header>
  {error?<section className="intro-film-message"><h2>The film could not load.</h2><button onClick={()=>{video.current?.load();void play(sound)}}>Retry</button><button onClick={onClose}>{replay?'Back to cinematics →':'Continue to game →'}</button></section>:
  paused?<section className="intro-film-message"><button onClick={()=>void play(sound)}>{'Play film →'}</button></section>:loading?<p className="intro-film-loading" role="status">Loading film …</p>:null}
  <button className="intro-sound" onClick={()=>{if(sound){if(video.current)video.current.muted=true;setSound(false)}else void play(true)}}>{sound?'Mute sound':'Play with sound ↺'}</button>

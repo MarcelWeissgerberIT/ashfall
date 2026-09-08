@@ -1,0 +1,1925 @@
+{
+  "provider": "Microsoft Edge online neural text-to-speech via edge-tts",
+  "recordings": [
+    {
+      "id": "story-30",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Lena brachte ihre Patienten nach Osten, als das Klinikdach einstürzte. Ihr Bote hinterließ eine Relaisadresse, keinen Abschied.",
+      "sha256": "377f732577f78c16b292e026dfb889e2d367a2cc767010bd00979e728944d141"
+    },
+    {
+      "id": "story-31",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Der Klinikkonvoi durchquerte bei Tagesanbruch das Frachtviertel. Die Einsatztafel nennt eine geschützte Fußgängerbrücke.",
+      "sha256": "ea675b1c104e9afa8e8b8d1aa1e8ee6c7b525620aee54fd65fff9d350620dc1e"
+    },
+    {
+      "id": "story-31",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The clinic convoy crossed the freight district at dawn. The dispatch board identifies a protected pedestrian bridge.",
+      "sha256": "0d7a1a018389b0fdddec0565e5e212b9315fe26b9e602a782c41454961755a37"
+    },
+    {
+      "id": "story-32",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Hinter der Brücke antwortet eine Feldklinik noch auf Lenas Rufzeichen. Mara hört das aufgezeichnete Versprechen ihrer Schwester, am nächsten sicheren Halt zu warten.",
+      "sha256": "b6373469f1084763625a81e29181f93cdf4146be77cd0604926e1b0b9fc36023"
+    },
+    {
+      "id": "story-32",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "A field clinic still answers Lena's call sign beyond the bridge. Mara hears her sister's recorded promise to wait at the next safe stop.",
+      "sha256": "e6cb8d9297df5e52c44589ca107bbb7e82f5071ecad1b63f5e3fa6d435e7d602"
+    },
+    {
+      "id": "story-30",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Lena moved her patients east when the clinic roof failed. Her courier left a relay address, not a farewell.",
+      "sha256": "3f631c55e0d5cb48fbdb59511654f94aae6adfb4f7383b293eaad677abf64696"
+    },
+    {
+      "id": "story-33",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Das Personal brachte nach einem verseuchten Staubsturm alle ins Landesinnere. Niemand blieb zurück; eine Schule beherbergt jetzt die Klinik.",
+      "sha256": "d171711d1c7995601db53370a1e0c5dad7bfad3481c63554d1cf92e7322f2bbd"
+    },
+    {
+      "id": "story-34",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Lena signed every transfer, including people too weak to walk. The supply route ends at a greenhouse refuge.",
+      "sha256": "12528a19dccb09a9a61a128516c0ceae1c6d41d01382c100085798c337c39c82"
+    },
+    {
+      "id": "story-34",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Lena unterschrieb jede Verlegung, auch für Menschen, die nicht gehen konnten. Der Versorgungsweg endet an einer Gewächshauszuflucht.",
+      "sha256": "128ca3af19c84d870dd9d473229455e350c18c3189890e281188a436bf60e8ec"
+    },
+    {
+      "id": "story-35",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Wache bestätigt, dass Lena Mara eine Nachricht hinterließ, lebend und unverletzt. Eine funktionierende Fähre ist die letzte Querung vor Lenas neuer Klinik.",
+      "sha256": "7993c07f0f7273cace85afc0776862dc9e4796061d054d501533f9e23cd85867"
+    },
+    {
+      "id": "story-33",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The staff moved everyone inland after a contaminated dust storm. No patients were left behind; a school now houses the clinic.",
+      "sha256": "adc31995d427c9f41bae6bedb2ea484290b9adbc0f3033ec8ba0eb7db5f2035c"
+    },
+    {
+      "id": "story-35",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The watch confirms Lena left a message for Mara, alive and unhurt. A working ferry is the last crossing before Lena's new clinic.",
+      "sha256": "14587a6e90ed3de5fe6e028418c4b0faee85d7955b9c3deee98a3a0d1f8a32dc"
+    },
+    {
+      "id": "story-36",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ein älterer Fahrgast namens Elias Voss setzte Monate vor Lena über. Maras Vater könnte die erste Evakuierung überlebt haben.",
+      "sha256": "50d59ad4b7821dbbf0a167ebd19beb1ca576af56ee1e952d76e9cd5a782ef46a"
+    },
+    {
+      "id": "story-36",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "An older passenger named Elias Voss crossed months before Lena. Mara's father may have survived the first evacuation.",
+      "sha256": "e6c99a5fd6b6989862cdd21cb95ad8c652460a9c52639052566365e4eee70199"
+    },
+    {
+      "id": "story-37",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Elias reiste mit Helfern, die Evakuierungsfunkgeräte reparierten. Die Mannschaft nutzte dieselben Bleistiftmarkierungen, die Mara als Kind lernte.",
+      "sha256": "b5d0c130055724ea05b0b5b415e0107924417439ce806398780367d89ada7c95"
+    },
+    {
+      "id": "story-37",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Elias traveled with an aid crew repairing evacuation radios. The crew used the same pencil marks Mara learned as a child.",
+      "sha256": "43de02b3ed4c41c84f87fc8bf94ea30a520c1bb1e1661dce0efd45b3beb9de2c"
+    },
+    {
+      "id": "story-38",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Reparatur darin trägt unverkennbar Elias' sorgfältige Handschrift. Lenas Klinik und die alte Route ihres Vaters treffen sich an der Obstgartenstation.",
+      "sha256": "69e92bc03848ed79b063d1badde30586b82a5c082b4e6e07b611c40c28742151"
+    },
+    {
+      "id": "story-38",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The repair inside is unmistakably Elias's careful work. Lena's clinic and their father's old route meet at the orchard station.",
+      "sha256": "70acab5bda7f24350dc53e4cc86179c00e366ec7fba14a8e24f85d12b275fe36"
+    },
+    {
+      "id": "story-39",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Lena answers in person and asks Mara to use the sheltered gate. The sisters are finally within walking distance.",
+      "sha256": "27f18433c5c2443df7d189055fa7a63d19666a0ee2219874b68c84809aedcc29"
+    },
+    {
+      "id": "story-39",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Lena antwortet persönlich und bittet Mara, das geschützte Tor zu nutzen. Die Schwestern sind endlich nur noch wenige Schritte voneinander entfernt.",
+      "sha256": "f6fa17e9ab357444b03ecd00206f4b5f260c05a3a37fcb34b65f831b5b21d07c"
+    },
+    {
+      "id": "story-40",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Koda leads Mara around a collapsed ambulance shelter. Through the gate, Lena recognizes Mara's red scarf.",
+      "sha256": "cba463d5fadb482b31cb40e4d95595b5d250f4a710d1806d5bcd0bc96ddbc37f"
+    },
+    {
+      "id": "story-40",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Koda führt Mara um einen eingestürzten Rettungswagenunterstand. Hinter dem Tor erkennt Lena Maras roten Schal.",
+      "sha256": "28f749dc5b8b8db8f0570f6220935ef5dbd00f7082c554bd1d844f3a191df0c2"
+    },
+    {
+      "id": "story-41",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Lena lebt; ihr Schweigen lag an zerstörten Wegen, nicht an einem Abschied. Ihre Mutter Ruth reiste zuletzt mit Elias zu den nördlichen Unterkünften.",
+      "sha256": "5c47cd3820aad2d3e075527eae006a65e92e7fc5d4897873d93dc198466c9a92"
+    },
+    {
+      "id": "story-42",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Elias and Ruth boarded together, then volunteered at separate stops. The family split while helping others, not while fleeing each other.",
+      "sha256": "57838b2526f7bd4345dc3ca691dd1e57f2078388535c134da74de4899d0e7ecf"
+    },
+    {
+      "id": "story-42",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Elias und Ruth stiegen gemeinsam ein und halfen dann an verschiedenen Halten. Die Familie trennte sich beim Helfen, nicht auf der Flucht voreinander.",
+      "sha256": "fd4edc141e942bcd176759dc25074b67636e4cd0cc0452cb297f85bfdb2b2999"
+    },
+    {
+      "id": "story-41",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Lena is alive; her silence came from broken routes, not abandonment. Their mother Ruth last traveled with Elias toward the northern shelters.",
+      "sha256": "6a043aa539801e26ebca46be895b869cbc1b422d39e4aae245f7690dd5b2061d"
+    },
+    {
+      "id": "story-43",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ruth begleitete eine Kinderevakuierung; Elias blieb bei den Funkhelfern. Beide wollten sich im nördlichen Durchgangshaus wiedersehen.",
+      "sha256": "280dcb94f937d6bbdc99afc0bd39e0bfe49205512b207994cb958fb8eb937757"
+    },
+    {
+      "id": "story-44",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ein Sturm zwang Ruths Transport nach Süden, bevor Elias ankam. Elias suchte mit einem überholten Ziel weiter im Norden.",
+      "sha256": "3922b52b9bb2f4ed848d8c477553d48f609a39df169415f3c50a161d531cb710"
+    },
+    {
+      "id": "story-43",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Ruth joined a children's evacuation; Elias stayed with the radio crew. Both intended to reunite at the northern transit house.",
+      "sha256": "81a60a54c0864d9d733d1506fae8e2ca22f7a9996629fd145fbcda4f721c8793"
+    },
+    {
+      "id": "story-44",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "A storm forced Ruth's transport south before Elias arrived. Elias kept searching north with an outdated destination.",
+      "sha256": "b5696c0250618b0fea24486ad493f1f7dd2ca38840a628f3c5a443c0c6924f42"
+    },
+    {
+      "id": "story-45",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Daten erklären den Widerspruch; keiner wusste von der Routenänderung. Mara folgt zuerst Elias, während Lena Ruths Südtransport verfolgt.",
+      "sha256": "f0797942e606c771ce7369d869370466fa152ec42f58c6fa18a999e75bb9f222"
+    },
+    {
+      "id": "story-45",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Dates explain the contradiction; neither parent knew the route had changed. Mara follows Elias first while Lena traces Ruth's southern transport.",
+      "sha256": "a81272ba696325bdad644ef307748c50985905d471f5eedb20b8b961e827bd3c"
+    },
+    {
+      "id": "story-46",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ein schwaches Mannschaftssignal trägt noch Elias' Wartungskennung. Die Mannschaft sucht Schutz an einer Reservoir-Wartungsstraße.",
+      "sha256": "49bed629be812c9bec595b3a84134dc69b263dd86528ae2b9666ed02471708c7"
+    },
+    {
+      "id": "story-46",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "A weak crew signal still carries Elias's maintenance signature. The crew shelters near a reservoir service road.",
+      "sha256": "049e3b3a2889947482a13229d12ed552c48b91375ff48656c4ea6ca20fb5cc7f"
+    },
+    {
+      "id": "story-47",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Mannschaft brachte einen verletzten Funktechniker in ein mobiles Krankenhaus. Der Techniker ist als Elias Voss verzeichnet, bei Ankunft bei Bewusstsein.",
+      "sha256": "6045fe759bbed67a38ab4cfe02172a7804f2eed664f24d4d4a2dc764f53021dc"
+    },
+    {
+      "id": "story-48",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Das Krankenhaus zog in saubere Luft hinter einem beschädigten Filterdepot. Elias gab Maras alte Hausfrequenz als Familienkontakt an.",
+      "sha256": "380ad46a1b144c8061c7f02837f00227b206102c563b2e290b1acfe82d907cc3"
+    },
+    {
+      "id": "story-47",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The crew moved an injured radio engineer to a mobile hospital. The engineer is listed as Elias Voss, conscious on arrival.",
+      "sha256": "7c166997ef9075bba8f386f8be5cc57ee812b67a2c7226ab20f02ce57b05decd"
+    },
+    {
+      "id": "story-49",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Der abgedichtete Schacht schützt die Straße, ohne die beschädigte Anlage zu starten. Mara kann das Krankenhaus erreichen, ohne dessen Patienten zu gefährden.",
+      "sha256": "4a85a1f6eeeedae40d204bc52fbd50d65afd5285a9f8e0f342554eef9c922657"
+    },
+    {
+      "id": "story-49",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The sealed duct protects the road without restarting the damaged plant. Mara can approach the hospital without exposing its patients.",
+      "sha256": "0d1b2a6511f7a21d202f345afc1fdd5865def1ae174479c3e6c9999a18233079"
+    },
+    {
+      "id": "story-48",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The hospital moved to clean air beyond a damaged filtration depot. Elias recorded Mara's old home frequency as his family contact.",
+      "sha256": "55d6ff8d8b4e831ac4779fd1da1f415719fb69f805e47ee111c8ebdeee48cef5"
+    },
+    {
+      "id": "story-50",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Elias antwortet; er glaubte, die südlichen Relais seien für immer verstummt. Er fragt, ob beide Töchter leben, und Mara kann endlich Ja sagen.",
+      "sha256": "aa2d1dc7372d7f20ad05c78bfb9ef573fe428fb8a6af7f17906a7ed42d28ba8f"
+    },
+    {
+      "id": "story-51",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Das Personal schützt Genesende durch einen ruhigen, kontrollierten Eingang. Elias erholt sich von einer Verletzung und kann mit Hilfe reisen.",
+      "sha256": "51dd72135a501f6509dd44f6668cdcb645f3ff911ce29470b2a8163e5e18d84a"
+    },
+    {
+      "id": "story-50",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Elias answers; he thought the southern relays had gone silent forever. He asks whether both his daughters are alive, and Mara can finally say yes.",
+      "sha256": "af1e369e9a0b51397df382270835e7b0a168172dcd9ebf326773b4ef9691d076"
+    },
+    {
+      "id": "story-51",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The staff protect recovering patients through a quiet, controlled entrance. Elias is recovering from an injury and can travel with assistance.",
+      "sha256": "d74e2a7134d631729568bf73f1e4596d379d665af543ed5b84626fea6bc16521"
+    },
+    {
+      "id": "story-52",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ruth schrieb von einer südlichen Zuflucht namens Bellweather, bevor sich deren Route änderte. Der Brief enthält keinen endgültigen Abschied, nur die Bitte, weiterzufragen.",
+      "sha256": "45ea251afd249f735355b67639bfafc21af46bd7ab006aa739d6a11d462f9e1c"
+    },
+    {
+      "id": "story-53",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Mara und Elias finden sich wieder; beide glaubten, der andere antworte nicht mehr. Sie wollen Ruth anhand von Unterlagen suchen, nicht anhand von Vermutungen.",
+      "sha256": "37f13935835b37529fbe1fee07e92b398b4dc13ce7fdf832ac50eacc75e1a237"
+    },
+    {
+      "id": "story-53",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Mara and Elias reunite; each believed the other had stopped answering. They agree to search for Ruth using records, not guesses.",
+      "sha256": "85084546778876bb21f90e6c3699c827b34aee02644b59a76a3a65ae77d9a001"
+    },
+    {
+      "id": "story-52",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Ruth wrote of a southern refuge called Bellweather, before its route changed. The letter has no final goodbye, only instructions to keep asking.",
+      "sha256": "d477f25f2e15566adcf1e85391703d9813dae4c704b6a9a13eec317273c15680"
+    },
+    {
+      "id": "story-54",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Das Krankenhaus entlässt Elias mit Ruheanweisungen und einer benannten Begleitung. Lena bereitet die Obstgartenklinik auf ihren Vater vor.",
+      "sha256": "a332b25f3878eaba1c45ef4482aee133b7d4654393d95329f9d93c15f70cb23f"
+    },
+    {
+      "id": "story-55",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Fährmannschaft hält die Querung für die Genesenden offen. Mara sendet die erste bestätigte Familien-Wiedervereinigung nach Haven.",
+      "sha256": "2d30fdbba3f7234d510b90f5648a068159cec4de941fb3768bfb130013c83fae"
+    },
+    {
+      "id": "story-55",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The ferry crew keeps the crossing open for the recovering passengers. Mara sends the first confirmed family reunion report to Haven.",
+      "sha256": "6e9af078c3f4d9dd8c032f0ec3b9377f5c9131126322d65760f3253f1cf6fbf3"
+    },
+    {
+      "id": "story-54",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The hospital releases Elias with rest instructions and a named escort. Lena prepares the orchard clinic to receive their father.",
+      "sha256": "4634d8d497bca3950a56a9d4f3713e42926d800ab1ad8f6f64686fc5cc69f277"
+    },
+    {
+      "id": "story-56",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Jonas hört in Haven seinen Vater; drei Suchen haben nun Antworten. Ruths Name bleibt offen, und die Familie wird ihm gemeinsam folgen.",
+      "sha256": "8fe6ef347c7a7dd92126bf741920240c1befc35ad55996105266122fe17865e2"
+    },
+    {
+      "id": "story-56",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Jonas hears his father's voice from Haven; three searches now have answers. Ruth's name remains open, and the family will follow it together.",
+      "sha256": "58b4361b42031e02901713facc00a43f134c856aa8c6e9737e32c3285e36d861"
+    },
+    {
+      "id": "story-57",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ruths Transport erreichte Bellweather vor dem Ende der Küstenevakuierung. Ein benannter Zeuge quittierte ihre Gruppe an der alten Leuchtturmstraße.",
+      "sha256": "33c25b4fb6dddf68008835fac59eb7bd3eb97af9162cf3c4f58c2d543ca61321"
+    },
+    {
+      "id": "story-58",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Eine Küstengemeinschaft antwortet und bietet Zugang zu ihren erhaltenen Akten. Es gibt kein Versprechen einer leichten Antwort, aber jemanden, den sie fragen können.",
+      "sha256": "1f20e8134a2d856e9484d841533d542fda2f62738141b8dfa22e800b2a28b37c"
+    },
+    {
+      "id": "story-58",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "A coastal community answers and offers access to its preserved records. There is no promise of an easy answer, but there is someone to ask.",
+      "sha256": "c7eb8a9321eab64b28201519f7369bbd7cacd20903c1079f15ca86a03fda547f"
+    },
+    {
+      "id": "story-57",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Ruth's transport reached Bellweather before the coastal evacuation closed. A named witness signed for her group at the old lighthouse road.",
+      "sha256": "0619003c1b1e197c3e28afcbcef21a67cff1efc596dd8bdea66a901b471bab46"
+    },
+    {
+      "id": "story-59",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Elias kann reisen; Lena und Jonas helfen, einen Weg mit vollständigen Namenslisten zu planen. Mara bricht mit Koda auf und weiß, dass sie nicht mehr allein sucht.",
+      "sha256": "481763dc478a3e338198b5144a01f59cacf8d89e5374876e366b1f36a9e3f688"
+    },
+    {
+      "id": "story-59",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Elias can travel; Lena and Jonas help organize a route that keeps everyone named. Mara leaves with Koda knowing she no longer searches alone.",
+      "sha256": "34dc12f99f04b5283aa960a2d84477be878a7d52ee06872663cd7980b285d75f"
+    },
+    {
+      "id": "story-60",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Gemeinschaft bewahrte ihre Akten auch beim Ausfall des Außenfunks. Die Wache führt Mara zur alten Ankunftshalle.",
+      "sha256": "46e518fb1a144021fc51415a21c3ee724e76a9448113889d2199fba256f3d158"
+    },
+    {
+      "id": "story-61",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ruth kam mit den Kindern, denen sie half, lebend an. Eine Helferkoordinatorin namens Sera dokumentierte ihre erste Nacht.",
+      "sha256": "60277398741ce3ffd80f6317d7c82d7021bde6dc9daa10feda75bad5210b2d93"
+    },
+    {
+      "id": "story-61",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Ruth arrived alive with the children she was helping. A volunteer coordinator named Sera recorded their first night.",
+      "sha256": "e19f80f731ee7b93044d42cb011cb779064635e869b16d26e8a3299dfea57661"
+    },
+    {
+      "id": "story-60",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The community kept its records even when outside radio traffic stopped. The watch directs Mara to the old arrivals hall.",
+      "sha256": "089ee9a155222159fe9bfd3cb8ac19032f42425bf38983447963f708d39638a2"
+    },
+    {
+      "id": "story-62",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Sera erinnert sich an Ruth, die Decken flickte und auf Familiennachrichten wartete. Ruth schloss sich später dem Evakuierungsteam der Küstenklinik an.",
+      "sha256": "601f456f8da2f945711bdace99f72ccf9d8384f3dc9aeb99ef4fcb9dfba4e581"
+    },
+    {
+      "id": "story-63",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Klinik wurde nach einem Dachbrand mit benannten Patientenbegleitern evakuiert. Ruth begleitete zwei Kinder zur Schule im Landesinneren.",
+      "sha256": "dd6d25f1fb62b6fe9d6034016b02094ad0f8563ba042975b3b9f443e6e4c7c98"
+    },
+    {
+      "id": "story-63",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The clinic evacuated after a roof fire, with each patient assigned an escort. Ruth escorted two children toward the inland school.",
+      "sha256": "65cf71bfc3e7ba66d0736caff9a1c17f64942d07a6202c87c0e43b1044b602eb"
+    },
+    {
+      "id": "story-62",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Sera remembers Ruth repairing blankets while waiting for news of her family. Ruth later joined the refuge's evacuation team at the shore clinic.",
+      "sha256": "f9be67952889aae25514e8a813528fea37efddbc7f542168009f7d69e8c24638"
+    },
+    {
+      "id": "story-64",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Both children reached the school; Ruth returned to help the last transport. The final transport's radio was monitored from the lighthouse.",
+      "sha256": "4667728815e3a8a0211f0a115d21d7df714873601ab7c20bfbc6aafd5088a32a"
+    },
+    {
+      "id": "story-64",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Beide Kinder erreichten die Schule; Ruth kehrte zum letzten Transport zurück. Der Funk des letzten Transports wurde am Leuchtturm mitgehört.",
+      "sha256": "74972e023e75c9a02d1518e5b6e35403fdd759083338904bbe5bb4fb41bda6b0"
+    },
+    {
+      "id": "story-65",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ruths Stimme nennt jeden Fahrgast, bevor die Straße unpassierbar wird. Die Gruppe suchte Schutz in einer Wartungshütte im Landesinneren.",
+      "sha256": "1ebc1902b20f18ac06a3f3670c41e1984990452c7b2cacab3937a8103ae984d4"
+    },
+    {
+      "id": "story-65",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Ruth's voice names every passenger before the road becomes impassable. The group took shelter at a maintenance lodge inland.",
+      "sha256": "5b3e22cc41309980adae4543b006d2f3bf4c7b5cc203953324a6d2c61bc52c24"
+    },
+    {
+      "id": "story-66",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Das Buch verzeichnet Erkrankungen nach einer Belastung bei der Klinikräumung. Ruth blieb bei den Kranken, während eine gesunde Gruppe Hilfe holte.",
+      "sha256": "1df7e8b6e7e472abd10fc6369de5a026beee46b8cc17cde7dd4c7b42b4a13640"
+    },
+    {
+      "id": "story-66",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The ledger records illness after exposure during the clinic evacuation. Ruth stayed with the sick while a healthy group went for help.",
+      "sha256": "56b88d601fe4cdfc29faad9dda9ceba314a5c279787b0ba851a2371273badce5"
+    },
+    {
+      "id": "story-67",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Helfer erreichten die Hütte zwei Tage später, für mehrere Patienten zu spät. Eine Schwester namens Tessa dokumentierte jeden Tod und bewahrte die persönlichen Sachen.",
+      "sha256": "c9dd2637626639f71fcb732deee5e4b55ea69173d3ee7e3af34602cc2b863ead"
+    },
+    {
+      "id": "story-68",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ruth Voss starb in der Hütte; das Buch bestätigt Namen und Familienangaben. Mara hat eine dokumentierte Antwort und möchte mit der Zeugin sprechen.",
+      "sha256": "221975f0c031733cfb6e7fc9497e36669a52be24cfb31f6f9d022f3fc48f86d6"
+    },
+    {
+      "id": "story-67",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The relief team reached the lodge two days later, too late for several patients. A nurse named Tessa recorded each death and protected the belongings.",
+      "sha256": "2f7086c9e886ab3b30c230f84f8c70204e86f2d3bac5ecd93c8c2e03e536a8ee"
+    },
+    {
+      "id": "story-69",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Tessa confirms Ruth's death and says she was cared for and never alone. Ruth left a small cloth pouch for her family.",
+      "sha256": "f3e31938a929c5b6d98bd1fd8d598f96343c8c048ddf3ae79439a589f0c7d1b8"
+    },
+    {
+      "id": "story-69",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Tessa bestätigt Ruths Tod und dass sie versorgt wurde und nie allein war. Ruth hinterließ ihrer Familie einen kleinen Stoffbeutel.",
+      "sha256": "23d9df7fc23845a8697a742eae0d3ca911fa6a74c7805b1e52bc49b81335bc04"
+    },
+    {
+      "id": "story-70",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Darin liegen ein Familienfoto, ein geflickter Handschuh und eine unvollendete Notiz. Die Notiz bittet ihre Kinder, füreinander da zu sein, nicht endlos weiterzusuchen.",
+      "sha256": "688f5860e8d415a21450977365c2fa6a4b419e836245ac23b89f8f41bb796fa5"
+    },
+    {
+      "id": "story-70",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Inside are a family photograph, a repaired glove and an unfinished note. The note asks her children to take care of each other, not to keep searching forever.",
+      "sha256": "eb183364bfa844d6f2ca73222245fc3525451bff7318f2ee677b207e3a5b8fe5"
+    },
+    {
+      "id": "story-68",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Ruth Voss died at the lodge; the ledger matches her name and family details. Mara has a documented answer, and asks to speak with the witness.",
+      "sha256": "029d8287f7dbf1bf935c2f4dbae3c0899e4b63a4d2f918ee69fb30003e8cabad"
+    },
+    {
+      "id": "story-71",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Elias, Lena und Jonas teilen Erinnerungen; Mara muss nicht mehr nach dem Ort fragen. Koda wartet neben ihr, während die Familie gemeinsam Abschied nimmt.",
+      "sha256": "e6f4cc88a2063e32506583a5e6d06ed1a9806edf42716a85fd5e4b73cffabf8e"
+    },
+    {
+      "id": "story-72",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Sie nehmen Ruths Sachen und mit Einverständnis der Zeugen Kopien der Akten mit. Mara möchte, dass andere Familien Antworten ohne ihre ganze Reise finden.",
+      "sha256": "a5c733549a4bb16ab3571d263b5c4c135e8ba04ddf3543dcf48ba4d4e49e7f09"
+    },
+    {
+      "id": "story-71",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Elias, Lena and Jonas share what they remember; Mara can finally stop asking where. Koda waits beside her while the family gives Ruth a shared goodbye.",
+      "sha256": "8cdec13b4d00119bed351917529566223030112a0082587d75d9482a0ebcf17c"
+    },
+    {
+      "id": "story-72",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "They will bring Ruth's belongings and copies of the records, with the witnesses' consent. Mara wants other families to find answers without repeating her entire journey.",
+      "sha256": "0207dfc168e92c4e72a0b9a6e60ca602e54053ca77af86a84dd7fe9bac37f894"
+    },
+    {
+      "id": "story-73",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Jeder Eintrag unterscheidet bestätigte Nachrichten von ungeprüften Spuren. Familien entscheiden, welche persönlichen Angaben geteilt werden.",
+      "sha256": "0cc430db2228203b27a3a67d915e5c389666c87dfd84d95d43dbf3c79953cc70"
+    },
+    {
+      "id": "story-74",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Der Bote trägt Akten nach Haven und bringt Anfragen wartender Familien zurück. Das Netzwerk beginnt mit wenigen, sorgfältig geprüften Namen.",
+      "sha256": "c8cad55e47d29fbaf4cee3e674e6f86f31263fff861c50ce6f5c5fcc757269d2"
+    },
+    {
+      "id": "story-73",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Each entry will distinguish confirmed news from an unverified lead. Families may choose which personal details are shared.",
+      "sha256": "1e34ecf577c8fd635bf1f0f55ca4a63ab750441b12be920a8a613c22c4b11c65"
+    },
+    {
+      "id": "story-74",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The courier carries records for Haven and brings back requests from waiting families. The network starts with a few names, carefully checked.",
+      "sha256": "3d514c324c5d77b264cb096c292f26bc0ff278ec0e4329f71c074913be0b1685"
+    },
+    {
+      "id": "story-75",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ein wartender Elternteil erfährt, dass seine erwachsene Tochter Bellweather erreichte. Mara erkennt die Stille vor der Erleichterung und lässt ihnen Zeit.",
+      "sha256": "22968b98849ce0f5fc9d478c528cfaa95bf5674931d177dbdf4a7fc60200b444"
+    },
+    {
+      "id": "story-76",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ein defekter Mechanismus, kein verschwundener Konvoi, hielt die Bewohner fest. Ihre Namen erreichen das Netzwerk vor der Abfahrt.",
+      "sha256": "cc9c409ad85104ccd4973b9c16c192f99ebd40bff9d07a9121aa5e4d66fc77a5"
+    },
+    {
+      "id": "story-75",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "A waiting parent hears that their adult daughter reached Bellweather. Mara recognizes the silence before relief and gives them time.",
+      "sha256": "4ccf64727d33d4801a7e9849a1c2969077bda3c99c11578484151a3fff5f8351"
+    },
+    {
+      "id": "story-76",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "A broken mechanism, not a missing convoy, stranded the residents. Their names reach the network before the convoy leaves.",
+      "sha256": "759498b4d5a3022986af124911b10e5ec2a17eb25de8265368773287ce0be99a"
+    },
+    {
+      "id": "story-77",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Jeder Abfahrt entspricht eine Ankunft; niemand verschwindet zwischen Formularen. Mara sendet Haven ein Verfahren, das einzelne Retter überdauern kann.",
+      "sha256": "0e846fb62cb6642d401fb8ef051486c6ea4ee1a4ef6eb08d150ad4c871ceb8f5"
+    },
+    {
+      "id": "story-78",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Kliniken vergleichen sorgfältige Behandlungsforschung samt Fehlschlägen und Grenzen. Es gibt Fortschritte, aber keine sofortige Heilung oder Umkehr jedes Verlusts.",
+      "sha256": "f7fcd5a53c495a2056b9a490066b36893f8c4b84f358bc1a5b3359a0feff3931"
+    },
+    {
+      "id": "story-77",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Every departure has a matching arrival; no one disappears between two forms. Mara sends Haven a method that can outlast any one rescuer.",
+      "sha256": "c29692396e43753b4946d37307220037f516f592a4f680666f2c35a55433311a"
+    },
+    {
+      "id": "story-78",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The clinics compare careful treatment research, including failures and limitations. There is progress, but no instant cure or promise to reverse every loss.",
+      "sha256": "11586ef60f9028983abb984d87a12dc2d3a7a0df1fb7f5f83bb97311445ec4a4"
+    },
+    {
+      "id": "story-79",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Elias hilft neuen Teams, die von seiner Familie zu spät erkannten Fehler zu sehen. Wartungswissen wird gemeinsamer Schutz statt verborgener Kennung.",
+      "sha256": "1d589ed5127a2f442c775fcdd1e093731bcfd852a7eb8e8b5ac2db07f8b7869d"
+    },
+    {
+      "id": "story-80",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Mara lehrt das Team, vor dem Austausch nach dem Grund einer Alarmabschaltung zu fragen. Sie unterschreiben ihre Arbeit offen und bewahren den ursprünglichen Fehlerbericht.",
+      "sha256": "7e3bc56064174e9f9495a6b38c06d41ce01c7105635d18838d46bb2f5dcf58a3"
+    },
+    {
+      "id": "story-81",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The route now carries patients, couriers and reunions in both directions. Mara's search has become a road other people can use.",
+      "sha256": "29cce6a9f666c5c3e3fd7e2df5fe8319f0ec2f428f721f5069b05e0291ab5b4d"
+    },
+    {
+      "id": "story-79",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Elias helps new crews recognize the failures his family learned too late. Maintenance knowledge becomes shared protection instead of a hidden signature.",
+      "sha256": "f80b37bec32f34945d17a80574c8f6a9e04b1c4614a158f134bed826b0e5dfda"
+    },
+    {
+      "id": "story-80",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Mara teaches the crew to ask why an alarm was silenced before replacing it. They sign their work openly and keep the original fault report.",
+      "sha256": "6a45f372cfcc73cb498a2361dbea2f9c49d728cd58bc9f2df84137cd2b8921b8"
+    },
+    {
+      "id": "story-81",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Die Route trägt jetzt Patienten, Boten und Wiedervereinigungen in beide Richtungen. Maras Suche ist zu einer Straße für andere geworden.",
+      "sha256": "57718983fc2aa01d032653c017380e39b4692ee581e459cbaafe22740db77af9"
+    },
+    {
+      "id": "story-82",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Lena, Jonas und Elias haben jeweils einen bestätigten Platz im Rücktransport. Ruths Sachen reisen unter dem Familiennamen mit ihnen.",
+      "sha256": "bb93cda71f70c3b955bf8bccde037e6a25174e00af5d82274be28e8a85fe62e3"
+    },
+    {
+      "id": "story-83",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Ada hielt ein ruhiges Zimmer für Elias und ein schattiges Plätzchen für Koda frei. Nach dieser Ankunft braucht es keine neue Suche nach jemandem.",
+      "sha256": "629f15dd305606fc2c187087650a4e151447c05971674fce79e9f7e87bf32f98"
+    },
+    {
+      "id": "story-83",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Ada saved a quiet room for Elias and a patch of shade for Koda. This arrival will not need a second search to find anyone.",
+      "sha256": "1569c4fd134d53311df17ae60336f5758f3e73fd05fef23e8fb42b6c6754cb19"
+    },
+    {
+      "id": "story-84",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The empty place is acknowledged, not hidden beneath a celebration. Mara can be glad they are together and grieve their mother at the same time.",
+      "sha256": "36053a8828c957b0f871ea2423e71330a81f3d2f07192b2d1f3a64f4cd68729b"
+    },
+    {
+      "id": "story-84",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Der leere Platz wird benannt und nicht hinter einer Feier verborgen. Mara darf sich über das Zusammensein freuen und zugleich um ihre Mutter trauern.",
+      "sha256": "c7b678162e7400add0969a0c83d84b7d3773771b9559304e307363134fbbe67c"
+    },
+    {
+      "id": "story-82",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Lena, Jonas and Elias each have a confirmed place on the return transport. Ruth's belongings travel with them under the family's name.",
+      "sha256": "14235825db237002ce9c4c2f100408c31006ecc8fbd7b402f705c4bd093f52ff"
+    },
+    {
+      "id": "story-85",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Das Archiv bewahrt Einwilligungen, Korrekturen und Belege gemeinsam auf. Kein Direktor oder Retter entscheidet allein, wessen Geschichte erhalten bleibt.",
+      "sha256": "688684453ab0ac4510a2252ddd8515cd7c6d300da3976d31472bdf5f84dd5405"
+    },
+    {
+      "id": "story-86",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Neighboring settlements answer with names, repairs and offers of help. Mara can turn off her own radio without leaving everyone unheard.",
+      "sha256": "be38d884b70ac8601b416cc29e0830eef2e18b68ba124a5b9a5cbc9338b0c953"
+    },
+    {
+      "id": "story-85",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "The archive keeps consent, corrections and evidence together. No director or rescuer alone decides whose story survives.",
+      "sha256": "30b6f7e38e51cb300217d379b0fa702d368069e22bb417060058624fd030cede"
+    },
+    {
+      "id": "story-86",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Nachbarsiedlungen antworten mit Namen, Reparaturen und Hilfsangeboten. Mara kann ihr eigenes Funkgerät ausschalten, ohne alle ungehört zu lassen.",
+      "sha256": "ef619662aa42896cda3eecb095486ee2879324105943620e8111c18fdf92e22a"
+    },
+    {
+      "id": "story-87",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Sie pflanzen etwas Lebendiges neben Ruths Namen, ohne es als Ersatz zu betrachten. Koda schläft im Schatten ein, während die Familie gemeinsam fertig wird.",
+      "sha256": "63f973467158e550a19f1d435dabbc1dc1474ff08a3e7b728a98d8d81afa67c7"
+    },
+    {
+      "id": "story-88",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Sie teilen Entschuldigungen und Erinnerungen, ohne einem Menschen alle Schuld zu geben. Maras Familiensuche ist abgeschlossen; ihr gemeinsames Leben kann weitergehen.",
+      "sha256": "f532020e6f4fd1acbac89e0113e8f64a07c3569eb925b2b407d13bb9c401b3c7"
+    },
+    {
+      "id": "story-87",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "They plant something living beside Ruth's name without pretending it replaces her. Koda falls asleep in the shade while the family finishes together.",
+      "sha256": "97d7b54304069ae2322eb90e3bda4ce1a895908b6a1e81e0b1e371a032e47c3f"
+    },
+    {
+      "id": "story-88",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "They share apologies and memories without assigning one person all the blame. Mara's family search is complete; their life together can continue.",
+      "sha256": "a9369a4453f04cf0bd000eb12c09a860f4dba7c8938c1ecf5f7449dd5a7a1841"
+    },
+    {
+      "id": "story-89",
+      "language": "de",
+      "speaker": "Mara",
+      "voice": "de-DE-KatjaNeural",
+      "text": "Mara hat ihre lebende Familie gefunden, Ruths Schicksal erfahren und Erinnerungen einen Ort gegeben. Zum ersten Mal ist der nächste Morgen keine weitere Suche. Es ist ein Leben, für das sie bleibt.",
+      "sha256": "bc7e26b1480eeecc5a0e79613f5963c6c42334d829ea45f957cbd83c806d93c4"
+    },
+    {
+      "id": "briefing-30",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Meet Lena's courier at Haven and prepare the clinic route.",
+      "sha256": "7287abfc675f6f7f91993b5325e548e1dbb045ec5f1dbc2eea35de95607dfaa3"
+    },
+    {
+      "id": "briefing-30",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Triff Lenas Boten in Haven und bereite die Klinikroute vor.",
+      "sha256": "df01c6dbdb70c6475fd23ff6c769f7252382a6421896af37a61ffe2a81578bc2"
+    },
+    {
+      "id": "story-89",
+      "language": "en",
+      "speaker": "Mara",
+      "voice": "en-GB-SoniaNeural",
+      "text": "Mara has found her living family, learned Ruth's fate and built a place for their memories. For once, the next morning is not another search. It is a life she chooses to stay for.",
+      "sha256": "b309ffd71bfe1416aec718f2d3e5b927f1b3a3ca151d07e57c8f15188ddd1d98"
+    },
+    {
+      "id": "briefing-31",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair the eastern relay and retrieve Lena's last route update.",
+      "sha256": "c6b206aad27b105db261b75c0bd1d3b49908ae6507631d5731d88f18fa649f7e"
+    },
+    {
+      "id": "briefing-31",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere das Ost-Relais und berge Lenas letzte Routenmeldung.",
+      "sha256": "278cfdbbb8f3d41c807facf43066589172f313e84e7e30588a427a6e803b0b60"
+    },
+    {
+      "id": "briefing-32",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair the bridge controls and signal the route back to Haven.",
+      "sha256": "98410cb6f04a5b71ec45f7e3716106ae0554e0e8de92095b017234ae842dd582"
+    },
+    {
+      "id": "briefing-32",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere die Brückensteuerung und melde den Weg nach Haven.",
+      "sha256": "ee5bc4d555adcf4d9f45693479f10e0297514e706009d2d458198b1bdb9342ba"
+    },
+    {
+      "id": "briefing-33",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Recover the convoy's sealed treatment log and transmit its destination.",
+      "sha256": "288c4118ad98388e006641439d4fa85403ce66aae41254471c9950423da4814e"
+    },
+    {
+      "id": "briefing-33",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Berge das versiegelte Behandlungsbuch des Konvois und sende sein Ziel.",
+      "sha256": "f53a0879d8073ffe4849b8a6c6ecf67b887ce85de742c9bc908270fcf0c0eb68"
+    },
+    {
+      "id": "briefing-34",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Power the school's emergency recorder and find the transfer schedule.",
+      "sha256": "f6fd156b2f5b02f036568c84a2c3aa04dd53767ccddf4322188a9eb9ce8b4564"
+    },
+    {
+      "id": "briefing-35",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Restore the greenhouse lights and contact its night watch.",
+      "sha256": "933adbf67722b8264906cf47319cc467c9b6d3defa051d60e8f19fabf6120393"
+    },
+    {
+      "id": "briefing-34",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Versorge den Notrekorder der Schule mit Strom und finde den Verlegungsplan.",
+      "sha256": "016f5692e864754de251edeca058f749cd738281e2c06390cbab4bdc484922b6"
+    },
+    {
+      "id": "briefing-35",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Stelle die Gewächshausbeleuchtung wieder her und kontaktiere die Nachtwache.",
+      "sha256": "c234c93ae41e3f8f40e88a7a761e023a42675c3a9b60d13acf3bc2e56ecd3c62"
+    },
+    {
+      "id": "briefing-36",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair the ferry winch and copy its passenger ledger.",
+      "sha256": "e70cef7cb5b546b86cb044a9869f459bcf3c4df587acda9aafc1fed11468010b"
+    },
+    {
+      "id": "briefing-37",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Power the navigation beacon and mark a safe crossing.",
+      "sha256": "286eb2c707928c60b90203ee8c20afabf047c6caf2ca357167c67bf4bd7e19ad"
+    },
+    {
+      "id": "briefing-36",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere die Fährwinde und kopiere das Fahrgastbuch.",
+      "sha256": "824d85096466ba27a86e493b13287564c7061ec25834600c47080bf09c1e6ce1"
+    },
+    {
+      "id": "briefing-37",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Versorge das Leuchtfeuer mit Strom und markiere eine sichere Querung.",
+      "sha256": "d86b2f6b2da33bfa60d369e17cb45384f69d88f18769fc641313f1f9704de565"
+    },
+    {
+      "id": "briefing-38",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Open the aid crew's service cabinet and recover its route card.",
+      "sha256": "f3a5d98fbff3f8dc93131d3406d30c46d56e3a49d81b6176f7548c56b5cc0426"
+    },
+    {
+      "id": "briefing-38",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Öffne den Wartungsschrank der Helfer und berge ihre Routenkarte.",
+      "sha256": "ca1760d373db0cbb1639d064f5d6998e04859be9ad056611b6817075d37fc55d"
+    },
+    {
+      "id": "briefing-39",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Stelle das Stationssignal wieder her und bitte um Zugang zum Klinikgelände.",
+      "sha256": "f037cb213e8c2d8e787e5d70236a417f6bd53061599fc97a8c53dbad87ae1982"
+    },
+    {
+      "id": "briefing-39",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Restore the station signal and request entry to the clinic grounds.",
+      "sha256": "42bc89ca9d456ca780189a16a97f9ccc96d9f5393f0d3f21cf491e0d369ad286"
+    },
+    {
+      "id": "briefing-40",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Clear the blocked service passage and open the clinic approach.",
+      "sha256": "1ae2a22dc21886f0fc0b5b5183388a0492517f7afbb0f03ca0d8a3a196da8f5e"
+    },
+    {
+      "id": "briefing-41",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Meet Lena and compare the family's surviving messages.",
+      "sha256": "ea6a53162cee7d7783220c6d716dc81419955b62bc73a069e5bf521fe66ff2aa"
+    },
+    {
+      "id": "briefing-40",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Räume den versperrten Wartungsweg und öffne den Klinikzugang.",
+      "sha256": "85f447c2f99b0789d09b24f6735c9628a01c6fdd43cf26e36c5fbaef18dfc77a"
+    },
+    {
+      "id": "briefing-41",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Triff Lena und vergleiche die erhaltenen Familiennachrichten.",
+      "sha256": "7e7a687c4f8d948a59264ea65a295fa8d2fa1d66afd3a3bef991b8827264a34d"
+    },
+    {
+      "id": "briefing-43",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair the platform lift and recover the volunteer assignments.",
+      "sha256": "6fb597216d26f59aee7a5be97e7ab7500207a0f54d6e4f3c47d765f4e3ca75e5"
+    },
+    {
+      "id": "briefing-42",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Starte den nördlichen Einsatzrekorder und verfolge den Hilfszug.",
+      "sha256": "354b4bb11d4ec06d7758466aac95f90d988a447fad8c516c6d27b6d75d12185b"
+    },
+    {
+      "id": "briefing-42",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Restart the northern dispatch recorder and trace the aid train.",
+      "sha256": "2514aad83ee920f11828105fb7da080c7cf701b2857a4775ca04b2332ee2e23c"
+    },
+    {
+      "id": "briefing-43",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere den Bahnsteigaufzug und berge die Helferzuweisungen.",
+      "sha256": "efcc054b742ade2ac43e5cc14a00bc25ed4f461a132708a7987a5059da7ffa37"
+    },
+    {
+      "id": "briefing-44",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Secure the transit house records and send the family entries to Lena.",
+      "sha256": "c99a3813cdb24a07e2185962e22f6ce05de22fb7c0f213d242537f9e4bfc09b2"
+    },
+    {
+      "id": "briefing-44",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Sichere die Unterlagen des Durchgangshauses und sende die Familieneinträge an Lena.",
+      "sha256": "bedb7ef8678c7cff892e6582fa90f7f04a4c8b989001fb0f336ba28cbb4e3bb8"
+    },
+    {
+      "id": "briefing-45",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Compare the conflicting records with Lena and plan the northern search.",
+      "sha256": "ea92894878abaf537278d0250c4d214c3efffb038ff97c5c50e8a7a6d9453600"
+    },
+    {
+      "id": "briefing-45",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Vergleiche die widersprüchlichen Akten mit Lena und plane die Suche im Norden.",
+      "sha256": "1865ef222d081255854446f21cb12ad6a37b3a7a78a8c640ea4efa07de16d158"
+    },
+    {
+      "id": "briefing-46",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair the high repeater and listen for the northern aid crew.",
+      "sha256": "fc5d20368a31f7b6efd13c48de1d1266e53279c95b3c3cef3862bba44441702c"
+    },
+    {
+      "id": "briefing-47",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Clear the fallen barriers and mark the aid crew's last shelter.",
+      "sha256": "241d055645465b295cff57cae140e8049827abad4024f1ce7c7c49ccfc42dab3"
+    },
+    {
+      "id": "briefing-46",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere das Höhenrelais und suche nach den nördlichen Funkhelfern.",
+      "sha256": "adcbcafbf7bf247b38c3d1750e75bb1a50e11517476a08a6ee2981e6cf4eab1b"
+    },
+    {
+      "id": "briefing-47",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Räume die gefallenen Sperren und markiere den letzten Unterschlupf der Helfer.",
+      "sha256": "68903074947bcee3284ee4e6c47f52ee77fb9e8431b3d8f6d6e6ccad93ef6d2f"
+    },
+    {
+      "id": "briefing-48",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Restore the ward recorder and locate the hospital's current camp.",
+      "sha256": "665a76cd326bbde416c8e082d4b9be286041df6633a26c9ff057cd2fad678297"
+    },
+    {
+      "id": "briefing-49",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Seal the leaking service duct and transmit a safe approach route.",
+      "sha256": "dbc183e95f6012700061180a9d5d222cd1f24decba6c2ddcc64a819e7e9bed59"
+    },
+    {
+      "id": "briefing-48",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Stelle den Stationsrekorder wieder her und finde das aktuelle Krankenhauslager.",
+      "sha256": "1086b7eb5b0cc795373ce1a774cd25eb83e133e0716941c1be9a345ce2fd7b72"
+    },
+    {
+      "id": "briefing-49",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Dichte den undichten Wartungsschacht ab und melde einen sicheren Zugang.",
+      "sha256": "f4a32475a8db3a5eb36a681a92eb6d3db5046715697b313791046ba617c0d34d"
+    },
+    {
+      "id": "briefing-50",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Power the hilltop receiver and establish contact with Elias.",
+      "sha256": "fb80992248ca7fcbc5ebcdaef0f520994aa2f2cf2425c62c97916d32ae75edfa"
+    },
+    {
+      "id": "briefing-50",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Versorge den Höhenempfänger mit Strom und stelle Kontakt zu Elias her.",
+      "sha256": "0ad35f77605e535eece0a9a7699d302c107abe7a37500e5452c8742a3937428c"
+    },
+    {
+      "id": "briefing-51",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair the hospital's access mechanism and request a supervised visit.",
+      "sha256": "4955dcc4aa707fdd3b11a3be0b1a98f5e006fbe25786e48efd2a60158a69946d"
+    },
+    {
+      "id": "briefing-51",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere den Krankenhauszugang und bitte um einen begleiteten Besuch.",
+      "sha256": "36bf4aea890a99270f6c9e66a43e1c6adc73bca4c175d50100a499d9b0abbf1c"
+    },
+    {
+      "id": "briefing-52",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Collect Elias's protected belongings and copy Ruth's last letter.",
+      "sha256": "09683516768a0822c9c57bcff3bec1dc11eea0ae4be4734b8fdcb335841d093f"
+    },
+    {
+      "id": "briefing-52",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Sammle Elias' geschützte Sachen ein und kopiere Ruths letzten Brief.",
+      "sha256": "71a032380a149dbf1d9fcf7ee923989e725af82f35ee1b2239b07ea06b6ef8a6"
+    },
+    {
+      "id": "briefing-53",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Triff Elias und organisiere den gemeinsamen Rückweg der Familie.",
+      "sha256": "66f0b4649fb86f21c24f2eaf8c9ac2f90e95843c594931c7ee28fea530b40927"
+    },
+    {
+      "id": "briefing-53",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Meet Elias and arrange the family's route back together.",
+      "sha256": "2cb580ba739906a68b256368dd06190abd81f4df4f02184745f063f6494ed5de"
+    },
+    {
+      "id": "briefing-54",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair the medical transport controls and confirm a safe departure.",
+      "sha256": "61bf7f6a53eb7c79d3e368bbeb5934f96040cd360118ca987e72b1128df6216f"
+    },
+    {
+      "id": "briefing-55",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Restore the crossing beacon so the medical convoy can return.",
+      "sha256": "4f95977bce7efaabcd2249519c5bc33f4e32d319833ec6dab7e592f948c87661"
+    },
+    {
+      "id": "briefing-54",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere die Steuerung des Krankentransports und bestätige eine sichere Abfahrt.",
+      "sha256": "d809adf55514b7708439e74a119619359cacee39f747dd91f6ee264363a0d202"
+    },
+    {
+      "id": "briefing-56",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Bring Elias to Lena and share the reunion with Jonas over radio.",
+      "sha256": "61bc1373f3c8c0de1889a681e48905aabe6aeb3e0cb766ab7dd9e33c9cdcaaeb"
+    },
+    {
+      "id": "briefing-56",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Bringe Elias zu Lena und teile die Wiedervereinigung mit Jonas über Funk.",
+      "sha256": "dd739066c503d22c7030913bb091fd76bcb5958a96c23229ba6c0eaf1a7630c6"
+    },
+    {
+      "id": "briefing-55",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Stelle das Leuchtfeuer wieder her, damit der Krankenkonvoi zurückkehren kann.",
+      "sha256": "c166c4a4291181c75db92605cbc59e72c9cc74d84ba1901e24acd8fb9d14b3c9"
+    },
+    {
+      "id": "briefing-57",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Recover the southern transport manifest and preserve its signatures.",
+      "sha256": "2ea3ebab78af2ba537a532c4c48192aacf73ddd13fa73a93e4e90aaf2917d306"
+    },
+    {
+      "id": "briefing-57",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Berge das südliche Fahrgastverzeichnis und bewahre seine Unterschriften.",
+      "sha256": "209a0d69b3213d59993e0b90bc310d1f6f0748bdedfa16bb85e3c45e607cf6cb"
+    },
+    {
+      "id": "briefing-58",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Versorge den Fernsender mit Strom und fordere Bellweathers Archiv an.",
+      "sha256": "abec7f55a671012a76cb961775cdaf06c2ec318268dbdc59c7be5eae002d9945"
+    },
+    {
+      "id": "briefing-58",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Power the long-range transmitter and request Bellweather's archive.",
+      "sha256": "395b5d6575528896ebd1331cf48db41763ed34e4a963568cc8ea8502a92074c5"
+    },
+    {
+      "id": "briefing-59",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Meet the reunited family and prepare the journey to Bellweather.",
+      "sha256": "103cc92d5f5857b3dc677a185ed7793413827e05dc03a57d31aaff32f486d3be"
+    },
+    {
+      "id": "briefing-59",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Triff die wiedervereinte Familie und bereite die Reise nach Bellweather vor.",
+      "sha256": "dce03497d684fc3949992bc55791834d2e22d045e776b7d970bd4b00f7ba4059"
+    },
+    {
+      "id": "briefing-60",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Clear the coastal approach and contact Bellweather's watch.",
+      "sha256": "18be7d341c3b59a1e0b174e066782de0bc8965909d3db31c7cbf764a4cd3b6b3"
+    },
+    {
+      "id": "briefing-60",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Räume den Küstenzugang und kontaktiere Bellweathers Wache.",
+      "sha256": "9fe7673495b3b1908f1ec353ff26f528e279e86aed51fda156fa30ac70d1b4e9"
+    },
+    {
+      "id": "briefing-61",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Power the arrivals terminal and locate Ruth's transport entry.",
+      "sha256": "bcbfd29905dea08c303f6674b652d4aa875147de8263b572f965816adcac6d1e"
+    },
+    {
+      "id": "briefing-61",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Versorge das Ankunftsterminal mit Strom und finde Ruths Transporteintrag.",
+      "sha256": "8a9f550a50c318eb63a5bd344c0d8eb46d9f1c51b2403ab0669f467b6e8cd51a"
+    },
+    {
+      "id": "briefing-62",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Meet Sera and ask what became of Ruth's group.",
+      "sha256": "745cdae9b79b2cd808e168109164e21642b17440aa96b270cb4d562913337e9f"
+    },
+    {
+      "id": "briefing-62",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Triff Sera und frage nach Ruths Gruppe.",
+      "sha256": "45d16b9d38eed42e73898147f2adea19c2daa5a7dd348e06e42c4780c7c0e246"
+    },
+    {
+      "id": "briefing-63",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Secure the clinic's evacuation log and compare its dates with Sera.",
+      "sha256": "27b5bf36035e8fb23a1ace87032325da634dd9352d70e26b4f0cd1d19c8ee728"
+    },
+    {
+      "id": "briefing-64",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair the archive cabinet and recover the children's arrival record.",
+      "sha256": "42c752f3179658c893db84de1e9312413288f6ce81893f3527caab86d7904f7a"
+    },
+    {
+      "id": "briefing-63",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Sichere das Evakuierungsbuch der Klinik und vergleiche die Daten mit Sera.",
+      "sha256": "69639b05b333dae8d9b89e36df3d4c599009ab1939d0e53fc9049ab454a879a5"
+    },
+    {
+      "id": "briefing-64",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere den Archivschrank und berge die Ankunftsliste der Kinder.",
+      "sha256": "a19d922bff078a95cb7ccaf73b6ce310f8e356d9f4ca1719c37ecc7a4419bd04"
+    },
+    {
+      "id": "briefing-65",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Stelle den Leuchtturmrekorder wieder her und kopiere den letzten Transportruf.",
+      "sha256": "ed6e07a8b091d942d7860a8e49c9cac246a0f525389e9d0cef54caf4132c6d3e"
+    },
+    {
+      "id": "briefing-65",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Restore the lighthouse recorder and copy the final transport call.",
+      "sha256": "951a3aa71eae00858f7b2f75681f28f3f01a3edadd6e46a28c22325321f5ef31"
+    },
+    {
+      "id": "briefing-66",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Clear the lodge entrance and retrieve the sheltered group's ledger.",
+      "sha256": "9c426be8b60dc73e68bc1b2d1c7908dd5fc57ca4228df5caf0b70c2fbff76012"
+    },
+    {
+      "id": "briefing-66",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Räume den Hütteneingang und berge das Buch der untergebrachten Gruppe.",
+      "sha256": "b8707b5b40331d53a58b6b7c34ba20030a1b9309bf0b3b1e5bc141a8bd22bae1"
+    },
+    {
+      "id": "briefing-67",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Restore the roadside beacon and reach the returning relief team's records.",
+      "sha256": "0a96dacd30110ed7fd73a4ea529ca96f1a5885ceb32b85159557f0e8efff304d"
+    },
+    {
+      "id": "briefing-67",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Stelle das Straßenleuchtfeuer wieder her und erreiche die Unterlagen der Hilfsmannschaft.",
+      "sha256": "444ec522fb545747a38aed07a9cf9b56565c76093c65da7c1f884cbb65a003f2"
+    },
+    {
+      "id": "briefing-68",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Recover Tessa's sealed medical ledger and verify Ruth's identity.",
+      "sha256": "849964c8cf5454e3c192dbdc3db7fe1071b532046ad8d013157b8391bb6e37ab"
+    },
+    {
+      "id": "briefing-68",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Berge Tessas versiegeltes Krankenbuch und überprüfe Ruths Identität.",
+      "sha256": "033c8fb49dfaaac673e1abf142946b46b3e68980f34987cdc8b7b1a3cc254e2e"
+    },
+    {
+      "id": "briefing-69",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Triff Tessa und höre Ruths letzte Tage an, ohne ihren Bericht zu drängen.",
+      "sha256": "847b9f693133dc0d4dcdc88f3bbfae3cf379eb5716153bc8abd4daccd711fb7a"
+    },
+    {
+      "id": "briefing-70",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Open the protected belongings cabinet and recover Ruth's pouch.",
+      "sha256": "0d0de4d42ed9922183964db32e642a61490dbc114e807a5d6a09098ad130193b"
+    },
+    {
+      "id": "briefing-69",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Meet Tessa and hear Ruth's final days without rushing her account.",
+      "sha256": "da05afc2dbdd81ebec034f8df0c6716dc1dee171ad88d3275c120f22d82817b0"
+    },
+    {
+      "id": "briefing-70",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Öffne den geschützten Schrank und berge Ruths Beutel.",
+      "sha256": "cdef52c1b8a96be8d07622011897a0d8cc0c17559baa094de5387a768e1c9bea"
+    },
+    {
+      "id": "briefing-72",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Meet the family and decide what to carry home to Haven.",
+      "sha256": "158836b76171e5edd5ea41d7075ac81fd755d1ede591f68a029de8de3db415d3"
+    },
+    {
+      "id": "briefing-71",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Besuche mit der Familie die Gedenkstätte und lege Ruths Foto nieder.",
+      "sha256": "33da8c6bbb6ee67861de7af1074867152b1b834cd740c649d2348555dd1c2682"
+    },
+    {
+      "id": "briefing-71",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Visit the named memorial with the family and place Ruth's photograph.",
+      "sha256": "fb424ddd1cc68910a6731bb7b71721cfe3ea03e710e82621761654b585f5cd8e"
+    },
+    {
+      "id": "briefing-72",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Triff die Familie und entscheide, was sie nach Haven mitnehmen.",
+      "sha256": "86e7b6a24068ddd695083299ed36d6176871791f6446c521bd75d12f6b4ae88f"
+    },
+    {
+      "id": "briefing-73",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair Bellweather's relay and agree a shared missing-person protocol.",
+      "sha256": "64290be0b9e094201964d111ec05c63748eb264048e04dd0fb197c08da7cfd03"
+    },
+    {
+      "id": "briefing-73",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere Bellweathers Relais und vereinbare ein gemeinsames Vermisstenverfahren.",
+      "sha256": "0b7de4ef601bf3dce19b15605beebf92281efe0f82bec584ac5ff5b4c9d7ac9e"
+    },
+    {
+      "id": "briefing-74",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Sichere Archivkopien und organisiere die erste Botenübergabe.",
+      "sha256": "46a0e2d8aa8b2b0d502a52b2d62071c53ef148ef80c33dabe0fcd90ed989a5ee"
+    },
+    {
+      "id": "briefing-74",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Secure archive copies and establish the first courier handover.",
+      "sha256": "8cceee7b474120ab4c8f9424189b5abd9e2e1765bea904b5fc74414f624184c0"
+    },
+    {
+      "id": "briefing-75",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Power an isolated receiver and deliver a verified family message.",
+      "sha256": "dffb857137ec3679d9d8c20e2eac12a0d9a680e3ea7e5705f77ca7746c92c251"
+    },
+    {
+      "id": "briefing-76",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair a refuge's evacuation winch and confirm all residents are accounted for.",
+      "sha256": "29b093d06de413df9299fd110b946dc53d1b1d2c6c6b30dffee8188584ff421e"
+    },
+    {
+      "id": "briefing-76",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere die Evakuierungswinde einer Zuflucht und bestätige alle Bewohner.",
+      "sha256": "424d3c61f2ea8fa9c50a72a68465649f331c5f028ca02200a73c138f13b1cb0b"
+    },
+    {
+      "id": "briefing-75",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Versorge einen abgelegenen Empfänger mit Strom und übermittle eine geprüfte Familiennachricht.",
+      "sha256": "9dcc54ba00b4b981eb0b66146ef9e313dacc7b4a93347b71007509b70a9e098e"
+    },
+    {
+      "id": "briefing-77",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Meet the rescued residents and reconcile the departure and arrival lists.",
+      "sha256": "f202319828cefe6253ce23db2f641240bb279b1678b0fbce51f87b5de545413a"
+    },
+    {
+      "id": "briefing-77",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Triff die Geretteten und gleiche Abfahrts- und Ankunftslisten ab.",
+      "sha256": "cf88f4d38f0168c918e89b1dff01978299c8833c013601d7925fa63e8fce5f80"
+    },
+    {
+      "id": "briefing-78",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Deliver Lena's shared research records and stabilize the study archive.",
+      "sha256": "a859919bb33c9b709e428155c154204672f34c58f409d572c73c24d4b1da8121"
+    },
+    {
+      "id": "briefing-79",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair a filter training rig and document safe isolation steps.",
+      "sha256": "ee89882d056f6412c7297fd63498b326dda921886ee6833edf7e3fbfcc921665"
+    },
+    {
+      "id": "briefing-78",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Überbringe Lenas gemeinsame Forschungsakten und sichere das Studienarchiv.",
+      "sha256": "5403ebb909292ae5691234009f1ec6836cb6e18f9eed541d68bd21113ab3bf24"
+    },
+    {
+      "id": "briefing-79",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere eine Filter-Übungsanlage und dokumentiere sichere Isolationsschritte.",
+      "sha256": "7ff958f3873d1fc08c05643045af63ef5356250772d4ee1e8725611fcf828e15"
+    },
+    {
+      "id": "briefing-80",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Stelle ein Übungsrelais wieder her und führe das nächste Team durch die Prüfungen.",
+      "sha256": "91a7565c72016705618b8af2578e522c4bac001e7498e99c16c15d2244017f6a"
+    },
+    {
+      "id": "briefing-80",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Restore a practice relay and guide the next repair crew through its checks.",
+      "sha256": "67077c493b50c60e30c0e87e58cd12c8cea2eb4100bdd34ede4e22934fcdf762"
+    },
+    {
+      "id": "briefing-81",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Clear the return corridor and mark shelter stops for the family convoy.",
+      "sha256": "7a855f3345ea40eb495ff83ae1d0c9db7b96dc82d0ee793c39ef56b13b02a3a5"
+    },
+    {
+      "id": "briefing-82",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Recover the convoy's last receipt and confirm the family is on its way.",
+      "sha256": "e7703e4f24558592ad5916499d3ebfab48e4a08df145dc614d34c6df2b5d26a7"
+    },
+    {
+      "id": "briefing-82",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Berge die letzte Konvoiquittung und bestätige den Aufbruch der Familie.",
+      "sha256": "1fc9f3f1a2fdeceee69ff8a4f720416f64eb647747d99a33e7022a2fcc7cfc2c"
+    },
+    {
+      "id": "briefing-81",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Räume den Rückweg und markiere Unterkünfte für den Familienkonvoi.",
+      "sha256": "d019a036b433c87c31fbcd54e567c26236f34b7c6735fcb351809b667972214b"
+    },
+    {
+      "id": "briefing-83",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Meet Haven's watch and prepare a welcome for the returning convoy.",
+      "sha256": "4fc03e418fdd33f44831a297aaf758e5c20638f3480db9626b55c847080bed07"
+    },
+    {
+      "id": "briefing-83",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Triff Havens Wache und bereite den Empfang des Rückkonvois vor.",
+      "sha256": "5904933b3c2f069cf48364d7f95bcbeb7851c7f07d3f6b25c948b4954e4aeea5"
+    },
+    {
+      "id": "briefing-84",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Bring the family together and share Ruth's photograph at the table.",
+      "sha256": "a77481e985186d5766f335f686f6615de6676cf6f0797136d526d90d8f8975bf"
+    },
+    {
+      "id": "briefing-84",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Bringe die Familie zusammen und teile Ruths Foto am Tisch.",
+      "sha256": "c9bf182746f8790c341c536a2dc6afe1b45d3c01deac3f79516ea33e4441d444"
+    },
+    {
+      "id": "briefing-85",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Secure the community archive and return each original to its owner.",
+      "sha256": "f191a24e98b6a1bbabfab767d41dbeabba3e327400e7a3a0a854e20c76b512ba"
+    },
+    {
+      "id": "briefing-86",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Power the permanent network beacon and hand its watch to the community.",
+      "sha256": "802cd67be158a2d4dfa3dafb3cb6481dc679f187db21b2abff95e2d798c5b45d"
+    },
+    {
+      "id": "briefing-85",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Sichere das Gemeinschaftsarchiv und gib jedes Original seinem Besitzer zurück.",
+      "sha256": "857212082a8d5da1f20b9726da66de9bf02db60e62a3b73e289b284216de96e2"
+    },
+    {
+      "id": "briefing-87",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Repariere die Gartenwasserleitung und gestalte mit der Familie einen Erinnerungsort.",
+      "sha256": "cb010e4333885b16ba21520d7a4938bd8460c076a8032aaa46ff48f3920de5ab"
+    },
+    {
+      "id": "briefing-87",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Repair the garden water line and prepare a memorial space with the family.",
+      "sha256": "d35c8f4d44c029e5247a20ed75baa481f2ac616000aad0fd4883941ca0c76f1a"
+    },
+    {
+      "id": "briefing-86",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Versorge das dauerhafte Netzleuchtfeuer mit Strom und übergib die Wache der Gemeinschaft.",
+      "sha256": "ec90e4fb865d4314f445efac3cd374f86654dc11c8561f5b12e351ef174bb2e7"
+    },
+    {
+      "id": "briefing-88",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Speak with Lena, Jonas and Elias and choose a quiet evening at home.",
+      "sha256": "cdea52f7bceb0d5a2a49ed303648e3de4094fca00d09707bbd3cb29d63ecff05"
+    },
+    {
+      "id": "briefing-88",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Sprich mit Lena, Jonas und Elias und wähle einen ruhigen Abend zu Hause.",
+      "sha256": "3caf52966c264795fa34f242ee15f217d64f8e7c1cee2169bbac12bd2b449a1e"
+    },
+    {
+      "id": "briefing-89",
+      "language": "de",
+      "speaker": "Levin",
+      "voice": "de-DE-ConradNeural",
+      "text": "Kehre zu Koda und dem Familiengarten zurück und übergib die abendliche Funkwache.",
+      "sha256": "2b56b7ab0fe482195c6872d8595e20815a439e7218202713d992f1b77896de73"
+    },
+    {
+      "id": "briefing-89",
+      "language": "en",
+      "speaker": "Levin",
+      "voice": "en-GB-RyanNeural",
+      "text": "Return to Koda and the family garden, then hand over the evening radio watch.",
+      "sha256": "c5d23a1001e227fad41feff0c9226ad3b821b223d8a9150b84052d4505bc7d29"
+    }
+  ]
+}

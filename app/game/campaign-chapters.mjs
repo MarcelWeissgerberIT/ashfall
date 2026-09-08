@@ -1,3 +1,4 @@
+import trilogy from './trilogy-chapters.json' with {type:'json'};
 // Chapter 8–30: authored revelations, objectives and deterministic traversable maps.
 // English and German text travel together so new chapters never fall back to English.
 export const CAMPAIGN_STORIES = [
@@ -94,22 +95,24 @@ export const CAMPAIGN_STORIES = [
  'Jonas: We will keep looking for the missing. Ada is opening a clinic. Levin is training new repair crews. There is work for all of us.', 'Jonas: Wir suchen weiter nach den Vermissten. Ada eröffnet eine Klinik. Levin bildet Reparaturteams aus. Es gibt Arbeit für uns alle.',
  'Mara: I promised you a way out, Koda. You helped me find a way back to people. Tomorrow, we start here.', 'Mara: Ich versprach dir einen Ausweg, Koda. Du halfst mir, zu den Menschen zurückzufinden. Morgen fangen wir hier an.']
 ];
+CAMPAIGN_STORIES.push(...trilogy);
 export const CAMPAIGN_DE={};
 const pair=(en,de)=>(CAMPAIGN_DE[en]=de,en);
 const taskWords={fuse:['Restore the relay','Relais wiederherstellen'],battery:['Power the station','Station mit Strom versorgen'],toolbox:['Repair the mechanism','Mechanismus reparieren'],samplecase:['Secure the evidence','Beweise sicher bergen'],axe:['Clear the service passage','Wartungsweg freimachen'],none:['Meet the survivors','Mit den Überlebenden sprechen']};
 export function makeCampaignChapters(){return CAMPAIGN_STORIES.map((s,i)=>{
- const [name,deName,theme,requires,intro,deIntro,reveal,deReveal,result,deResult]=s,safe=theme==='safe';
+ const [name,deName,theme,requires,intro,deIntro,reveal,deReveal,result,deResult]=s,safe=theme==='safe'||requires==='none';
  const mirror=i%2===1;const point=(x,y)=>({x:mirror?20-x:x,y});
  const prop=(id,x,y,style,w=1,h=1)=>({id,...point(mirror?x+w-1:x,y),type:'prop',style,w,h,solid:true,name:pair('Abandoned structure','Verlassene Anlage'),desc:pair('Find a route around this structure.','Finde einen Weg um diese Anlage.')});
  const layouts=[[[6,4,3,4],[12,10,4,2],[5,12,2,2]],[[5,5,5,1],[12,4,2,5],[8,12,5,1]],[[4,6,2,4],[9,3,4,2],[13,11,3,3]],[[6,3,2,5],[11,7,5,1],[7,12,2,3]],[[5,4,4,2],[12,5,3,3],[6,11,6,1]]];
  const style=theme==='hospital'?'vent':theme==='canal'?'tank':theme==='rail'?'vent':theme==='garden'?'tree':theme==='safe'?'desk':'wall';
- const entities=layouts[i%5].map(([x,y,w,h],n)=>prop('structure-'+n,x,y,style,w,h));
+ if(i>=23)layouts.push([[5,3,2,5],[10,9,5,2],[6,13,3,1]],[[7,5,4,2],[5,10,2,4],[13,12,3,2]],[[4,6,4,1],[11,5,2,6],[6,13,4,1]],[[6,4,2,3],[12,8,4,2],[5,12,3,2]],[[5,5,3,2],[10,10,4,3],[14,2,2,2]]);
+ const entities=layouts[i%layouts.length].map(([x,y,w,h],n)=>prop('structure-'+n,x,y,style,w,h));
  const label=pair(...taskWords[requires]);
  const briefing=pair(intro,deIntro),hint=pair(safe?'Meet both contacts, then reach the marked departure point.':'Search the marked supply cache. Prepare the required equipment in Crafting, complete the first task, then hold the transmission point. You can step away and return; progress is kept.',safe?'Sprich mit beiden Kontakten und erreiche dann den markierten Ausgang.':'Durchsuche das markierte Vorratslager. Bereite die Ausrüstung unter Herstellen vor, erledige die erste Aufgabe und halte dann den Sendepunkt. Du kannst weggehen und zurückkehren; der Fortschritt bleibt erhalten.');
  entities.push({id:'story-a',...point(3,3),type:safe?'npc':'mission',name:label,desc:pair(reveal,deReveal),requires:requires==='none'?null:requires,keepRequired:['axe','toolbox'].includes(requires)});
  const transmission=pair(safe?'Hear the next lead':'Transmit the findings',safe?'Die nächste Spur erfahren':'Ergebnisse übermitteln');
- entities.push({id:'story-b',...point(17,4),type:safe?'npc':'mission',name:transmission,desc:pair(result,deResult),prerequisite:'story-a',duration:safe?0:8+Math.floor(i/6)*2});
- const exitName=pair(i===22?'Rest with Koda':'Continue the journey',i===22?'Mit Koda ausruhen':'Die Reise fortsetzen');
+ entities.push({id:'story-b',...point(17,4),type:safe?'npc':'mission',name:transmission,desc:pair(result,deResult),prerequisite:'story-a',duration:safe?0:8+Math.min(4,Math.floor((i%30)/6))*2});
+ const exitName=pair([22,52,82].includes(i)?'Rest with Koda':'Continue the journey',[22,52,82].includes(i)?'Mit Koda ausruhen':'Die Reise fortsetzen');
  entities.push({id:'story-exit',...point(17,16),type:'exit',name:exitName,desc:pair('Complete the chapter tasks before leaving.','Erledige vor dem Aufbruch die Kapitelaufgaben.'),solid:false});
  const ingredients=requires==='fuse'?['scrap','toolbox']:requires==='samplecase'?['scrap','bottle','toolbox']:requires==='axe'?['crowbar','scrap','toolbox']:requires==='none'?[]:[requires];
  entities.push({id:'story-supplies',...point(3,11),type:'container',solid:true,name:pair('Mission supply cache','Missionsvorräte'),desc:pair('Materials for this chapter. Take only what you need; tools and duplicate equipment add weight.','Material für dieses Kapitel. Nimm nur, was du brauchst; Werkzeug und doppelte Ausrüstung wiegen zusätzlich.'),contents:[...ingredients,...(i===0||safe?['vest','helmet']:[]),'medkit','medkit','ration','bottle']});
@@ -117,6 +120,6 @@ export function makeCampaignChapters(){return CAMPAIGN_STORIES.map((s,i)=>{
  // Three to five enemies, finite and separated from the entry and supply cache.
  const zombies=safe?[]:[[10,3],[17,8],[10,15],[15,15],[3,7]].slice(0,3+Math.floor(i/9)).map(([x,y],n)=>({id:'infected-'+n,...point(x,y),hp:76,maxHp:76,type:'zombie',attack:0,hurt:0,repath:0,path:[],home:point(x,y),alert:false}));
  for(const z of zombies){while(entities.some(e=>e.solid&&z.x>=e.x&&z.x<e.x+(e.w||1)&&z.y>=e.y&&z.y<e.y+(e.h||1))){z.y++;}z.home={x:z.x,y:z.y};}
- const tag=i<5?pair('ACT II · THE MISSING','AKT II · DIE VERMISSTEN'):i<11?pair('ACT III · THE SOURCE','AKT III · DER URSPRUNG'):i<17?pair('ACT IV · THE RECORD','AKT IV · DIE AKTEN'):pair('ACT V · THE MORNING','AKT V · DER MORGEN');
+ const tag=i>=53?pair('CAMPAIGN III · WHAT WE CARRY','KAMPAGNE III · WAS WIR MIT UNS TRAGEN'):i>=23?pair('CAMPAIGN II · ECHOES BEYOND HAVEN','KAMPAGNE II · ECHOS JENSEITS VON HAVEN'):i<5?pair('ACT II · THE MISSING','AKT II · DIE VERMISSTEN'):i<11?pair('ACT III · THE SOURCE','AKT III · DER URSPRUNG'):i<17?pair('ACT IV · THE RECORD','AKT IV · DIE AKTEN'):pair('ACT V · THE MORNING','AKT V · DER MORGEN');
  return {name:pair(name,deName),place:pair(name.toUpperCase(),deName.toUpperCase()),tag,weather:pair(safe?'DAWN · 12 °C':theme==='hospital'?'INDOORS · 14 °C':'MIST · 9 °C',safe?'MORGENGRAUEN · 12 °C':theme==='hospital'?'INNENRAUM · 14 °C':'NEBEL · 9 °C'),intro:briefing,hint,size:[21,19],start:point(3,16),goals:[label,transmission,exitName],entities,zombies,theme,safe,storyChapter:true,recipe:['fuse','samplecase','axe'].includes(requires)?requires:null};
 });}
