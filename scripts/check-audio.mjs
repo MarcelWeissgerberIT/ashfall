@@ -121,14 +121,14 @@ await run('Every trigger has a file and matching prerecorded caption',async()=>{
  const g=new Game(),seen=[];
  seen.push(g.lastRadio.voiceId);
  g.start(false);g.inventory.push('fuse','fuel');g.interact(g.entities.find(e=>e.id==='generator'));seen.push(g.lastRadio.voiceId);
- g.loadLevel(1);seen.push(g.lastRadio.voiceId);
+ g.loadLevel(1);assert(g.messages.some(m=>m.voiceId==='memory-bunker'),'Bunker background remains available for manual replay');
  g.loadLevel(2);seen.push(g.lastRadio.voiceId);g.start(false);g.zombies=[];g.inventory.push('battery','sample');
  g.interact(g.entities.find(e=>e.id==='radio'));seen.push(g.lastRadio.voiceId);
  const signalId=g.lastRadio.id;g.interact(g.entities.find(e=>e.id==='radio'));assert.equal(g.lastRadio.id,signalId);
  g.signal=.01;g.tick(.02);seen.push(g.lastRadio.voiceId);
  const evacId=g.lastRadio.id;g.tick(.02);assert.equal(g.lastRadio.id,evacId);
  g.interact(g.entities.find(e=>e.id==='evac'));seen.push(g.lastRadio.voiceId);
- assert.deepEqual(seen,['checkpoint','generator','bunker','rooftop','signal','evac-ready','rescue']);
+ assert.deepEqual(seen,['checkpoint','generator','rooftop','signal','evac-ready','rescue']);
 });
 console.log(JSON.stringify(results,null,2));
 process.exitCode=results.some(result=>result.status==='FAIL')?1:0;
