@@ -198,7 +198,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
     kit.disposeLocal(effectRoot);effects.clear();meshes.clear();pickables.length=0;
     if(pathDots)pathDots.count=0;if(marker)marker.visible=false;lastPath='';lastHover='';hoverEntity=null;hoverPoint=null;hoverRef.current(null);
     terrain=new THREE.Group();objectGroup=new THREE.Group();actors=new THREE.Group();deco=new THREE.Group();skyline=new THREE.Group();world.add(terrain,objectGroup,actors,deco,skyline);
-    renderedLanguage=game.language;level=game.level;const [w,h]=game.data.size;world.position.set(-(w-1)/2,0,-(h-1)/2);cameraTarget.set(0,0,0);camera.position.copy(cameraOffset);camera.lookAt(cameraTarget);
+    renderedLanguage=game.language;level=game.level;const [w,h]=game.data.size;world.position.set(-(w-1)/2,0,-(h-1)/2);cameraTarget.set(camera.zoom>1.05?game.player.x-(w-1)/2:0,0,camera.zoom>1.05?game.player.y-(h-1)/2:0);camera.position.copy(cameraOffset).add(cameraTarget);camera.lookAt(cameraTarget);
     const mood=game.data.theme;const fogColor=mood==='hospital'?0x153238:mood==='garden'||mood==='safe'?0x394a3b:mood==='industrial'?0x332c30:mood==='canal'?0x183c49:mood==='rooftop'?0x424c64:level===0?0x213c40:level===1?0x11282b:0x3e4440;scene.background=new THREE.Color(fogColor);scene.fog=new THREE.FogExp2(fogColor,level===1?.020:.012);
     ambient.color.setHex(level===2?0xb1c9cc:0xb0dce0);ambient.groundColor.setHex(level===1?0x2f413c:0x465040);ambient.intensity=level===1?1.3:1.12;
     sun.color.setHex(level===2?0xffb96a:level===1?0xadd6d0:0xeee3c0);sun.intensity=level===2?4:level===1?2.1:3;

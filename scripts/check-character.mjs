@@ -68,6 +68,16 @@ for(const mode of ['sniff','found','follow','defend'])for(const speed of [0,1,2.
  for(const leg of puppy.userData.legs){assert(leg.userData.knee&&leg.userData.paw);const paw=leg.userData.paw.getWorldPosition(new THREE.Vector3());assert(paw.y>=.025,'Paw must not penetrate floor');}
 }
 for(const kind of ['play','feed']){dog.care={kind,at:Date.now()};for(let i=0;i<90;i++)animatePuppy(puppy,dog,1/60,true,i/60);assert(puppy.userData[kind]>.9);}
+// A complete play performance must settle smoothly and keep paws above the floor.
+dog.mode='idle';dog.action=0;delete dog.care;
+for(let i=0;i<120;i++)animatePuppy(puppy,dog,1/60,true,i/60);
+dog.care={kind:'play',at:Date.now()};let previous=puppy.userData.body.position.clone(),maxJump=0;
+for(let i=0;i<360;i++){
+ animatePuppy(puppy,dog,1/60,true,i/60);puppy.updateMatrixWorld(true);
+ maxJump=Math.max(maxJump,previous.distanceTo(puppy.userData.body.position));previous.copy(puppy.userData.body.position);
+ for(const leg of puppy.userData.legs)assert(leg.userData.paw.getWorldPosition(new THREE.Vector3()).y>=.035,'Play paws clear the ground');
+}
+assert(maxJump<.015,'Play pose has no abrupt frame jumps');assert(puppy.userData.play<.001,'Play settles back to idle');
 delete dog.care;dog.x+=50;animatePuppy(puppy,dog,1/60,true,0);assert(Number.isFinite(puppy.userData.phase));
 console.log('720 puppy animation frames verified: idle, trot, defence, pause and actor immutability.');
 for(let variant=0;variant<3;variant++){const corpse=createCharacter(kit,true,variant);roots.push(corpse);animateCharacter(corpse,{x:0,y:0,hp:0,facing:0},1/60,true,1);corpse.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(corpse.userData.body);assert(bounds.max.y<.9,'Defeated infected lie below standing actors');assert(bounds.max.z-bounds.min.z>1.3,'Defeated infected lie horizontally');}
