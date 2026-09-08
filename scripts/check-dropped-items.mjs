@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {Game} from '../app/game/engine.mjs';
+import {createSave,restoreSave} from '../app/game/savegame.mjs';
+const g=new Game();g.start(false);g.zombies=[];
+g.drop('bottle');const item=g.entities.find(e=>e.dropped);assert.equal(item.item,'bottle');assert.notDeepEqual({x:item.x,y:item.y},{x:g.player.x,y:g.player.y});assert(!g.isBlocked(item.x,item.y));assert(g.pathTo(g.player,item));
+g.player.x=item.x;g.player.y=item.y;g.interact(item);assert(item.removed);assert(g.has('bottle'));
+g.throwing=true;g.throwBottle(5,15);const shards=g.entities.find(e=>e.style==='glass-shards');assert(shards);assert.equal(shards.solid,false);assert(!g.has('bottle'));
+for(let i=0;i<600;i++)g.tick(1/60);assert(g.entities.includes(shards));assert.equal(g.effects.length,0);
+const loaded=new Game();restoreSave(loaded,createSave(g));assert(loaded.entities.some(e=>e.style==='glass-shards'));
+console.log('Dropped loot is visible on an adjacent reachable tile, recoverable; thrown glass persists after effects and save/load.');

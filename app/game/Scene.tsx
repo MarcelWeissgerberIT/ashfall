@@ -1,4 +1,5 @@
 'use client';
+import {buildGlassShards} from './glass-shards';
 import {buildChapterLandmark} from './chapter-landmarks';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
@@ -72,10 +73,12 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
   };
   function makeObject(e:any){const g=new THREE.Group();g.position.set(e.x,0,e.y);g.userData.entity=e;const w=e.w||1,h=e.h||1;
    currentSurface=e.style?(['wall','barrier','rubble'].includes(e.style)?'concrete':e.style==='car'?'carPaint':e.style==='tree'?'bark':['vent','tank','desk','bed'].includes(e.style)?'brushedSteel':undefined):['generator','door','radio','exit'].includes(e.type)?'brushedSteel':undefined;
-   if(e.style&&e.style!=='tree')kit.contact(g,(w-1)/2,(h-1)/2,w+.65,h+.6);
-   else if(!['exit','note'].includes(e.type))kit.contact(g,0,0,1.25,1.1);
+   if(e.style&&!['tree','glass-shards'].includes(e.style))kit.contact(g,(w-1)/2,(h-1)/2,w+.65,h+.6);
+   else if(!['exit','note'].includes(e.type)&&e.style!=='glass-shards')kit.contact(g,0,0,1.25,1.1);
    if(e.style){
-    if(game.data.storyChapter && e.id==='structure-0'){
+    if(e.style==='glass-shards'){
+     buildGlassShards(kit,g);
+    }else if(game.data.storyChapter && e.id==='structure-0'){
      buildChapterLandmark(kit,g,e,game.data.theme,game.level);
     }else if(e.style==='wall'){
      buildWall(kit,g,e,game.level);
@@ -313,7 +316,7 @@ export default function Scene({game,onHover,zoom,onZoomChange,viewReset,rotation
         }
       }
       if(g.userData.ring){const active=e.type==='exit'&&(level===0?game.generatorOn:level===1?game.has('sample'):level>2?game.entities.filter((task:any)=>task.type==='mission'||task.type==='npc').every((task:any)=>task.done):game.signal===0),hover=hoverEntity?.id===e.id||game.selected?.id===e.id||game.companion.foundId===e.id;
-        const m=g.userData.ring.material as THREE.MeshBasicMaterial;m.color.setHex(active?0x9ee2c0:hover?0xf7c991:0xa5b49b);m.opacity=hover||active?.9:e.type==='item'?.35:e.type==='container'&&e.open?.12:.25;
+        const m=g.userData.ring.material as THREE.MeshBasicMaterial;m.color.setHex(active?0x9ee2c0:hover?0xf7c991:0xa5b49b);m.opacity=hover||active?.9:e.type==='item'?(e.dropped?.65:.35):e.type==='container'&&e.open?.12:.25;
         g.userData.ring.scale.setScalar(g.userData.ring.userData.baseRadius*(active?1+Math.sin(game.time*3)*.08:1));
       }
     }

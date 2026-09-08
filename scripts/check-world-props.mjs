@@ -75,3 +75,8 @@ for(const [chapter,data] of LEVELS.entries())if(data.storyChapter){
  g.traverse(o=>{if(o.isMesh)for(const attr of Object.values(o.geometry.attributes))assert([...attr.array].every(Number.isFinite));});landmarks++;
 }
 assert.equal(landmarks,23);console.log('23 chapter landmarks: finite geometry and unchanged collision footprints.');
+const {buildGlassShards}=await import('../app/game/glass-shards.ts');
+const glass=new THREE.Group();buildGlassShards(kit,glass);assert.equal(glass.children.length,4);glass.updateMatrixWorld(true);
+const glassBounds=new THREE.Box3().setFromObject(glass);assert(glassBounds.max.y<.18&&glassBounds.min.y>=0,'Glass fragments lie above the floor');
+glass.traverse(o=>{if(o.isMesh){assert(o.userData.noPick);for(const attr of Object.values(o.geometry.attributes))assert([...attr.array].every(Number.isFinite));}});
+const beforeGlass=geometries.size;buildGlassShards(kit,new THREE.Group());assert.equal(geometries.size,beforeGlass);console.log('Glass shards: four draw calls, finite geometry, ground clearance and shared resources.');
