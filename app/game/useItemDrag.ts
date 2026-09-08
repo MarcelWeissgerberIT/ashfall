@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import { ITEMS, CAPACITY } from './engine.mjs';
+import {inventoryDropTarget} from './inventory-drop.mjs';
 type Drag={id:string;from:string;x:number;y:number;over:string|null;valid:boolean};
 
 export function useItemDrag(game:any) {
@@ -14,26 +15,27 @@ export function useItemDrag(game:any) {
   };
   const begin=(e:ReactPointerEvent,id:string,from:string,handle=false)=>{
     if(!game.canManageInventory||e.button!==0||e.pointerType==='touch'&&!handle)return;
-    if(handle||e.pointerType==='touch')e.preventDefault();suppressClick.current=false;e.currentTarget.setPointerCapture(e.pointerId);session.current={id,from,pointer:e.pointerId,x:e.clientX,y:e.clientY,latestX:e.clientX,latestY:e.clientY,moved:false};
+    if(handle||e.pointerType==='touch')e.preventDefault();suppressClick.current=false;e.currentTarget.setPointerCapture(e.pointerId);session.current={id,from,pointer:e.pointerId,x:e.clientX,y:e.clientY,latestX:e.clientX,latestY:e.clientY,moved:false,dialog:e.currentTarget.closest('.inventory-dialog')};
   };
   useEffect(()=>{
     if(!game.inventoryOpen&&!game.lootOpen)return;
+    const targetAt=(x:number,y:number)=>inventoryDropTarget(x,y,session.current?.dialog?.getBoundingClientRect(),document.elementFromPoint(x,y)?.closest<HTMLElement>('[data-dropzone]')?.dataset.dropzone,window.innerWidth,window.innerHeight);
     const move=(e:PointerEvent)=>{const s=session.current;if(!s||e.pointerId!==s.pointer)return;s.latestX=e.clientX;s.latestY=e.clientY;if(!s.moved&&Math.hypot(e.clientX-s.x,e.clientY-s.y)<7)return;s.moved=true;
-      const zone=document.elementFromPoint(e.clientX,e.clientY)?.closest<HTMLElement>('[data-dropzone]')?.dataset.dropzone||null;
+      const zone=targetAt(e.clientX,e.clientY);
       setDrag({id:s.id,from:s.from,x:e.clientX,y:e.clientY,over:zone,valid:valid(s.id,s.from,zone)});
     };
-    const finish=(e:PointerEvent)=>{const s=session.current;if(!s||e.pointerId!==s.pointer)return;session.current=null;
-      if(s.moved){suppressClick.current=true;const to=document.elementFromPoint(e.clientX,e.clientY)?.closest<HTMLElement>('[data-dropzone]')?.dataset.dropzone;if(to&&valid(s.id,s.from,to))game.transferItem(s.id,s.from,to);else game.log('Drop onto a matching slot, your backpack, or a storage area.','warn');}
+    const finish=(e:PointerEvent)=>{const s=session.current;if(!s||e.pointerId!==s.pointer)return;const to=targetAt(e.clientX,e.clientY);session.current=null;
+      if(s.moved){suppressClick.current=true;if(to&&valid(s.id,s.from,to))game.transferItem(s.id,s.from,to);else game.log('Drop onto a matching slot, your backpack, or a storage area.','warn');}
       setDrag(null);
     };
-    const cancel=()=>{session.current=null;setDrag(null)};
+    const cancel=()=>{if(session.current?.moved)suppressClick.current=true;session.current=null;setDrag(null)};
     let frame=0,last=0;
     const scroll=(now:number)=>{
       const dt=last?Math.min((now-last)/1000,.05):0;last=now;const s=session.current;
       if(s?.moved){
         const under=document.elementFromPoint(s.latestX,s.latestY),viewport=under?.closest('.modal-scroll-frame')?.querySelector<HTMLElement>('.modal-scroll');
         if(viewport){const rect=viewport.getBoundingClientRect(),edge=Math.min(40,rect.height/4),speed=s.latestY<rect.top+edge?-340:s.latestY>rect.bottom-edge?340:0;if(speed)viewport.scrollTop+=speed*dt;}
-        const over=document.elementFromPoint(s.latestX,s.latestY)?.closest<HTMLElement>('[data-dropzone]')?.dataset.dropzone||null;
+        const over=targetAt(s.latestX,s.latestY);
         setDrag(previous=>previous&&previous.over!==over?{...previous,over,valid:valid(s.id,s.from,over)}:previous);
       }
       frame=requestAnimationFrame(scroll);

@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {inventoryDropTarget as target} from '../app/game/inventory-drop.mjs';
+const box={left:100,right:900,top:80,bottom:720};
+for(const [x,y] of [[99,300],[901,300],[300,79],[300,721]])assert.equal(target(x,y,box,null,1000,800),'ground');
+assert.equal(target(300,300,box,'hand',1000,800),'hand');
+assert.equal(target(300,300,box,'bag',1000,800),'bag');
+assert.equal(target(300,300,box,null,1000,800),null,'Blank space inside does not discard');
+for(const [x,y] of [[-1,300],[1000,300],[300,-1],[300,800]])assert.equal(target(x,y,box,null,1000,800),null,'Leaving the browser does not discard');
+assert.equal(target(10,10,null,null,1000,800),null,'Closed dialog cannot discard');
+console.log('Inventory drop targets: four outer edges, explicit slots, blank interior and viewport boundaries passed.');
